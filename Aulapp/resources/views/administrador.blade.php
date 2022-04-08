@@ -23,12 +23,13 @@
           </nav>
     </header>
     <div id="Contenido">
-        <form id="formulario">
+        <form id="formulario" method="post">
+            @csrf
             @yield('Titulo formulario')
             <label for="inputNombre" class="form-label">Nombre</label>
             <input type="text" id="inputNombre" class="form-control">
             @yield('Contenido formulario')
-            <input class="btn btn-primary" type="submit" value="Registrar">
+            <input class="btn btn-lg  btn-block" type="submit" value="Registrar">
         </form>
     </div>
     <footer>
