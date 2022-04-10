@@ -11,7 +11,7 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
   </script>
   <link rel="stylesheet" href="{{asset('css/formulario.css')}}" />
-  <title>Document</title>
+  <title>@yield('title')</title>
 </head>
 
 <body>
@@ -31,10 +31,8 @@
     <form id="formulario" method="post">
       @csrf
       @yield('Titulo formulario')
-      <label for="inputNombre" class="form-label">Nombre</label>
-      <input type="text" id="inputNombre" class="form-control">
       @yield('Contenido formulario')
-      <input class="btn btn-lg  btn-block" type="submit" value="Registrar">
+
     </form>
   </div>
   <footer>
