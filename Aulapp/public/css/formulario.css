@@ -1,24 +1,24 @@
-.nav-link{
+.nav-link {
     color: black;
 }
-nav{
-    border-bottom: #C7C6C8  solid;
+nav {
+    border-bottom: #c7c6c8 solid;
 }
-#formulario{
+#formulario {
     width: 20%;
     margin-left: 5%;
     margin-top: 5%;
     border: 1px solid black;
     padding: 2%;
-    background-color: #E8EDEA;
+    background-color: #e8edea;
     border: white solid 1px;
 }
-h3{
+h3 {
     text-align: center;
 }
 
-input{
-    box-shadow: 6px 6px 1px #CAC8CA;
+input {
+    box-shadow: 6px 6px 1px #cac8ca;
 }
 .btn {
     background-color: black;
@@ -26,8 +26,8 @@ input{
     margin-top: 7%;
     width: 100%;
     border-radius: 0;
-    box-shadow: 6px 6px 1px #E8EDEA;
+    box-shadow: 6px 6px 1px #e8edea;
 }
-label{
+label {
     margin-top: 3%;
 }
