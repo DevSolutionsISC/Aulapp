@@ -22,6 +22,7 @@ Route::get('/adm', function () {
 Route::get('/seccion', function () {
     return view('adm_secciones');
 });
+
 Route::get('/aula', function () {
     return view('adm_aulas');
 });
