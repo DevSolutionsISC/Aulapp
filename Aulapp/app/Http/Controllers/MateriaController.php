@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Materia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreMateria;
 
 class MateriaController extends Controller
 {
@@ -13,6 +15,7 @@ class MateriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $materia;
+
     public function __construct(Materia $materia)
     {
         $this->materia = $materia;
@@ -20,7 +23,9 @@ class MateriaController extends Controller
 
     public function index()
     {
-        return view('materia.index');
+        $materias = Materia::paginate(5);
+        return view('materia.create')
+        ->with('materia', $materias);
     }
 
     /**
@@ -39,13 +44,13 @@ class MateriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMateria $request)
     {
-      $datosMateria = request()->all();
-       $datosMateria = request()->except('_token');
-      Materia::insert($datosMateria);
-       return response()->json($datosMateria); 
+      $materia = Materia::create($request->only('nombre_materia','Cod_materia'));
+      Session::flash('mensaje','Materia registrada correctamente');
+      return redirect()->route('materia.create');       
     }
+ 
 
     /**
      * Display the specified resource.

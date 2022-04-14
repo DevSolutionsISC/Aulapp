@@ -5,21 +5,32 @@
 @endsection
 @section('Contenido formulario')
 <div class="row">
-  <div class="col-xl-3 col-md-4 col-12">
-  <h3 text-center>Registrar aula</h3>
-    <form class="mt-4" action="{{ route('materia.store') }}" method='post'>
+  <div class="col-xl-3 col-md-4 col-12">     
+    <form id="formulario" action="{{ route('materia.store') }}" method='post'>
+    <h4 text-center>Registrar Materias</h4>
       @csrf
       <label for="nombre_materia" class="form-label">Nombre</label>
-      <input type="text" name ="nombre_materia" id="nombre_materia" class="form-control">
+      <input type="text" name ="nombre_materia" value = "{{old('nombre_materia')}}" id="nombre_materia" class="form-control">
+      @error('nombre_materia')
+      <p class="form-text text-danger">{{$message}}</p>
+      @enderror      
+
+      <label for="Cod_materia" class="form-label">Código</label>
+      <input type="number" name="Cod_materia" value = "{{old('Cod_materia')}}" id="Cod_materia" class="form-control"> 
+      @error('Cod_materia')
+      <p class="form-text text-danger">{{$message}}</p>
+      @enderror
       
-
-      <label for="Cod_materia" class="form-label">Codigo</label>
-      <input type="number" name="Cod_materia" id="Cod_materia" class="form-control"> 
-
+      @if (Session::has('mensaje'))
+          <div class="alert alert-info my-5">
+              {{Session::get('mensaje')}}
+         </div>
+      @endif
       <input class="btn btn-lg  btn-block" type="submit" value="Registrar">
 
     </form>
   </div>
+
   <div class="col-xl-9 col-md-8 col-12">
     <h3 id="listaSecciones">Lista de materias</h3>
     <table class="table table-striped">
@@ -31,10 +42,10 @@
         </tr>
       </thead>
       <tbody>
-
-        <tr>
-          <td>Nombre de la materia</td>
-          <td>Código</td>
+    
+      <tr>
+          <td>nombre</td>
+          <td>codigo</td>
           <td><button id="EditarEliminar">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -53,7 +64,8 @@
               </svg>
             </button>
           </td>
-        </tr>   
+        </tr> 
+         
       </tbody>
     </table>
   </div>
