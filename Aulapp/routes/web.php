@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MateriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,5 @@ Route::get('/seccion', function () {
 Route::get('/aula', function () {
     return view('adm_aulas');
 });
+
+Route::resource('materia', MateriaController::class);
