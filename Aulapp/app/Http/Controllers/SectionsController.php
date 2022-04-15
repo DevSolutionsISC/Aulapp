@@ -38,7 +38,7 @@ class SectionsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombre' => 'required|min:3|max:50|unique:sections|regex:/^[a-zA-Z\s]+$/u',
+            'nombre' => 'required|min:3|max:50|regex:/^[a-zA-Z\s]+$/u',
             'descripcion' => 'required|min:3|max:50|regex:/^[a-zA-Z0-9\s]+$/u',
         ]);
 
