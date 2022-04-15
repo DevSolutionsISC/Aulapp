@@ -14,7 +14,7 @@
 
       <label for="inputNombre" class="form-label">Nombre</label>
       <input type="text" id="inputNombre" class="form-control" name="nombre" value="{{$section->nombre}}"
-        value="{{old('name')}}" autofocus>
+        value="{{old('nombre')}}" autofocus>
       @if ($errors->has('nombre'))
       <span class="error text-danger" for="input-nombre">{{ $errors->first('nombre') }}</span>
       @endif

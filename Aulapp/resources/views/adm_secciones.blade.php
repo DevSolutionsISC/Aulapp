@@ -14,7 +14,7 @@
       <h3 text-center>Registrar Seccion</h3>
 
       <label for="inputNombre" class="form-label">Nombre</label>
-      <input type="text" id="inputNombre" class="form-control" name="nombre" value="{{old('name')}}" autofocus>
+      <input type="text" id="inputNombre" class="form-control" name="nombre" value="{{old('nombre')}}" autofocus>
       @if ($errors->has('nombre'))
       <span class="error text-danger" for="input-nombre">{{ $errors->first('nombre') }}</span>
       @endif
