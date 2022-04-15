@@ -29,9 +29,7 @@ h3 {
 input {
     box-shadow: 6px 6px 1px #cac8ca;
 }
-.btn {
-    background-color: black;
-    color: white;
+#botonRegistrar {
     margin-top: 7%;
     width: 100%;
     border-radius: 0;
@@ -41,6 +39,9 @@ label {
     margin-top: 3%;
 }
 #EditarEliminar {
+    cursor: pointer;
+    margin: 0;
+    color: black;
     border: none;
     display: block;
     display: flex;
@@ -51,4 +52,8 @@ label {
     width: 35px;
     height: 35px;
     border-radius: 60%;
+}
+#formularioEditar {
+    max-width: 500px;
+    margin: auto;
 }

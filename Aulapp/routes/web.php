@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SectionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,13 @@ Route::get('/', function () {
 Route::get('/adm', function () {
     return view('adm_docentes');
 });
-Route::get('/seccion', function () {
-    return view('adm_secciones');
-});
+Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
+
+Route::post('/seccion', [SectionsController::class, 'store'])->name('secciones');
+
+Route::get('/seccion/{id}', [SectionsController::class, 'show'])->name('secciones-show');
+Route::patch('/seccion/{id}', [SectionsController::class, 'update'])->name('secciones-update');
+Route::delete('/seccion/{id}', [SectionsController::class, 'destroy'])->name('secciones-destroy');
 
 Route::get('/aula', function () {
     return view('adm_aulas');
