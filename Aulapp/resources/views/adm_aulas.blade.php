@@ -20,7 +20,7 @@
         <option value="seccion2">Seccion 2</option>
         <option value="seccion3">Seccion 3</option>
       </select>
-      <input class="btn btn-lg  btn-block" type="submit" value="Registrar">
+      <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Registrar</button>
     </form>
   </div>
   <div class="col-xl-9 col-md-8 col-12">
