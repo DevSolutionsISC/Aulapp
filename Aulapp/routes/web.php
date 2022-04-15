@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SectionsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MateriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,5 @@ Route::delete('/seccion/{id}', [SectionsController::class, 'destroy'])->name('se
 Route::get('/aula', function () {
     return view('adm_aulas');
 });
+
+Route::resource('materia', MateriaController::class);
