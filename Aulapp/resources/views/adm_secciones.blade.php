@@ -120,7 +120,7 @@
   Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Registro guardado',
+  title: 'Registro exitoso',
   showConfirmButton: false,
   timer: 1500
   })
@@ -131,7 +131,7 @@
   Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Cambios guardados',
+  title: 'Cambios guardados exitosamente',
   showConfirmButton: false,
   timer: 1500
   })
