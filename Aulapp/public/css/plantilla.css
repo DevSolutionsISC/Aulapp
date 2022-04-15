@@ -57,3 +57,6 @@ label {
     max-width: 500px;
     margin: auto;
 }
+.modal {
+    top: 25%;
+}
