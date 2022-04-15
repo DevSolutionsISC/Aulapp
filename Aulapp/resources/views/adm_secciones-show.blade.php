@@ -13,10 +13,19 @@
       <h3 text-center>Editar Seccion</h3>
 
       <label for="inputNombre" class="form-label">Nombre</label>
-      <input type="text" id="inputNombre" class="form-control" name="nombre" value="{{$section->nombre}}">
+      <input type="text" id="inputNombre" class="form-control" name="nombre" value="{{$section->nombre}}"
+        value="{{old('name')}}" autofocus>
+      @if ($errors->has('nombre'))
+      <span class="error text-danger" for="input-nombre">{{ $errors->first('nombre') }}</span>
+      @endif
+      <br>
       <label for="Descripcion" class="form-label">Descripcion</label>
-      <input type="text" id="inputDescripcion" class="form-control" name="descripcion"
-        value="{{$section->descripcion}}">
+      <input type="text" id="inputDescripcion" class="form-control" name="descripcion" value="{{$section->descripcion}}"
+        value="{{old('descripcion')}}" autofocus>
+      @if ($errors->has('descripcion'))
+      <span class=" error text-danger" for="input-descripcion">{{ $errors->first('descripcion') }}</span>
+      @endif
+      <br>
       <div class="d-grid gap-2">
         <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Guardar</button>
         <a href="{{route('secciones')}}"" class=" btn btn-danger btn-block btn-lg" id="botonRegistrar"
