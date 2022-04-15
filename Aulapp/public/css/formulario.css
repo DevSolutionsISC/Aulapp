@@ -32,3 +32,14 @@ input {
 label {
     margin-top: 3%;
 }
+@media (max-width: 1024px) {
+    #formulario{
+        width: 35%;
+    }
+}
+@media (max-width: 600px) {
+#formulario{
+    width: 90%;
+}
+}
+
