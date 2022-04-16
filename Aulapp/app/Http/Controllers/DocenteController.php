@@ -15,7 +15,8 @@ class DocenteController extends Controller
     public function index()
     {
         //
-        return view('adm_docentes') ;
+        $docentes = Docente::all();
+        return view('adm_docentes', ['docentes' => $docentes]) ;
     }
 
     /**

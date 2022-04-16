@@ -28,3 +28,33 @@ action="{{route('docentes')}}"
       @endif
 <br>
 @endsection
+@section('Tabla')
+<div id="C_tabla">
+      <h3 id="T_tabla">Lista de docentes</h3>
+      <table class="table">
+      
+            <thead>
+                  
+                  <tr>
+                        <th scope="col">Nombre completo</th>
+                        <th scope="col">Ci</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
+                  </tr>
+            </thead>
+            <tbody>
+                  @foreach ($docentes as $docente)
+                   <tr>
+                         <td>{{$docente->Nombre . " ". $docente->Apellido}}</td>
+                         <td>{{$docente->CI}}</td>
+                         <td>{{$docente->Email}}</td>
+                         <td>Editar</td>
+                         <td>Eliminar</td>
+                   </tr>     
+                  @endforeach
+            </tbody>
+      </table>
+</div>
+
+@endsection

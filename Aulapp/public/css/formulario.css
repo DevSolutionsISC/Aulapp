@@ -7,13 +7,16 @@ nav {
 #formulario {
     width: 20%;
     margin-left: 5%;
-    margin-top: 5%;
+    margin-right: 2%;
     border: 1px solid black;
     padding: 2%;
     background-color: #e8edea;
     border: white solid 1px;
+    float: left;
 }
-
+#Contenido{
+    margin-top: 3%;
+}
 h3 {
     text-align: center;
 }
@@ -31,6 +34,14 @@ input {
 }
 label {
     margin-top: 2%;
+}
+#C_tabla{
+    margin-right: 2%;
+    width: 70%;
+    float: right;
+}
+#T_tabla{
+    background-color: #C6C6C6;
 }
 @media (max-width: 1024px) {
     #formulario{
