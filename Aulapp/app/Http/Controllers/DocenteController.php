@@ -96,6 +96,8 @@ class DocenteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $docente = Docente::find($id);
+        $docente->delete();
+        return redirect()->route('docentes')->with('eliminar', 'ok');
     }
 }
