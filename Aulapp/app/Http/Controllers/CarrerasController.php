@@ -14,7 +14,8 @@ class CarrerasController extends Controller
      */
     public function index()
     {
-        return view('adm_carreras');
+        $carreras=Carrera::all();
+        return view('adm_carreras', ['carreras' => $carreras]);
     }
 
     /**
@@ -45,7 +46,7 @@ class CarrerasController extends Controller
         $carrera->Codigo=$request->Codigo;
         $carrera->save();
 
-        return redirect()->route('carrera')->with('registrar','ok');
+        return redirect()->route('carreras')->with('registrar','ok');
     }
 
     /**
@@ -90,6 +91,8 @@ class CarrerasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $carrera = Carrera::find($id);
+        $carrera->delete();
+        return redirect()->route('carreras')->with('eliminar', 'ok');
     }
 }

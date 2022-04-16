@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
+Route::delete('/carrera/{id}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
 Route::get('/docente', [DocenteController::class, 'index'])->name('docentes');
 Route::post('/docente', [DocenteController::class, 'store'])->name('docentes');
 Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
