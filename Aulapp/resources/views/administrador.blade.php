@@ -28,11 +28,15 @@
     </nav>
   </header>
   <div id="Contenido">
-    <form id="formulario" method="post">
+    <form id="formulario" method="post" @yield('Direccion')>
       @csrf
       @yield('Titulo formulario')
       <label for="inputNombre" class="form-label">Nombre</label>
-      <input type="text" id="inputNombre" class="form-control">
+      <input type="text" id="inputNombre" class="form-control" name="Nombre" value="{{old('Nombre')}}">
+      @if ($errors->has('Nombre'))
+      <span class="error text-danger" for="input-nombre">{{ $errors->first('Nombre') }}</span>
+      @endif
+      <br>
       @yield('Contenido formulario')
       <input class="btn btn-lg  btn-block" type="submit" value="Registrar">
     </form>

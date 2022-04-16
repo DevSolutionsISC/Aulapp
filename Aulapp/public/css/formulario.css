@@ -30,7 +30,7 @@ input {
     box-shadow: 6px 6px 1px #e8edea;
 }
 label {
-    margin-top: 3%;
+    margin-top: 2%;
 }
 @media (max-width: 1024px) {
     #formulario{
