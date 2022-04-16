@@ -27,7 +27,7 @@
       @endif
       <br>
       <div class="d-grid gap-2">
-        <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Guardar</button>
+        <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Guardar cambios</button>
         <a href="{{route('secciones')}}"" class=" btn btn-danger btn-block btn-lg" id="botonRegistrar"
           type="button">Cancelar</a>
       </div>
