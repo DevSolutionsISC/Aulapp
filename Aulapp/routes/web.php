@@ -3,6 +3,7 @@
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\CarrerasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
+Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
 Route::get('/docente', [DocenteController::class, 'index'])->name('docentes');
 Route::post('/docente', [DocenteController::class, 'store'])->name('docentes');
 Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
