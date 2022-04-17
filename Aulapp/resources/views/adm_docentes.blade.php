@@ -51,7 +51,7 @@ action="{{route('docentes')}}"
                          <td>{{$docente->Email}}</td>
                          <td>Editar</td>
                          <td>
-                              <form action="{{route('docentes-destroy',[$docente->id])}}" method="POST">
+                              <form action="{{route('docentes-destroy',[$docente->id])}}" method="POST" class="Elimina">
                                     @method('DELETE')
                                     @csrf
                                     <button class=Eliminar>
@@ -76,4 +76,60 @@ action="{{route('docentes')}}"
       </table>
 </div>
 
+@endsection
+
+@section('js')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+      $('.Elimina').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+            title: '¿Estás sguro que quieres eliminar al docente?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, no'
+            }).then((result) => {
+                  if (result.isConfirmed) {
+                  this.submit();
+            }
+            })
+      });
+</script>
+
+@if (session('registrar')=='ok')
+<script>
+  Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Registro exitoso',
+  showConfirmButton: false,
+  timer: 1500
+  })
+</script>
+@endif
+@if (session('actualizar')=='ok')
+<script>
+  Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Cambios guardados exitosamente',
+  showConfirmButton: false,
+  timer: 1500
+  })
+</script>
+@endif
+@if (session('eliminar')=='ok')
+<script>
+  Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Docente eliminado',
+  showConfirmButton: false,
+  timer: 1500
+  })
+</script>
+@endif
 @endsection

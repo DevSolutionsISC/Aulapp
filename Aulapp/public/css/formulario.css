@@ -58,9 +58,6 @@ label {
     height: 35px;
     border-radius: 60%;
 }
-
-
-
 @media (max-width: 1024px) {
     #formulario{
         width: 35%;

@@ -40,7 +40,7 @@ class DocenteController extends Controller
         $request->validate([
             'Nombre' => 'required|min:3|max:20|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
             'Apellido' => 'required|min:3|max:20|regex:/^[a-zA-Z0-9\s áéíóúÁÉÍÓÚñÑ]+$/u',
-            'CI'=> 'required|unique:docentes|digits_between:6,y',
+            'CI'=> 'required|unique:docentes|digits_between:6,10',
             'Email' => 'required|email'
         ]);
 
