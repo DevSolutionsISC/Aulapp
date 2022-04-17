@@ -24,7 +24,7 @@ Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
 Route::delete('/carrera/{id}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
 Route::delete('/docente/{id}', [DocenteController::class, 'destroy'])->name('docentes-destroy');
-
+Route::get('/docente/{id}', [DocenteController::class, 'update'])->name('docentes-update');
 Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
 Route::get('/docente', [DocenteController::class, 'index'])->name('docentes');
 Route::post('/docente', [DocenteController::class, 'store'])->name('docentes');

@@ -62,7 +62,8 @@ class DocenteController extends Controller
      */
     public function show($id)
     {
-        //
+        $docente=Docente::find($id);
+        return redirect()->route('carreras-update',['id'=> $docente->id]);
     }
 
     /**
@@ -85,7 +86,14 @@ class DocenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $docente=Docente::find($id);
+        $docente->Nombre = $request->Nombre;
+        $docente->Apellido = $request->Apellido;
+        $docente->CI = $request->CI;
+        $docente->Email = $request->Email;
+        $docente->save();
+
+        return redirect()->route('docentes')->with('actualizar', 'ok');
     }
 
     /**
