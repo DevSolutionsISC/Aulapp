@@ -9,8 +9,8 @@ action="{{route('carreras')}}"
 <h3 text-center>Registrar carrera</h3>
 @endsection
 @section('Contenido formulario')
-<label for="inputApellido" class="form-label">Código</label>
-<input type="text" id="inputApellido" class="form-control" name="Codigo" value="{{old('Codigo')}}">
+<label for="inputCodigo" class="form-label">Código</label>
+<input type="text" id="inputCodigo" class="form-control" name="Codigo" value="{{old('Codigo')}}">
 
 
 @if ($errors->has('Codigo'))
@@ -38,12 +38,50 @@ action="{{route('carreras')}}"
                    <tr>
                          <td>{{$carrera->Nombre}}</td>
                          <td>{{$carrera->Codigo}}</td>
-                         
                          <td>
-                              <form action="{{route('carreras-destroy',[$carrera->id])}}" method="POST">
+                             
+                                    <button id='{{$carrera->id}}' >
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                           <path
+                                           d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                          <path fill-rule="evenodd"
+                                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                          </svg>
+                                    </button>
+                                    <script>
+                                         
+                                          var btnEditar=document.getElementById("{{$carrera->id}}");
+                                          btnEditar.className="Modelo";
+                                          btnEditar.onclick=function(){
+                                          var nombre=document.getElementById("inputNombre");
+                                          nombre.value="{{$carrera->Nombre}}";
+                                          var codigo=document.getElementById("inputCodigo");
+                                          codigo.value="{{$carrera->Codigo}}";
+                                          var formulario=document.getElementById("formulario");
+                                          formulario.method="PATCH";
+                                          formulario.action="{{route('carreras-update',['id'=> $carrera->id])}}";
+                                          var boton=document.getElementsByClassName("Boton");
+                                          boton[0].value="Aceptar";
+                                          boton[0].type="submit";
+                                          var bandera=formulario.getElementsByTagName("a");
+                                          if(bandera.length==0){
+                                          var btnCancelar=document.createElement("a");
+                                          btnCancelar.className="btn btn-danger";
+                                          btnCancelar.innerHTML="Cancelar";
+                                          btnCancelar.href="carrera";
+                                          formulario.appendChild(btnCancelar);
+                                          }
+                                          }
+                                          
+                                    </script>
+                              
+                         </td>
+                         <td>
+                              <form action="{{route('carreras-destroy',[$carrera->id])}}" method="POST" class="Elimina">
                                     @method('DELETE')
                                     @csrf
-                                    <button class=Eliminar>
+                                    <button class=Modelo>
                                           <!--copiado de estilo xd-->
                                           <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -59,11 +97,68 @@ action="{{route('carreras')}}"
                                     </button>
                               </form> 
                          </td>
-                         <td>Eliminar</td>
+                         
                    </tr>     
                   @endforeach
             </tbody>
       </table>
 </div>
 
+@endsection
+
+@section('js')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+      $('.Elimina').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+            title: '¿Estás seguro que quieres eliminar la carrera?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
+            }).then((result) => {
+                  if (result.isConfirmed) {
+                  this.submit();
+            }
+            })
+      });
+</script>
+
+@if (session('registrar')=='ok')
+<script>
+  Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Registro exitoso',
+  showConfirmButton: false,
+  timer: 1500
+  })
+</script>
+@endif
+@if (session('actualizar')=='ok')
+<script>
+  Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Cambios guardados exitosamente',
+  showConfirmButton: false,
+  timer: 1500
+  })
+</script>
+@endif
+@if (session('eliminar')=='ok')
+<script>
+  Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Carrera eliminado',
+  showConfirmButton: false,
+  timer: 1500
+  })
+</script>
+@endif
 @endsection
