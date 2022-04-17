@@ -57,7 +57,8 @@ class CarrerasController extends Controller
      */
     public function show($id)
     {
-        
+        $carrera=Carrera::find($id);
+        return redirect()->route('carreras-update',['id'=> $carrera->id]);
     }
 
     /**
@@ -80,7 +81,13 @@ class CarrerasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $carrera=Carrera::find($id);
+        $carrera->Nombre=$request->Nombre;
+        $carrera->Codigo=$request->Codigo;
+        $carrera->save();
+
+        return redirect()->route('carreras')->with('actualizar', 'ok');
     }
 
     /**

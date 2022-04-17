@@ -38,7 +38,7 @@
       @endif
       <br>
       @yield('Contenido formulario')
-      <input class="btn btn-lg  btn-block" type="submit" value="Registrar">
+      <input class="btn btn-lg  btn-block Boton" type="submit" value="Registrar">
     </form>
     @yield('Tabla')
   </div>
