@@ -1,51 +1,54 @@
 @extends('plantilla')
-@section('title', 'Materia')
+@section('title', 'Seccion')
 @section('Titulo')
-<h3 text-center>Plantilla de materias</h3>
+<h3 text-center>Administracion de Materias</h3>
 @endsection
 @section('Contenido formulario')
+
 <div class="row">
-  <div class="col-xl-3 col-md-4 col-12">     
-    <form id="formulario" action="{{ route('materia.store') }}" method='post'>
-    <h4 text-center>Registrar Materias</h4>
+  <div class="d-flex" id="formularioEditar">
+    <form method="POST" action="{{route('materias-update', ['id'=>$materia->id])}}" id="formulario">
+      @method('PATCH')
       @csrf
+      <h3 text-center>Editar Materia</h3>
+
       <label for="nombre_materia" class="form-label">Nombre</label>
-      <input type="text" name ="nombre_materia" value = "{{old('nombre_materia')}}" id="nombre_materia" class="form-control">
-      @error('nombre_materia')
-      <p class="form-text text-danger">{{$message}}</p>
-      @enderror      
-
-      <label for="Cod_materia" class="form-label">Código</label>
-      <input type="number" name="Cod_materia" value = "{{old('Cod_materia')}}" id="Cod_materia" class="form-control"> 
-      @error('Cod_materia')
-      <p class="form-text text-danger">{{$message}}</p>
-      @enderror
-      
-      @if (Session::has('mensaje'))
-          <div class="alert alert-info my-5">
-              {{Session::get('mensaje')}}
-         </div>
+      <input type="text" id="nombre_materia" class="form-control" name="nombre_materia" value="{{$materia->nombre_materia}}"
+        value="{{old('nombre_materia')}}" autofocus>
+      @if ($errors->has('nombre_materia'))
+      <span class="error text-danger" for="input-nombre">{{ $errors->first('nombre_materia') }}</span>
       @endif
-      <input class="btn btn-lg  btn-block" type="submit" value="Registrar">
-
+      <br>
+      <label for="Cod_materia" class="form-label">Código</label>
+      <input type="text" id="Cod_materia" class="form-control" name="Cod_materia" value="{{$materia->Cod_materia}}"
+        value="{{old('Cod_materia')}}" autofocus>
+      @if ($errors->has('descripcion'))
+      <span class=" error text-danger" for="input-Cod_materia">{{ $errors->first('Cod_materia') }}</span>
+      @endif
+      <br>
+      <div class="d-grid gap-2">
+        <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Guardar cambios</button>
+        <a href="{{route('materias')}}" class=" btn btn-danger btn-block btn-lg" id="botonRegistrar"
+          type="button">Cancelar</a>
+      </div>
     </form>
   </div>
-
+  {{--
   <div class="col-xl-9 col-md-8 col-12">
-    <h3 id="listaSecciones">Lista de materias</h3>
+    <h3 id="listaMaterias">Lista de materias</h3>
     <table class="table table-striped">
       <thead>
-        <tr>
-          <th scope="col">Nombre</th>
+        <tr id="filaMateria">
+          <th scope="col">Materia</th>
           <th scope="col">Código</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
-    
-      <tr>
-          <td>nombre</td>
-          <td>codigo</td>
+        @foreach ($materias as $materia )
+        <tr>
+          <td>{{$materia->nombre_materia}}</td>
+          <td>{{$materia->Cod_materia}}</td>
           <td><button id="EditarEliminar">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -64,12 +67,12 @@
               </svg>
             </button>
           </td>
-        </tr> 
-         
+          @endforeach
+
+
       </tbody>
     </table>
-  </div>
+  </div> --}}
 </div>
 
-</div>
 @endsection
