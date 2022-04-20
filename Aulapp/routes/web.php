@@ -34,8 +34,10 @@ Route::get('/seccion/{id}', [SectionsController::class, 'show'])->name('seccione
 Route::patch('/seccion/{id}', [SectionsController::class, 'update'])->name('secciones-update');
 Route::delete('/seccion/{id}', [SectionsController::class, 'destroy'])->name('secciones-destroy');
 
+Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
+Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
+
 Route::get('/aula', function () {
     return view('adm_aulas');
 });
 
-Route::resource('materia', MateriaController::class);

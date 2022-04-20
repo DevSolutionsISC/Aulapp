@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Materia;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+//use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreMateria;
 
 class MateriaController extends Controller
@@ -14,18 +14,13 @@ class MateriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $materia;
-
-    public function __construct(Materia $materia)
-    {
-        $this->materia = $materia;
-    }
+    
 
     public function index()
     {
-        $materias = Materia::paginate(5);
-        return view('materia.create')
-        ->with('materia', $materias);
+        $materias=Materia::all();
+        return view('adm_materias', ['materias' => $materias]);
+ 
     }
 
     /**
@@ -35,7 +30,7 @@ class MateriaController extends Controller
      */
     public function create()
     {
-        return view('materia.create');
+      //  return view('materia.create');
     }
 
     /**
@@ -46,9 +41,14 @@ class MateriaController extends Controller
      */
     public function store(StoreMateria $request)
     {
-      $materia = Materia::create($request->only('nombre_materia','Cod_materia'));
-      Session::flash('mensaje','Materia registrada correctamente');
-      return redirect()->route('materia.create');       
+        $materia=new Materia();
+        $materia->nombre_materia=$request->nombre_materia;
+        $materia->Cod_materia=$request->Cod_materia;
+        $materia->save();
+
+        return redirect()->route('materias')->with('registrar','ok');
+      
+
     }
  
 
@@ -60,7 +60,8 @@ class MateriaController extends Controller
      */
     public function show(Materia $materia)
     {
-        //
+        $materia = Materia::find($id);
+        return view('adm_materias-show', ['materia' => $materia]);
     }
 
     /**
@@ -83,7 +84,7 @@ class MateriaController extends Controller
      */
     public function update(Request $request, Materia $materia)
     {
-        //
+       
     }
 
     /**
@@ -92,8 +93,8 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Materia $materia)
+    public function destroy($id)
     {
-        //
+        
     }
 }
