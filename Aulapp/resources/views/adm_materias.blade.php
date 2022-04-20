@@ -46,8 +46,40 @@
           <td>{{$materia->Cod_materia}}</td>
 
           <td>
-
-          
+          <button id='{{$materia->id}}' >
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                           <path
+                                           d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                          <path fill-rule="evenodd"
+                                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                          </svg>
+                                    </button>
+          <script>
+                                         
+                                       var btnEditar=document.getElementById("{{$materia->id}}");
+                                         btnEditar.className="Modelo";
+                                         btnEditar.onclick=function(){
+                                         var nombre=document.getElementById("nombre_materia");
+                                         nombre.value="{{$materia->nombre_materia}}";
+                                         var codigo=document.getElementById("Cod_materia");                                        var formulario=document.getElementById("formulario");
+                                         formulario.method="PATCH";
+                                         formulario.action="{{route('materias-update',['id'=> $materia->id])}}";
+                                         var boton=document.getElementsByClassName("Boton");
+                                         boton[0].value="Aceptar";
+                                         boton[0].type="submit";
+                                         var bandera=formulario.getElementsByTagName("a");
+                                         if(bandera.length==0){
+                                         var btnCancelar=document.createElement("a");
+                                         btnCancelar.className="btn btn-danger";
+                                         btnCancelar.innerHTML="Cancelar";
+                                         btnCancelar.href="carrera";
+                                         formulario.appendChild(btnCancelar);
+                                         }
+                                         }
+                                         
+                                   </script>
+       
 
           </td>
           <td>

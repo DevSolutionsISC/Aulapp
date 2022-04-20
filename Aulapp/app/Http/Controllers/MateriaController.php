@@ -82,8 +82,16 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Materia $materia)
+    public function update(StoreMateria $request, $id)
     {
+
+        
+        $materia=Materia::find($id);
+        $materia->nombre_materia=$request->nombre_materia;
+        $materia->Cod_materia=$request->Cod_materia;
+        $materia->save();
+
+        return redirect()->route('materias')->with('actualizar', 'ok');
        
     }
 
