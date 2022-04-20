@@ -37,8 +37,8 @@
         <tr id="filaSeccion">
           <th scope="col">Seccion</th>
           <th scope="col">Descripcion</th>
-          <th scope="col">Editar</th>
-          <th scope="col">Eliminar</th>
+          <th scope="col" id="columnaEditar">Editar</th>
+          <th scope="col" id="columnaEliminar">Eliminar</th>
         </tr>
       </thead>
       <tbody>
