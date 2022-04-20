@@ -36,6 +36,7 @@ Route::delete('/seccion/{id}', [SectionsController::class, 'destroy'])->name('se
 
 Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
 Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
+Route::delete('/materia/{id}', [MateriaController::class, 'destroy'])->name('materias-destroy');
 
 Route::get('/aula', function () {
     return view('adm_aulas');
