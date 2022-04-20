@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -28,18 +29,7 @@
     </nav>
   </header>
   <div id="Contenido">
-    <form id="formulario" method="post" @yield('Direccion')>
-      @csrf
-      @yield('Titulo formulario')
-      <label for="inputNombre" class="form-label">Nombre</label>
-      <input type="text" id="inputNombre" class="form-control" name="Nombre" value="{{old('Nombre')}}">
-      @if ($errors->has('Nombre'))
-      <span class="error text-danger" for="input-nombre">{{ $errors->first('Nombre') }}</span>
-      @endif
-      <br>
-      @yield('Contenido formulario')
-      <input class="btn btn-lg  btn-block Boton" type="submit" value="Registrar">
-    </form>
+    @yield('Formulario')
     @yield('Tabla')
   </div>
   <footer>

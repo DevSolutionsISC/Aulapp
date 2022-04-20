@@ -61,7 +61,7 @@
           <td>
 
 
-            <form action="{{route('secciones-destroy',[$section->id])}}" method="POST" class="Eliminar">
+            <form action="{{route('secciones-destroy',[$section->id])}}" method="POST" class="Elimina">
               @method('DELETE')
               @csrf
               <button class="btn" id="botonEliminar">
@@ -92,12 +92,12 @@
 </table>
 </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endsection
 @section('js')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  $('.Eliminar').submit(function(e){
+  $('.Elimina').submit(function(e){
             e.preventDefault();
             Swal.fire({
             title: '¿Estás seguro que quieres eliminar la seccion?',
@@ -114,6 +114,7 @@
             })
       });
 </script>
+
 @if (session('registrar')=='ok')
 <script>
   Swal.fire({
@@ -147,4 +148,5 @@
   })
 </script>
 @endif
+
 @endsection
