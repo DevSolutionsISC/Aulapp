@@ -1,23 +1,56 @@
 @extends('administrador')
-@section('Direccion')
-action="{{route('carreras')}}"
-@endsection
+
 @section('Titulo')
 <h3 text-center>Administracion de Carreras</h3>
 @endsection
-@section('Titulo formulario')
-<h3 text-center>Registrar carrera</h3>
-@endsection
-@section('Contenido formulario')
-<label for="inputCodigo" class="form-label">Código</label>
-<input type="text" id="inputCodigo" class="form-control" name="Codigo" value="{{old('Codigo')}}">
+@section('Formulario')
+     <script>
+           
+     
+     console.log("{{Request::cookie('id')}}");    
+     </script>
 
-
-@if ($errors->has('Codigo'))
-      <span class="error text-danger" for="inputApellido">{{ $errors->first('Codigo') }}</span>
+      @if(Request::cookie('editar')=='ok')
+     
+      <form id="formulario" method="post" action="{{route('carreras-update', ['id'=>Request::cookie('id')])}}" >
+            @method('PATCH')
+            @csrf
+            
+            <h3 text-center>Editar carrera</h3>
+            <label for="inputNombre" class="form-label">Nombre</label>
+            <input type="text" id="inputNombre" class="form-control" name="Nombre" value="{{Request::cookie('nombre')}}">
+            @if ($errors->has('Nombre'))
+            <span class="error text-danger" for="input-nombre">{{ $errors->first('Nombre') }}</span>
+            @endif
+            <br>
+            <label for="inputCodigo" class="form-label">Código</label>
+            <input type="text" id="inputCodigo" class="form-control" name="Codigo" value="{{Request::cookie('codigo')}}">
+            @if ($errors->has('Codigo'))
+            <span class="error text-danger" for="inputApellido">{{ $errors->first('Codigo') }}</span>
+            @endif
+           <input class="btn btn-lg btn-block" type="submit" value="Guardar">
+           <a href="carrera5" class="btn btn-lg btn-danger">Cancelar</a>
+            <br>
+      </form>
+      @else
+      <form id="formulario" method="post" action="{{route('carreras')}}" >
+            @csrf
+            <h3 text-center>Registrar carrera</h3>
+            <label for="inputNombre" class="form-label">Nombre</label>
+            <input type="text" id="inputNombre" class="form-control" name="Nombre" value="{{old('Nombre')}}">
+            @if ($errors->has('Nombre'))
+            <span class="error text-danger" for="input-nombre">{{ $errors->first('Nombre') }}</span>
+            @endif
+            <br>
+            <label for="inputCodigo" class="form-label">Código</label>
+            <input type="text" id="inputCodigo" class="form-control" name="Codigo" value="{{old('Codigo')}}">
+            @if ($errors->has('Codigo'))
+            <span class="error text-danger" for="inputApellido">{{ $errors->first('Codigo') }}</span>
+            @endif
+           <input class="btn btn-lg btn-block" type="submit" value="Registrar">
+            <br>
+      </form>
       @endif
-<br>
-
 @endsection
 @section('Tabla')
 <div id="C_tabla">
@@ -38,44 +71,19 @@ action="{{route('carreras')}}"
                    <tr>
                          <td>{{$carrera->Nombre}}</td>
                          <td>{{$carrera->Codigo}}</td>
+                         
                          <td>
-                             
-                                    <button id='{{$carrera->id}}' >
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                               <div><a href="{{route('carreras-show',['id'=>$carrera->id])}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                             class="bi bi-pencil-square" viewBox="0 0 16 16">
                                            <path
                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                           <path fill-rule="evenodd"
                                           d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                           </svg>
-                                    </button>
-                                    <script>
-                                         
-                                          var btnEditar=document.getElementById("{{$carrera->id}}");
-                                          btnEditar.className="Modelo";
-                                          btnEditar.onclick=function(){
-                                          var nombre=document.getElementById("inputNombre");
-                                          nombre.value="{{$carrera->Nombre}}";
-                                          var codigo=document.getElementById("inputCodigo");
-                                          codigo.value="{{$carrera->Codigo}}";
-                                          var formulario=document.getElementById("formulario");
-                                          formulario.method="PATCH";
-                                          formulario.action="{{route('carreras-update',['id'=> $carrera->id])}}";
-                                          var boton=document.getElementsByClassName("Boton");
-                                          boton[0].value="Aceptar";
-                                          boton[0].type="submit";
-                                          var bandera=formulario.getElementsByTagName("a");
-                                          if(bandera.length==0){
-                                          var btnCancelar=document.createElement("a");
-                                          btnCancelar.className="btn btn-danger";
-                                          btnCancelar.innerHTML="Cancelar";
-                                          btnCancelar.href="carrera";
-                                          formulario.appendChild(btnCancelar);
-                                          }
-                                          }
-                                          
-                                    </script>
-                              
+                               </a>
+                               </div>
+                             
                          </td>
                          <td>
                               <form action="{{route('carreras-destroy',[$carrera->id])}}" method="POST" class="Elimina">
@@ -140,7 +148,9 @@ action="{{route('carreras')}}"
 </script>
 @endif
 @if (session('actualizar')=='ok')
+
 <script>
+    
   Swal.fire({
   position: 'center',
   icon: 'success',
@@ -149,6 +159,8 @@ action="{{route('carreras')}}"
   timer: 1500
   })
 </script>
+
+
 @endif
 @if (session('eliminar')=='ok')
 <script>
@@ -160,5 +172,7 @@ action="{{route('carreras')}}"
   timer: 1500
   })
 </script>
+
 @endif
+
 @endsection
