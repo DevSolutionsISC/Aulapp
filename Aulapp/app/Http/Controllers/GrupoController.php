@@ -15,7 +15,7 @@ class GrupoController extends Controller
     public function index()
     {
         $grupos=Grupo::all();
-        return view('adm_grupos', ['grupos' => $materias]);
+        return view('adm_grupos', ['grupos' => $grupos]);
  
     }
 

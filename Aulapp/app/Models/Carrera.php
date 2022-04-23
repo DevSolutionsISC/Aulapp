@@ -9,7 +9,3 @@ class Carrera extends Model
 {
     use HasFactory;
 }
-
-public function materia_carrera(){
-	return $this->hasMany('App\Models\Materia_Carrera');
-}

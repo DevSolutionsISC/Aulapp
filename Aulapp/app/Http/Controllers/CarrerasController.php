@@ -17,10 +17,8 @@ class CarrerasController extends Controller
      */
     public function index()
     {
-        
-       
         $carreras=Carrera::all();
-        return view('adm_carreras', ['carreras' => $carreras]);
+        return view('editarcarrera', ['carreras' => $carreras]);
     }
 
     /**

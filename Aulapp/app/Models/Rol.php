@@ -9,6 +9,4 @@ class Rol extends Model
 {
     use HasFactory;
 }
-public function usuarioRols(){
-	return $this->hasMany('App\Models\UserRol');
-}
+

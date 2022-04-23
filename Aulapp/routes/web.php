@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::get('/', function () {
     return view('eliminar');
 });
+/*
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
 Route::delete('/carrera/{id}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
@@ -53,9 +54,11 @@ Route::get('/aula', function () {
 
 Route::get('/menu-adm', function () {
     return view('menu_administrador');
-});
+});*/
+
 
 Route::get('/pr', function () {
     return view('editarcarrera');
 });
+Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 

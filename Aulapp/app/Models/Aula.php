@@ -9,6 +9,3 @@ class Aula extends Model
 {
     use HasFactory;
 }
-public function sectiones(){
-	return $this->belongsTo('App\Models\Section');
-}

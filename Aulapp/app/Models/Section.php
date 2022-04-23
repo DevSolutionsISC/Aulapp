@@ -9,7 +9,3 @@ class Section extends Model
 {
     use HasFactory;
 }
-
-public function aulas(){
-	return $this->hasMany('App\Models\Aula');
-}

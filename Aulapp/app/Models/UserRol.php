@@ -10,11 +10,3 @@ class UserRol extends Model
     use HasFactory;
 }
 
-public function usuario(){
-	return $this->belongsTo('App\Models\Usuario');
-}
-
-public function rol(){
-	return $this->belongsTo('App\Models\Rol');
-}
-

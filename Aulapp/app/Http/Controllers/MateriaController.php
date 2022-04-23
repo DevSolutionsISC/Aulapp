@@ -60,7 +60,7 @@ class MateriaController extends Controller
      */
     public function show(Materia $materia)
     {
-        $materia = Materia::find($id);
+        $materia = Materia::all();
         return view('adm_materias-show', ['materia' => $materia]);
     }
 

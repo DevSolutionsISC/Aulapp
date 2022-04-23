@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('title', 'Seccion')
+@section('title', 'Carrera')
 @section('Titulo')
 <h3 text-center id="Titulo">Administracion de Carreras</h3>
 @endsection
@@ -28,12 +28,12 @@
       <span class="error text-danger" for="input-nombre"></span>
       <label for="inputNombre" class="form-label">Nombre</label>
       <input type="text" id="inputNombre" class="form-control" name="nombre" value=""
-      value="" autofocus>
+      value="" autofocus disabled>
       <span class="error text-danger" for="input-nombre"></span>
 
       <label for="Codigo" class="form-label">Codigo</label>
       <input type="text" id="inputCodigo" class="form-control" name="codigo" value=""
-      value="" autofocus>
+      value="" autofocus disabled>
       <span class=" error text-danger" for="input-codigo"></span>
    
       <br>
@@ -47,4 +47,9 @@
 
 </div>
 
+@endsection
+@section('js')
+<script>
+console.log("safsa")
+</script>
 @endsection

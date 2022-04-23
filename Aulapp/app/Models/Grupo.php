@@ -9,7 +9,4 @@ class Grupo extends Model
 {
     use HasFactory;
 }
-public function materia_carrera(){
-	return $this->belongsTo('App\Models\Materia_Carrera');
-}
 
