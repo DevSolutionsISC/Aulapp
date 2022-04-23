@@ -11,10 +11,9 @@ class Materia extends Model
     protected $fillable = ['nombre_materia','Cod_materia'];
 }
 
-public function grupos(){
-	return $this->hasMany('App\Models\Grupo');
+public function materia_carrera(){
+	return $this->hasMany('App\Models\Materia_Carrera');
 }
-
-public function carrera(){
-	return $this->belongsTo('App\Models\Carrera');
+public function docente(){
+	return $this->belongsTo('App\Models\Docente');
 }

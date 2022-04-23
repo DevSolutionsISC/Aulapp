@@ -9,6 +9,6 @@ class Informacion extends Model
 {
     use HasFactory;
 }
-public function roles(){
-	return $this->hasMany('App\Models\Rol');
-}
+/*public function usuarios(){
+	return $this->hasMany('App\Models\Usuario');
+}*/

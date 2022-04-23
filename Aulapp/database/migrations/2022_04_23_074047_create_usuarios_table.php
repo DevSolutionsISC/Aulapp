@@ -17,7 +17,14 @@ class CreateUsuariosTable extends Migration
             $table->id();
             $table->string('usuario');
             $table->string('contrasenia');
+            
+
+            $table->unsignedBigInteger('id_informacion')->unique();
+            $table->foreign('id_informacion')->references('id')->on('informacions')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
+        
         });
     }
 

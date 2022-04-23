@@ -9,10 +9,7 @@ class Carrera extends Model
 {
     use HasFactory;
 }
-/*public function grupos(){
-	return $this->hasMany('App\Models\Grupo');
-}
-*/
-public function materias(){
-	return $this->hasMany('App\Models\Materia');
+
+public function materia_carrera(){
+	return $this->hasMany('App\Models\Materia_Carrera');
 }
