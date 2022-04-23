@@ -52,3 +52,7 @@ Route::get('/menu-adm', function () {
     return view('menu_administrador');
 });
 
+Route::get('/pr', function () {
+    return view('reportar');
+});
+
