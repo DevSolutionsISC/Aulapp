@@ -14,11 +14,7 @@ public function usuario(){
 	return $this->belongsTo('App\Models\Usuario');
 }
 
-
 public function rol(){
 	return $this->belongsTo('App\Models\Rol');
 }
 
-public function asignacionGrupos(){
-	return $this->hasMany('App\Models\AsignacionGrupo');
-}

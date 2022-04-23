@@ -12,6 +12,3 @@ class Rol extends Model
 public function usuarioRols(){
 	return $this->hasMany('App\Models\UserRol');
 }
-public function informacion(){
-	return $this->belongsTo('App\Models\Informacion');
-}

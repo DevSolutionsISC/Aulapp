@@ -16,20 +16,10 @@ class CreateGruposTable extends Migration
         Schema::create('grupos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->unsignedBigInteger('id_materia');
-            //$table->unsignedBigInteger('id_carrera');
-            //$table->unsignedBigInteger('id_docente');
 
-            $table->foreign('id_materia')
-            ->references('id')->on('materias');
+            $table->unsignedBigInteger('id_materia_carrera');
 
-           // $table->foreign('id_carrera')
-             //     ->references('id')->on('carreras');
-
-            //$table->foreign('id_docente')
-              //    ->references('id')->on('docentes');
-
-          
+            $table->foreign('id_materia_carrera')->references('id')->on('materia__carreras');
       
             $table->timestamps();
         });

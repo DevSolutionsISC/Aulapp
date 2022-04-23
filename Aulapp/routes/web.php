@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/', function () {
+    return view('editar');
+});
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
 Route::delete('/carrera/{id}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');

@@ -9,12 +9,7 @@ class Grupo extends Model
 {
     use HasFactory;
 }
-public function materia(){
-	return $this->belongsTo('App\Models\Materia');
-}/*
-public function carrera(){
-	return $this->belongsTo('App\Models\Carrera');
+public function materia_carrera(){
+	return $this->belongsTo('App\Models\Materia_Carrera');
 }
-public function docente(){
-	return $this->belongsTo('App\Models\Docente');
-}*/
+
