@@ -5,8 +5,17 @@
 @endsection
 @section('Contenido formulario')
 
-<div class="row">
-  <div class="col-xl-3 col-md-4 col-12">
+<div class="row" >
+
+  <div style=" width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 15%; left:25%" class="col-xl-3 col-md-4 col-12">
     <form id="formulario" method="post">
 
       <h3 text-center>Registrar materia</h3>
@@ -25,12 +34,16 @@
       <span class=" error text-danger" for="input-codigo"></span>
    
       <br>
-      <div class="d-grid gap-2">
-        <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Guardar</button>
-        <a href="" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+      <div>
+      
+        <button style = "width:150px" class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Guardar</button>
+        <a href="" style = "width:150px" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
           type="button">Cancelar</a>
       </div>
 
     </form>
+
   </div>
+  
 @endsection
+
