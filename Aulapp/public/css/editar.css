@@ -1,0 +1,49 @@
+h3{
+        font-family: 'Gruppo', cursive;
+        font-family: 'Poppins', sans-serif;
+        font-size: 30px;
+        font-weight:  bolder;
+}
+.nav-link{
+    font-family: 'Gruppo', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+#Titulo{
+    margin-left: 250px;
+}
+#menu{
+    text-decoration: none;
+    color: black;
+    display: none;
+}
+@media (max-width: 1300px){
+    #Titulo{
+        margin-left: 0;
+        
+    }
+}
+@media (max-width: 800px){
+#Titulo{
+    margin-left: 0;
+    font-size: 15px;
+    display: block;
+    padding-top: 7px;
+}
+.nav-link{
+    
+    font-size: 10px;
+}
+#Nlogo{
+    font-size: 15px;
+}
+#logo{
+    width: 15px;
+}
+#menu{
+    display: block;
+}
+.nav-link{
+    display: none;
+}
+}

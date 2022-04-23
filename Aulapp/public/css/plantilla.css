@@ -19,7 +19,7 @@ nav {
     padding-bottom: 1%;
 }
 #Container {
-    margin-top: 5%;
+    margin-top: 3%;
     max-width: 1800px;
 }
 h3 {
@@ -83,4 +83,19 @@ svg {
 }
 #columnaEditar {
     width: 75px;
+}
+
+#Nlogo{
+    font-family: 'Gruppo', cursive;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 10px;
+    font-size: 30px;
+    display: block;
+    float: left;
+}
+#logo{
+    margin-left: 10px;
+    margin-top: 0;
+    display: block;
+    float: right;
 }
