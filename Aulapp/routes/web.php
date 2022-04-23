@@ -51,11 +51,4 @@ Route::get('/aula', function () {
     return view('adm_aulas');
 });
 
-Route::get('/menu-adm', function () {
-    return view('menu_administrador');
-});
-
-Route::get('/pr', function () {
-    return view('editarcarrera');
-});
 
