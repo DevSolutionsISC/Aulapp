@@ -56,6 +56,6 @@ Route::get('/menu-adm', function () {
 });
 
 Route::get('/pr', function () {
-    return view('reportar');
+    return view('editarcarrera');
 });
 
