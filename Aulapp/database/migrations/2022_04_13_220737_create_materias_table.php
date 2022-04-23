@@ -17,10 +17,8 @@ class CreateMateriasTable extends Migration
             $table->id();
 
             $table->string('nombre_materia');
-            $table->integer('Cod_materia');
+            $table->integer('Cod_materia')->unique();
 
-            $table->unsignedBigInteger('id_docente');
-            $table->foreign('id_docente')->references('id')->on('docentes');
             
             $table->timestamps();
         });
