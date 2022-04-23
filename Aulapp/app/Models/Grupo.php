@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Materia extends Model
+class Grupo extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre_materia','Cod_materia'];
 }
-
-public function grupos(){
-	return $this->hasMany('App\Models\Grupo');
-}
-
+public function materia(){
+	return $this->belongsTo('App\Models\Materia');
+}/*
 public function carrera(){
 	return $this->belongsTo('App\Models\Carrera');
 }
+public function docente(){
+	return $this->belongsTo('App\Models\Docente');
+}*/

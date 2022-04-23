@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Section extends Model
+class Usuario extends Model
 {
     use HasFactory;
 }
-
-public function aulas(){
-	return $this->hasMany('App\Models\Aula');
+public function usuarioRols(){
+	return $this->hasMany('App\Models\UserRol');
 }

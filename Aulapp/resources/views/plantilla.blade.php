@@ -27,7 +27,10 @@
         @yield('Titulo')
         <form class="d-flex">
           <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="#">DevSolutions</a>
+          <a class="nav-link active" aria-current="page" href="#">Registrar</a>
+          <a class="nav-link active" aria-current="page" href="#">Editar</a>
+          <a class="nav-link active" aria-current="page" href="#">Eliminar</a>
+          <a class="nav-link active" aria-current="page" href="#">Ver reporte</a>
         </form>
       </div>
     </nav>
