@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/', function () {
-    return view('editar');
+    return view('eliminar');
 });
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
