@@ -51,3 +51,4 @@ Route::get('/aula', function () {
     return view('adm_aulas');
 });
 
+
