@@ -14,3 +14,7 @@ class Materia extends Model
 public function grupos(){
 	return $this->hasMany('App\Models\Grupo');
 }
+
+public function carrera(){
+	return $this->belongsTo('App\Models\Carrera');
+}

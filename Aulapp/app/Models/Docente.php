@@ -9,6 +9,6 @@ class Docente extends Model
 {
     use HasFactory;
 }
-public function grupos(){
+/*public function grupos(){
 	return $this->hasMany('App\Models\Grupo');
-}
+}*/

@@ -4,6 +4,7 @@ use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\CarrerasController;
+use App\Http\Controllers\GrupoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,8 +41,9 @@ Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
 Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
 Route::delete('/materia/{id}', [MateriaController::class, 'destroy'])->name('materias-destroy');
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
-//Route::get('/materia/{id}', [SectionsController::class, 'show'])->name('materias-show');
 
+Route::get('/grupo', [GrupoController::class, 'index'])->name('grupos');
+Route::post('/grupo', [GrupoController::class, 'store'])->name('grupos');
 Route::get('/aula', function () {
     return view('adm_aulas');
 });

@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Section extends Model
+class Aula extends Model
 {
     use HasFactory;
 }
-
-public function aulas(){
-	return $this->hasMany('App\Models\Aula');
+public function sectiones(){
+	return $this->belongsTo('App\Models\Section');
 }

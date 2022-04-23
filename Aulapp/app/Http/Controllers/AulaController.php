@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Grupo;
+use App\Models\Aula;
 use Illuminate\Http\Request;
 
-class GrupoController extends Controller
+class AulaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        $grupos=Grupo::all();
-        return view('adm_grupos', ['grupos' => $materias]);
- 
+        //
     }
 
     /**
@@ -37,23 +35,16 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        $grupo=new Grupo();
-        $grupo->nombre=$request->nombre;
-        $grupo->id_materia=$request->id_materia;
-        $grupo->id_carrera=$request->id_carrera;
-        $grupo->id_docente=$request->id_docente;
-        $grupo->save();
-
-        return redirect()->route('grupos')->with('registrar','ok');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Grupo  $grupo
+     * @param  \App\Models\Aula  $aula
      * @return \Illuminate\Http\Response
      */
-    public function show(Grupo $grupo)
+    public function show(Aula $aula)
     {
         //
     }
@@ -61,10 +52,10 @@ class GrupoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Grupo  $grupo
+     * @param  \App\Models\Aula  $aula
      * @return \Illuminate\Http\Response
      */
-    public function edit(Grupo $grupo)
+    public function edit(Aula $aula)
     {
         //
     }
@@ -73,10 +64,10 @@ class GrupoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Grupo  $grupo
+     * @param  \App\Models\Aula  $aula
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Grupo $grupo)
+    public function update(Request $request, Aula $aula)
     {
         //
     }
@@ -84,10 +75,10 @@ class GrupoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Grupo  $grupo
+     * @param  \App\Models\Aula  $aula
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Grupo $grupo)
+    public function destroy(Aula $aula)
     {
         //
     }

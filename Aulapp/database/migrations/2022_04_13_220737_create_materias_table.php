@@ -17,7 +17,20 @@ class CreateMateriasTable extends Migration
             $table->id();
 
             $table->string('nombre_materia');
-            $table->integer("Cod_materia");
+            $table->integer('Cod_materia');
+
+            $table->unsignedBigInteger('id_carrera');
+
+            $table->foreign('id_carrera')->references('id')->on('carreras');
+
+          
+
+         
+          //  $table->foreignId('id_carrera')
+        	/*->nullable()
+	        ->constrained('carreras')
+	        ->cascadeOnUpdate()
+	        ->nullOnDelete();*/
             
             $table->timestamps();
         });

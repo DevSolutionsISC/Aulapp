@@ -11,10 +11,10 @@ class Grupo extends Model
 }
 public function materia(){
 	return $this->belongsTo('App\Models\Materia');
-}
+}/*
 public function carrera(){
 	return $this->belongsTo('App\Models\Carrera');
 }
 public function docente(){
 	return $this->belongsTo('App\Models\Docente');
-}
+}*/

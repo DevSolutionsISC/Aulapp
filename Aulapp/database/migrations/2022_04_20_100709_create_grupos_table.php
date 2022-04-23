@@ -17,17 +17,19 @@ class CreateGruposTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->unsignedBigInteger('id_materia');
-            $table->unsignedBigInteger('id_carrera');
-            $table->unsignedBigInteger('id_docente');
+            //$table->unsignedBigInteger('id_carrera');
+            //$table->unsignedBigInteger('id_docente');
 
             $table->foreign('id_materia')
-                  ->references('id')->on('materias');
+            ->references('id')->on('materias');
 
-            $table->foreign('id_carrera')
-                  ->references('id')->on('carreras');
+           // $table->foreign('id_carrera')
+             //     ->references('id')->on('carreras');
 
-            $table->foreign('id_docente')
-                  ->references('id')->on('docentes');
+            //$table->foreign('id_docente')
+              //    ->references('id')->on('docentes');
+
+          
       
             $table->timestamps();
         });
