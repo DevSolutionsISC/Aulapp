@@ -3,6 +3,7 @@
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\CarrerasController;
 use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\MateriaCarreraController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SectionsController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,9 @@ Route::get('/', function () {
 Route::get('/eliminar-aula', [AulaController::class, 'busqueda'])->name('eliminar-aula');
 Route::get('/eliminar-carrera', [CarrerasController::class, 'busqueda'])->name('eliminar-carrera');
 Route::get('/eliminar-materia', [MateriaController::class, 'busqueda'])->name('eliminar-materia');
+Route::get('/eliminar-materia-carrera', [MateriaCarreraController::class, 'busqueda'])->name('eliminar-materia-carrera');
+Route::get('/eliminar-grupo', [GrupoController::class, 'busqueda'])->name('eliminar-grupo');
+Route::delete('/grupo/{id}', [GrupoController::class, 'destroy'])->name('grupos-destroy');
 
 //
 
@@ -47,6 +51,8 @@ Route::delete('/aula/{id}', [AulaController::class, 'destroy'])->name('aulas-des
 
 Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
 Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
+Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::class, 'destroy'])->name('materiasCarreras-destroy');
+
 Route::delete('/materia/{materia}', [MateriaController::class, 'destroy'])->name('materias-destroy');
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
 

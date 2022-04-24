@@ -15,6 +15,7 @@ class CreateMateriaCarrerasTable extends Migration
     {
         Schema::create('materia__carreras', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('carrera_id');
             $table->foreign('carrera_id')->references('id')->on('carreras');
 

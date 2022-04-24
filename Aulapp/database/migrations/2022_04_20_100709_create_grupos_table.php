@@ -17,10 +17,10 @@ class CreateGruposTable extends Migration
             $table->id();
             $table->string('nombre')->unique();
 
-            $table->unsignedBigInteger('id_materia_carrera');
+            $table->unsignedBigInteger('materia__carrera_id');
 
-            $table->foreign('id_materia_carrera')->references('id')->on('materia__carreras');
-      
+            $table->foreign('materia__carrera_id')->references('id')->on('materia__carreras');
+
             $table->timestamps();
         });
     }
