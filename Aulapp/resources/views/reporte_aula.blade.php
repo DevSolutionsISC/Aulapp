@@ -4,6 +4,7 @@
 <h3 text-center>Administracion de aulas </h3>
 @endsection
 @section('Contenido formulario')
+
 <div id="C_tabla">
       <h3 id="T_tabla">Lista de aulas</h3>
       <table class="table">
@@ -11,6 +12,7 @@
             <thead>                
                   <tr>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Capacidad</th>
                         <th scope="col">Seccion</th>
                   </tr>
             </thead>
@@ -18,7 +20,8 @@
                     @foreach($aulas as $aula)
                    <tr>
                          <td>{{$aula->nombre}}</td>
-                         <td>{{$aula->id_section}}</td>
+                         <td>{{$aula->capacidad}}</td>
+                         <td>{{$aula->nombre}}</td>
                          
                          <td>
                                <div><a href="">
