@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
+/*Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
 Route::get('/eliminar-aula', [AulaController::class, 'busqueda'])->name('eliminar-aula');
 Route::get('/eliminar-carrera', [CarrerasController::class, 'busqueda'])->name('eliminar-carrera');
 Route::get('/eliminar-materia', [MateriaController::class, 'busqueda'])->name('eliminar-materia');
@@ -54,7 +54,7 @@ Route::get('/grupo', [GrupoController::class, 'index'])->name('grupos');
 Route::post('/grupo', [GrupoController::class, 'store'])->name('grupos');
 Route::get('/aula', function () {
     return view('adm_aulas');
-});
+});*/
 
 Route::get('/menu-adm', function () {
     return view('menu_administrador');
@@ -69,4 +69,13 @@ Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
 
 Route::get('/materiaEdit', [MateriaController::class, 'showEdit'])->name('materia_edit');
+
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
+
+Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
+
+Route::get('/materia','App\Http\Controllers\MateriaController@reporte');
+Route::get('/carrera','App\Http\Controllers\CarrerasController@reporte');
+Route::get('/section','App\Http\Controllers\SectionsController@reporte');
+Route::get('/aula','App\Http\Controllers\AulaController@reporte');
+Route::get('/grupo','App\Http\Controllers\GrupoController@reporte');
