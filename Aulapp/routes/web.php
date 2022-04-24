@@ -35,6 +35,8 @@ Route::post('/docente', [DocenteController::class, 'store'])->name('docentes');
 */
 Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
 Route::post('/seccion', [SectionsController::class, 'store'])->name('secciones');
+Route::get('/aula', [SectionsController::class, 'index'])->name('aulas');
+Route::post('/aula', [SectionsController::class, 'store'])->name('aulas');
 /*Route::get('/seccion/{id}', [SectionsController::class, 'show'])->name('secciones-show');
 Route::patch('/seccion/{id}', [SectionsController::class, 'update'])->name('secciones-update');
 Route::delete('/seccion/{section}', [SectionsController::class, 'destroy'])->name('secciones-destroy');
