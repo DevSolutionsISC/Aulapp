@@ -12,6 +12,12 @@ class SectionsController extends Controller
         $sections = Section::all();
         return view('adm_secciones', compact('sections'));
     }
+    public function reporte()
+    {
+        $sections = Section::all();
+        return view('reporte_seccion', compact('sections'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([

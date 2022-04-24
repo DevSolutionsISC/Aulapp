@@ -5,19 +5,21 @@
 @endsection
 @section('Contenido formulario')
 <div id="C_tabla">
-      <h3 id="T_tabla">Lista de materias</h3>
+      <h3 id="T_tabla">Lista de Materias</h3>
       <table class="table">
       
             <thead>                
                   <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Código</th>
+
                   </tr>
             </thead>
             <tbody>
+                   @foreach($materias as $materia)
                    <tr>
-                         <td>ingrese un nombre</td>
-                         <td>ingrese un codigo</td>
+                         <td>{{$materia->nombre_materia}}</td>
+                         <td>{{$materia->Cod_materia}}</td>
                          
                          <td>
                                <div><a href="">
@@ -29,7 +31,8 @@
                              
                          </td>
                          
-                   </tr>     
+                   </tr>    
+                   @endforeach 
                   
             </tbody>
       </table>
