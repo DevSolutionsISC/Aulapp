@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aula;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -62,17 +61,13 @@ class SectionsController extends Controller
         return view('eliminar_seccion', compact('sections'));
 
     }
-    public function destroy($id)
+    public function destroy($section)
     {
-        // buscas el padre
-        $result = Section::find($id);
-
-// buscas el hijo y lo borras
-        $resultAula = Aula::find($result->id);
-        $resultAula->delete();
-
-// borrar el padre
-        $result->delete();
+        $section = Section::find($section);
+        $section->aulas()->each(function ($aula) {
+            $aula->delete(); // <-- direct deletion
+        });
+        $section->delete();
 
         return redirect()->route('secciones')->with('eliminar', 'ok');
     }
