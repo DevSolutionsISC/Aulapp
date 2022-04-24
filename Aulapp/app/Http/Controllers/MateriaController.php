@@ -20,7 +20,7 @@ class MateriaController extends Controller
     public function index()
     {
         $materias = Materia::all();
-        return view('editarmateria', ['materias' => $materias]);
+        return view('registrar_materia', ['materias' => $materias]);
 
     }
     public function reporte()
@@ -57,7 +57,7 @@ class MateriaController extends Controller
     public function store(StoreMateria $request)
     {
         $materia = new Materia();
-        $materia->nombre_materia = $request->nombre_materia;
+        $materia->nombre_materia = $request->nombre;
         $materia->Cod_materia = $request->Cod_materia;
         $materia->save();
 
