@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Materia;
+use App\Models\Materia_Carrera;
+use App\Models\Carrera;
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreMateria;
@@ -19,7 +21,15 @@ class MateriaController extends Controller
     public function index()
     {
         $materias=Materia::all();
-        return view('adm_materias', ['materias' => $materias]);
+        return view('editarmateria', ['materias' => $materias]);
+ 
+    }
+    public function showEdit()
+    {
+        $materias=Materia::all();
+        $carreras=Carrera::all();
+        $conexiones=Materia_Carrera::all();
+        return view('editarmateria', ['materias' => $materias, 'carreras' => $carreras, 'conexiones' => $conexiones]);
  
     }
 
@@ -60,8 +70,7 @@ class MateriaController extends Controller
      */
     public function show(Materia $materia)
     {
-        $materia = Materia::all();
-        return view('adm_materias-show', ['materia' => $materia]);
+       
     }
 
     /**
@@ -82,16 +91,20 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreMateria $request, $id)
+    public function update(Request $request, $id)
     {
-
+        $materia=Materia::find($id);
+        $request->validate([
+            'Nombre' => 'required|regex:/^[\pL\s\-]+$/u|min:5|max:60|unique:materias,nombre_materia,'. $materia->id ,
+            'Codigo' => 'required|numeric|digits_between:6,10|unique:materias,Cod_materia,' . $materia->id 
+        ]);
         
         $materia=Materia::find($id);
-        $materia->nombre_materia=$request->nombre_materia;
-        $materia->Cod_materia=$request->Cod_materia;
+        $materia->nombre_materia=$request->Nombre;
+        $materia->Cod_materia=$request->Codigo;
         $materia->save();
 
-        return redirect()->route('materias')->with('actualizar', 'ok');
+        return redirect()->route('materia_edit')->with('actualizar', 'ok');
        
     }
 

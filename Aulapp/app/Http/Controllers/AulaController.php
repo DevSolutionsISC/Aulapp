@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAula;
 use App\Models\Aula;
+use App\Models\Carrera;
+use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class AulaController extends Controller
 {
@@ -12,11 +17,14 @@ class AulaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
-        //
+        $seccions=Section::all();
+        return view('registrar_aula',['seccions'=>$seccions]);
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -33,9 +41,20 @@ class AulaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAula $request)
     {
-        //
+        
+        
+        
+        $aula=new Aula();
+        $aula->nombre=$request->nombre;
+        $aula->capacidad=$request->capacidad;
+        $aula->id_section=$_POST['seccion'];
+        
+
+        $aula->save();
+
+        return redirect()->route('aulas')->with('registrar','ok');
     }
 
     /**

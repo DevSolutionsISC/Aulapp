@@ -25,7 +25,7 @@ class StoreSeccion extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:10|max:50|unique:sections',
+            'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/u|min:10|max:50|unique:sections',
             'descripcion' => 'bail|required|min:10|max:50'
         ];
     }

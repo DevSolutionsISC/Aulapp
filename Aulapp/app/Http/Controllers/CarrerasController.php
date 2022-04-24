@@ -90,9 +90,15 @@ class CarrerasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CarrerasEdirRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $carrera=Carrera::find($id);        
+
+        $carrera=Carrera::find($id);   
+        $request->validate([
+            'Nombre' => 'bail|required|min:3|max:20|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
+            'Codigo' => 'bail|required|numeric|digits_between:6,10|unique:carreras,Codigo,' . $carrera->id 
+        ]);
+    
         $carrera->Nombre=$request->Nombre;
         $carrera->Codigo=$request->Codigo;
         $carrera->save();        

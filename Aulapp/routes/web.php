@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\SectionsController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarrerasController;
+use App\Http\Controllers\MateriaController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AulaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 /*
+});/*
 Route::get('/eliminar', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
 */
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
@@ -35,8 +38,10 @@ Route::post('/docente', [DocenteController::class, 'store'])->name('docentes');
 */
 Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
 Route::post('/seccion', [SectionsController::class, 'store'])->name('secciones');
-Route::get('/aula', [SectionsController::class, 'index'])->name('aulas');
-Route::post('/aula', [SectionsController::class, 'store'])->name('aulas');
+Route::get('/aula', [AulaController::class, 'index'])->name('aulas');
+Route::post('/aula', [AulaController::class, 'store'])->name('aulas');
+
+
 /*Route::get('/seccion/{id}', [SectionsController::class, 'show'])->name('secciones-show');
 Route::patch('/seccion/{id}', [SectionsController::class, 'update'])->name('secciones-update');
 Route::delete('/seccion/{section}', [SectionsController::class, 'destroy'])->name('secciones-destroy');
@@ -51,6 +56,7 @@ Route::post('/grupo', [GrupoController::class, 'store'])->name('grupos');
 
 Route::get('/aula', function () {
     return view('adm_aulas');
+<<<<<<< HEAD
 });
 
 */
@@ -58,6 +64,13 @@ Route::get('/aula', function () {
 
 
 
+
+Route::get('/menu-adm', function () {
+    return view('menu_administrador');
+});
+
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
 
+Route::get('/materiaEdit', [MateriaController::class, 'showEdit'])->name('materia_edit');
+Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');

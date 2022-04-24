@@ -1,7 +1,7 @@
 @extends('plantilla')
-@section('title', 'Carrera')
+@section('title', 'Materia')
 @section('Titulo')
-<h3 text-center id="Titulo">Administracion de Carreras</h3>
+<h3 text-center id="Titulo">Administracion de Materias</h3>
 @endsection
 @section('Contenido formulario')
 
@@ -11,9 +11,9 @@
     <form method="GET" action="" id="formulario">
       
       @csrf
-      <h3 text-center>Editar carrera</h3>
+      <h3 text-center>Editar materia</h3>
 
-      <label for="inputtexto" class="form-label ">Coloque el codigo de la carrera que quiere editar y presione buscar</label>
+      <label for="inputtexto" class="form-label ">Coloque el codigo de la materia que quiere editar y presione buscar</label>
       <input type="text" id="inputtexto" class="form-control" name="nombre" value="{{old('nombre')}}" autofocus>
       <br>
       <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="buscar">
@@ -69,11 +69,11 @@
   var texto=document.getElementById("inputtexto");
   var encontrado=0;
   var formulario=document.getElementById("formulario");
-  @foreach ($carreras as $carrera)
-    if(texto.value =='{{$carrera->Codigo}}'){
-      nombre.value='{{$carrera->Nombre}}'
-      codigo.value='{{$carrera->Codigo}}'
-      formulario.action="{{route('carreras-update', ['id'=>$carrera->id])}}"
+  @foreach ($materias as $materia)
+    if(texto.value =='{{$materia->Cod_materia}}'){
+      nombre.value='{{$materia->nombre_materia}}'
+      codigo.value='{{$materia->Cod_materia}}'
+      formulario.action="{{route('materias-update', ['id'=>$materia->id])}}"
       localStorage.setItem('ruta',formulario.action)
       localStorage.setItem('id',texto.value)
       var ed=document.getElementsByClassName("ed");
@@ -81,15 +81,18 @@
         ed[i].style.display="block"
       }
       texto.disabled=true;
-    }else{
+      encontrado=1;
+      
+    }
+  @endforeach
+  if(encontrado==0){
       Swal.fire({
     icon: 'error',
     title: 'Oops...',
-    text: 'No se encontro ninguna carrera con ese codigo',
+    text: 'No se encontro ninguna materia con ese codigo',
     })
 
     }
-  @endforeach
   }
 </script>
 @endsection
