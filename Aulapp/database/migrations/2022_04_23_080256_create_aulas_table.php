@@ -16,16 +16,16 @@ class CreateAulasTable extends Migration
         Schema::create('aulas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
-            
-            $table->unsignedBigInteger('id_section');
-            $table->foreign('id_section')->references('id')
-	        ->on('sections');
 
-          /*  $table->foreignId('id_section')
-	        ->nullable()
-	        ->constrained('sections')
-	        ->cascadeOnUpdate()
-	        ->nullOnDelete();*/
+            $table->unsignedBigInteger('section_id');
+            $table->foreign('section_id')->references('id')
+                ->on('sections');
+
+            /*  $table->foreignId('id_section')
+            ->nullable()
+            ->constrained('sections')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();*/
             $table->timestamps();
         });
     }
