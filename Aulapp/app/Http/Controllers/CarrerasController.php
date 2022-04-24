@@ -116,10 +116,26 @@ class CarrerasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function busqueda(Request $request)
     {
-        $carrera = Carrera::find($id);
+
+        $carrera = Carrera::query();
+
+        if ($request->has('search')) {
+            $carrera->where('Codigo', 'like', $request->search);
+        }
+        $carreras = $carrera->get();
+        return view('eliminar_carrera', compact('carreras'));
+
+    }
+    public function destroy($carrera)
+    {
+        $carrera = Carrera::find($carrera);
+        $carrera->materia__carreras()->each(function ($materia_carrera) {
+            $materia_carrera->delete(); // <-- direct deletion
+        });
         $carrera->delete();
-        return redirect()->route('carreras')->with('eliminar', 'ok');
+
+        return redirect()->route('secciones')->with('eliminar', 'ok');
     }
 }
