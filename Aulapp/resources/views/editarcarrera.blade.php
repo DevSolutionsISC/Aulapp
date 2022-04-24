@@ -8,48 +8,88 @@
 <div class="row">
 <div >
   <div class="d-flex" id="formularioEditar">
-    <form method="POST" action="" id="formulario">
-      @method('PATCH')
+    <form method="GET" action="" id="formulario">
+      
       @csrf
       <h3 text-center>Editar carrera</h3>
 
-      <label for="inputNombre" class="form-label">Coloque el codigo de la materia que quiere editar</label>
-      <input type="text" id="inputNombre" class="form-control" name="nombre" value=""
-      value="" autofocus>
-
-      <span class="error text-danger" for="input-nombre">
-        
-      </span>
+      <label for="inputtexto" class="form-label ">Coloque el codigo de la materia que quiere editar</label>
+      <input type="text" id="inputtexto" class="form-control" name="nombre" value="{{old('nombre')}}" autofocus>
       <br>
-      <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off">
+      <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="buscar">
        Buscar
       </button>
       <br>
       <span class="error text-danger" for="input-nombre"></span>
-      <label for="inputNombre" class="form-label">Nombre</label>
-      <input type="text" id="inputNombre" class="form-control" name="nombre" value=""
-      value="" autofocus disabled>
-      <span class="error text-danger" for="input-nombre"></span>
-
-      <label for="Codigo" class="form-label">Codigo</label>
-      <input type="text" id="inputCodigo" class="form-control" name="codigo" value=""
-      value="" autofocus disabled>
-      <span class=" error text-danger" for="input-codigo"></span>
+      <label for="inputNombre" class="form-label ed">Nombre</label>
+      <input type="text" id="inputNombre" class="form-control ed" name="Nombre" value="{{old('Nombre')}}" autofocus>
+      @if ($errors->has('Nombre'))
+            <span class="error text-danger" for="input-nombre">{{ $errors->first('Nombre') }}</span>
+      @endif
+      <br>
+      <label for="Codigo" class="form-label ed">Codigo</label>
+      <input type="text" id="inputCodigo" class="form-control ed" name="Codigo" value="{{old('Codigo')}}" autofocus>
+      @if ($errors->has('Codigo'))
+      <span class="error text-danger" for="inputApellido">{{ $errors->first('Codigo') }}</span>
+      @endif
    
       <br>
       <div class="d-grid gap-2">
-        <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Guardar</button>
-        <a href="" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+        <button class="btn btn-dark btn-block btn-lg ed" id="botonRegistrar" type="submit">Guardar</button>
+        <a href="" class="btn btn-danger btn-block btn-lg ed" id="botonRegistrar"
           type="button">Cancelar</a>
       </div>
     </form>
   </div>
 
 </div>
+@if ($errors->has('Codigo') || $errors->has('Nombre') )
+<script>
+   var ed=document.getElementsByClassName("ed");
+      for(var i=0;i<ed.length;i++){
+        ed[i].style.display="block"
+      }
+      var texto=document.getElementById("inputtexto");
+      texto.disabled=true
+      texto.value=localStorage.getItem('id')
+  formulario.action=localStorage.getItem("ruta");
 
+</script>
+@endif
+@if (session('actualizar')=='ok')
+  <script>localStorage.setItem('ruta',"")</script>
+@endif
 @endsection
 @section('js')
 <script>
-console.log("safsa")
+  var buscar=document.getElementById("buscar");
+  buscar.onclick=function(){
+  var nombre= document.getElementById("inputNombre");
+  var codigo=document.getElementById("inputCodigo");
+  var texto=document.getElementById("inputtexto");
+  var encontrado=0;
+  var formulario=document.getElementById("formulario");
+  @foreach ($carreras as $carrera)
+    if(texto.value =='{{$carrera->Codigo}}'){
+      nombre.value='{{$carrera->Nombre}}'
+      codigo.value='{{$carrera->Codigo}}'
+      formulario.action="{{route('carreras-update', ['id'=>$carrera->id])}}"
+      localStorage.setItem('ruta',formulario.action)
+      localStorage.setItem('id',texto.value)
+      var ed=document.getElementsByClassName("ed");
+      for(var i=0;i<ed.length;i++){
+        ed[i].style.display="block"
+      }
+      texto.disabled=true;
+    }else{
+      Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'No se encontro ninguna carrera con ese codigo',
+    })
+
+    }
+  @endforeach
+  }
 </script>
 @endsection

@@ -17,6 +17,9 @@ h3{
     color: black;
     display: none;
 }
+.ed{
+    display: none;
+}
 @media (max-width: 1300px){
     #Titulo{
         margin-left: 0;

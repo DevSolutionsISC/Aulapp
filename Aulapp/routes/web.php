@@ -51,3 +51,14 @@ Route::post('/grupo', [GrupoController::class, 'store'])->name('grupos');
 Route::get('/aula', function () {
     return view('adm_aulas');
 });
+
+<<<<<<< HEAD
+Route::get('/menu-adm', function () {
+    return view('menu_administrador');
+});*/
+
+
+
+Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
+Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
+

@@ -2,6 +2,8 @@
  
 namespace App\Http\Controllers;
 session_start();
+
+use App\Http\Requests\CarrerasEdirRequest;
 use App\Models\Carrera;
 use Illuminate\Http\Request;
 
@@ -94,23 +96,12 @@ class CarrerasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CarrerasEdirRequest $request, $id)
     {
-
-        $request->validate([
-            'Nombre' => 'bail|required|min:3|max:20|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
-            'Codigo' => 'bail|required|numeric|digits_between:6,10',
-        ]);
-
         $carrera=Carrera::find($id);        
         $carrera->Nombre=$request->Nombre;
         $carrera->Codigo=$request->Codigo;
-        $carrera->save();
-        Cookie::queue(Cookie::forget('editar'));
-        Cookie::queue(Cookie::forget('id'));
-        Cookie::queue(Cookie::forget('codigo'));
-        Cookie::queue(Cookie::forget('nombre'));
-        
+        $carrera->save();        
         return redirect()->route('carreras')->with('actualizar', 'ok');
     }
 
