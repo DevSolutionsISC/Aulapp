@@ -6,11 +6,10 @@ nav {
 }
 #formulario {
     margin: auto;
-    width: 90%;
-    border: 1px solid black;
-    padding: 10%;
+    max-width: 450px;
+
+    padding: 15px;
     background-color: #e8edea;
-    border: white solid 1px;
     margin-bottom: 30px;
 }
 #listaSecciones {
@@ -19,7 +18,7 @@ nav {
     padding-bottom: 1%;
 }
 #Container {
-    margin-top: 3%;
+    margin-top: 5%;
     max-width: 1800px;
 }
 h3 {
@@ -83,21 +82,6 @@ svg {
 }
 #columnaEditar {
     width: 75px;
-}
-
-#Nlogo {
-    font-family: "Gruppo", cursive;
-    font-family: "Poppins", sans-serif;
-    margin-left: 10px;
-    font-size: 30px;
-    display: block;
-    float: left;
-}
-#logo {
-    margin-left: 10px;
-    margin-top: 0;
-    display: block;
-    float: right;
 }
 #datosEliminar {
     background-color: rgba(146, 143, 143, 0.466);

@@ -78,8 +78,11 @@ class AulaController extends Controller
      * @param  \App\Models\Aula  $aula
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aula $aula)
+    public function destroy($id)
     {
-        //
+        $aula = Aula::find($id);
+        $aula->delete();
+        return view('eliminar_seccion', compact('sections'));
+
     }
 }

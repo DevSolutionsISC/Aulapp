@@ -49,10 +49,26 @@ class SectionsController extends Controller
         return redirect()->route('secciones')->with('actualizar', 'ok');
 
     }
-    public function destroy($id)
+    public function busqueda(Request $request)
     {
-        $section = Section::find($id);
+
+        $section = Section::query();
+
+        if ($request->has('search')) {
+            $section->where('nombre', 'like', $request->search);
+        }
+        $sections = $section->get();
+        return view('eliminar_seccion', compact('sections'));
+
+    }
+    public function destroy($section)
+    {
+        $section = Section::find($section);
+        $section->aulas()->each(function ($aula) {
+            $aula->delete(); // <-- direct deletion
+        });
         $section->delete();
+
         return redirect()->route('secciones')->with('eliminar', 'ok');
     }
 
