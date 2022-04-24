@@ -15,11 +15,11 @@ class CreateMateriaCarrerasTable extends Migration
     {
         Schema::create('materia__carreras', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_carrera');
-            $table->foreign('id_carrera')->references('id')->on('carreras');
+            $table->unsignedBigInteger('carrera_id');
+            $table->foreign('carrera_id')->references('id')->on('carreras');
 
-            $table->unsignedBigInteger('id_materia');
-            $table->foreign('id_materia')->references('id')->on('materias');
+            $table->unsignedBigInteger('materia_id');
+            $table->foreign('materia_id')->references('id')->on('materias');
 
             $table->timestamps();
         });

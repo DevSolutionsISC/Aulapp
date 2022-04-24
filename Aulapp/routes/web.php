@@ -23,11 +23,13 @@ Route::get('/', function () {
 });
 Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
 Route::get('/eliminar-aula', [AulaController::class, 'busqueda'])->name('eliminar-aula');
+Route::get('/eliminar-carrera', [CarrerasController::class, 'busqueda'])->name('eliminar-carrera');
+
 //
 
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
-Route::delete('/carrera/{id}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
+Route::delete('/carrera/{carrera}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
 //Route::delete('/docente/{id}', [DocenteController::class, 'destroy'])->name('docentes-destroy');
 //Route::get('/docente/{id}', [DocenteController::class, 'update'])->name('docentes-update');
 Route::get('/carrera/{id}', [CarrerasController::class, 'show'])->name('carreras-show');
