@@ -93,7 +93,7 @@
   $('.Eliminar').submit(function(e){
             e.preventDefault();
             Swal.fire({
-            title: '¿Estás seguro que quieres eliminar la seccion?',
+            title: '¿Estás seguro que quieres eliminar el aula?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -114,7 +114,7 @@
   Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Seccion eliminada',
+  title: 'Aula eliminada',
   showConfirmButton: false,
   timer: 1500
   })
