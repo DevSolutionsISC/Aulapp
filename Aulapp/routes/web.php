@@ -68,3 +68,4 @@ Route::get('/materia','App\Http\Controllers\MateriaController@reporte');
 Route::get('/carrera','App\Http\Controllers\CarrerasController@reporte');
 Route::get('/section','App\Http\Controllers\SectionsController@reporte');
 Route::get('/aula','App\Http\Controllers\AulaController@reporte');
+Route::get('/grupo','App\Http\Controllers\GrupoController@reporte');
