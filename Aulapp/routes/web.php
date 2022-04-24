@@ -70,8 +70,3 @@ Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carrer
 
 Route::get('/materiaEdit', [MateriaController::class, 'showEdit'])->name('materia_edit');
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
-
-Route::get('/materia', 'App\Http\Controllers\MateriaController@reporte');
-Route::get('/carrera', 'App\Http\Controllers\CarrerasController@reporte');
-Route::get('/section', 'App\Http\Controllers\SectionsController@reporte');
-Route::get('/aula', 'App\Http\Controllers\AulaController@reporte');
