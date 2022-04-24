@@ -1,10 +1,6 @@
 <?php
 
-use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SectionsController;
-use App\Http\Controllers\DocenteController;
-use App\Http\Controllers\CarrerasController;
-use App\Http\Controllers\GrupoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/', function () {
-    return view('eliminar');
-});
-/*
+Route::get('/eliminar', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
+
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
 Route::delete('/carrera/{id}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
@@ -39,7 +33,7 @@ Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
 Route::post('/seccion', [SectionsController::class, 'store'])->name('secciones');
 Route::get('/seccion/{id}', [SectionsController::class, 'show'])->name('secciones-show');
 Route::patch('/seccion/{id}', [SectionsController::class, 'update'])->name('secciones-update');
-Route::delete('/seccion/{id}', [SectionsController::class, 'destroy'])->name('secciones-destroy');
+Route::delete('/seccion/{section}', [SectionsController::class, 'destroy'])->name('secciones-destroy');
 
 Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
 Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
