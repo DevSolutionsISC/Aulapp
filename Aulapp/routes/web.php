@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/eliminar', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
+Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
+Route::get('/eliminar-aula', [AulaController::class, 'busqueda'])->name('eliminar-aula');
+//
 
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
@@ -49,13 +51,11 @@ Route::get('/grupo', [GrupoController::class, 'index'])->name('grupos');
 Route::post('/grupo', [GrupoController::class, 'store'])->name('grupos');
 Route::get('/aula', function () {
     return view('adm_aulas');
-
 });
+
 Route::get('/menu-adm', function () {
     return view('menu_administrador');
 });
+
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
-
-Route::get('/materiaEdit', [MateriaController::class, 'showEdit'])->name('materia_edit');
-Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
