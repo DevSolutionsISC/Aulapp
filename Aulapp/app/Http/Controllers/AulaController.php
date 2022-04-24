@@ -23,6 +23,12 @@ class AulaController extends Controller
         $seccions=Section::all();
         return view('registrar_aula',['seccions'=>$seccions]);
     }
+    public function reporte()
+    {
+        $aulas=Aula::all();
+        return view('reporte_aula', compact('aulas'));
+ 
+    }
 
     
     /**
@@ -97,11 +103,24 @@ class AulaController extends Controller
      * @param  \App\Models\Aula  $aula
      * @return \Illuminate\Http\Response
      */
+    public function busqueda(Request $request)
+    {
+
+        $aula = Aula::query();
+
+        if ($request->has('search')) {
+            $aula->where('nombre', 'like', $request->search);
+        }
+        $aulas = $aula->get();
+        return view('eliminar_aula', compact('aulas'));
+
+    }
     public function destroy($id)
     {
         $aula = Aula::find($id);
-        $aula->delete();
-        return view('eliminar_seccion', compact('sections'));
 
+        $aula->delete();
+
+        return redirect()->route('secciones')->with('eliminar', 'ok');
     }
 }

@@ -22,11 +22,6 @@ class CreateAulasTable extends Migration
             $table->foreign('id_section')->references('id')
 	        ->on('sections');
 
-          /*  $table->foreignId('id_section')
-	        ->nullable()
-	        ->constrained('sections')
-	        ->cascadeOnUpdate()
-	        ->nullOnDelete();*/
             $table->timestamps();
         });
     }

@@ -27,11 +27,11 @@
 <div class="d-flex align-items-center justify-content-center row p-2" id="formulario">
   <div class="col-12">
 
-    <form id="formulario" method="GET" action="{{route('eliminar-seccion')}}">
-      <h3 text-center>Eliminar seccion</h3>
+    <form id="formulario" method="GET" action="{{route('eliminar-aula')}}">
+      <h3 text-center>Eliminar aula</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el nombre de la seccion que quiere eliminar</label>
+      <label for="inputNombre" class="form-label">Coloque el nombre del aula que quiere eliminar</label>
       <input type="text" id="inputNombre" class="form-control search" name="search" required>
 
 
@@ -44,17 +44,17 @@
 
 
       <br>
-      @if (count($sections) <= 0) <p class="p-1" id="datosEliminar">No hay resultados</p>
-        @elseif (count($sections) > 1)
+      @if (count($aulas) <= 0) <p class="p-1" id="datosEliminar">No hay resultados</p>
+        @elseif (count($aulas) > 1)
 
-        @elseif (count($sections) == 1)
-        @foreach ($sections as $section )
+        @elseif (count($aulas) == 1)
+        @foreach ($aulas as $aula )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la seccion</h6>
+          <h6>Datos del aula</h6>
 
-          <span>Nombre: {{$section->nombre}}</span>
+          <span>Nombre: {{$aula->nombre}}</span>
           <br>
-          <span>Descripcion:{{$section->descripcion}}</span>
+          <span>Seccion:{{$aula->section->nombre}}</span>
 
         </div>
 
@@ -63,7 +63,7 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <form action="{{route('secciones-destroy', ['section'=>$section->id])}}" method="POST" class="Eliminar">
+      <form action="{{route('aulas-destroy', [$aula->id])}}" method="POST" class="Eliminar">
         @method('DELETE')
         @csrf
         <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Eliminar</button>
@@ -93,7 +93,7 @@
   $('.Eliminar').submit(function(e){
             e.preventDefault();
             Swal.fire({
-            title: '¿Estás seguro que quieres eliminar la seccion?',
+            title: '¿Estás seguro que quieres eliminar el aula?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -114,7 +114,7 @@
   Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Seccion eliminada',
+  title: 'Aula eliminada',
   showConfirmButton: false,
   timer: 1500
   })

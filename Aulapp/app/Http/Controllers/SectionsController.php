@@ -14,6 +14,12 @@ class SectionsController extends Controller
         return view('registrar_seccion_de_aula');
     }
 
+    public function reporte()
+    {
+        $sections = Section::all();
+        return view('reporte_seccion', compact('sections'));
+    }
+
     public function store(StoreSeccion $request)
     {
         

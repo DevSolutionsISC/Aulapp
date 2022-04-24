@@ -1,18 +1,20 @@
 <?php
- 
+
 namespace App\Http\Controllers;
+
 session_start();
 
-use App\Http\Requests\CarrerasEdirRequest;
 use App\Models\Carrera;
 use Illuminate\Http\Request;
+
 use App\Http\Requests\StoreCarrera;
+
 
 
 
 class CarrerasController extends Controller
 {
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +22,16 @@ class CarrerasController extends Controller
      */
     public function index()
     {
+
         
         return view('registrar_carrera');
+
+    }
+    public function reporte()
+    {
+        $carreras=Carrera::all();
+        return view('reporte_carrera', compact('carreras'));
+ 
     }
 
     /**
@@ -43,19 +53,22 @@ class CarrerasController extends Controller
     public function store(StoreCarrera $request)
     {
 
+
         $carrera=new Carrera();
         $carrera->Nombre=$request->nombre;
         $carrera->Codigo=$request->codigo;
+
         $carrera->save();
 
-        return redirect()->route('carreras')->with('registrar','ok');
+        return redirect()->route('carreras')->with('registrar', 'ok');
     }
 
-    public function cancelar(){
+    public function cancelar()
+    {
 
        
         return redirect()->route('carreras');
-        
+
     }
     /**
      * Display the specified resource.
@@ -66,10 +79,9 @@ class CarrerasController extends Controller
     public function show($id)
     {
 
-        $carrera=Carrera::find($id);
-       
-      
-        return redirect()->route('carreras')->cookie('id',$carrera->id)->cookie('nombre',$carrera->Nombre)->cookie('codigo',$carrera->Codigo)->cookie('editar','ok');
+        $carrera = Carrera::find($id);
+
+        return redirect()->route('carreras')->cookie('id', $carrera->id)->cookie('nombre', $carrera->Nombre)->cookie('codigo', $carrera->Codigo)->cookie('editar', 'ok');
     }
 
     /**
@@ -93,15 +105,15 @@ class CarrerasController extends Controller
     public function update(Request $request, $id)
     {
 
-        $carrera=Carrera::find($id);   
+        $carrera = Carrera::find($id);
         $request->validate([
             'Nombre' => 'bail|required|min:3|max:20|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
-            'Codigo' => 'bail|required|numeric|digits_between:6,10|unique:carreras,Codigo,' . $carrera->id 
+            'Codigo' => 'bail|required|numeric|digits_between:6,10|unique:carreras,Codigo,' . $carrera->id,
         ]);
-    
-        $carrera->Nombre=$request->Nombre;
-        $carrera->Codigo=$request->Codigo;
-        $carrera->save();        
+
+        $carrera->Nombre = $request->Nombre;
+        $carrera->Codigo = $request->Codigo;
+        $carrera->save();
         return redirect()->route('carreras')->with('actualizar', 'ok');
     }
 
@@ -111,10 +123,26 @@ class CarrerasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function busqueda(Request $request)
     {
-        $carrera = Carrera::find($id);
+
+        $carrera = Carrera::query();
+
+        if ($request->has('search')) {
+            $carrera->where('Codigo', 'like', $request->search);
+        }
+        $carreras = $carrera->get();
+        return view('eliminar_carrera', compact('carreras'));
+
+    }
+    public function destroy($carrera)
+    {
+        $carrera = Carrera::find($carrera);
+        $carrera->materia__carreras()->each(function ($materia_carrera) {
+            $materia_carrera->delete(); // <-- direct deletion
+        });
         $carrera->delete();
-        return redirect()->route('carreras')->with('eliminar', 'ok');
+
+        return redirect()->route('secciones')->with('eliminar', 'ok');
     }
 }
