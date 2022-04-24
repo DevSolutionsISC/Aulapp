@@ -1,17 +1,16 @@
 <?php
- 
+
 namespace App\Http\Controllers;
+
 session_start();
 
-use App\Http\Requests\CarrerasEdirRequest;
 use App\Models\Carrera;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Cookie;
 
 class CarrerasController extends Controller
 {
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +18,7 @@ class CarrerasController extends Controller
      */
     public function index()
     {
-        $carreras=Carrera::all();
+        $carreras = Carrera::all();
         return view('editarcarrera', ['carreras' => $carreras]);
     }
 
@@ -46,22 +45,23 @@ class CarrerasController extends Controller
             'Codigo' => 'bail|required|numeric|unique:carreras|digits_between:6,10',
         ]);
 
-        $carrera=new Carrera();
-        $carrera->Nombre=$request->Nombre;
-        $carrera->Codigo=$request->Codigo;
+        $carrera = new Carrera();
+        $carrera->Nombre = $request->Nombre;
+        $carrera->Codigo = $request->Codigo;
         $carrera->save();
 
-        return redirect()->route('carreras')->with('registrar','ok');
+        return redirect()->route('carreras')->with('registrar', 'ok');
     }
 
-    public function cancelar(){
+    public function cancelar()
+    {
 
         Cookie::queue(Cookie::forget('editar'));
         Cookie::queue(Cookie::forget('id'));
         Cookie::queue(Cookie::forget('codigo'));
         Cookie::queue(Cookie::forget('nombre'));
         return redirect()->route('carreras');
-        
+
     }
     /**
      * Display the specified resource.
@@ -72,10 +72,9 @@ class CarrerasController extends Controller
     public function show($id)
     {
 
-        $carrera=Carrera::find($id);
-       
-      
-        return redirect()->route('carreras')->cookie('id',$carrera->id)->cookie('nombre',$carrera->Nombre)->cookie('codigo',$carrera->Codigo)->cookie('editar','ok');
+        $carrera = Carrera::find($id);
+
+        return redirect()->route('carreras')->cookie('id', $carrera->id)->cookie('nombre', $carrera->Nombre)->cookie('codigo', $carrera->Codigo)->cookie('editar', 'ok');
     }
 
     /**
@@ -99,15 +98,15 @@ class CarrerasController extends Controller
     public function update(Request $request, $id)
     {
 
-        $carrera=Carrera::find($id);   
+        $carrera = Carrera::find($id);
         $request->validate([
             'Nombre' => 'bail|required|min:3|max:20|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
-            'Codigo' => 'bail|required|numeric|digits_between:6,10|unique:carreras,Codigo,' . $carrera->id 
+            'Codigo' => 'bail|required|numeric|digits_between:6,10|unique:carreras,Codigo,' . $carrera->id,
         ]);
-    
-        $carrera->Nombre=$request->Nombre;
-        $carrera->Codigo=$request->Codigo;
-        $carrera->save();        
+
+        $carrera->Nombre = $request->Nombre;
+        $carrera->Codigo = $request->Codigo;
+        $carrera->save();
         return redirect()->route('carreras')->with('actualizar', 'ok');
     }
 
