@@ -23,6 +23,7 @@ Route::get('/', function () {
 });
 Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
 Route::get('/eliminar-aula', [AulaController::class, 'busqueda'])->name('eliminar-aula');
+//
 
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
