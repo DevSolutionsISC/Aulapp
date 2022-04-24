@@ -21,6 +21,12 @@ class CarrerasController extends Controller
         $carreras = Carrera::all();
         return view('editarcarrera', ['carreras' => $carreras]);
     }
+    public function reporte()
+    {
+        $carreras=Carrera::all();
+        return view('reporte_carrera', compact('carreras'));
+ 
+    }
 
     /**
      * Show the form for creating a new resource.

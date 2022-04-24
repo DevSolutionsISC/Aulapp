@@ -16,6 +16,12 @@ class AulaController extends Controller
     {
         //
     }
+    public function reporte()
+    {
+        $aulas=Aula::all();
+        return view('reporte_aula', compact('aulas'));
+ 
+    }
 
     /**
      * Show the form for creating a new resource.
