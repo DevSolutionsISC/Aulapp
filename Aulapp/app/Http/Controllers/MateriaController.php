@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMateria;
 use App\Models\Carrera;
+
+//use Illuminate\Support\Facades\Session;
 use App\Models\Materia;
 use App\Models\Materia_Carrera;
-//use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class MateriaController extends Controller
@@ -25,9 +26,9 @@ class MateriaController extends Controller
     }
     public function reporte()
     {
-        $materias=Materia::all();
+        $materias = Materia::all();
         return view('reporte_materia', compact('materias'));
- 
+
     }
     public function showEdit()
     {
@@ -132,11 +133,11 @@ class MateriaController extends Controller
     public function destroy($materia)
     {
         $materia = Materia::find($materia);
-        $materia->materia__carreras()->each(function ($materia_carrera) {
-            $materia_carrera->delete(); // <-- direct deletion
+        $materia->materia__carreras()->each(function ($materia_carreras) {
+            $materia_carreras->delete(); // <-- direct deletion
         });
         $materia->delete();
 
-        return redirect()->route('secciones')->with('eliminar', 'ok');
+        return redirect()->route('eliminar-materia')->with('eliminar', 'ok');
     }
 }

@@ -14,9 +14,9 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        $grupos=Grupo::all();
+        $grupos = Grupo::all();
         return view('adm_grupos', ['grupos' => $grupos]);
- 
+
     }
 
     /**
@@ -37,14 +37,14 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        $grupo=new Grupo();
-        $grupo->nombre=$request->nombre;
-        $grupo->id_materia=$request->id_materia;
-        $grupo->id_carrera=$request->id_carrera;
-        $grupo->id_docente=$request->id_docente;
+        $grupo = new Grupo();
+        $grupo->nombre = $request->nombre;
+        $grupo->id_materia = $request->id_materia;
+        $grupo->id_carrera = $request->id_carrera;
+        $grupo->id_docente = $request->id_docente;
         $grupo->save();
 
-        return redirect()->route('grupos')->with('registrar','ok');
+        return redirect()->route('grupos')->with('registrar', 'ok');
     }
 
     /**
@@ -87,8 +87,24 @@ class GrupoController extends Controller
      * @param  \App\Models\Grupo  $grupo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Grupo $grupo)
+    public function busqueda(Request $request)
     {
-        //
+
+        $grupo = Grupo::query();
+
+        if ($request->has('search')) {
+            $grupo->where('id', 'like', $request->search);
+        }
+        $grupos = $grupo->get();
+        return view('eliminar_grupo', compact('grupos'));
+
+    }
+    public function destroy($id)
+    {
+        $grupo = Grupo::find($id);
+
+        $grupo->delete();
+
+        return redirect()->route('eliminar-grupo')->with('eliminar', 'ok');
     }
 }
