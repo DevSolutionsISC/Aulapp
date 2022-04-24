@@ -4,11 +4,7 @@ use App\Http\Controllers\AulaController;
 use App\Http\Controllers\CarrerasController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\MateriaController;
-<<<<<<< HEAD
 use App\Http\Controllers\SectionsController;
-=======
-use App\Http\Controllers\AulaController;
->>>>>>> reportes
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,11 +59,6 @@ Route::get('/aula', function () {
 Route::get('/menu-adm', function () {
     return view('menu_administrador');
 });
-<<<<<<< HEAD
-
-Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
-Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
-=======
 Route::get('/rep', function () {
     return view('reportar');
 });
@@ -80,8 +71,7 @@ Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carrer
 Route::get('/materiaEdit', [MateriaController::class, 'showEdit'])->name('materia_edit');
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
 
-Route::get('/materia','App\Http\Controllers\MateriaController@reporte');
-Route::get('/carrera','App\Http\Controllers\CarrerasController@reporte');
-Route::get('/section','App\Http\Controllers\SectionsController@reporte');
-Route::get('/aula','App\Http\Controllers\AulaController@reporte');
->>>>>>> reportes
+Route::get('/materia', 'App\Http\Controllers\MateriaController@reporte');
+Route::get('/carrera', 'App\Http\Controllers\CarrerasController@reporte');
+Route::get('/section', 'App\Http\Controllers\SectionsController@reporte');
+Route::get('/aula', 'App\Http\Controllers\AulaController@reporte');
