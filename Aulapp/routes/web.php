@@ -46,6 +46,7 @@ Route::get('/grupo', [GrupoController::class, 'index'])->name('grupos');
 Route::post('/grupo', [GrupoController::class, 'store'])->name('grupos');
 Route::get('/aula', function () {
     return view('adm_aulas');
+<<<<<<< HEAD
 }); */
 Route::get('/menu-adm', function () {
     return view('menu_administrador');
