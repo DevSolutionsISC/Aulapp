@@ -4,6 +4,7 @@
 <h3 text-center>Administracion de materia </h3>
 @endsection
 @section('Contenido formulario')
+@section('Tabla')
 <div id="C_tabla">
       <h3 id="T_tabla">Lista de materias</h3>
       <table class="table">

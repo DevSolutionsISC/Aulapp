@@ -13,6 +13,6 @@ class Section extends Model
     protected $table = 'sections';
     public function aulas()
     {
-        return $this->hasMany(Aula::class);
+        return $this->hasMany(Aula::class,'section_id');
     }
 }

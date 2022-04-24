@@ -5,7 +5,7 @@
 @endsection
 @section('Contenido formulario')
 <div id="C_tabla">
-      <h3 id="T_tabla">Lista de Carreras</h3>
+      <h3 id="T_tabla">Lista de carreras</h3>
       <table class="table">
       
             <thead>                
