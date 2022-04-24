@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
 Route::get('/eliminar-aula', [AulaController::class, 'busqueda'])->name('eliminar-aula');
 Route::get('/eliminar-carrera', [CarrerasController::class, 'busqueda'])->name('eliminar-carrera');
+Route::get('/eliminar-materia', [MateriaController::class, 'busqueda'])->name('eliminar-materia');
 
 //
 
@@ -46,7 +47,7 @@ Route::delete('/aula/{id}', [AulaController::class, 'destroy'])->name('aulas-des
 
 Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
 Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
-Route::delete('/materia/{id}', [MateriaController::class, 'destroy'])->name('materias-destroy');
+Route::delete('/materia/{materia}', [MateriaController::class, 'destroy'])->name('materias-destroy');
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
 
 Route::get('/grupo', [GrupoController::class, 'index'])->name('grupos');
