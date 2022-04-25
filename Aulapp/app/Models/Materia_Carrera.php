@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Materia_Carrera extends Model
 {
     use HasFactory;
-    protected $table = 'materia__carreras';
+    protected $table = 'materia_carreras';
     protected $primaryKey = 'id';
 
     public function carrera()
