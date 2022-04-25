@@ -21,7 +21,7 @@ class CreateAsignacionDocentesTable extends Migration
             $table->foreign('id_user_rol')
             ->references('id')->on('user_rols');
             $table->foreign('id_materia_carreras')
-            ->references('id')->on('materia__carreras');
+            ->references('id')->on('materia_carreras');
             $table->timestamps();
         });
     }

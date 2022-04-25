@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAula;
 use App\Models\Aula;
+use App\Models\Carrera;
+use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class AulaController extends Controller
 {
@@ -12,11 +17,20 @@ class AulaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
-        //
+        $seccions=Section::all();
+        return view('registrar_aula',['seccions'=>$seccions]);
+    }
+    public function reporte()
+    {
+        $aulas=Aula::all();
+        return view('reporte_aula', compact('aulas'));
+ 
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -33,9 +47,20 @@ class AulaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAula $request)
     {
-        //
+        
+        
+        
+        $aula=new Aula();
+        $aula->nombre=$request->nombre;
+        $aula->capacidad=$request->capacidad;
+        $aula->id_section=$_POST['seccion'];
+        
+
+        $aula->save();
+
+        return redirect()->route('aulas')->with('registrar','ok');
     }
 
     /**
@@ -78,11 +103,24 @@ class AulaController extends Controller
      * @param  \App\Models\Aula  $aula
      * @return \Illuminate\Http\Response
      */
+    public function busqueda(Request $request)
+    {
+
+        $aula = Aula::query();
+
+        if ($request->has('search')) {
+            $aula->where('nombre', 'like', $request->search);
+        }
+        $aulas = $aula->get();
+        return view('eliminar_aula', compact('aulas'));
+
+    }
     public function destroy($id)
     {
         $aula = Aula::find($id);
-        $aula->delete();
-        return view('eliminar_seccion', compact('sections'));
 
+        $aula->delete();
+
+        return redirect()->route('secciones')->with('eliminar', 'ok');
     }
 }

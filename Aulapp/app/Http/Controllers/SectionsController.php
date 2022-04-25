@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSeccion;
 use App\Models\Section;
 use Illuminate\Http\Request;
+
 
 class SectionsController extends Controller
 {
     public function index()
     {
-        $sections = Section::all();
-        return view('adm_secciones', compact('sections'));
+        return view('registrar_seccion_de_aula');
     }
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required|min:3|max:50|unique:sections|regex:/^[a-zA-Z-ñÑ\s]+$/u',
-            'descripcion' => 'required|min:3|max:50|regex:/^[a-zA-Z0-9-ñÑ\s]+$/u',
-        ]);
 
+    public function reporte()
+    {
+        $sections = Section::all();
+        return view('reporte_seccion', compact('sections'));
+    }
+
+    public function store(StoreSeccion $request)
+    {
+        
         $seccion = new Section();
         $seccion->nombre = $request->nombre;
         $seccion->descripcion = $request->descripcion;
@@ -30,8 +34,6 @@ class SectionsController extends Controller
     public function show($id)
     {
 
-        $section = Section::find($id);
-        return view('adm_secciones-show', ['section' => $section]);
 
     }
 

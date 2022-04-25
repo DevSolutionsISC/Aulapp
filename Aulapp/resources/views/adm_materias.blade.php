@@ -1,7 +1,7 @@
 @extends('plantilla')
-@section('title', 'Seccion')
+@section('title', 'Materias')
 @section('Titulo')
-<h3 text-center>Administracion de materias</h3>
+<h3 text-center>Administración </h3>
 @endsection
 @section('Contenido formulario')
 
