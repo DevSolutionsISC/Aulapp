@@ -6,6 +6,7 @@ use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\MateriaCarreraController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SectionsController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -54,8 +55,8 @@ Route::get('/docente/{id}', [DocenteController::class, 'update'])->name('docente
 Route::get('/carrera/{id}', [CarrerasController::class, 'show'])->name('carreras-show');
 Route::patch('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
 Route::get('/carrera5', [CarrerasController::class, 'cancelar'])->name('carreras-noupdate');
-//Route::get('/docente', [DocenteController::class, 'index'])->name('docentes');
-//Route::post('/docente', [DocenteController::class, 'store'])->name('docentes');
+Route::get('/docente', [UsuarioController::class, 'registro'])->name('docentes');
+Route::post('/docente', [UsuarioController::class, 'store'])->name('docentes');
 
 
 
