@@ -93,13 +93,22 @@ Route::get('/eli', function () {
 });
 
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
+
+Route::get('/carreraEdit', [CarrerasController::class, 'showEdit'])->name('carrera_edit');
+
 Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
 
 Route::get('/materiaEdit', [MateriaController::class, 'showEdit'])->name('materia_edit');
 
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
 
-Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
+Route::get('/seccionEdit', [SectionsController::class, 'showEdit'])->name('seccion_edit');
+
+Route::get('/seccion/{id}', [SectionsController::class, 'update'])->name('seccion-update');
+
+Route::get('/aulaEdit', [AulaController::class, 'showEdit'])->name('aulas_edit');
+
+Route::get('/aula/{id}', [AulaController::class, 'update'])->name('aula-update');
 
 Route::get('/materia','App\Http\Controllers\MateriaController@reporte');
 Route::get('/carrera','App\Http\Controllers\CarrerasController@reporte');

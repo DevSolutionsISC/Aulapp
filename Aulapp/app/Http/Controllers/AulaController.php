@@ -30,7 +30,13 @@ class AulaController extends Controller
  
     }
 
-    
+    public function showEdit()
+    {
+        $aulas = Aula::all();
+        $secciones = Section::all();
+        return view('editaraula', ['secciones' => $secciones, 'aulas' => $aulas]);
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -92,9 +98,19 @@ class AulaController extends Controller
      * @param  \App\Models\Aula  $aula
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Aula $aula)
+    public function update(Request $request, $id)
     {
-        //
+        $aula = Aula::find($id);
+        $request->validate([
+            'Nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/|min:3|max:10|unique:aulas,nombre,' . $aula->id,
+            'capacidad' => 'bail|required|numeric|between:10,500'
+        ]);
+        $aula->nombre = $request->Nombre;
+        $aula->capacidad = $request->capacidad;
+        $aula->id_section=$request->section;
+        $aula->save();
+
+        return redirect()->route('aulas_edit')->with('actualizar', 'ok');
     }
 
     /**

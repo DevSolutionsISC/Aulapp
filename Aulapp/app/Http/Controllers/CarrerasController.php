@@ -102,6 +102,12 @@ class CarrerasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showEdit()
+    {
+        $carreras = Carrera::all();
+        return view('editarcarrera', ['carreras' => $carreras]);
+
+    }
     public function update(Request $request, $id)
     {
 
@@ -114,7 +120,7 @@ class CarrerasController extends Controller
         $carrera->Nombre = $request->Nombre;
         $carrera->Codigo = $request->Codigo;
         $carrera->save();
-        return redirect()->route('carreras')->with('actualizar', 'ok');
+        return redirect()->route('carrera_edit')->with('actualizar', 'ok');
     }
 
     /**

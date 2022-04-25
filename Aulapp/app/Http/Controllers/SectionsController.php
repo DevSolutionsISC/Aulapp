@@ -14,6 +14,12 @@ class SectionsController extends Controller
         return view('registrar_seccion_de_aula');
     }
 
+    public function showEdit()
+    {
+        $secciones = Section::all();
+        return view('editarseccion', ['secciones' => $secciones]);
+
+    }
     public function reporte()
     {
         $sections = Section::all();
@@ -39,16 +45,17 @@ class SectionsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $section = Section::find($id);
         $request->validate([
-            'nombre' => 'required|min:3|max:50|regex:/^[a-zA-Z-ñÑ\s]+$/u',
+            'nombre' => 'required|min:3|max:50|regex:/^[a-zA-Z-ñÑ\s]+$/u|unique:sections,nombre,' . $section->id,
             'descripcion' => 'required|min:3|max:50|regex:/^[a-zA-Z0-9-ñÑ\s]+$/u',
         ]);
 
-        $section = Section::find($id);
+
         $section->nombre = $request->nombre;
         $section->descripcion = $request->descripcion;
         $section->save();
-        return redirect()->route('secciones')->with('actualizar', 'ok');
+        return redirect()->route('seccion_edit')->with('actualizar', 'ok');
 
     }
     public function busqueda(Request $request)
