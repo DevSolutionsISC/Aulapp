@@ -1,6 +1,9 @@
 @extends('plantilla')
 @section('title', 'Carrera')
 @section('Titulo')
+@section("editar","carreraEdit")
+@section("registrar","carreras")
+@section("reporte","carrera")
 <h3 text-center id="Titulo">Administracion de Carreras</h3>
 @endsection
 @section('Contenido formulario')
@@ -77,19 +80,20 @@
       localStorage.setItem('ruta',formulario.action)
       localStorage.setItem('id',texto.value)
       var ed=document.getElementsByClassName("ed");
+      encontrado=1;
       for(var i=0;i<ed.length;i++){
         ed[i].style.display="block"
       }
       texto.disabled=true;
-    }else{
-      Swal.fire({
+    }
+  @endforeach
+  if(encontrado == 0){
+    Swal.fire({
     icon: 'error',
     title: 'Oops...',
     text: 'No se encontro ninguna carrera con ese codigo',
     })
-
-    }
-  @endforeach
+  }
   }
 </script>
 @endsection

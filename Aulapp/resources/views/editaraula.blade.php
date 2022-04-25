@@ -1,5 +1,8 @@
 @extends('plantilla')
 @section('title', 'Aulas')
+@section("editar","aulaEdit")
+@section("registrar","aula")
+@section("reporte","aulas")
 @section('Titulo')
 <h3 text-center id="Titulo">Administracion de Aulas</h3>
 @endsection

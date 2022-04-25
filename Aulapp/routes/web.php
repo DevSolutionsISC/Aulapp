@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/menu_administrador', function () {
+    return view('menu_administrador');
+});
 
 /*Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
 >>>>>>> 744ac07367b5f0309f54057e47a8d22c6821fd3d
@@ -112,5 +115,5 @@ Route::get('/aula/{id}', [AulaController::class, 'update'])->name('aula-update')
 Route::get('/materia','App\Http\Controllers\MateriaController@reporte');
 Route::get('/carrera','App\Http\Controllers\CarrerasController@reporte');
 Route::get('/section','App\Http\Controllers\SectionsController@reporte');
-Route::get('/aula','App\Http\Controllers\AulaController@reporte');
+Route::get('/aulas','App\Http\Controllers\AulaController@reporte');
 Route::get('/grupo','App\Http\Controllers\GrupoController@reporte');

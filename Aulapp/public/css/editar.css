@@ -22,11 +22,17 @@ h3{
 }
 @media (max-width: 1300px){
     #Titulo{
-        margin-left: 0;
-        
+        margin-right: 15px;
     }
+    .nav-link{
+        display: none;
+    }
+    #menu{
+        display: block;
+    }
+    
 }
-@media (max-width: 800px){
+@media (max-width: 830px){
 #Titulo{
     margin-left: 0;
     font-size: 15px;

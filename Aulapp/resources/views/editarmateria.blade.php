@@ -1,5 +1,7 @@
 @extends('plantilla')
 @section('title', 'Materia')
+@section("editar","materiaEdit")
+@section("registrar","materias")
 @section('Titulo')
 <h3 text-center id="Titulo">Administracion de Materias</h3>
 @endsection

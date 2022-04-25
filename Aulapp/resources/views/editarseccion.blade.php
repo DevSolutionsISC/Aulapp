@@ -1,4 +1,6 @@
 @extends('plantilla')
+@section("editar","seccionEdit")
+@section("registrar","seccion")
 @section('title', 'Sección')
 @section('Titulo')
 <h3 text-center id="Titulo">Administracion de Secciones</h3>
@@ -81,15 +83,17 @@
         ed[i].style.display="block"
       }
       texto.disabled=true;
-    }else{
-      Swal.fire({
+      encontrado=1;
+    }
+  @endforeach
+  if(encontrado==0){
+    Swal.fire({
     icon: 'error',
     title: 'Oops...',
     text: 'No se encontro ninguna seccion con ese nombre',
     })
-
-    }
-  @endforeach
+  }
+  
   }
 </script>
 @endsection

@@ -13,7 +13,7 @@
             </a>
         </div>
         <div>
-            <a href="#" class="funcion btn"><span class="letras">Administracion de materias</span>
+            <a href="materia" class="funcion btn"><span class="letras">Administracion de materias</span>
                 <span class="material-symbols-outlined icon" >
                     menu_book
                     </span>
@@ -27,21 +27,21 @@
             </a>
         </div>
         <div>
-            <a href="#"class="funcion btn"><span class="letras">Administrador de carreras</span>
+            <a href="carrera"class="funcion btn"><span class="letras">Administrador de carreras</span>
                 <span class="material-symbols-outlined icon">
                     home_pin
                     </span>
             </a> 
         </div>
         <div>
-            <a href="#"class="funcion btn"><span class="letras">Administrador de aulas</span>
+            <a href="aulas"class="funcion btn"><span class="letras">Administrador de aulas</span>
                 <span class="material-symbols-outlined icon">
                     book
                     </span>
             </a>
         </div>
         <div>
-            <a href="#"class="funcion btn"><span class="letras">Administrador de secciones</span>
+            <a href="section"class="funcion btn"><span class="letras">Administrador de secciones</span>
                 <span class="material-symbols-outlined icon">
                     map
                     </span>
