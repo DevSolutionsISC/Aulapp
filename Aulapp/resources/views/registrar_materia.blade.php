@@ -46,10 +46,21 @@ value="{{old('codigo')}}"
       <span id="agregar">Nueva asignacion</span>
       
       <input type="text" id="nuevo" class="oculto" value="{{old('Nuevo')}}" name="Nuevo">
-    
+      <input type="text" id="nuevotxt" class="oculto" value="{{old('Nuevotxt')}}" name="Nuevotxt">
     
   </div>
-      
+      <script>
+          var recuperar=document.getElementById("nuevo");
+          recuperar=recuperar.value.split("+");
+          if(recuperar.length>0){
+              var recuperartxt=document.getElementById("nuevotxt");
+              recuperartxt=recuperartxt.value.split("+");
+            for(var i=1;i<recuperar.length;i++){
+                var asignaciones= document.getElementById("Asignaciones");
+               asignaciones.innerHTML+="<div class='A_cont'><span class='material-symbols-outlined A_icon'>close</span><span class='A_let' id="+recuperar[i]+">"+recuperartxt[i] +"</span></div>";
+            }
+          }
+      </script>
         <script>
             var agreras=document.getElementById("agregar");
             agreras.onclick=function(){
@@ -85,6 +96,8 @@ value="{{old('codigo')}}"
                     asignaciones.innerHTML+="<div class='A_cont'><span class='material-symbols-outlined A_icon'>close</span><span class='A_let' id="+aux.options[aux.selectedIndex].id+">"+aux.options[aux.selectedIndex].text +"</span></div>";
                     nuevos=document.getElementById('nuevo');
                     nuevo.value+="+"+aux.options[aux.selectedIndex].id
+                    nuevostxt=document.getElementById('nuevotxt');
+                    nuevotxt.value+="+"+aux.options[aux.selectedIndex].text
                     
                 }
                 })
