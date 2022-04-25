@@ -9,6 +9,7 @@ use App\Models\Carrera;
 use App\Models\Materia;
 use App\Models\Materia_Carrera;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MateriaController extends Controller
 {
@@ -119,6 +120,40 @@ class MateriaController extends Controller
         $materia->Cod_materia = $request->Codigo;
         $materia->save();
 
+        $id_materia=Materia::firstWhere('Cod_materia',$request->Codigo);
+        $ids=explode("+",$request->Nuevo);
+        $permanentes=explode("+", $request-> permanente);
+
+        for($i=1;$i<sizeof($ids);$i++){
+            $encontrado=0;
+            for($j=1;$j <sizeof($permanentes);$j++){
+                if($ids[$i]==$permanentes[$j] ){
+                    $encontrado=1;
+                }
+            }
+            if($encontrado==0){
+                $materia_carrera = new Materia_Carrera();
+                $materia_carrera->materia_id =  $id_materia->id;
+                $materia_carrera->carrera_id = $ids[$i];
+                $materia_carrera->save();
+            }
+
+        }
+        $idse=explode("+",$request->Eliminar);
+        for($i=1;$i<sizeof($idse);$i++){
+            $encontrado=0;
+            for($j=1;$j <sizeof($permanentes);$j++){
+                if($idse[$i]==$permanentes[$j] ){
+                    $encontrado=1;
+                }
+            }
+            if($encontrado==1){
+                $sql= DB::table("materia_carreras")->where(['carrera_id'=> $idse[$i],'materia_id'=>$id])->value('id');
+                $a = Materia_Carrera::find($sql);
+                $a->delete();
+            }
+
+        }
         return redirect()->route('materia_edit')->with('actualizar', 'ok');
 
     }
