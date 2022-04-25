@@ -35,14 +35,15 @@ Route::delete('/grupo/{id}', [GrupoController::class, 'destroy'])->name('grupos-
 
 //
 */
-Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
-Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
+Route::get('/carreras', [CarrerasController::class, 'index'])->name('carreras');
+Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras');
 Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
 Route::post('/seccion', [SectionsController::class, 'store'])->name('secciones');
 Route::get('/aula', [AulaController::class, 'index'])->name('aulas');
 Route::post('/aula', [AulaController::class, 'store'])->name('aulas');
-Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
-Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
+
+Route::get('/materias', [MateriaController::class, 'index'])->name('material');
+Route::post('/materias', [MateriaController::class, 'store'])->name('materias');
 
 
 Route::delete('/carrera/{carrera}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
@@ -89,7 +90,7 @@ Route::get('/rep', function () {
 Route::get('/eli', function () {
     return view('eliminar');
 });
-
+*/
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
 

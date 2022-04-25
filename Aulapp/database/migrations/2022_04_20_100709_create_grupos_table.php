@@ -17,9 +17,9 @@ class CreateGruposTable extends Migration
             $table->id();
             $table->string('nombre')->unique();
 
-            $table->unsignedBigInteger('id_asignacion_docentes');
+            $table->unsignedBigInteger('asignacion_docentes_id');
 
-            $table->foreign('id_asignacion_docentes')->references('id')->on('asignacion_docentes');
+            $table->foreign('asignacion_docentes_id')->references('id')->on('asignacion_docentes');
       
 
             $table->timestamps();

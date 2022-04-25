@@ -18,8 +18,8 @@ class CreateAulasTable extends Migration
             $table->string('nombre')->unique();
             $table->integer('capacidad');
             
-            $table->unsignedBigInteger('id_section');
-            $table->foreign('id_section')->references('id')
+            $table->unsignedBigInteger('section_id');
+            $table->foreign('section_id')->references('id')
 	        ->on('sections');
 
             $table->timestamps();

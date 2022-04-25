@@ -20,8 +20,8 @@ class MateriaController extends Controller
 
     public function index()
     {
-        $materias = Materia::all();
-        return view('registrar_materia', ['materias' => $materias]);
+        $carreras = Carrera::all();
+        return view('registrar_materia',['carreras'=>$carreras]);
 
     }
     public function reporte()
@@ -59,9 +59,20 @@ class MateriaController extends Controller
     {
         $materia = new Materia();
         $materia->nombre_materia = $request->nombre;
-        $materia->Cod_materia = $request->Cod_materia;
+        $materia->Cod_materia = $request->codigo;
         $materia->save();
 
+        
+        $id_materia=Materia::firstWhere('Cod_materia',$request->codigo);
+        $ids=explode("+",$request->Nuevo);
+        for($i=1;$i<sizeof($ids);$i++){
+            $materia_carrera = new Materia_Carrera();
+            $materia_carrera->materia_id =  $id_materia->id;
+            $materia_carrera->carrera_id = $ids[$i];
+           
+            $materia_carrera->save();
+        }
+       
         return redirect()->route('materias')->with('registrar', 'ok');
 
     }
