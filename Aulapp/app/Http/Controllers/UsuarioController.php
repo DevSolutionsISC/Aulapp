@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\Materia_Carrera;
+use App\Models\Materia;
+use App\Models\Carrera;
+use App\Models\Rol;
+use App\Models\UserRol;
+
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -16,6 +22,15 @@ class UsuarioController extends Controller
     {
         //
     }
+
+    public function registro()
+    {
+        $materias=Materia::all();
+        $carreras=Carrera::all();
+        $materia_carrera=Materia_Carrera::all();
+        return view('registrar_docente',['materias'=>$materias,'carreras'=>$carreras,'materia_carrera'=>$materia_carrera]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

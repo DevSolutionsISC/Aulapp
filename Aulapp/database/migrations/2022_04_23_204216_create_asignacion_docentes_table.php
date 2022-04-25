@@ -15,12 +15,12 @@ class CreateAsignacionDocentesTable extends Migration
     {
         Schema::create('asignacion_docentes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user_rol');
-            $table->unsignedBigInteger('id_materia_carreras');
+            $table->unsignedBigInteger('user_rol_id');
+            $table->unsignedBigInteger('materia_carreras_id');
 
-            $table->foreign('id_user_rol')
+            $table->foreign('user_rol_id')
             ->references('id')->on('user_rols');
-            $table->foreign('id_materia_carreras')
+            $table->foreign('materia_carreras_id')
             ->references('id')->on('materia_carreras');
             $table->timestamps();
         });

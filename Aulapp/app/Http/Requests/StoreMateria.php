@@ -26,16 +26,12 @@ class StoreMateria extends FormRequest
     {
         return [      
         'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:5|max:60',
-        'codigo' => 'bail|required|numeric|digits_between:6,10|unique:materias'
+        'codigo' => 'bail|required|numeric|digits_between:6,10|unique:materias,Cod_materia',
+        'Nuevo'=>'bail|required'
         ];
     }
 
-    public function attributes(){
-        return[
-            'nombre_materia'=> 'nombre',
-            'Cod_materia'=>'código'
-        ];
-    }
+    
 
     public function messages()
     {
@@ -44,7 +40,8 @@ class StoreMateria extends FormRequest
             'nombre.unique'=> 'Ya existe una materia registrada con ese nombre.',
             'nombre.required'=>'El campo nombre es obligatorio',
             'codigo.required'=>'El campo código es obligatorio',
-            'codigo.unique'=> 'Ya existe una materia registrada con ese código.'
+            'codigo.unique'=> 'Ya existe una materia registrada con ese código.',
+            'Nuevo.required'=>'Debe tener al menos una carrera asignada'
         ];
     }
 }

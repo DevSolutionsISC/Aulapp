@@ -25,7 +25,7 @@ Route::get('/', function () {
 });
 
 /*Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
-
+>>>>>>> 744ac07367b5f0309f54057e47a8d22c6821fd3d
 Route::get('/eliminar-aula', [AulaController::class, 'busqueda'])->name('eliminar-aula');
 Route::get('/eliminar-carrera', [CarrerasController::class, 'busqueda'])->name('eliminar-carrera');
 Route::get('/eliminar-materia', [MateriaController::class, 'busqueda'])->name('eliminar-materia');
@@ -34,15 +34,16 @@ Route::get('/eliminar-grupo', [GrupoController::class, 'busqueda'])->name('elimi
 Route::delete('/grupo/{id}', [GrupoController::class, 'destroy'])->name('grupos-destroy');
 
 //
-
-Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
-Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
+*/
+Route::get('/carreras', [CarrerasController::class, 'index'])->name('carreras');
+Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras');
 Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
 Route::post('/seccion', [SectionsController::class, 'store'])->name('secciones');
 Route::get('/aula', [AulaController::class, 'index'])->name('aulas');
 Route::post('/aula', [AulaController::class, 'store'])->name('aulas');
-Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
-Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
+
+Route::get('/materias', [MateriaController::class, 'index'])->name('material');
+Route::post('/materias', [MateriaController::class, 'store'])->name('materias');
 
 
 Route::delete('/carrera/{carrera}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
@@ -76,8 +77,6 @@ Route::post('/grupo', [GrupoController::class, 'store'])->name('grupos');
 Route::get('/aula', function () {
     return view('adm_aulas');
 
-});*/
-
 
 
 
@@ -91,7 +90,7 @@ Route::get('/rep', function () {
 Route::get('/eli', function () {
     return view('eliminar');
 });
-
+*/
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 
 Route::get('/carreraEdit', [CarrerasController::class, 'showEdit'])->name('carrera_edit');
