@@ -50,3 +50,32 @@ h3{
     display: none;
 }
 }
+.A_icon{
+    display: block;
+    float: left;
+}
+.A_let{
+    display: block;
+    
+}
+.A_cont{
+    background: white;
+    border: solid black 1px;
+    width: 200px;
+    border-radius: 20px;
+}
+.A_cont:hover{
+    color: red;
+    cursor: pointer;
+}
+#agregar{
+    color: white;
+    background-color: black;
+    width: 200px;
+    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
+}
+.oculto{
+    display: none;
+}
