@@ -78,8 +78,26 @@ class MateriaCarreraController extends Controller
      * @param  \App\Models\Materia_Carrera  $materia_Carrera
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Materia_Carrera $materia_Carrera)
+    public function busqueda(Request $request)
     {
-        //
+
+        $materiaCarrera = Materia_Carrera::query();
+
+        if ($request->has('search')) {
+            $materiaCarrera->where('id', 'like', $request->search);
+        }
+        $materiasCarrera = $materiaCarrera->get();
+        return view('eliminar_materia_carrera', compact('materiasCarrera'));
+
+    }
+    public function destroy($materiaCarrera)
+    {
+        $materiaCarrera = Materia_Carrera::find($materiaCarrera);
+        $materiaCarrera->grupos()->each(function ($grupo) {
+            $grupo->delete(); // <-- direct deletion
+        });
+        $materiaCarrera->delete();
+
+        return redirect()->route('eliminar-materia-carrera')->with('eliminar', 'ok');
     }
 }

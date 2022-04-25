@@ -29,9 +29,9 @@ class CarrerasController extends Controller
     }
     public function reporte()
     {
-        $carreras=Carrera::all();
+        $carreras = Carrera::all();
         return view('reporte_carrera', compact('carreras'));
- 
+
     }
 
     /**
@@ -143,6 +143,6 @@ class CarrerasController extends Controller
         });
         $carrera->delete();
 
-        return redirect()->route('secciones')->with('eliminar', 'ok');
+        return redirect()->route('eliminar-carrera')->with('eliminar', 'ok');
     }
 }

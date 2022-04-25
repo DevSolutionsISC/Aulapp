@@ -3,6 +3,7 @@
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\CarrerasController;
 use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\MateriaCarreraController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SectionsController;
 use Illuminate\Support\Facades\Route;
@@ -23,13 +24,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
+/*Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
+>>>>>>> 744ac07367b5f0309f54057e47a8d22c6821fd3d
 Route::get('/eliminar-aula', [AulaController::class, 'busqueda'])->name('eliminar-aula');
 Route::get('/eliminar-carrera', [CarrerasController::class, 'busqueda'])->name('eliminar-carrera');
 Route::get('/eliminar-materia', [MateriaController::class, 'busqueda'])->name('eliminar-materia');
+Route::get('/eliminar-materia-carrera', [MateriaCarreraController::class, 'busqueda'])->name('eliminar-materia-carrera');
+Route::get('/eliminar-grupo', [GrupoController::class, 'busqueda'])->name('eliminar-grupo');
+Route::delete('/grupo/{id}', [GrupoController::class, 'destroy'])->name('grupos-destroy');
 
 //
-
+*/
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::post('/carrera', [CarrerasController::class, 'store'])->name('carreras');
 Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
@@ -60,6 +65,8 @@ Route::delete('/aula/{id}', [AulaController::class, 'destroy'])->name('aulas-des
 
 Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
 Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
+Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::class, 'destroy'])->name('materiasCarreras-destroy');
+
 Route::delete('/materia/{materia}', [MateriaController::class, 'destroy'])->name('materias-destroy');
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
 
@@ -69,17 +76,6 @@ Route::post('/grupo', [GrupoController::class, 'store'])->name('grupos');
 Route::get('/aula', function () {
     return view('adm_aulas');
 
-});
-
-*/
-
-
-
-
-
-Route::get('/menu-adm', function () {
-    return view('menu_administrador');
-});
 
 
 
@@ -98,4 +94,13 @@ Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
 
 Route::get('/materiaEdit', [MateriaController::class, 'showEdit'])->name('materia_edit');
+
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
+
+Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
+
+Route::get('/materia','App\Http\Controllers\MateriaController@reporte');
+Route::get('/carrera','App\Http\Controllers\CarrerasController@reporte');
+Route::get('/section','App\Http\Controllers\SectionsController@reporte');
+Route::get('/aula','App\Http\Controllers\AulaController@reporte');
+Route::get('/grupo','App\Http\Controllers\GrupoController@reporte');*/
