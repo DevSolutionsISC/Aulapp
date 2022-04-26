@@ -22,7 +22,7 @@ class MateriaController extends Controller
     public function index()
     {
         $carreras = Carrera::all();
-        return view('registrar_materia',['carreras'=>$carreras]);
+        return view('registrar_materia', ['carreras' => $carreras]);
 
     }
     public function reporte()
@@ -63,17 +63,16 @@ class MateriaController extends Controller
         $materia->Cod_materia = $request->codigo;
         $materia->save();
 
-        
-        $id_materia=Materia::firstWhere('Cod_materia',$request->codigo);
-        $ids=explode("+",$request->Nuevo);
-        for($i=1;$i<sizeof($ids);$i++){
+        $id_materia = Materia::firstWhere('Cod_materia', $request->codigo);
+        $ids = explode("+", $request->Nuevo);
+        for ($i = 1; $i < sizeof($ids); $i++) {
             $materia_carrera = new Materia_Carrera();
-            $materia_carrera->materia_id =  $id_materia->id;
+            $materia_carrera->materia_id = $id_materia->id;
             $materia_carrera->carrera_id = $ids[$i];
-           
+
             $materia_carrera->save();
         }
-       
+
         return redirect()->route('materias')->with('registrar', 'ok');
 
     }
@@ -120,35 +119,35 @@ class MateriaController extends Controller
         $materia->Cod_materia = $request->Codigo;
         $materia->save();
 
-        $id_materia=Materia::firstWhere('Cod_materia',$request->Codigo);
-        $ids=explode("+",$request->Nuevo);
-        $permanentes=explode("+", $request-> permanente);
+        $id_materia = Materia::firstWhere('Cod_materia', $request->Codigo);
+        $ids = explode("+", $request->Nuevo);
+        $permanentes = explode("+", $request->permanente);
 
-        for($i=1;$i<sizeof($ids);$i++){
-            $encontrado=0;
-            for($j=1;$j <sizeof($permanentes);$j++){
-                if($ids[$i]==$permanentes[$j] ){
-                    $encontrado=1;
+        for ($i = 1; $i < sizeof($ids); $i++) {
+            $encontrado = 0;
+            for ($j = 1; $j < sizeof($permanentes); $j++) {
+                if ($ids[$i] == $permanentes[$j]) {
+                    $encontrado = 1;
                 }
             }
-            if($encontrado==0){
+            if ($encontrado == 0) {
                 $materia_carrera = new Materia_Carrera();
-                $materia_carrera->materia_id =  $id_materia->id;
+                $materia_carrera->materia_id = $id_materia->id;
                 $materia_carrera->carrera_id = $ids[$i];
                 $materia_carrera->save();
             }
 
         }
-        $idse=explode("+",$request->Eliminar);
-        for($i=1;$i<sizeof($idse);$i++){
-            $encontrado=0;
-            for($j=1;$j <sizeof($permanentes);$j++){
-                if($idse[$i]==$permanentes[$j] ){
-                    $encontrado=1;
+        $idse = explode("+", $request->Eliminar);
+        for ($i = 1; $i < sizeof($idse); $i++) {
+            $encontrado = 0;
+            for ($j = 1; $j < sizeof($permanentes); $j++) {
+                if ($idse[$i] == $permanentes[$j]) {
+                    $encontrado = 1;
                 }
             }
-            if($encontrado==1){
-                $sql= DB::table("materia_carreras")->where(['carrera_id'=> $idse[$i],'materia_id'=>$id])->value('id');
+            if ($encontrado == 1) {
+                $sql = DB::table("materia_carreras")->where(['carrera_id' => $idse[$i], 'materia_id' => $id])->value('id');
                 $a = Materia_Carrera::find($sql);
                 $a->delete();
             }
@@ -179,6 +178,10 @@ class MateriaController extends Controller
     public function destroy($materia)
     {
         $materia = Materia::find($materia);
+        $newMateria = $materia->replicate();
+        $newMateria->setTable('log_materias');
+        $newMateria->save();
+
         $materia->materia__carreras()->each(function ($materia_carreras) {
             $materia_carreras->delete(); // <-- direct deletion
         });
