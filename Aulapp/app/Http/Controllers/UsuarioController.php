@@ -22,6 +22,12 @@ class UsuarioController extends Controller
     {
         //
     }
+    public function reporte()
+    {
+        $usuarios = Usuario::all();
+        return view('reporte_docente', compact('usuarios'));
+
+    }
 
     public function registro()
     {
