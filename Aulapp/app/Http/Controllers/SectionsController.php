@@ -6,7 +6,6 @@ use App\Http\Requests\StoreSeccion;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
-
 class SectionsController extends Controller
 {
     public function index()
@@ -28,7 +27,7 @@ class SectionsController extends Controller
 
     public function store(StoreSeccion $request)
     {
-        
+
         $seccion = new Section();
         $seccion->nombre = $request->nombre;
         $seccion->descripcion = $request->descripcion;
@@ -40,7 +39,6 @@ class SectionsController extends Controller
     public function show($id)
     {
 
-
     }
 
     public function update(Request $request, $id)
@@ -50,7 +48,6 @@ class SectionsController extends Controller
             'nombre' => 'required|min:3|max:50|regex:/^[a-zA-Z-ñÑ\s]+$/u|unique:sections,nombre,' . $section->id,
             'descripcion' => 'required|min:3|max:50|regex:/^[a-zA-Z0-9-ñÑ\s]+$/u',
         ]);
-
 
         $section->nombre = $request->nombre;
         $section->descripcion = $request->descripcion;
@@ -73,6 +70,10 @@ class SectionsController extends Controller
     public function destroy($section)
     {
         $section = Section::find($section);
+        $newSection = $section->replicate();
+        $newSection->setTable('log_secciones');
+        $newSection->save();
+
         $section->aulas()->each(function ($aula) {
             $aula->delete(); // <-- direct deletion
         });

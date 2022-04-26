@@ -138,6 +138,10 @@ class CarrerasController extends Controller
     {
 
         $carrera = Carrera::find($carrera);
+        $newCarrera = $carrera->replicate();
+        $newCarrera->setTable('log_carreras');
+        $newCarrera->save();
+
         $carrera->materia__carreras()->each(function ($materia_carrera) {
             $materia_carrera->delete(); // <-- direct deletion
         });

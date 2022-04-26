@@ -146,7 +146,11 @@ class UsuarioController extends Controller
     }
     public function destroy($usuario)
     {
+
         $usuario = Usuario::find($usuario);
+        $newUser = $usuario->replicate();
+        $newUser->setTable('log_docentes');
+        $newUser->save();
 
         $usuario->user_rol()->each(function ($user_rol) {
             $user_rol->delete(); // <-- direct deletion
