@@ -1,8 +1,8 @@
 @extends('plantilla2')
 @section('title', 'Carrera')
-@section('Titulo')
-<h3 text-center>Administracion de carrera </h3>
-@endsection
+
+
+
 
 <header>
   <nav class="navbar navbar-light bg-light">
@@ -11,6 +11,7 @@
           width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+      <h3 text-center id="Titulo">Administracion de carrera </h3>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="#">Inicio</a>
         <a class="nav-link active" aria-current="page" href="#">Registrar</a>
