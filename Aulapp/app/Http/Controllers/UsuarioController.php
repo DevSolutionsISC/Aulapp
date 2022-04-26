@@ -138,7 +138,7 @@ class UsuarioController extends Controller
         $usuario = Usuario::query();
 
         if ($request->has('search')) {
-            $usuario->where('id', 'like', $request->search);
+            $usuario->where('CI', 'like', $request->search);
         }
         $usuarios = $usuario->get();
         return view('eliminar_docente', compact('usuarios'));

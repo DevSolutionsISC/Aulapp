@@ -51,7 +51,7 @@
         <div class="p-1" id="datosEliminar">
           <h6> <b>Datos del docente</b></h6>
 
-          <span><b>id:</b>{{$usuario->id}}</span>
+          <span><b>CI:</b>{{$usuario->CI}}</span>
           <br>
           <span><b>Docente:</b> {{$usuario->Nombre}}
             {{$usuario->Apellido}}</span>
