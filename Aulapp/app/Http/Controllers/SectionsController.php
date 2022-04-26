@@ -79,7 +79,7 @@ class SectionsController extends Controller
         });
         $section->delete();
 
-        return redirect()->route('secciones')->with('eliminar', 'ok');
+        return redirect()->route('eliminar-seccion')->with('eliminar', 'ok');
     }
 
 }

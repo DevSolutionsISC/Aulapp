@@ -1,7 +1,7 @@
 @extends('plantilla2')
 @section('title', 'Grupo')
 @section('Titulo')
-<h3 text-center>Administracion de seccion </h3>
+<h3 text-center>Administracion de grupo </h3>
 @endsection
 
 <header>
@@ -31,7 +31,7 @@
       <h3 text-center>Eliminar grupo</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque id del grupo que quiere eliminar</label>
+      <label for="inputNombre" class="form-label">Introduzca el id de registro</label>
       <input type="text" id="inputNombre" class="form-control search" name="search" required>
 
 

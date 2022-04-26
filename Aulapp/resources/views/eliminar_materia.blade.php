@@ -31,7 +31,7 @@
       <h3 text-center>Eliminar materia</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el codigo de la materia que quiere eliminar</label>
+      <label for="inputNombre" class="form-label">Introduzca el codigo de la materia que quiere eliminar</label>
       <input type="text" id="inputNombre" class="form-control search" name="search" required>
 
 

@@ -31,7 +31,7 @@
       <h3 text-center>Eliminar asignacion docente</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el codigo de registro</label>
+      <label for="inputNombre" class="form-label">Introduzca el id de registro</label>
       <input type="text" id="inputNombre" class="form-control search" name="search" required>
 
       <br>
