@@ -27,7 +27,7 @@
 <div class="d-flex align-items-center justify-content-center row p-2" id="formulario">
   <div class="col-12">
 
-    <form id="formulario" method="GET" action="{{route('eliminar-grupo')}}">
+    <form id="formulario" method="GET" action="{{route('eliminar-materia-carrera')}}">
       <h3 text-center>Eliminar materia-carrera</h3>
       @csrf
 
@@ -62,7 +62,7 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <form action="{{route('grupos-destroy', ['materiaCarrera'=>$materiaCarrera->id])}}" method="POST"
+      <form action="{{route('materiasCarreras-destroy', ['materiaCarrera'=>$materiaCarrera->id])}}" method="POST"
         class="Eliminar">
         @method('DELETE')
         @csrf

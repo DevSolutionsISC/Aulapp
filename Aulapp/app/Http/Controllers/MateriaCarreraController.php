@@ -93,8 +93,8 @@ class MateriaCarreraController extends Controller
     public function destroy($materiaCarrera)
     {
         $materiaCarrera = Materia_Carrera::find($materiaCarrera);
-        $materiaCarrera->grupos()->each(function ($grupo) {
-            $grupo->delete(); // <-- direct deletion
+        $materiaCarrera->asignacionDocentes()->each(function ($asignacionDocentes) {
+            $asignacionDocentes->delete(); // <-- direct deletion
         });
         $materiaCarrera->delete();
 
