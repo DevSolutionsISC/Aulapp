@@ -12,6 +12,8 @@ use App\Models\Rol;
 use App\Models\UserRol;
 
 
+
+
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -71,11 +73,13 @@ class UsuarioController extends Controller
             }
         }
         $caracteres.=$request->ci;
+        $Usercontrasenia=substr(str_shuffle($caracteres), 0, 10);
+        $User=$request->ci . $iniciales;
 
-        $usuario->usuario=$request->ci . $iniciales;
-        $usuario->contrasenia=substr(str_shuffle($caracteres), 0, 10);
+        $usuario->usuario=$User;
+        $usuario->contrasenia=$Usercontrasenia;
         $usuario->save();
-
+        
         $userRol=new UserRol();
         $id_usuario=Usuario::firstWhere('CI',$request->ci);
         $userRol->usuario_id=$id_usuario->id;
@@ -93,10 +97,17 @@ class UsuarioController extends Controller
             $asignacion->save();
         }
 
-        
-       
+/*
+        //Enviar email a docente
+        $body='Usuario: ' . $User . '/nContraseña: ' . $Usercontrasenia .'';
+        $mensaje=[
+            'titulo'=>'Usuario y contraseña para ingresar a la plataforma Aulapp',
+            'cuerpo' => $body
+        ];
+        $to=$request->email;
+        Mail::to($request->email)->send(new AulappMail($mensaje));
 
-        
+        */
         return redirect()->route('docentes')->with('registrar', 'ok');
     }
 
