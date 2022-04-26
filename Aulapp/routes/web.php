@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsignacionDocenteController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\CarrerasController;
 use App\Http\Controllers\GrupoController;
@@ -31,7 +32,10 @@ Route::get('/eliminar-carrera', [CarrerasController::class, 'busqueda'])->name('
 Route::get('/eliminar-materia', [MateriaController::class, 'busqueda'])->name('eliminar-materia');
 Route::get('/eliminar-materia-carrera', [MateriaCarreraController::class, 'busqueda'])->name('eliminar-materia-carrera');
 Route::get('/eliminar-grupo', [GrupoController::class, 'busqueda'])->name('eliminar-grupo');
+Route::get('/eliminar-asignacion-docente', [AsignacionDocenteController::class, 'busqueda'])->name('eliminar-asignacion-docente');
+
 Route::delete('/grupo/{id}', [GrupoController::class, 'destroy'])->name('grupos-destroy');
+Route::delete('/asignacionDocente/{asignacionDocente}', [AsignacionDocenteController::class, 'destroy'])->name('asignacionDocente-destroy');
 
 //
 
