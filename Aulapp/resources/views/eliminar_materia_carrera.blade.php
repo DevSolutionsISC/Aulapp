@@ -1,5 +1,5 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
+@section('title', 'Materia-carrera')
 @section('Titulo')
 <h3 text-center>Administracion de materias-carreras </h3>
 @endsection
@@ -49,11 +49,11 @@
         @elseif (count($materiasCarrera) == 1)
         @foreach ($materiasCarrera as $materiaCarrera )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la carrera</h6>
+          <h6> <b>Datos de la materia-carrera</b></h6>
 
-          <span>Carrera: {{$materiaCarrera->carrera->Nombre}}</span>
+          <span> <b>Carrera:</b> {{$materiaCarrera->carrera->Nombre}}</span>
           <br>
-          <span>Materia:{{$materiaCarrera->materia->nombre_materia}}</span>
+          <span> <b>Materia:</b> {{$materiaCarrera->materia->nombre_materia}}</span>
 
         </div>
 
@@ -93,7 +93,7 @@
   $('.Eliminar').submit(function(e){
             e.preventDefault();
             Swal.fire({
-            title: '¿Estás seguro que quieres eliminar la materia?',
+            title: '¿Estás seguro que quieres eliminar la materia asignada a la carrera?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -114,7 +114,7 @@
   Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Materia eliminada',
+  title: 'Materia asiganada a la carrera eliminada',
   showConfirmButton: false,
   timer: 1500
   })

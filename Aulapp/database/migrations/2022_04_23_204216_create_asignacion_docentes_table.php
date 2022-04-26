@@ -19,9 +19,12 @@ class CreateAsignacionDocentesTable extends Migration
             $table->unsignedBigInteger('materia_carreras_id');
 
             $table->foreign('user_rol_id')
-            ->references('id')->on('user_rols');
+
+                ->references('id')->on('user_rols')->constrained()->onDelete('cascade');
+
             $table->foreign('materia_carreras_id')
-            ->references('id')->on('materia_carreras');
+                ->references('id')->on('materia_carreras')->constrained()->onDelete('cascade');
+
             $table->timestamps();
         });
     }

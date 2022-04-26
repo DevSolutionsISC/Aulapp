@@ -50,11 +50,11 @@
         @elseif (count($sections) == 1)
         @foreach ($sections as $section )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la seccion</h6>
+          <h6><b>Datos de la seccion</b> </h6>
 
-          <span>Nombre: {{$section->nombre}}</span>
+          <span><b>Nombre:</b> {{$section->nombre}}</span>
           <br>
-          <span>Descripcion:{{$section->descripcion}}</span>
+          <span><b>Descripcion:</b> {{$section->descripcion}}</span>
 
         </div>
 

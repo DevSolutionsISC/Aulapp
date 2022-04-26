@@ -17,12 +17,11 @@ class CreateAulasTable extends Migration
             $table->id();
             $table->string('nombre')->unique();
             $table->integer('capacidad');
-            
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')
-	        ->on('sections');
-
+                ->on('sections')->constrained()->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 

@@ -1,5 +1,5 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
+@section('title', 'Aula')
 @section('Titulo')
 <h3 text-center>Administracion de seccion </h3>
 @endsection
@@ -48,13 +48,15 @@
         @elseif (count($aulas) > 1)
 
         @elseif (count($aulas) == 1)
-        @foreach ($aulas as $aula )
+        @foreach ($aulas as $aula)
         <div class="p-1" id="datosEliminar">
-          <h6>Datos del aula</h6>
+          <h6><b>Datos del aula</b></h6>
 
-          <span>Nombre: {{$aula->nombre}}</span>
+          <span> <b>Nombre:</b> {{$aula->nombre}}</span>
           <br>
-          <span>Seccion:{{$aula->section->nombre}}</span>
+          <span> <b>Capacidad:</b> {{$aula->capacidad}}</span>
+          <br>
+          <span> <b>Seccion: </b> {{$aula->section->nombre}}</span>
 
         </div>
 

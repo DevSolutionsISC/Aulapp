@@ -1,7 +1,7 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
+@section('title', 'Carrera')
 @section('Titulo')
-<h3 text-center>Administracion de carreras </h3>
+<h3 text-center>Administracion de carrera </h3>
 @endsection
 
 <header>
@@ -28,7 +28,9 @@
   <div class="col-12">
 
     <form id="formulario" method="GET" action="{{route('eliminar-carrera')}}">
+
       <h3 text-center>Eliminar carrera</h3>
+
       @csrf
 
       <label for="inputNombre" class="form-label">Coloque el codigo de la carrera que quiere eliminar</label>
@@ -50,11 +52,13 @@
         @elseif (count($carreras) == 1)
         @foreach ($carreras as $carrera )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la carrera</h6>
 
-          <span>Nombre: {{$carrera->Nombre}}</span>
+          <h6><b>Datos de la carrera</b></h6>
+
+          <span><b>Codigo:</b>{{$carrera->Codigo}}</span>
+
           <br>
-          <span>Codigo:{{$carrera->Codigo}}</span>
+          <span><b>Nombre: </b>{{$carrera->Nombre}}</span>
 
         </div>
 

@@ -33,6 +33,8 @@ Route::get('/eliminar-materia', [MateriaController::class, 'busqueda'])->name('e
 Route::get('/eliminar-materia-carrera', [MateriaCarreraController::class, 'busqueda'])->name('eliminar-materia-carrera');
 Route::get('/eliminar-grupo', [GrupoController::class, 'busqueda'])->name('eliminar-grupo');
 Route::get('/eliminar-asignacion-docente', [AsignacionDocenteController::class, 'busqueda'])->name('eliminar-asignacion-docente');
+Route::get('/eliminar-docente', [UsuarioController::class, 'busqueda'])->name('eliminar-docente');
+Route::delete('/eliminar-docente{usuario}', [UsuarioController::class, 'destroy'])->name('docente-destroy');
 
 Route::delete('/grupo/{id}', [GrupoController::class, 'destroy'])->name('grupos-destroy');
 Route::delete('/asignacionDocente/{asignacionDocente}', [AsignacionDocenteController::class, 'destroy'])->name('asignacionDocente-destroy');
@@ -105,9 +107,3 @@ Route::get('/seccion/{id}', [SectionsController::class, 'update'])->name('seccio
 Route::get('/aulaEdit', [AulaController::class, 'showEdit'])->name('aulas_edit');
 
 Route::get('/aula/{id}', [AulaController::class, 'update'])->name('aula-update');
-
-/*Route::get('/materia', 'App\Http\Controllers\MateriaController@reporte');
-Route::get('/carrera', 'App\Http\Controllers\CarrerasController@reporte');
-Route::get('/section', 'App\Http\Controllers\SectionsController@reporte');
-Route::get('/aula', 'App\Http\Controllers\AulaController@reporte');
-Route::get('/grupo', 'App\Http\Controllers\GrupoController@reporte');

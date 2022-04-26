@@ -1,7 +1,7 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
+@section('title', 'Materia')
 @section('Titulo')
-<h3 text-center>Administracion de carreras </h3>
+<h3 text-center>Administracion de materia </h3>
 @endsection
 
 <header>
@@ -50,11 +50,11 @@
         @elseif (count($materias) == 1)
         @foreach ($materias as $materia )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la carrera</h6>
+          <h6> <b>Datos de la carrera</b> </h6>
 
-          <span>Nombre: {{$materia->nombre_materia}}</span>
+          <span> <b>Codigo:</b> {{$materia->Cod_materia}}</span>
           <br>
-          <span>Codigo:{{$materia->Cod_materia}}</span>
+          <span><b>Nombre:</b> {{$materia->nombre_materia}}</span>
 
         </div>
 

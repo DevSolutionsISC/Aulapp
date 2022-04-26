@@ -16,12 +16,8 @@ class CreateGruposTable extends Migration
         Schema::create('grupos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
-
             $table->unsignedBigInteger('asignacion_docentes_id');
-
-            $table->foreign('asignacion_docentes_id')->references('id')->on('asignacion_docentes');
-      
-
+            $table->foreign('asignacion_docentes_id')->references('id')->on('asignacion_docentes')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
