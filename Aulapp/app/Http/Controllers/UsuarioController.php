@@ -26,7 +26,7 @@ class UsuarioController extends Controller
     public function reporte()
     {
         $usuarios = Usuario::all();
-        return view('reporte_docente', compact('usuarios'));
+        return view('Usuario-Docente\reporte_docente', compact('usuarios'));
 
     }
 
@@ -37,7 +37,7 @@ class UsuarioController extends Controller
         $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras", "carreras.id", "=", "materia_carreras.carrera_id")
             ->select("materia_carreras.id as id", "materias.id as id_materia", "carreras.id as id_carrera", "materias.nombre_materia as nom_materia", "carreras.Nombre as nom_carrera")->get();
 
-        return view('registrar_docente', ['materias' => $materias, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
+        return view('Usuario-Docente\registrar_docente', ['materias' => $materias, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
     }
 
     /**

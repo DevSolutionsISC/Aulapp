@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/menu_administrador', function () {
+Route::get('/menu_adm', function () {
     return view('menu_administrador');
 });
 
@@ -127,7 +127,7 @@ Route::get('/docente/{id}', [UsuarioController::class, 'update'])->name('docente
 Route::get('/grupoEdit', [GrupoController::class, 'showEdit'])->name('grupo_edit');
 
 Route::get('/grupo/{id}', [GrupoController::class, 'update'])->name('grupo-update');
-//--------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 Route::get('/materia','App\Http\Controllers\MateriaController@reporte');
 Route::get('/carrera','App\Http\Controllers\CarrerasController@reporte');
