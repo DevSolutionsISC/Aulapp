@@ -25,7 +25,7 @@ class AulaController extends Controller
     {
 
         $aulas = Aula::all();
-        return view('reporte_aula', compact('aulas'));
+        return view('Aula.reporte_aula', compact('aulas'));
 
     }
 
@@ -124,7 +124,7 @@ class AulaController extends Controller
                 $aula->where('nombre', 'like', $request->search);
             }
             $aulas = $aula->get();
-            return view('eliminar_aula', compact('aulas'));
+            return view('Aula.eliminar_aula', compact('aulas'));
 
         } catch (\Throwable $th) {
             return redirect()->route('eliminar-aula')->with('buscar', 'error');

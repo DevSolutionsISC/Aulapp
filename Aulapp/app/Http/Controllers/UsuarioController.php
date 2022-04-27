@@ -133,44 +133,44 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $docente=Usuario::find($id);
+        $docente = Usuario::find($id);
         $request->validate([
             'Nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:3|max:60',
             'Apellido' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:2|max:60',
-            'CI'=>'bail|required|numeric|digits_between:6,10|unique:usuarios,CI,'.$docente->id,
-            'Correo'=>'bail|required|email|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 @ . _]+$/|unique:usuarios,Email,'.$docente->id,
+            'CI' => 'bail|required|numeric|digits_between:6,10|unique:usuarios,CI,' . $docente->id,
+            'Correo' => 'bail|required|email|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 @ . _]+$/|unique:usuarios,Email,' . $docente->id,
         ]);
         $docente->save();
-        $ur=DB::table("user_rols")->where(['usuario_id'=>$id])->value('id');
-        $ids=explode("+",$request->Nuevo);
-        $permanentes=explode("+", $request-> permanente);
+        $ur = DB::table("user_rols")->where(['usuario_id' => $id])->value('id');
+        $ids = explode("+", $request->Nuevo);
+        $permanentes = explode("+", $request->permanente);
 
-        for($i=1;$i<sizeof($ids);$i++){
-            $encontrado=0;
-            for($j=1;$j <sizeof($permanentes);$j++){
-                if($ids[$i]==$permanentes[$j] ){
-                    $encontrado=1;
+        for ($i = 1; $i < sizeof($ids); $i++) {
+            $encontrado = 0;
+            for ($j = 1; $j < sizeof($permanentes); $j++) {
+                if ($ids[$i] == $permanentes[$j]) {
+                    $encontrado = 1;
                 }
             }
-            if($encontrado==0){
-                $asignacion= new asignacionDocentes();
-                $asignacion->user_rol_id=$ur;
+            if ($encontrado == 0) {
+                $asignacion = new asignacionDocentes();
+                $asignacion->user_rol_id = $ur;
                 $asignacion->materia_carreras_id = $ids[$i];
                 $asignacion->save();
 
             }
 
         }
-        $idse=explode("+",$request->Eliminar);
-        for($i=1;$i<sizeof($idse);$i++){
-            $encontrado=0;
-            for($j=1;$j <sizeof($permanentes);$j++){
-                if($idse[$i]==$permanentes[$j] ){
-                    $encontrado=1;
+        $idse = explode("+", $request->Eliminar);
+        for ($i = 1; $i < sizeof($idse); $i++) {
+            $encontrado = 0;
+            for ($j = 1; $j < sizeof($permanentes); $j++) {
+                if ($idse[$i] == $permanentes[$j]) {
+                    $encontrado = 1;
                 }
             }
-            if($encontrado==1){
-                $sql= DB::table("asignacion_docentes")->where(['materia_carreras_id'=> $idse[$i],'user_rol_id'=>$ur])->value('id');
+            if ($encontrado == 1) {
+                $sql = DB::table("asignacion_docentes")->where(['materia_carreras_id' => $idse[$i], 'user_rol_id' => $ur])->value('id');
                 $a = asignacionDocentes::find($sql);
                 $a->delete();
             }
@@ -182,14 +182,14 @@ class UsuarioController extends Controller
     public function showEdit()
     {
         $carreras = Carrera::all();
-        $materias=Materia::all();
-        $docentes= Usuario::all();
-        $a_docentes=asignacionDocentes::all();
-        $userRol=UserRol::all();
-        $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras","carreras.id","=","materia_carreras.carrera_id")
-        ->select("materia_carreras.id as id", "materias.id as id_materia","carreras.id as id_carrera","materias.nombre_materia as nom_materia","carreras.Nombre as nom_carrera")->get();
-        
-        return view('editardocente',['materias'=>$materias,'carreras'=>$carreras,'materia_carrera'=>$materia_carrera,'docentes'=>$docentes,'a_docentes'=>$a_docentes,'userRol'=>$userRol]);
+        $materias = Materia::all();
+        $docentes = Usuario::all();
+        $a_docentes = asignacionDocentes::all();
+        $userRol = UserRol::all();
+        $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras", "carreras.id", "=", "materia_carreras.carrera_id")
+            ->select("materia_carreras.id as id", "materias.id as id_materia", "carreras.id as id_carrera", "materias.nombre_materia as nom_materia", "carreras.Nombre as nom_carrera")->get();
+
+        return view('editardocente', ['materias' => $materias, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera, 'docentes' => $docentes, 'a_docentes' => $a_docentes, 'userRol' => $userRol]);
 
     }
     /**
@@ -207,7 +207,7 @@ class UsuarioController extends Controller
                 $usuario->where('CI', 'like', $request->search);
             }
             $usuarios = $usuario->get();
-            return view('eliminar_docente', compact('usuarios'));
+            return view('Usuario-Docente.eliminar_docente', compact('usuarios'));
 
         } catch (\Throwable $th) {
             return redirect()->route('eliminar-docente')->with('buscar', 'error');

@@ -29,7 +29,6 @@ Route::get('/menu_administrador', function () {
     return view('menu_administrador');
 });
 
-
 //--------------------------------Rutas de eliminacion --------------------------------------------------------
 Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
 
@@ -92,16 +91,13 @@ Route::post('/docente', [UsuarioController::class, 'store'])->name('docentes');
 
 //-----------------------------------------------------------------------------------
 
-
 //Reportes
 Route::get('/reporte_materia', 'App\Http\Controllers\MateriaController@reporte');
 Route::get('/reporte_carrera', 'App\Http\Controllers\CarrerasController@reporte');
 Route::get('/reporte_section', 'App\Http\Controllers\SectionsController@reporte');
 Route::get('/reporte_aula', 'App\Http\Controllers\AulaController@reporte');
 Route::get('/reporte_grupo', 'App\Http\Controllers\GrupoController@reporte');
-Route::get('/reporte_docente','App\Http\Controllers\UsuarioController@reporte');
-
-
+Route::get('/reporte_docente', 'App\Http\Controllers\UsuarioController@reporte');
 
 //----------------------Rutas de edicion--------------------------------------------------
 Route::get('/carreraEdit', [CarrerasController::class, 'showEdit'])->name('carrera_edit');
@@ -129,9 +125,8 @@ Route::get('/grupoEdit', [GrupoController::class, 'showEdit'])->name('grupo_edit
 Route::get('/grupo/{id}', [GrupoController::class, 'update'])->name('grupo-update');
 //--------------------------------------------------------------------
 
-Route::get('/materia','App\Http\Controllers\MateriaController@reporte');
-Route::get('/carrera','App\Http\Controllers\CarrerasController@reporte');
-Route::get('/section','App\Http\Controllers\SectionsController@reporte');
-Route::get('/aulas','App\Http\Controllers\AulaController@reporte');
-Route::get('/grupo','App\Http\Controllers\GrupoController@reporte');
-
+Route::get('/materia', 'App\Http\Controllers\MateriaController@reporte');
+Route::get('/carrera', 'App\Http\Controllers\CarrerasController@reporte');
+Route::get('/section', 'App\Http\Controllers\SectionsController@reporte');
+Route::get('/aulas', 'App\Http\Controllers\AulaController@reporte');
+Route::get('/grupo', 'App\Http\Controllers\GrupoController@reporte');
