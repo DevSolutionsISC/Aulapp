@@ -6,7 +6,7 @@
 @section('Contenido formulario')
 <div id="C_tabla">
       <h3 id="T_tabla">Lista de docentes</h3>
-      <table class="table">
+      <table class="table table-striped">
       
             <thead>                
                   <tr>

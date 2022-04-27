@@ -5,8 +5,17 @@
 @endsection
 @section('Contenido formulario')
 <div id="C_tabla">
-      <h3 id="T_tabla">Lista de materias</h3>
-      <table class="table">
+<h3 id="T_tabla" class="row justify-content-center justify-content-md-start">&nbsp;&nbsp;Lista de materias</h3>
+      @if(count($materias) == 0)
+      
+      <br>
+      <br>
+      <br>
+      <h4 class="row justify-content-center">No hay resultados</h4>
+ 
+      @else
+
+      <table class="table table-striped">
       
             <thead>                
                   <tr>
@@ -36,5 +45,6 @@
                   
             </tbody>
       </table>
+      @endif
 </div>
 @endsection
