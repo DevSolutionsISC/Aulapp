@@ -17,7 +17,7 @@ class AsignacionDocenteController extends Controller
                 $asignacionDocente->where('id', 'like', $request->search);
             }
             $asignacionDocentes = $asignacionDocente->get();
-            return view('eliminar_asignacion_docente', compact('asignacionDocentes'));
+            return view('Usuario-Docente.eliminar_asignacion_docente', compact('asignacionDocentes'));
 
         } catch (\Throwable $th) {
             return redirect()->route('eliminar-asignacion-docente')->with('buscar', 'error');

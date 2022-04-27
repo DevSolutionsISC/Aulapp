@@ -72,7 +72,7 @@
       </form>
     </div>
     <div class="col-6">
-      <a href="{{url('eliminar-aula')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+      <a href="{{url('/eliminar-aula')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
     @endforeach

@@ -87,7 +87,7 @@ class MateriaCarreraController extends Controller
                 $materiaCarrera->where('id', 'like', $request->search);
             }
             $materiasCarrera = $materiaCarrera->get();
-            return view('eliminar_materia_carrera', compact('materiasCarrera'));
+            return view('Materia.eliminar_materia_carrera', compact('materiasCarrera'));
         } catch (\Throwable $th) {
             return redirect()->route('eliminar-materia-carrera')->with('buscar', 'error');
 

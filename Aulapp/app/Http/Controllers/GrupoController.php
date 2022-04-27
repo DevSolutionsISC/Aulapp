@@ -6,10 +6,10 @@ use App\Http\Requests\StoreGrupo;
 use App\Models\asignacionDocentes;
 use App\Models\Carrera;
 use App\Models\Grupo;
-use App\Models\Usuario;
-use App\Models\UserRol;
 use App\Models\Materia;
 use App\Models\Materia_Carrera;
+use App\Models\UserRol;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class GrupoController extends Controller
@@ -21,9 +21,7 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        $grupos = Grupo::all();
-        return view('adm_grupos', ['grupos' => $grupos]);
-
+       
     }
     public function showEdit()
     {
@@ -34,7 +32,7 @@ class GrupoController extends Controller
         $Urs=UserRol::all();
         $ads=asignacionDocentes::all();
         $mcs=Materia_Carrera::all();
-        return view('editargrupo', ['grupos' => $grupos,'docentes'=>$docentes,'carreras'=>$carreras,'materias'=>$materias,'urs'=>$Urs,"ads"=>$ads,"mcs"=>$mcs]);
+        return view('Grupo\editargrupo', ['grupos' => $grupos,'docentes'=>$docentes,'carreras'=>$carreras,'materias'=>$materias,'urs'=>$Urs,"ads"=>$ads,"mcs"=>$mcs]);
 
     }
 
@@ -48,20 +46,30 @@ class GrupoController extends Controller
         $user_rol = UserRol::all();
         $asignacion = asignacionDocentes::all();
 
-        return view('registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
+        return view('Grupo\registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
 
     }
 
     public function reporte()
     {
         $grupos = Grupo::all();
+<<<<<<< HEAD
         $docentes=Usuario::all();
         $carreras=Carrera::all();
         $materias=Materia::all();
         $Urs=UserRol::all();
         $ads=asignacionDocentes::all();
         $mcs=Materia_Carrera::all();
-        return view('reporte_grupo', ['grupos' => $grupos,'docentes'=>$docentes,'carreras'=>$carreras,'materias'=>$materias,'urs'=>$Urs,"ads"=>$ads,"mcs"=>$mcs]);
+        return view('Grupo\reporte_grupo', ['grupos' => $grupos,'docentes'=>$docentes,'carreras'=>$carreras,'materias'=>$materias,'urs'=>$Urs,"ads"=>$ads,"mcs"=>$mcs]);
+=======
+        $docentes = Usuario::all();
+        $carreras = Carrera::all();
+        $materias = Materia::all();
+        $Urs = UserRol::all();
+        $ads = asignacionDocentes::all();
+        $mcs = Materia_Carrera::all();
+        return view('reporte_grupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
+>>>>>>> 137ac852d3ba3a076ed6ef57807af9f3740bbb86
 
     }
 
@@ -122,12 +130,12 @@ class GrupoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $grupo=Grupo::find($id);
+        $grupo = Grupo::find($id);
         $request->validate([
-            'nombre'=>'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 : ]+$/|min:2|max:4:',
+            'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 : ]+$/|min:2|max:4:',
         ]);
-        $grupo->nombre=$request->Grupo;
-        $grupo->id_asignacion_docentes=$request->ac;
+        $grupo->nombre = $request->Grupo;
+        $grupo->id_asignacion_docentes = $request->ac;
         $grupo->save();
         return redirect()->route('grupo_edit')->with('actualizar', 'ok');
     }
@@ -147,7 +155,7 @@ class GrupoController extends Controller
                 $grupo->where('id', 'like', $request->search);
             }
             $grupos = $grupo->get();
-            return view('eliminar_grupo', compact('grupos'));
+            return view('Grupo.eliminar_grupo', compact('grupos'));
 
         } catch (\Throwable $th) {
             return redirect()->route('eliminar-grupo')->with('buscar', 'error');
