@@ -3,6 +3,7 @@
 @section("editar","aulaEdit")
 @section("registrar","aula")
 @section("reporte","aulas")
+@section("eliminar","eliminar-aula")
 
 @section('Titulo')
 <h3 text-center id="Titulo">Administracion de Aulas</h3>
