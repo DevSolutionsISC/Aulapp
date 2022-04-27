@@ -40,6 +40,13 @@ class GrupoController extends Controller
 
     }
 
+    public function reporte()
+    {
+        $grupos = Grupo::all();
+        return view('reporte_grupo', compact('grupos'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

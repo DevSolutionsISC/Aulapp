@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('title', 'Seccion')
+@section('title', 'Aula')
 @section('Titulo')
 <h3 text-center>Administracion de aulas </h3>
 @endsection

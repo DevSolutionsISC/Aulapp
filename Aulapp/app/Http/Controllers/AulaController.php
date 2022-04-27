@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAula;
 use App\Models\Aula;
-use App\Models\Carrera;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\DB;
 
 class AulaController extends Controller
 {
@@ -17,17 +15,17 @@ class AulaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function index()
     {
-        $seccions=Section::all();
-        return view('registrar_aula',['seccions'=>$seccions]);
+        $seccions = Section::all();
+        return view('registrar_aula', ['seccions' => $seccions]);
     }
     public function reporte()
     {
-        $aulas=Aula::all();
+        $aulas = Aula::all();
         return view('reporte_aula', compact('aulas'));
- 
+
     }
 
     public function showEdit()
@@ -55,18 +53,15 @@ class AulaController extends Controller
      */
     public function store(StoreAula $request)
     {
-        
-        
-        
-        $aula=new Aula();
-        $aula->nombre=$request->nombre;
-        $aula->capacidad=$request->capacidad;
-        $aula->id_section=$_POST['seccion'];
-        
+
+        $aula = new Aula();
+        $aula->nombre = $request->nombre;
+        $aula->capacidad = $request->capacidad;
+        $aula->id_section = $_POST['seccion'];
 
         $aula->save();
 
-        return redirect()->route('aulas')->with('registrar','ok');
+        return redirect()->route('aulas')->with('registrar', 'ok');
     }
 
     /**
@@ -103,11 +98,11 @@ class AulaController extends Controller
         $aula = Aula::find($id);
         $request->validate([
             'Nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/|min:3|max:10|unique:aulas,nombre,' . $aula->id,
-            'capacidad' => 'bail|required|numeric|between:10,500'
+            'capacidad' => 'bail|required|numeric|between:10,500',
         ]);
         $aula->nombre = $request->Nombre;
         $aula->capacidad = $request->capacidad;
-        $aula->id_section=$request->section;
+        $aula->id_section = $request->section;
         $aula->save();
 
         return redirect()->route('aulas_edit')->with('actualizar', 'ok');
@@ -137,6 +132,6 @@ class AulaController extends Controller
 
         $aula->delete();
 
-        return redirect()->route('secciones')->with('eliminar', 'ok');
+        return redirect()->route('eliminar-aula')->with('eliminar', 'ok');
     }
 }

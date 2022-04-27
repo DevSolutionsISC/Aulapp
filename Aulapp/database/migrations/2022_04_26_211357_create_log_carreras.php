@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGruposTable extends Migration
+class CreateLogCarreras extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateGruposTable extends Migration
      */
     public function up()
     {
-        Schema::create('grupos', function (Blueprint $table) {
+        Schema::create('log_carreras', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->unique();
-            $table->unsignedBigInteger('asignacion_docentes_id');
-            $table->foreign('asignacion_docentes_id')->references('id')->on('asignacion_docentes')->constrained()->onDelete('cascade');
+            $table->string('Nombre');
+            $table->integer('Codigo');
+
             $table->timestamps();
+
         });
     }
 
@@ -29,6 +30,6 @@ class CreateGruposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grupos');
+        Schema::dropIfExists('log_carreras');
     }
 }

@@ -1,25 +1,28 @@
 @extends('plantilla')
-@section('title', 'Carrera')
+@section('title', 'Docente')
 @section('Titulo')
-<h3 text-center>Administracion de carrera </h3>
+<h3 text-center>Administracion de docentes </h3>
 @endsection
 @section('Contenido formulario')
 <div id="C_tabla">
-      <h3 id="T_tabla">Lista de carreras</h3>
+      <h3 id="T_tabla">Lista de docentes</h3>
       <table class="table">
       
             <thead>                
                   <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Código</th>
-
+                        <th scope="col">Apellido</th>
+                        <th scope="col">CI</th>
+                        <th scope="col">Email</th>
                   </tr>
             </thead>
             <tbody>
-                    @foreach($carreras as $carrera)
+                    @foreach($usuarios as $usuario)
                    <tr>
-                         <td>{{$carrera->Nombre}}</td>
-                         <td>{{$carrera->Codigo}}</td>
+                         <td>{{$usuario->Nombre}}</td>
+                         <td>{{$usuario->Apellido}}</td>
+                         <td>{{$usuario->CI}}</td>
+                         <td>{{$usuario->Email}}</td>
                          
                          <td>
                                <div><a href="">
@@ -31,8 +34,9 @@
                              
                          </td>
                          
-                   </tr>     
-                  @endforeach
+                   </tr>   
+                   @endforeach  
+                  
             </tbody>
       </table>
 </div>

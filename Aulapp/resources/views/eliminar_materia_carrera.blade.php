@@ -1,8 +1,8 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
-@section('Titulo')
-<h3 text-center>Administracion de materias-carreras </h3>
-@endsection
+@section('title', 'Materia-carrera')
+
+
+
 
 <header>
   <nav class="navbar navbar-light bg-light">
@@ -11,6 +11,7 @@
           width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+      <h3 text-center id="Titulo">Administracion de materias-carreras </h3>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="#">Inicio</a>
         <a class="nav-link active" aria-current="page" href="#">Registrar</a>
@@ -27,11 +28,11 @@
 <div class="d-flex align-items-center justify-content-center row p-2" id="formulario">
   <div class="col-12">
 
-    <form id="formulario" method="GET" action="{{route('eliminar-grupo')}}">
+    <form id="formulario" method="GET" action="{{route('eliminar-materia-carrera')}}">
       <h3 text-center>Eliminar materia-carrera</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el codigo de registro</label>
+      <label for="inputNombre" class="form-label">Introduzca el id de registro</label>
       <input type="text" id="inputNombre" class="form-control search" name="search" required>
 
       <br>
@@ -49,11 +50,11 @@
         @elseif (count($materiasCarrera) == 1)
         @foreach ($materiasCarrera as $materiaCarrera )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la carrera</h6>
+          <h6> <b>Datos de la materia-carrera</b></h6>
 
-          <span>Carrera: {{$materiaCarrera->carrera->Nombre}}</span>
+          <span> <b>Carrera:</b> {{$materiaCarrera->carrera->Nombre}}</span>
           <br>
-          <span>Materia:{{$materiaCarrera->materia->nombre_materia}}</span>
+          <span> <b>Materia:</b> {{$materiaCarrera->materia->nombre_materia}}</span>
 
         </div>
 
@@ -62,7 +63,7 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <form action="{{route('grupos-destroy', ['materiaCarrera'=>$materiaCarrera->id])}}" method="POST"
+      <form action="{{route('materiasCarreras-destroy', ['materiaCarrera'=>$materiaCarrera->id])}}" method="POST"
         class="Eliminar">
         @method('DELETE')
         @csrf
@@ -93,7 +94,7 @@
   $('.Eliminar').submit(function(e){
             e.preventDefault();
             Swal.fire({
-            title: '¿Estás seguro que quieres eliminar la materia?',
+            title: '¿Estás seguro que quieres eliminar la materia asignada a la carrera?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -114,7 +115,7 @@
   Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Materia eliminada',
+  title: 'Materia asiganada a la carrera eliminada',
   showConfirmButton: false,
   timer: 1500
   })

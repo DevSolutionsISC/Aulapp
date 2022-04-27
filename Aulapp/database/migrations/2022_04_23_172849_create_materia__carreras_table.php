@@ -17,11 +17,10 @@ class CreateMateriaCarrerasTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('carrera_id');
-            $table->foreign('carrera_id')->references('id')->on('carreras');
+            $table->foreign('carrera_id')->references('id')->on('carreras')->constrained()->onDelete('cascade');
 
             $table->unsignedBigInteger('materia_id');
-            $table->foreign('materia_id')->references('id')->on('materias');
-
+            $table->foreign('materia_id')->references('id')->on('materias')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

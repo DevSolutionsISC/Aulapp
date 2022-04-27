@@ -1,8 +1,8 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
-@section('Titulo')
-<h3 text-center>Administracion de seccion </h3>
-@endsection
+@section('title', 'Aula')
+
+
+
 
 <header>
   <nav class="navbar navbar-light bg-light">
@@ -11,6 +11,7 @@
           width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+      <h3 text-center id="Titulo">Administracion de aula </h3>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="#">Inicio</a>
         <a class="nav-link active" aria-current="page" href="#">Registrar</a>
@@ -48,13 +49,15 @@
         @elseif (count($aulas) > 1)
 
         @elseif (count($aulas) == 1)
-        @foreach ($aulas as $aula )
+        @foreach ($aulas as $aula)
         <div class="p-1" id="datosEliminar">
-          <h6>Datos del aula</h6>
+          <h6><b>Datos del aula</b></h6>
 
-          <span>Nombre: {{$aula->nombre}}</span>
+          <span> <b>Nombre:</b> {{$aula->nombre}}</span>
           <br>
-          <span>Seccion:{{$aula->section->nombre}}</span>
+          <span> <b>Capacidad:</b> {{$aula->capacidad}}</span>
+          <br>
+          <span> <b>Seccion: </b> {{$aula->section->nombre}}</span>
 
         </div>
 

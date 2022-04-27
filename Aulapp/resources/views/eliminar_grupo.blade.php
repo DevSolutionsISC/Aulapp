@@ -1,8 +1,8 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
-@section('Titulo')
-<h3 text-center>Administracion de seccion </h3>
-@endsection
+@section('title', 'Grupo')
+
+
+
 
 <header>
   <nav class="navbar navbar-light bg-light">
@@ -11,6 +11,7 @@
           width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+      <h3 text-center id="Titulo">Administracion de grupo </h3>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="#">Inicio</a>
         <a class="nav-link active" aria-current="page" href="#">Registrar</a>
@@ -31,7 +32,7 @@
       <h3 text-center>Eliminar grupo</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque id del grupo que quiere eliminar</label>
+      <label for="inputNombre" class="form-label">Introduzca el id de registro</label>
       <input type="text" id="inputNombre" class="form-control search" name="search" required>
 
 
@@ -50,10 +51,18 @@
         @elseif (count($grupos) == 1)
         @foreach ($grupos as $grupo )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos del aula</h6>
-
-          <span>Nombre: {{$grupo->nombre}}</span>
+          <h6>Datos del grupo</h6>
+          <span><b>id:</b>{{$grupo->id}}</span>
           <br>
+          <span><b>{{$grupo->nombre}}</b></span>
+          <br>
+          <span><b>Docente:</b> {{$grupo->asignacionDocente->user_rol->usuario->Nombre}}
+            {{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</span>
+          <br>
+
+          <span><b>Carrera:</b> {{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</span>
+          <br>
+          <span><b>Materia:</b> {{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</span>
         </div>
     </form>
   </div>
@@ -89,7 +98,7 @@
   $('.Eliminar').submit(function(e){
             e.preventDefault();
             Swal.fire({
-            title: '¿Estás seguro que quieres eliminar el aula?',
+            title: '¿Estás seguro que quieres eliminar el grupo?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -110,7 +119,7 @@
   Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Aula eliminada',
+  title: 'Grupo eliminado',
   showConfirmButton: false,
   timer: 1500
   })

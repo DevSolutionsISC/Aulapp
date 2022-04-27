@@ -1,8 +1,8 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
-@section('Titulo')
-<h3 text-center>Administracion de carreras </h3>
-@endsection
+@section('title', 'Materia')
+
+
+
 
 <header>
   <nav class="navbar navbar-light bg-light">
@@ -11,6 +11,7 @@
           width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+      <h3 text-center id="Titulo">Administracion de materia </h3>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="#">Inicio</a>
         <a class="nav-link active" aria-current="page" href="#">Registrar</a>
@@ -31,7 +32,7 @@
       <h3 text-center>Eliminar materia</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el codigo de la materia que quiere eliminar</label>
+      <label for="inputNombre" class="form-label">Introduzca el codigo de la materia que quiere eliminar</label>
       <input type="text" id="inputNombre" class="form-control search" name="search" required>
 
 
@@ -50,11 +51,11 @@
         @elseif (count($materias) == 1)
         @foreach ($materias as $materia )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la carrera</h6>
+          <h6> <b>Datos de la carrera</b> </h6>
 
-          <span>Nombre: {{$materia->nombre_materia}}</span>
+          <span> <b>Codigo:</b> {{$materia->Cod_materia}}</span>
           <br>
-          <span>Codigo:{{$materia->Cod_materia}}</span>
+          <span><b>Nombre:</b> {{$materia->nombre_materia}}</span>
 
         </div>
 

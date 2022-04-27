@@ -1,8 +1,8 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
-@section('Titulo')
-<h3 text-center>Administracion de carreras </h3>
-@endsection
+@section('title', 'Carrera')
+
+
+
 
 <header>
   <nav class="navbar navbar-light bg-light">
@@ -11,6 +11,7 @@
           width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+      <h3 text-center id="Titulo">Administracion de carrera </h3>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="#">Inicio</a>
         <a class="nav-link active" aria-current="page" href="#">Registrar</a>
@@ -28,10 +29,12 @@
   <div class="col-12">
 
     <form id="formulario" method="GET" action="{{route('eliminar-carrera')}}">
+
       <h3 text-center>Eliminar carrera</h3>
+
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el codigo de la carrera que quiere eliminar</label>
+      <label for="inputNombre" class="form-label">Introduzca el codigo de la carrera que quiere eliminar</label>
       <input type="text" id="inputNombre" class="form-control search" name="search" required>
 
 
@@ -50,11 +53,13 @@
         @elseif (count($carreras) == 1)
         @foreach ($carreras as $carrera )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la carrera</h6>
 
-          <span>Nombre: {{$carrera->Nombre}}</span>
+          <h6><b>Datos de la carrera</b></h6>
+
+          <span><b>Codigo:</b>{{$carrera->Codigo}}</span>
+
           <br>
-          <span>Codigo:{{$carrera->Codigo}}</span>
+          <span><b>Nombre: </b>{{$carrera->Nombre}}</span>
 
         </div>
 
