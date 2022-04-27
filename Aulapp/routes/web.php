@@ -57,7 +57,6 @@ Route::post('/materias', [MateriaController::class, 'store'])->name('materias');
 Route::get('/grupos', [GrupoController::class, 'registro'])->name('grupos');
 Route::post('/grupos', [GrupoController::class, 'store'])->name('grupos');
 
-
 Route::get('/materias', [MateriaController::class, 'index'])->name('materias');
 Route::post('/materias', [MateriaController::class, 'store'])->name('materias');
 
@@ -75,15 +74,10 @@ Route::get('/seccion/{id}', [SectionsController::class, 'show'])->name('seccione
 Route::patch('/seccion/{id}', [SectionsController::class, 'update'])->name('secciones-update');
 
 Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
-<<<<<<< HEAD
 
 Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::class, 'destroy'])->name('materiasCarreras-destroy');
-=======
-Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
->>>>>>> 595fa1c1e939451e479166da29476566bee33033
 
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
-
 
 Route::get('/aula', function () {
     return view('adm_aulas');
@@ -93,14 +87,13 @@ Route::get('/menu-adm', function () {
 });
 
 //Reportes
-Route::get('/reporte_materia','App\Http\Controllers\MateriaController@reporte');
-Route::get('/reporte_carrera','App\Http\Controllers\CarrerasController@reporte');
-Route::get('/reporte_section','App\Http\Controllers\SectionsController@reporte');
-Route::get('/reporte_aula','App\Http\Controllers\AulaController@reporte');
-Route::get('/reporte_grupo','App\Http\Controllers\GrupoController@reporte');
+Route::get('/reporte_materia', 'App\Http\Controllers\MateriaController@reporte');
+Route::get('/reporte_carrera', 'App\Http\Controllers\CarrerasController@reporte');
+Route::get('/reporte_section', 'App\Http\Controllers\SectionsController@reporte');
+Route::get('/reporte_aula', 'App\Http\Controllers\AulaController@reporte');
+Route::get('/reporte_grupo', 'App\Http\Controllers\GrupoController@reporte');
 //Route::get('/reporte_docente','App\Http\Controllers\UsuarioController@reporte');
-Route::get('/reporte_user_rol','App\Http\Controllers\UserRolController@reporte');//docente
-
+Route::get('/reporte_user_rol', 'App\Http\Controllers\UserRolController@reporte'); //docente
 
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 
