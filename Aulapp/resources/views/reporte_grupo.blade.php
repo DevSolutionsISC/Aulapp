@@ -1,5 +1,9 @@
 @extends('plantilla')
 @section('title', 'Grupo')
+@section("editar","grupoEdit")
+@section("registrar","grupos")
+@section("reporte","reporte_grupo")
+@section("eliminar","eliminar-grupo")
 @section('Titulo')
 <h3 text-center>Administracion de grupos </h3>
 @endsection
@@ -33,19 +37,7 @@
                    <tr>
                          
                          <td>{{$grupo->nombre}}</td>
-                         <td>{{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</td>
-                         <td>{{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</td>
-                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Nombre}}</td>
-                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</td>
-                         <td>
-                               <div><a href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                            class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    </svg>
-                               </a>
-                               </div>
-                             
-                         </td>
+                         
                          
                    </tr>   
                    @endforeach  

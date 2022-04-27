@@ -3,7 +3,7 @@
 @section("editar","materiaEdit")
 @section("registrar","materias")
 @section("reporte","materia")
-
+@section("eliminar","eliminar-materia")
 @section('Titulo')
 <h3 text-center>Administracion de materia </h3>
 @endsection

@@ -1,7 +1,8 @@
 @extends('plantilla')
-@section("editar","seccionEdit")
-@section("registrar","seccion")
-@section("reporte","section")
+@section("editar","grupoEdit")
+@section("registrar","grupos")
+@section("reporte","reporte_grupo")
+@section("eliminar","eliminar-grupo")
 @section('title', 'Grupo')
 @section('Titulo')
 <h3 text-center id="Titulo">Administracion de Grupos</h3>
@@ -128,27 +129,5 @@
                 }
             }
 
-            var enviar=document.getElementById("botonRegistrar")
-  enviar.onclick=function(event){
-    var encontrado=0;
-    var grupo=document.getElementById("inputGrupo");
-    var carreras=document.getElementById("carreras");
-    var mensaje=document.getElementById("mensaje")
-        @foreach ($grupos as $grupo)
-            @foreach ($ads as $ad )
-            if(grupo.value=='{{$grupo->nombre}}' &&  '{{$ad->materia_carreras}}' == carreras.options[carreras.selectedIndex].id && '{{$grupo->id}}'!= localStorage.getItem("id")){
-                encontrado==1
-            }
-            @endforeach
-        @endforeach
-    if(encontrado== 1){
-        console.log("Existe")
-      event.preventDefault();
-      mensaje.innerHTML="Ya existe otro grupo con estas asignaciones"
-    }else{
-      mensaje.innerHTML="";
-      
-    }
-  }
     </script>
 @endsection

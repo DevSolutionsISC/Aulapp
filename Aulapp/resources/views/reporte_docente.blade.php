@@ -1,6 +1,10 @@
 @extends('plantilla')
 @section('title', 'Docente')
 @section('Titulo')
+@section("editar","docenteEdit")
+@section("registrar","docente")
+@section("reporte","reporte_docente")
+@section("eliminar","eliminar-docente")
 <h3 text-center>Administracion de docentes </h3>
 @endsection
 @section('Contenido formulario')

@@ -55,7 +55,13 @@ class GrupoController extends Controller
     public function reporte()
     {
         $grupos = Grupo::all();
-        return view('reporte_grupo', compact('grupos'));
+        $docentes=Usuario::all();
+        $carreras=Carrera::all();
+        $materias=Materia::all();
+        $Urs=UserRol::all();
+        $ads=asignacionDocentes::all();
+        $mcs=Materia_Carrera::all();
+        return view('reporte_grupo', ['grupos' => $grupos,'docentes'=>$docentes,'carreras'=>$carreras,'materias'=>$materias,'urs'=>$Urs,"ads"=>$ads,"mcs"=>$mcs]);
 
     }
 

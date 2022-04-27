@@ -1,6 +1,9 @@
 @extends('plantilla2')
 @section('title', 'Docente')
-
+@section("editar","docenteEdit")
+@section("registrar","docente")
+@section("reporte","reporte_docente")
+@section("eliminar","eliminar-docente")
 
 
 
@@ -15,9 +18,9 @@
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="{{url('/docente')}}">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="#">Editar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/docenteEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-docente')}}">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{url('/reporte_user_rol')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_docente')}}">Ver reporte</a>
 
       </form>
     </div>

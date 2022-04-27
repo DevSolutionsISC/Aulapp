@@ -2,6 +2,7 @@
 @section("editar","seccionEdit")
 @section("registrar","seccion")
 @section("reporte","section")
+@section("eliminar","eliminar-seccion")
 @section('title', 'Sección')
 @section('Titulo')
 <h3 text-center id="Titulo">Administracion de Secciones</h3>

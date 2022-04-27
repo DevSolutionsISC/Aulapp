@@ -85,9 +85,7 @@ Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::c
 
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
 
-Route::get('/aula', function () {
-    return view('adm_aulas');
-});
+
 Route::get('/menu-adm', function () {
     return view('menu_administrador');
 });
@@ -98,8 +96,8 @@ Route::get('/reporte_carrera', 'App\Http\Controllers\CarrerasController@reporte'
 Route::get('/reporte_section', 'App\Http\Controllers\SectionsController@reporte');
 Route::get('/reporte_aula', 'App\Http\Controllers\AulaController@reporte');
 Route::get('/reporte_grupo', 'App\Http\Controllers\GrupoController@reporte');
-//Route::get('/reporte_docente','App\Http\Controllers\UsuarioController@reporte');
-Route::get('/reporte_user_rol', 'App\Http\Controllers\UserRolController@reporte'); //docente
+Route::get('/reporte_docente','App\Http\Controllers\UsuarioController@reporte');
+
 
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');
 

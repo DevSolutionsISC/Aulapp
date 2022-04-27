@@ -1,6 +1,10 @@
 @extends('registrar')
 @section('title', 'Docente')
 @section('Titulo')
+@section("editar","docenteEdit")
+@section("registrar","docente")
+@section("reporte","reporte_docente")
+@section("eliminar","eliminar-docente")
 <h3 text-center  id="Titulo"> Administracion de docentes</h3>
 @endsection
 @section('action')

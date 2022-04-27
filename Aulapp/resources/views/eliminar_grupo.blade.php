@@ -15,7 +15,7 @@
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="{{url('/grupos')}}">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="#">Editar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/grupoEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-grupo')}}">Eliminar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/reporte_grupo')}}">Ver reporte</a>
 

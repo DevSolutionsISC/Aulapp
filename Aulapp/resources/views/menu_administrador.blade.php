@@ -6,7 +6,7 @@
     </div>
     <div id="funcionalidades">
         <div>
-            <a href="#" class="funcion btn"><span class="letras">Administracion de docentes</span> 
+            <a href="reporte_docente" class="funcion btn"><span class="letras">Administracion de docentes</span> 
                 <span class="material-symbols-outlined icon" >
                     person
                     </span>
@@ -20,7 +20,7 @@
             </a> 
         </div>
         <div>
-            <a href="#"class="funcion btn"><span class="letras">Administrador de grupos</span>
+            <a href="reporte_grupo"class="funcion btn"><span class="letras">Administrador de grupos</span>
                 <span class="material-symbols-outlined icon">
                     group
                     </span>

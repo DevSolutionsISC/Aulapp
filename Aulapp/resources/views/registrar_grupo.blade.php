@@ -1,5 +1,8 @@
 @extends('plantilla')
-
+@section("editar","grupoEdit")
+@section("registrar","grupos")
+@section("reporte","reporte_grupo")
+@section("eliminar","eliminar-grupo")
 @section('Contenido formulario')
 
 <div class="row" >

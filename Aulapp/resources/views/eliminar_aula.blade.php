@@ -14,7 +14,7 @@
       <h3 text-center id="Titulo">Administracion de aula </h3>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
-        <a class="nav-link active" aria-current="page" href="#">Registrar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/aula')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/aulaEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-aula')}}">Eliminar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/reporte_aula')}}">Ver reporte</a>

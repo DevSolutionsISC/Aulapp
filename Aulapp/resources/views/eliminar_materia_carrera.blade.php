@@ -14,10 +14,10 @@
       <h3 text-center id="Titulo">Administracion de materias-carreras </h3>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="{{url('/menu-adm')}}">Inicio</a>
-        <a class="nav-link active" aria-current="page" href="#">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="#">Editar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/materias')}}">Registrar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/materiaEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-materia-carrera')}}">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="#">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/materia')}}">Ver reporte</a>
 
       </form>
     </div>
