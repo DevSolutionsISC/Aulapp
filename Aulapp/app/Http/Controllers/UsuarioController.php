@@ -9,7 +9,6 @@ use App\Models\Materia;
 use App\Models\Materia_Carrera;
 use App\Models\UserRol;
 use App\Models\Usuario;
-
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -74,18 +73,18 @@ class UsuarioController extends Controller
             }
         }
 
-        $caracteres.=$request->ci;
-        $Usercontrasenia=substr(str_shuffle($caracteres), 0, 10);
-        $User=$request->ci . $iniciales;
+        $caracteres .= $request->ci;
+        $Usercontrasenia = substr(str_shuffle($caracteres), 0, 10);
+        $User = $request->ci . $iniciales;
 
-        $usuario->usuario=$User;
-        $usuario->contrasenia=$Usercontrasenia;
+        $usuario->usuario = $User;
+        $usuario->contrasenia = $Usercontrasenia;
         $usuario->save();
-        
-        $userRol=new UserRol();
-        $id_usuario=Usuario::firstWhere('CI',$request->ci);
-        $userRol->usuario_id=$id_usuario->id;
-        $userRol->rol_id=2;
+
+        $userRol = new UserRol();
+        $id_usuario = Usuario::firstWhere('CI', $request->ci);
+        $userRol->usuario_id = $id_usuario->id;
+        $userRol->rol_id = 2;
         $userRol->save();
 
         $id_userRol = UserRol::select('id')->orderBy('id', 'desc')->first();
@@ -98,7 +97,6 @@ class UsuarioController extends Controller
 
             $asignacion->save();
         }
-
 
         return redirect()->route('docentes')->with('registrar', 'ok');
     }
@@ -145,14 +143,19 @@ class UsuarioController extends Controller
      */
     public function busqueda(Request $request)
     {
+        try {
+            $usuario = Usuario::query();
 
-        $usuario = Usuario::query();
+            if ($request->has('search')) {
+                $usuario->where('CI', 'like', $request->search);
+            }
+            $usuarios = $usuario->get();
+            return view('eliminar_docente', compact('usuarios'));
 
-        if ($request->has('search')) {
-            $usuario->where('CI', 'like', $request->search);
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-docente')->with('buscar', 'error');
+
         }
-        $usuarios = $usuario->get();
-        return view('eliminar_docente', compact('usuarios'));
 
     }
     public function destroy($usuario)

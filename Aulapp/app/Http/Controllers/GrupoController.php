@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGrupo;
-use App\Models\Grupo;
-use Illuminate\Http\Request;
-use App\Models\Carrera;
-use App\Models\Materia_Carrera;
-use App\Models\Materia;
 use App\Models\asignacionDocentes;
-use App\Models\Usuario;
+use App\Models\Carrera;
+use App\Models\Grupo;
+use App\Models\Materia_Carrera;
 use App\Models\UserRol;
+use App\Models\Usuario;
+use Illuminate\Http\Request;
 
 class GrupoController extends Controller
 {
@@ -25,19 +24,18 @@ class GrupoController extends Controller
         return view('adm_grupos', ['grupos' => $grupos]);
 
     }
-    
 
     public function registro()
     {
-        
-        $carreras=Carrera::all();
-        $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras","carreras.id","=","materia_carreras.carrera_id")
-        ->select("materia_carreras.id as id", "materias.id as id_materia","carreras.id as id_carrera","materias.nombre_materia as nom_materia","carreras.Nombre as nom_carrera")->get();
-        $docentes=Usuario::all();
-        $user_rol=UserRol::all();
-        $asignacion=asignacionDocentes::all();
 
-        return view('registrar_grupo',['urs'=>$user_rol,'ads'=>$asignacion,'docentes'=>$docentes,'carreras'=>$carreras,'materia_carrera'=>$materia_carrera]);
+        $carreras = Carrera::all();
+        $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras", "carreras.id", "=", "materia_carreras.carrera_id")
+            ->select("materia_carreras.id as id", "materias.id as id_materia", "carreras.id as id_carrera", "materias.nombre_materia as nom_materia", "carreras.Nombre as nom_carrera")->get();
+        $docentes = Usuario::all();
+        $user_rol = UserRol::all();
+        $asignacion = asignacionDocentes::all();
+
+        return view('registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
 
     }
 
@@ -116,14 +114,19 @@ class GrupoController extends Controller
      */
     public function busqueda(Request $request)
     {
+        try {
+            $grupo = Grupo::query();
 
-        $grupo = Grupo::query();
+            if ($request->has('search')) {
+                $grupo->where('id', 'like', $request->search);
+            }
+            $grupos = $grupo->get();
+            return view('eliminar_grupo', compact('grupos'));
 
-        if ($request->has('search')) {
-            $grupo->where('id', 'like', $request->search);
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-grupo')->with('buscar', 'error');
+
         }
-        $grupos = $grupo->get();
-        return view('eliminar_grupo', compact('grupos'));
 
     }
     public function destroy($id)

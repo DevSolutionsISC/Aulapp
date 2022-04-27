@@ -13,11 +13,11 @@
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <h3 text-center id="Titulo">Administracion de carrera </h3>
       <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-        <a class="nav-link active" aria-current="page" href="#">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="#">Editar</a>
-        <a class="nav-link active" aria-current="page" href="#">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{route('secciones')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/menu-adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('carreras')}}">Registrar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/carreraEdit')}}">Editar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/eliminar-carrera')}}">Eliminar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_carrera')}}">Ver reporte</a>
 
       </form>
     </div>
@@ -35,7 +35,7 @@
       @csrf
 
       <label for="inputNombre" class="form-label">Introduzca el codigo de la carrera que quiere eliminar</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search" required>
+      <input type="text" id="inputNombre" class="form-control search" name="search">
 
 
       <br>
@@ -47,8 +47,7 @@
 
 
       <br>
-      @if (count($carreras) <= 0) <p class="p-1" id="datosEliminar">No hay resultados</p>
-        @elseif (count($carreras) > 1)
+      @if (count($carreras) <= 0) @elseif (count($carreras)> 1)
 
         @elseif (count($carreras) == 1)
         @foreach ($carreras as $carrera )
@@ -75,7 +74,7 @@
       </form>
     </div>
     <div class="col-6">
-      <a href="{{route('secciones')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+      <a href="{{url('eliminar-carrera')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
     @endforeach
@@ -123,6 +122,17 @@
   showConfirmButton: false,
   timer: 1500
   })
+</script>
+@endif
+@if (session('buscar')=='error')
+<script>
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'No se encontro ninguna carrera  ese codigo',
+  showConfirmButton: true,
+  })
+
 </script>
 @endif
 @endsection

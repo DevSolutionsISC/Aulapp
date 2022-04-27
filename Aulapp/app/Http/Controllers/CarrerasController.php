@@ -124,14 +124,19 @@ class CarrerasController extends Controller
      */
     public function busqueda(Request $request)
     {
+        try {
+            $carrera = Carrera::query();
 
-        $carrera = Carrera::query();
+            if ($request->has('search')) {
+                $carrera->where('Codigo', 'like', $request->search);
+            }
+            $carreras = $carrera->get();
+            return view('eliminar_carrera', compact('carreras'));
 
-        if ($request->has('search')) {
-            $carrera->where('Codigo', 'like', $request->search);
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-carrera')->with('buscar', 'error');
+
         }
-        $carreras = $carrera->get();
-        return view('eliminar_carrera', compact('carreras'));
 
     }
     public function destroy($carrera)

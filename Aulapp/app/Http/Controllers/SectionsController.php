@@ -57,16 +57,24 @@ class SectionsController extends Controller
     }
     public function busqueda(Request $request)
     {
+        $nombre = $request->search;
+        try {
 
-        $section = Section::query();
+            $section = Section::query();
 
-        if ($request->has('search')) {
-            $section->where('nombre', 'like', $request->search);
-        }
-        $sections = $section->get();
-        return view('eliminar_seccion', compact('sections'));
+            if ($request->has('search')) {
+                $section->where('nombre', 'like', $request->search);
 
-    }
+            }
+            $sections = $section->get();
+            return view('eliminar_seccion', compact('sections'));
+
+        } catch (\Throwable $th) {
+
+            return redirect()->route('eliminar-seccion')->with('buscar', 'error');
+
+        }}
+
     public function destroy($section)
     {
         $section = Section::find($section);

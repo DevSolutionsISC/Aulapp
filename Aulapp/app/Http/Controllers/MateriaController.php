@@ -166,13 +166,19 @@ class MateriaController extends Controller
     public function busqueda(Request $request)
     {
 
-        $materia = Materia::query();
+        try {
+            $materia = Materia::query();
 
-        if ($request->has('search')) {
-            $materia->where('Cod_materia', 'like', $request->search);
+            if ($request->has('search')) {
+                $materia->where('Cod_materia', 'like', $request->search);
+            }
+            $materias = $materia->get();
+            return view('eliminar_materia', compact('materias'));
+
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-materia')->with('buscar', 'error');
+
         }
-        $materias = $materia->get();
-        return view('eliminar_materia', compact('materias'));
 
     }
     public function destroy($materia)

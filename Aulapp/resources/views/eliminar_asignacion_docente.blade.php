@@ -13,11 +13,11 @@
       <h3 text-center id="Titulo">Administracion de asignacion-docente </h3>
 
       <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="#">Registrar</a>
         <a class="nav-link active" aria-current="page" href="#">Editar</a>
-        <a class="nav-link active" aria-current="page" href="#">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{route('secciones')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('eliminar-asignacion-docente')}}">Eliminar</a>
+        <a class="nav-link active" aria-current="page" href="#">Ver reporte</a>
 
       </form>
     </div>
@@ -33,7 +33,7 @@
       @csrf
 
       <label for="inputNombre" class="form-label">Introduzca el id de registro</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search" required>
+      <input type="text" id="inputNombre" class="form-control search" name="search">
 
       <br>
       <div class="d-flex justify-content-center">
@@ -44,8 +44,7 @@
 
 
       <br>
-      @if (count($asignacionDocentes) <= 0) <p class="p-1" id="datosEliminar">No hay resultados</p>
-        @elseif (count($asignacionDocentes) > 1)
+      @if (count($asignacionDocentes) <= 0) @elseif (count($asignacionDocentes)> 1)
 
         @elseif (count($asignacionDocentes) == 1)
         @foreach ($asignacionDocentes as $asignacionDocente )
@@ -78,7 +77,7 @@
       </form>
     </div>
     <div class="col-6">
-      <a href="{{route('secciones')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+      <a href="{{url('eliminar-asignacion-docente')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
     @endforeach
@@ -126,6 +125,17 @@
   showConfirmButton: false,
   timer: 1500
   })
+</script>
+@endif
+@if (session('buscar')=='error')
+<script>
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'No se encontro ninguna asignacion docente-materia-carrera con ese codigo',
+  showConfirmButton: true,
+  })
+
 </script>
 @endif
 @endsection
