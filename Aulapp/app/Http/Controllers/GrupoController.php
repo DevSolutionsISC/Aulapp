@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Grupo;
 use Illuminate\Http\Request;
+use App\Models\Carrera;
+use App\Models\Materia_Carrera;
+use App\Models\Materia;
+use App\Models\asignacionDocentes;
+use App\Models\Usuario;
+use App\Models\UserRol;
 
 class GrupoController extends Controller
 {
@@ -16,6 +22,21 @@ class GrupoController extends Controller
     {
         $grupos = Grupo::all();
         return view('adm_grupos', ['grupos' => $grupos]);
+
+    }
+    
+
+    public function registro()
+    {
+        
+        $carreras=Carrera::all();
+        $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras","carreras.id","=","materia_carreras.carrera_id")
+        ->select("materia_carreras.id as id", "materias.id as id_materia","carreras.id as id_carrera","materias.nombre_materia as nom_materia","carreras.Nombre as nom_carrera")->get();
+        $docentes=Usuario::all();
+        $user_rol=UserRol::all();
+        $asignacion=asignacionDocentes::all();
+
+        return view('registrar_docente',['usr'=>$user_rol,'asd'=>$asignacion,'docentes'=>$docentes,'carreras'=>$carreras,'materia_carrera'=>$materia_carrera]);
 
     }
 
