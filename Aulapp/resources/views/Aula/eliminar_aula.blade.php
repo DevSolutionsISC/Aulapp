@@ -13,7 +13,7 @@
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <h3 text-center id="Titulo">Administracion de aula </h3>
       <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('menu_adm')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="{{url('/aula')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/aulaEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-aula')}}">Eliminar</a>

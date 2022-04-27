@@ -13,7 +13,7 @@
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <h3 text-center id="Titulo">Administracion de grupo </h3>
       <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('menu_adm')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="{{url('/grupos')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/grupoEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-grupo')}}">Eliminar</a>
