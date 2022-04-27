@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGrupo;
 use App\Models\Grupo;
 use Illuminate\Http\Request;
 use App\Models\Carrera;
@@ -36,7 +37,7 @@ class GrupoController extends Controller
         $user_rol=UserRol::all();
         $asignacion=asignacionDocentes::all();
 
-        return view('registrar_docente',['usr'=>$user_rol,'asd'=>$asignacion,'docentes'=>$docentes,'carreras'=>$carreras,'materia_carrera'=>$materia_carrera]);
+        return view('registrar_grupo',['urs'=>$user_rol,'ads'=>$asignacion,'docentes'=>$docentes,'carreras'=>$carreras,'materia_carrera'=>$materia_carrera]);
 
     }
 
@@ -63,13 +64,11 @@ class GrupoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGrupo $request)
     {
         $grupo = new Grupo();
         $grupo->nombre = $request->nombre;
-        $grupo->id_materia = $request->id_materia;
-        $grupo->id_carrera = $request->id_carrera;
-        $grupo->id_docente = $request->id_docente;
+        $grupo->asignacion_docentes_id = $request->docente;
         $grupo->save();
 
         return redirect()->route('grupos')->with('registrar', 'ok');

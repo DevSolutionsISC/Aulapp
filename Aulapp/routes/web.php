@@ -47,8 +47,13 @@ Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
 Route::post('/seccion', [SectionsController::class, 'store'])->name('secciones');
 Route::get('/aula', [AulaController::class, 'index'])->name('aulas');
 Route::post('/aula', [AulaController::class, 'store'])->name('aulas');
+Route::get('/materias', [MateriaController::class, 'index'])->name('materias');
+Route::post('/materias', [MateriaController::class, 'store'])->name('materias');
+Route::get('/grupos', [GrupoController::class, 'registro'])->name('grupos');
+Route::post('/grupos', [GrupoController::class, 'store'])->name('grupos');
 
-Route::get('/materias', [MateriaController::class, 'index'])->name('material');
+
+Route::get('/materias', [MateriaController::class, 'index'])->name('materias');
 Route::post('/materias', [MateriaController::class, 'store'])->name('materias');
 
 Route::delete('/carrera/{carrera}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
@@ -68,14 +73,12 @@ Route::delete('/seccion/{section}', [SectionsController::class, 'destroy'])->nam
 Route::delete('/aula/{id}', [AulaController::class, 'destroy'])->name('aulas-destroy');
 
 Route::get('/materia', [MateriaController::class, 'index'])->name('materias');
-Route::post('/materia', [MateriaController::class, 'store'])->name('materias');
+
 Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::class, 'destroy'])->name('materiasCarreras-destroy');
 
 Route::delete('/materia/{materia}', [MateriaController::class, 'destroy'])->name('materias-destroy');
 Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
 
-Route::get('/grupo', [GrupoController::class, 'index'])->name('grupos');
-Route::post('/grupo', [GrupoController::class, 'store'])->name('grupos');
 
 Route::get('/aula', function () {
     return view('adm_aulas');

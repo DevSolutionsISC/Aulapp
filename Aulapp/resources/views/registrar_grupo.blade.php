@@ -10,26 +10,30 @@
       <h3 text-center>Registrar grupos</h3>
       @csrf
       <label for="input1" class="form-label">Nombre</label>
-      <input type="text" id="input1" class="form-control" name="nombre"
-      value={{old("nombre")}} autofocus>
+      <input type="text" id="input1" class="form-control" name="nombre" value="{{old("nombre")}}" autofocus>
       @if ($errors->has("nombre"))
       <span class="error text-danger" for="input1">{{ $errors->first("nombre") }}</span>
       @endif
       <br>
       <label for="input2" class="form-label">Carrera</label>
-      <select name="carrera" id="carrera">
+      <select name="carrera" id="carrera" class="form-select">
         <option >Seleccione una carrera</option>
         @foreach ($carreras as $carrera)
-            <option>{{$carrera}}</option>
+            <option>{{$carrera->Nombre}}</option>
         @endforeach
       </select>
-
-      
+      @if ($errors->has("carrera"))
+        <span class="error text-danger" for="input1">{{ $errors->first("carrera") }}</span>
+        @endif
+      <br>
       <label for="input2" class="form-label">Materia</label>
-      <select name="materia" id="materia">
+      <select name="materia" id="materia" class="form-select">
         <option >Seleccione una materia</option>
       </select>
-
+      @if ($errors->has("materia"))
+        <span class="error text-danger" for="input1">{{ $errors->first("materia") }}</span>
+        @endif
+<br>
       <script>
         var carrera=document.getElementById("carrera");   
         var todosCM=[]
@@ -53,19 +57,19 @@
                   });
     </script>
       <label for="input2" class="form-label">Docente</label>
-        <select name="docente" id="docente">
+        <select name="docente" id="docente" class="form-select">
+            <option >Seleccione un docente</option>
 
         </select>
-
+        @if ($errors->has("docente"))
+        <span class="error text-danger" for="input1">{{ $errors->first("docente") }}</span>
+        @endif
         <script>
             var todosCMD=[];          
             var materia=document.getElementById("materia");
             
 
-            @foreach ($m_c_docente as $docente )
-            todosCMD.push(['{{docente->id}}','{{$docente->id_m_c}}','{{$docente->$nom_docente}}']);
-            @endforeach
-
+           
             materia.addEventListener('change', (event) => {
                 var docentes=document.getElementById("docente");
                 docentes.innerHTML="";
@@ -74,7 +78,7 @@
                     @foreach ($ads as $ad)
                         @foreach ($urs as $ur)
                             if('{{$ad->materia_carreras_id}}'==materia.options[materia.selectedIndex].id && '{{$ad->user_rol_id}}'=='{{$ur->id}}' && '{{$ur->usuario_id}}'=='{{$docente->id}}' ){
-                                docentes.innerHTML+="<option id='{{$ad->id}}'>{{$docente->Nombre}} {{$docente->Apellido}}</option>"
+                                docentes.innerHTML+="<option value='{{$ad->id}}'>{{$docente->Nombre}} {{$docente->Apellido}}</option>"
                             }
                         @endforeach
                     @endforeach
