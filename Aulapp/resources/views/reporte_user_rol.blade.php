@@ -5,8 +5,19 @@
 @endsection
 @section('Contenido formulario')
 <div id="C_tabla">
-      <h3 id="T_tabla">Lista de docentes</h3>
-      <table class="table">
+      <h3 id="T_tabla" class="row justify-content-center justify-content-md-start">&nbsp;&nbsp;Lista de docentes</h3>
+     
+     
+      @if(count($user_rols) == 1)
+      
+      <br>
+      <br>
+      <br>
+      <h4 class="row justify-content-center">No hay resultados</h4>
+ 
+      @else
+      
+      <table class="table table-striped">
       
             <thead>                
                   <tr>
@@ -19,7 +30,7 @@
             <tbody>
                  
                     @foreach($user_rols as $user_rol)
-                    @if ($user_rol->usuario_id == 1) 
+                    @if ($user_rol->usuario_id == 2) 
                     
                    <tr>
                          <td>{{$user_rol->usuario->Nombre}}</td>
@@ -39,10 +50,12 @@
                    </tr>   
                    
                    @endif
-                   @endforeach 
+                   @endforeach
                   
                   
             </tbody>
       </table>
+      @endif
+       
 </div>
 @endsection
