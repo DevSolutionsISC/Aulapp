@@ -1,5 +1,8 @@
 @extends('plantilla')
 @section('title', 'Seccion')
+@section("editar","seccionEdit")
+@section("registrar","seccion")
+@section("reporte","section")
 @section('Titulo')
 <h3 text-center>Administracion de secciones </h3>
 @endsection

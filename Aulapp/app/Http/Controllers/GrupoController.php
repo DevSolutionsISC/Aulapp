@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grupo;
+use App\Models\Usuario;
+use App\Models\UserRol;
+use App\Models\Materia;
+use App\Models\Carrera;
+use App\Models\asignacionDocentes;
+use App\Models\Materia_Carrera;
 use Illuminate\Http\Request;
 
 class GrupoController extends Controller
@@ -16,6 +22,18 @@ class GrupoController extends Controller
     {
         $grupos = Grupo::all();
         return view('adm_grupos', ['grupos' => $grupos]);
+
+    }
+    public function showEdit()
+    {
+        $grupos = Grupo::all();
+        $docentes=Usuario::all();
+        $carreras=Carrera::all();
+        $materias=Materia::all();
+        $Urs=UserRol::all();
+        $ads=asignacionDocentes::all();
+        $mcs=Materia_Carrera::all();
+        return view('editargrupo', ['grupos' => $grupos,'docentes'=>$docentes,'carreras'=>$carreras,'materias'=>$materias,'urs'=>$Urs,"ads"=>$ads,"mcs"=>$mcs]);
 
     }
 
@@ -76,9 +94,16 @@ class GrupoController extends Controller
      * @param  \App\Models\Grupo  $grupo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Grupo $grupo)
+    public function update(Request $request, $id)
     {
-        //
+        $grupo=Grupo::find($id);
+        $request->validate([
+            'nombre'=>'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 : ]+$/|min:2|max:4:',
+        ]);
+        $grupo->nombre=$request->Grupo;
+        $grupo->id_asignacion_docentes=$request->ac;
+        $grupo->save();
+        return redirect()->route('grupo_edit')->with('actualizar', 'ok');
     }
 
     /**

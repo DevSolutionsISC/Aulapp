@@ -2,6 +2,7 @@
 @section('title', 'Materia')
 @section("editar","materiaEdit")
 @section("registrar","materias")
+@section("reporte","materia")
 @section('Titulo')
 <h3 text-center id="Titulo">Administracion de Materias</h3>
 @endsection
@@ -72,7 +73,11 @@
           @foreach ($conexiones as $conexion )
                     if(localStorage.getItem("key")== '{{$conexion -> materia_id}}' && '{{$carrera -> id}}' == '{{$conexion -> carrera_id}}'){
                         asignaciones.innerHTML+="<div class='A_cont'><span class='material-symbols-outlined A_icon'>close</span><span class='A_let' id='{{$carrera->id}}'>{{$carrera->Nombre}}</span></div>"
-                    }          
+                        var actual= document.getElementById("actual");
+                        actual.value+="+"+'{{$carrera -> id}}'
+                        var permanente= document.getElementById("permanente");
+                        permanente.value+="+"+'{{$carrera -> id}}'
+                      }          
           @endforeach
       @endforeach
 </script>

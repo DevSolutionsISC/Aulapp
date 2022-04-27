@@ -113,6 +113,14 @@ Route::get('/aulaEdit', [AulaController::class, 'showEdit'])->name('aulas_edit')
 
 Route::get('/aula/{id}', [AulaController::class, 'update'])->name('aula-update');
 
+Route::get('/docenteEdit', [UsuarioController::class, 'showEdit'])->name('docentes_edit');
+
+Route::get('/docente/{id}', [UsuarioController::class, 'update'])->name('docente-update');
+
+Route::get('/grupoEdit', [GrupoController::class, 'showEdit'])->name('grupo_edit');
+
+Route::get('/grupo/{id}', [GrupoController::class, 'update'])->name('grupo-update');
+
 Route::get('/materia','App\Http\Controllers\MateriaController@reporte');
 Route::get('/carrera','App\Http\Controllers\CarrerasController@reporte');
 Route::get('/section','App\Http\Controllers\SectionsController@reporte');
