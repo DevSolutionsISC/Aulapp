@@ -20,7 +20,7 @@
       <br>
       <label for="input2" class="form-label">Carrera</label>
       <select name="carrera" id="carrera" class="form-select">
-        <option >Seleccione una carrera</option>
+        <option selected>Seleccione una carrera</option>
         @foreach ($carreras as $carrera)
             <option>{{$carrera->Nombre}}</option>
         @endforeach
@@ -31,7 +31,7 @@
       <br>
       <label for="input2" class="form-label">Materia</label>
       <select name="materia" id="materia" class="form-select">
-        <option >Seleccione una materia</option>
+        <option selected>Seleccione una materia</option>
       </select>
       @if ($errors->has("materia"))
         <span class="error text-danger" for="input1">{{ $errors->first("materia") }}</span>
@@ -61,7 +61,7 @@
     </script>
       <label for="input2" class="form-label">Docente</label>
         <select name="docente" id="docente" class="form-select">
-            <option >Seleccione un docente</option>
+            <option selected>Seleccione un docente</option>
 
         </select>
         @if ($errors->has("docente"))
