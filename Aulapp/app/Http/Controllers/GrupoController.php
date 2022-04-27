@@ -21,20 +21,18 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        $grupos = Grupo::all();
-        return view('adm_grupos', ['grupos' => $grupos]);
-
+       
     }
     public function showEdit()
     {
         $grupos = Grupo::all();
-        $docentes = Usuario::all();
-        $carreras = Carrera::all();
-        $materias = Materia::all();
-        $Urs = UserRol::all();
-        $ads = asignacionDocentes::all();
-        $mcs = Materia_Carrera::all();
-        return view('editargrupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
+        $docentes=Usuario::all();
+        $carreras=Carrera::all();
+        $materias=Materia::all();
+        $Urs=UserRol::all();
+        $ads=asignacionDocentes::all();
+        $mcs=Materia_Carrera::all();
+        return view('Grupo\editargrupo', ['grupos' => $grupos,'docentes'=>$docentes,'carreras'=>$carreras,'materias'=>$materias,'urs'=>$Urs,"ads"=>$ads,"mcs"=>$mcs]);
 
     }
 
@@ -48,13 +46,22 @@ class GrupoController extends Controller
         $user_rol = UserRol::all();
         $asignacion = asignacionDocentes::all();
 
-        return view('registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
+        return view('Grupo\registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
 
     }
 
     public function reporte()
     {
         $grupos = Grupo::all();
+<<<<<<< HEAD
+        $docentes=Usuario::all();
+        $carreras=Carrera::all();
+        $materias=Materia::all();
+        $Urs=UserRol::all();
+        $ads=asignacionDocentes::all();
+        $mcs=Materia_Carrera::all();
+        return view('Grupo\reporte_grupo', ['grupos' => $grupos,'docentes'=>$docentes,'carreras'=>$carreras,'materias'=>$materias,'urs'=>$Urs,"ads"=>$ads,"mcs"=>$mcs]);
+=======
         $docentes = Usuario::all();
         $carreras = Carrera::all();
         $materias = Materia::all();
@@ -62,6 +69,7 @@ class GrupoController extends Controller
         $ads = asignacionDocentes::all();
         $mcs = Materia_Carrera::all();
         return view('reporte_grupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
+>>>>>>> 137ac852d3ba3a076ed6ef57807af9f3740bbb86
 
     }
 

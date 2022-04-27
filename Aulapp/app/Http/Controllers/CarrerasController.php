@@ -19,13 +19,13 @@ class CarrerasController extends Controller
     public function index()
     {
 
-        return view('registrar_carrera');
+        return view('Carrera\registrar_carrera');
 
     }
     public function reporte()
     {
         $carreras = Carrera::all();
-        return view('reporte_carrera', compact('carreras'));
+        return view('Carrera\reporte_carrera', compact('carreras'));
 
     }
 
@@ -98,7 +98,7 @@ class CarrerasController extends Controller
     public function showEdit()
     {
         $carreras = Carrera::all();
-        return view('editarcarrera', ['carreras' => $carreras]);
+        return view('Carrera\editarcarrera', ['carreras' => $carreras]);
 
     }
     public function update(Request $request, $id)
