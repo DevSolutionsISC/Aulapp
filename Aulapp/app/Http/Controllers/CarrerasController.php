@@ -4,13 +4,9 @@ namespace App\Http\Controllers;
 
 session_start();
 
+use App\Http\Requests\StoreCarrera;
 use App\Models\Carrera;
 use Illuminate\Http\Request;
-
-use App\Http\Requests\StoreCarrera;
-
-
-
 
 class CarrerasController extends Controller
 {
@@ -23,7 +19,6 @@ class CarrerasController extends Controller
     public function index()
     {
 
-        
         return view('registrar_carrera');
 
     }
@@ -53,10 +48,9 @@ class CarrerasController extends Controller
     public function store(StoreCarrera $request)
     {
 
-
-        $carrera=new Carrera();
-        $carrera->Nombre=$request->nombre;
-        $carrera->Codigo=$request->codigo;
+        $carrera = new Carrera();
+        $carrera->Nombre = $request->nombre;
+        $carrera->Codigo = $request->codigo;
 
         $carrera->save();
 
@@ -66,7 +60,6 @@ class CarrerasController extends Controller
     public function cancelar()
     {
 
-       
         return redirect()->route('carreras');
 
     }
@@ -131,19 +124,29 @@ class CarrerasController extends Controller
      */
     public function busqueda(Request $request)
     {
+        try {
+            $carrera = Carrera::query();
 
-        $carrera = Carrera::query();
+            if ($request->has('search')) {
+                $carrera->where('Codigo', 'like', $request->search);
+            }
+            $carreras = $carrera->get();
+            return view('eliminar_carrera', compact('carreras'));
 
-        if ($request->has('search')) {
-            $carrera->where('Codigo', 'like', $request->search);
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-carrera')->with('buscar', 'error');
+
         }
-        $carreras = $carrera->get();
-        return view('eliminar_carrera', compact('carreras'));
 
     }
     public function destroy($carrera)
     {
+
         $carrera = Carrera::find($carrera);
+        $newCarrera = $carrera->replicate();
+        $newCarrera->setTable('log_carreras');
+        $newCarrera->save();
+
         $carrera->materia__carreras()->each(function ($materia_carrera) {
             $materia_carrera->delete(); // <-- direct deletion
         });

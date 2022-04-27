@@ -1,38 +1,28 @@
 @extends('plantilla')
-@section('title', 'Materias')
-@section("editar","materiaEdit")
-@section("registrar","materias")
-@section("reporte","materia")
-
+@section('title', 'Docente')
 @section('Titulo')
-<h3 text-center>Administracion de materia </h3>
+<h3 text-center>Administracion de docentes </h3>
 @endsection
 @section('Contenido formulario')
 <div id="C_tabla">
-<h3 id="T_tabla" class="row justify-content-center justify-content-md-start">&nbsp;&nbsp;Lista de materias</h3>
-      @if(count($materias) == 0)
-      
-      <br>
-      <br>
-      <br>
-      <h4 class="row justify-content-center">No hay resultados</h4>
- 
-      @else
-
+      <h3 id="T_tabla">Lista de docentes</h3>
       <table class="table table-striped">
       
             <thead>                
                   <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Código</th>
-
+                        <th scope="col">Apellido</th>
+                        <th scope="col">CI</th>
+                        <th scope="col">Email</th>
                   </tr>
             </thead>
             <tbody>
-                   @foreach($materias as $materia)
+                    @foreach($usuarios as $usuario)
                    <tr>
-                         <td>{{$materia->nombre_materia}}</td>
-                         <td>{{$materia->Cod_materia}}</td>
+                         <td>{{$usuario->Nombre}}</td>
+                         <td>{{$usuario->Apellido}}</td>
+                         <td>{{$usuario->CI}}</td>
+                         <td>{{$usuario->Email}}</td>
                          
                          <td>
                                <div><a href="">
@@ -44,11 +34,10 @@
                              
                          </td>
                          
-                   </tr>    
-                   @endforeach 
+                   </tr>   
+                   @endforeach  
                   
             </tbody>
       </table>
-      @endif
 </div>
 @endsection

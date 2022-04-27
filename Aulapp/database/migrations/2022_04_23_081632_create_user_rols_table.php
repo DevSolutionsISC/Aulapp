@@ -17,12 +17,10 @@ class CreateUserRolsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('usuario_id');
             $table->unsignedBigInteger('rol_id');
-            
-            
             $table->foreign('usuario_id')
-            ->references('id')->on('usuarios');
+                ->references('id')->on('usuarios')->constrained()->onDelete('cascade');
             $table->foreign('rol_id')
-            ->references('id')->on('rols');
+                ->references('id')->on('rols')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -1,16 +1,12 @@
 @extends('plantilla')
-@section('title', 'Materias')
-@section("editar","materiaEdit")
-@section("registrar","materias")
-@section("reporte","materia")
-
+@section('title', 'Grupo')
 @section('Titulo')
-<h3 text-center>Administracion de materia </h3>
+<h3 text-center>Administracion de grupos </h3>
 @endsection
 @section('Contenido formulario')
 <div id="C_tabla">
-<h3 id="T_tabla" class="row justify-content-center justify-content-md-start">&nbsp;&nbsp;Lista de materias</h3>
-      @if(count($materias) == 0)
+<h3 id="T_tabla" class="row justify-content-center justify-content-md-start">&nbsp;&nbsp;Lista de grupos</h3>
+      @if(count($grupos) == 0)
       
       <br>
       <br>
@@ -24,16 +20,23 @@
             <thead>                
                   <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Código</th>
-
+                        <th scope="col">Materia</th>
+                        <th scope="col">Carrera</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                      
+                    
                   </tr>
             </thead>
             <tbody>
-                   @foreach($materias as $materia)
+                    @foreach($grupos as $grupo)
                    <tr>
-                         <td>{{$materia->nombre_materia}}</td>
-                         <td>{{$materia->Cod_materia}}</td>
                          
+                         <td>{{$grupo->nombre}}</td>
+                         <td>{{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</td>
+                         <td>{{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</td>
+                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Nombre}}</td>
+                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</td>
                          <td>
                                <div><a href="">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -44,8 +47,8 @@
                              
                          </td>
                          
-                   </tr>    
-                   @endforeach 
+                   </tr>   
+                   @endforeach  
                   
             </tbody>
       </table>

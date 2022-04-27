@@ -1,8 +1,8 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
-@section('Titulo')
-<h3 text-center>Administracion de carreras </h3>
-@endsection
+@section('title', 'Carrera')
+
+
+
 
 <header>
   <nav class="navbar navbar-light bg-light">
@@ -11,12 +11,13 @@
           width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+      <h3 text-center id="Titulo">Administracion de carrera </h3>
       <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-        <a class="nav-link active" aria-current="page" href="#">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="#">Editar</a>
-        <a class="nav-link active" aria-current="page" href="#">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{route('secciones')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/menu-adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('carreras')}}">Registrar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/carreraEdit')}}">Editar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/eliminar-carrera')}}">Eliminar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_carrera')}}">Ver reporte</a>
 
       </form>
     </div>
@@ -28,11 +29,13 @@
   <div class="col-12">
 
     <form id="formulario" method="GET" action="{{route('eliminar-carrera')}}">
+
       <h3 text-center>Eliminar carrera</h3>
+
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el codigo de la carrera que quiere eliminar</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search" required>
+      <label for="inputNombre" class="form-label">Introduzca el codigo de la carrera que quiere eliminar</label>
+      <input type="text" id="inputNombre" class="form-control search" name="search">
 
 
       <br>
@@ -44,17 +47,18 @@
 
 
       <br>
-      @if (count($carreras) <= 0) <p class="p-1" id="datosEliminar">No hay resultados</p>
-        @elseif (count($carreras) > 1)
+      @if (count($carreras) <= 0) @elseif (count($carreras)> 1)
 
         @elseif (count($carreras) == 1)
         @foreach ($carreras as $carrera )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la carrera</h6>
 
-          <span>Nombre: {{$carrera->Nombre}}</span>
+          <h6><b>Datos de la carrera</b></h6>
+
+          <span><b>Codigo:</b>{{$carrera->Codigo}}</span>
+
           <br>
-          <span>Codigo:{{$carrera->Codigo}}</span>
+          <span><b>Nombre: </b>{{$carrera->Nombre}}</span>
 
         </div>
 
@@ -70,7 +74,7 @@
       </form>
     </div>
     <div class="col-6">
-      <a href="{{route('secciones')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+      <a href="{{url('eliminar-carrera')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
     @endforeach
@@ -118,6 +122,17 @@
   showConfirmButton: false,
   timer: 1500
   })
+</script>
+@endif
+@if (session('buscar')=='error')
+<script>
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'No se encontro ninguna carrera  ese codigo',
+  showConfirmButton: true,
+  })
+
 </script>
 @endif
 @endsection

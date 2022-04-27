@@ -1,8 +1,8 @@
 @extends('plantilla2')
-@section('title', 'Seccion')
-@section('Titulo')
-<h3 text-center>Administracion de carreras </h3>
-@endsection
+@section('title', 'Materia')
+
+
+
 
 <header>
   <nav class="navbar navbar-light bg-light">
@@ -11,12 +11,13 @@
           width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+      <h3 text-center id="Titulo">Administracion de materia </h3>
       <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-        <a class="nav-link active" aria-current="page" href="#">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="#">Editar</a>
-        <a class="nav-link active" aria-current="page" href="#">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{route('secciones')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/menu-adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/materias')}}">Registrar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/materiaEdit')}}">Editar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/eliminar-materia')}}">Eliminar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_materia')}}">Ver reporte</a>
 
       </form>
     </div>
@@ -31,8 +32,8 @@
       <h3 text-center>Eliminar materia</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el codigo de la materia que quiere eliminar</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search" required>
+      <label for="inputNombre" class="form-label">Introduzca el codigo de la materia que quiere eliminar</label>
+      <input type="text" id="inputNombre" class="form-control search" name="search">
 
 
       <br>
@@ -44,17 +45,16 @@
 
 
       <br>
-      @if (count($materias) <= 0) <p class="p-1" id="datosEliminar">No hay resultados</p>
-        @elseif (count($materias) > 1)
+      @if (count($materias) <= 0) @elseif (count($materias)> 1)
 
         @elseif (count($materias) == 1)
         @foreach ($materias as $materia )
         <div class="p-1" id="datosEliminar">
-          <h6>Datos de la carrera</h6>
+          <h6> <b>Datos de la carrera</b> </h6>
 
-          <span>Nombre: {{$materia->nombre_materia}}</span>
+          <span> <b>Codigo:</b> {{$materia->Cod_materia}}</span>
           <br>
-          <span>Codigo:{{$materia->Cod_materia}}</span>
+          <span><b>Nombre:</b> {{$materia->nombre_materia}}</span>
 
         </div>
 
@@ -70,7 +70,7 @@
       </form>
     </div>
     <div class="col-6">
-      <a href="{{route('secciones')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+      <a href="{{url('/eliminar-materia')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
     @endforeach
@@ -118,6 +118,17 @@
   showConfirmButton: false,
   timer: 1500
   })
+</script>
+@endif
+@if (session('buscar')=='error')
+<script>
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'No se encontro ninguna  materia con ese codigo',
+  showConfirmButton: true,
+  })
+
 </script>
 @endif
 @endsection

@@ -6,7 +6,6 @@ use App\Http\Requests\StoreSeccion;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
-
 class SectionsController extends Controller
 {
     public function index()
@@ -28,7 +27,7 @@ class SectionsController extends Controller
 
     public function store(StoreSeccion $request)
     {
-        
+
         $seccion = new Section();
         $seccion->nombre = $request->nombre;
         $seccion->descripcion = $request->descripcion;
@@ -40,7 +39,6 @@ class SectionsController extends Controller
     public function show($id)
     {
 
-
     }
 
     public function update(Request $request, $id)
@@ -51,7 +49,6 @@ class SectionsController extends Controller
             'descripcion' => 'required|min:3|max:50|regex:/^[a-zA-Z0-9-ñÑ\s]+$/u',
         ]);
 
-
         $section->nombre = $request->nombre;
         $section->descripcion = $request->descripcion;
         $section->save();
@@ -60,25 +57,37 @@ class SectionsController extends Controller
     }
     public function busqueda(Request $request)
     {
+        $nombre = $request->search;
+        try {
 
-        $section = Section::query();
+            $section = Section::query();
 
-        if ($request->has('search')) {
-            $section->where('nombre', 'like', $request->search);
-        }
-        $sections = $section->get();
-        return view('eliminar_seccion', compact('sections'));
+            if ($request->has('search')) {
+                $section->where('nombre', 'like', $request->search);
 
-    }
+            }
+            $sections = $section->get();
+            return view('eliminar_seccion', compact('sections'));
+
+        } catch (\Throwable $th) {
+
+            return redirect()->route('eliminar-seccion')->with('buscar', 'error');
+
+        }}
+
     public function destroy($section)
     {
         $section = Section::find($section);
+        $newSection = $section->replicate();
+        $newSection->setTable('log_secciones');
+        $newSection->save();
+
         $section->aulas()->each(function ($aula) {
             $aula->delete(); // <-- direct deletion
         });
         $section->delete();
 
-        return redirect()->route('secciones')->with('eliminar', 'ok');
+        return redirect()->route('eliminar-seccion')->with('eliminar', 'ok');
     }
 
 }

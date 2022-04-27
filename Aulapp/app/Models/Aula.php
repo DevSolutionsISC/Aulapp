@@ -13,7 +13,7 @@ class Aula extends Model
     protected $primaryKey = 'id';
     public function section()
     {
-        return $this->belongsTo(Section::class);
+        return $this->belongsTo(Section::class, 'section_id');
     }
 
 }

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGrupo;
+use App\Models\asignacionDocentes;
+use App\Models\Carrera;
 use App\Models\Grupo;
 use App\Models\Usuario;
 use App\Models\UserRol;
 use App\Models\Materia;
-use App\Models\Carrera;
-use App\Models\asignacionDocentes;
 use App\Models\Materia_Carrera;
 use Illuminate\Http\Request;
 
@@ -37,6 +38,27 @@ class GrupoController extends Controller
 
     }
 
+    public function registro()
+    {
+
+        $carreras = Carrera::all();
+        $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras", "carreras.id", "=", "materia_carreras.carrera_id")
+            ->select("materia_carreras.id as id", "materias.id as id_materia", "carreras.id as id_carrera", "materias.nombre_materia as nom_materia", "carreras.Nombre as nom_carrera")->get();
+        $docentes = Usuario::all();
+        $user_rol = UserRol::all();
+        $asignacion = asignacionDocentes::all();
+
+        return view('registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
+
+    }
+
+    public function reporte()
+    {
+        $grupos = Grupo::all();
+        return view('reporte_grupo', compact('grupos'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -53,13 +75,11 @@ class GrupoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGrupo $request)
     {
         $grupo = new Grupo();
         $grupo->nombre = $request->nombre;
-        $grupo->id_materia = $request->id_materia;
-        $grupo->id_carrera = $request->id_carrera;
-        $grupo->id_docente = $request->id_docente;
+        $grupo->asignacion_docentes_id = $request->docente;
         $grupo->save();
 
         return redirect()->route('grupos')->with('registrar', 'ok');
@@ -114,14 +134,19 @@ class GrupoController extends Controller
      */
     public function busqueda(Request $request)
     {
+        try {
+            $grupo = Grupo::query();
 
-        $grupo = Grupo::query();
+            if ($request->has('search')) {
+                $grupo->where('id', 'like', $request->search);
+            }
+            $grupos = $grupo->get();
+            return view('eliminar_grupo', compact('grupos'));
 
-        if ($request->has('search')) {
-            $grupo->where('id', 'like', $request->search);
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-grupo')->with('buscar', 'error');
+
         }
-        $grupos = $grupo->get();
-        return view('eliminar_grupo', compact('grupos'));
 
     }
     public function destroy($id)

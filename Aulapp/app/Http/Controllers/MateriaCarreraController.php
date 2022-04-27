@@ -80,7 +80,18 @@ class MateriaCarreraController extends Controller
      */
     public function busqueda(Request $request)
     {
+        try {
+            $materiaCarrera = Materia_Carrera::query();
 
+            if ($request->has('search')) {
+                $materiaCarrera->where('id', 'like', $request->search);
+            }
+            $materiasCarrera = $materiaCarrera->get();
+            return view('eliminar_materia_carrera', compact('materiasCarrera'));
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-materia-carrera')->with('buscar', 'error');
+
+        }
         $materiaCarrera = Materia_Carrera::query();
 
         if ($request->has('search')) {
@@ -93,8 +104,8 @@ class MateriaCarreraController extends Controller
     public function destroy($materiaCarrera)
     {
         $materiaCarrera = Materia_Carrera::find($materiaCarrera);
-        $materiaCarrera->grupos()->each(function ($grupo) {
-            $grupo->delete(); // <-- direct deletion
+        $materiaCarrera->asignacionDocentes()->each(function ($asignacionDocentes) {
+            $asignacionDocentes->delete(); // <-- direct deletion
         });
         $materiaCarrera->delete();
 

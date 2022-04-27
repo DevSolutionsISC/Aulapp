@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAulasTable extends Migration
+class CreateLogSecciones extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateAulasTable extends Migration
      */
     public function up()
     {
-        Schema::create('aulas', function (Blueprint $table) {
+        Schema::create('log_secciones', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->unique();
-            $table->integer('capacidad');
-            $table->unsignedBigInteger('section_id');
-            $table->foreign('section_id')->references('id')
-                ->on('sections')->constrained()->onDelete('cascade');
+            $table->string('nombre');
+            $table->string('descripcion');
             $table->timestamps();
 
         });
@@ -32,6 +29,6 @@ class CreateAulasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aulas');
+        Schema::dropIfExists('log_secciones');
     }
 }

@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('title', 'Seccion')
+@section('title', 'Carreras')
 @section("editar","carreraEdit")
 @section("registrar","carreras")
 @section("reporte","carrera")
@@ -8,8 +8,16 @@
 @endsection
 @section('Contenido formulario')
 <div id="C_tabla">
-      <h3 id="T_tabla">Lista de carreras</h3>
-      <table class="table">
+<h3 id="T_tabla" class="row justify-content-center justify-content-md-start">&nbsp;&nbsp;Lista de carreras</h3>
+      @if(count($carreras) == 0)
+      <br>
+      <br>
+      <br>
+      <h4 class="row justify-content-center">No hay resultados</h4>
+ 
+      @else
+      
+      <table class="table table-striped">
       
             <thead>                
                   <tr>
@@ -38,5 +46,6 @@
                   @endforeach
             </tbody>
       </table>
+      @endif
 </div>
 @endsection

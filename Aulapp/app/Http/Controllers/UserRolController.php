@@ -16,6 +16,12 @@ class UserRolController extends Controller
     {
         //
     }
+    public function reporte()
+    {
+        $user_rols = UserRol::all();
+        return view('reporte_user_rol', compact('user_rols'));
+
+    }
 
     /**
      * Show the form for creating a new resource.
