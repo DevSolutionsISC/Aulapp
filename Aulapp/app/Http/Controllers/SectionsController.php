@@ -67,7 +67,7 @@ class SectionsController extends Controller
 
             }
             $sections = $section->get();
-            return view('eliminar_seccion', compact('sections'));
+            return view('Seccion.eliminar_seccion', compact('sections'));
 
         } catch (\Throwable $th) {
 

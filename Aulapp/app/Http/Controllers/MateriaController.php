@@ -173,7 +173,7 @@ class MateriaController extends Controller
                 $materia->where('Cod_materia', 'like', $request->search);
             }
             $materias = $materia->get();
-            return view('eliminar_materia', compact('materias'));
+            return view('Materia.eliminar_materia', compact('materias'));
 
         } catch (\Throwable $th) {
             return redirect()->route('eliminar-materia')->with('buscar', 'error');

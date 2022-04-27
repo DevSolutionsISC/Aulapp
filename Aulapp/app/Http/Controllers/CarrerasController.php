@@ -131,7 +131,7 @@ class CarrerasController extends Controller
                 $carrera->where('Codigo', 'like', $request->search);
             }
             $carreras = $carrera->get();
-            return view('eliminar_carrera', compact('carreras'));
+            return view('Carrera.eliminar_carrera', compact('carreras'));
 
         } catch (\Throwable $th) {
             return redirect()->route('eliminar-carrera')->with('buscar', 'error');
