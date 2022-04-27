@@ -13,11 +13,11 @@
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <h3 text-center id="Titulo">Administracion de grupo </h3>
       <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-        <a class="nav-link active" aria-current="page" href="#">Registrar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/grupos')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="#">Editar</a>
-        <a class="nav-link active" aria-current="page" href="#">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{route('secciones')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/eliminar-grupo')}}">Eliminar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_grupo')}}">Ver reporte</a>
 
       </form>
     </div>
@@ -33,7 +33,7 @@
       @csrf
 
       <label for="inputNombre" class="form-label">Introduzca el id de registro</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search" required>
+      <input type="text" id="inputNombre" class="form-control search" name="search">
 
 
       <br>
@@ -45,8 +45,7 @@
 
 
       <br>
-      @if (count($grupos) <= 0) <p class="p-1" id="datosEliminar">No hay resultados</p>
-        @elseif (count($grupos) > 1)
+      @if (count($grupos) <= 0) @elseif (count($grupos)> 1)
 
         @elseif (count($grupos) == 1)
         @foreach ($grupos as $grupo )
@@ -75,7 +74,7 @@
       </form>
     </div>
     <div class="col-6">
-      <a href="{{route('secciones')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+      <a href="{{url('eliminar-grupo')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
     @endforeach
@@ -123,6 +122,17 @@
   showConfirmButton: false,
   timer: 1500
   })
+</script>
+@endif
+@if (session('buscar')=='error')
+<script>
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'No se encontro ningun grupo con ese codigo',
+  showConfirmButton: true,
+  })
+
 </script>
 @endif
 @endsection

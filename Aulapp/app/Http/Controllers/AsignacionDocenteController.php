@@ -10,13 +10,19 @@ class AsignacionDocenteController extends Controller
     public function busqueda(Request $request)
     {
 
-        $asignacionDocente = asignacionDocentes::query();
+        try {
+            $asignacionDocente = asignacionDocentes::query();
 
-        if ($request->has('search')) {
-            $asignacionDocente->where('id', 'like', $request->search);
+            if ($request->has('search')) {
+                $asignacionDocente->where('id', 'like', $request->search);
+            }
+            $asignacionDocentes = $asignacionDocente->get();
+            return view('eliminar_asignacion_docente', compact('asignacionDocentes'));
+
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-asignacion-docente')->with('buscar', 'error');
+
         }
-        $asignacionDocentes = $asignacionDocente->get();
-        return view('eliminar_asignacion_docente', compact('asignacionDocentes'));
 
     }
     public function destroy($asignacionDocente)

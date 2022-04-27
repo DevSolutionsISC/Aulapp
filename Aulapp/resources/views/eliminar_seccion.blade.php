@@ -10,11 +10,11 @@
       <h3 text-center id="Titulo"> Administracion de seccion</h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-        <a class="nav-link active" aria-current="page" href="#">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="#">Editar</a>
-        <a class="nav-link active" aria-current="page" href="#">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{route('secciones')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/menu-adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/seccion')}}">Registrar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/seccionEdit')}}">Editar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/eliminar-seccion')}}">Eliminar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_section')}}">Ver reporte</a>
 
       </form>
     </div>
@@ -22,7 +22,7 @@
 </header>
 @section('Contenido formulario')
 
-<div class="d-flex align-items-center justify-content-center row p-2" id="formulario">
+<div class="d-flex align-items-center justify-content-center row p-2 formulario" id="formulario">
   <div class="col-12">
 
     <form id="formulario" method="GET" action="{{route('eliminar-seccion')}}">
@@ -30,20 +30,19 @@
       @csrf
 
       <label for="inputNombre" class="form-label">Coloque el nombre de la seccion que quiere eliminar</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search" required>
+      <input type="text" id="inputNombre" class="form-control search" name="search" id="inputtexto">
 
 
       <br>
       <div class="d-flex justify-content-center">
-        <button class="btn btn-dark btn-block btn-lg">
+        <button class="btn btn-dark btn-block btn-lg" id="buscar">
           Buscar
         </button>
       </div>
 
 
       <br>
-      @if (count($sections) <= 0) <p class="p-1" id="datosEliminar">No hay resultados</p>
-        @elseif (count($sections) > 1)
+      @if (count($sections) <= 0) @elseif (count($sections)> 1)
 
         @elseif (count($sections) == 1)
         @foreach ($sections as $section )
@@ -68,7 +67,7 @@
       </form>
     </div>
     <div class="col-6">
-      <a href="{{route('secciones')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+      <a href="{{url('/eliminar-seccion')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
     @endforeach
@@ -87,24 +86,7 @@
 @section('js')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  $('.Eliminar').submit(function(e){
-            e.preventDefault();
-            Swal.fire({
-            title: '¿Estás seguro que quieres eliminar la seccion?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí',
-            cancelButtonText: 'No'
-            }).then((result) => {
-                  if (result.isConfirmed) {
-                  this.submit();
-            }
-            })
-      });
-</script>
+
 
 
 @if (session('eliminar')=='ok')
@@ -116,6 +98,18 @@
   showConfirmButton: false,
   timer: 1500
   })
+</script>
+@endif
+@if (session('buscar')=='error')
+<script>
+  Swal.fire({
+position: 'center',
+icon: 'error',
+title: 'Oops...',
+text: 'No se encontro ninguna seccion con ese nombre',
+showConfirmButton: true,
+
+})
 </script>
 @endif
 @endsection

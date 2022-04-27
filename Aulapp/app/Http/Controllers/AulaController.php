@@ -23,7 +23,7 @@ class AulaController extends Controller
     }
     public function reporte()
     {
-        
+
         $aulas = Aula::all();
         return view('reporte_aula', compact('aulas'));
 
@@ -58,7 +58,7 @@ class AulaController extends Controller
         $aula = new Aula();
         $aula->nombre = $request->nombre;
         $aula->capacidad = $request->capacidad;
-        $aula->id_section = $_POST['seccion'];
+        $aula->section_id = $_POST['seccion'];
 
         $aula->save();
 
@@ -103,7 +103,7 @@ class AulaController extends Controller
         ]);
         $aula->nombre = $request->Nombre;
         $aula->capacidad = $request->capacidad;
-        $aula->id_section = $request->section;
+        $aula->section_id = $request->section;
         $aula->save();
 
         return redirect()->route('aulas_edit')->with('actualizar', 'ok');
@@ -117,14 +117,19 @@ class AulaController extends Controller
      */
     public function busqueda(Request $request)
     {
+        try {
+            $aula = Aula::query();
 
-        $aula = Aula::query();
+            if ($request->has('search')) {
+                $aula->where('nombre', 'like', $request->search);
+            }
+            $aulas = $aula->get();
+            return view('eliminar_aula', compact('aulas'));
 
-        if ($request->has('search')) {
-            $aula->where('nombre', 'like', $request->search);
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-aula')->with('buscar', 'error');
+
         }
-        $aulas = $aula->get();
-        return view('eliminar_aula', compact('aulas'));
 
     }
     public function destroy($id)

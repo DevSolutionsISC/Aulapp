@@ -72,10 +72,13 @@ class UsuarioController extends Controller
                 $caracteres .= $user[$i];
             }
         }
-        $caracteres .= $request->ci;
 
-        $usuario->usuario = $request->ci . $iniciales;
-        $usuario->contrasenia = substr(str_shuffle($caracteres), 0, 10);
+        $caracteres .= $request->ci;
+        $Usercontrasenia = substr(str_shuffle($caracteres), 0, 10);
+        $User = $request->ci . $iniciales;
+
+        $usuario->usuario = $User;
+        $usuario->contrasenia = $Usercontrasenia;
         $usuario->save();
 
         $userRol = new UserRol();
@@ -140,14 +143,19 @@ class UsuarioController extends Controller
      */
     public function busqueda(Request $request)
     {
+        try {
+            $usuario = Usuario::query();
 
-        $usuario = Usuario::query();
+            if ($request->has('search')) {
+                $usuario->where('CI', 'like', $request->search);
+            }
+            $usuarios = $usuario->get();
+            return view('eliminar_docente', compact('usuarios'));
 
-        if ($request->has('search')) {
-            $usuario->where('CI', 'like', $request->search);
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-docente')->with('buscar', 'error');
+
         }
-        $usuarios = $usuario->get();
-        return view('eliminar_docente', compact('usuarios'));
 
     }
     public function destroy($usuario)

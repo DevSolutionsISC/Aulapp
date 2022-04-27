@@ -13,11 +13,11 @@
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <h3 text-center id="Titulo">Administracion de aula </h3>
       <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="#">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="#">Editar</a>
-        <a class="nav-link active" aria-current="page" href="#">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{route('secciones')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/aulaEdit')}}">Editar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/eliminar-aula')}}">Eliminar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_aula')}}">Ver reporte</a>
 
       </form>
     </div>
@@ -33,7 +33,7 @@
       @csrf
 
       <label for="inputNombre" class="form-label">Coloque el nombre del aula que quiere eliminar</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search" required>
+      <input type="text" id="inputNombre" class="form-control search" name="search">
 
 
       <br>
@@ -45,8 +45,7 @@
 
 
       <br>
-      @if (count($aulas) <= 0) <p class="p-1" id="datosEliminar">No hay resultados</p>
-        @elseif (count($aulas) > 1)
+      @if (count($aulas) <= 0) @elseif (count($aulas)> 1)
 
         @elseif (count($aulas) == 1)
         @foreach ($aulas as $aula)
@@ -73,7 +72,7 @@
       </form>
     </div>
     <div class="col-6">
-      <a href="{{route('secciones')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
+      <a href="{{url('eliminar-aula')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
     @endforeach
@@ -121,6 +120,17 @@
   showConfirmButton: false,
   timer: 1500
   })
+</script>
+@endif
+@if (session('buscar')=='error')
+<script>
+  Swal.fire({
+position: 'center',
+icon: 'error',
+title: 'Oops...',
+text: 'No se encontro ninguna aula con ese nombre',
+showConfirmButton: true,
+})
 </script>
 @endif
 @endsection

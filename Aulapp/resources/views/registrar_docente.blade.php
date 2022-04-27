@@ -116,8 +116,7 @@ value="{{old('apellido')}}"
                                 bandera=1;
                             }
                         }
-                        console.log(aux.options[aux.selectedIndex].text);
-                        console.log(todosCM[contM][0]);
+                     
                         if(bandera==0 && aux.options[aux.selectedIndex].text==todosCM[contM][0]){
                            
 
