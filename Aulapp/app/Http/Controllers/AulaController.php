@@ -58,7 +58,7 @@ class AulaController extends Controller
         $aula = new Aula();
         $aula->nombre = $request->nombre;
         $aula->capacidad = $request->capacidad;
-        $aula->id_section = $_POST['seccion'];
+        $aula->section_id = $_POST['seccion'];
 
         $aula->save();
 
@@ -103,7 +103,7 @@ class AulaController extends Controller
         ]);
         $aula->nombre = $request->Nombre;
         $aula->capacidad = $request->capacidad;
-        $aula->id_section = $request->section;
+        $aula->section_id = $request->section;
         $aula->save();
 
         return redirect()->route('aulas_edit')->with('actualizar', 'ok');

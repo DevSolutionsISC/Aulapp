@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGrupo;
 use App\Models\Grupo;
 use Illuminate\Http\Request;
+use App\Models\Carrera;
+use App\Models\Materia_Carrera;
+use App\Models\Materia;
+use App\Models\asignacionDocentes;
+use App\Models\Usuario;
+use App\Models\UserRol;
 
 class GrupoController extends Controller
 {
@@ -16,6 +23,21 @@ class GrupoController extends Controller
     {
         $grupos = Grupo::all();
         return view('adm_grupos', ['grupos' => $grupos]);
+
+    }
+    
+
+    public function registro()
+    {
+        
+        $carreras=Carrera::all();
+        $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras","carreras.id","=","materia_carreras.carrera_id")
+        ->select("materia_carreras.id as id", "materias.id as id_materia","carreras.id as id_carrera","materias.nombre_materia as nom_materia","carreras.Nombre as nom_carrera")->get();
+        $docentes=Usuario::all();
+        $user_rol=UserRol::all();
+        $asignacion=asignacionDocentes::all();
+
+        return view('registrar_grupo',['urs'=>$user_rol,'ads'=>$asignacion,'docentes'=>$docentes,'carreras'=>$carreras,'materia_carrera'=>$materia_carrera]);
 
     }
 
@@ -42,13 +64,11 @@ class GrupoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGrupo $request)
     {
         $grupo = new Grupo();
         $grupo->nombre = $request->nombre;
-        $grupo->id_materia = $request->id_materia;
-        $grupo->id_carrera = $request->id_carrera;
-        $grupo->id_docente = $request->id_docente;
+        $grupo->asignacion_docentes_id = $request->docente;
         $grupo->save();
 
         return redirect()->route('grupos')->with('registrar', 'ok');
