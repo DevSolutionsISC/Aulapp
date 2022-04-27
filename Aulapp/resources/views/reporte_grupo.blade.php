@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('title', 'Seccion')
+@section('title', 'Grupo')
 @section('Titulo')
 <h3 text-center>Administracion de grupos </h3>
 @endsection
@@ -25,8 +25,8 @@
                          
                          <td>{{$grupo->nombre}}</td>
                          <td>{{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</td>
-                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Nombre}}</td>
                          <td>{{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</td>
+                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Nombre}}</td>
                          <td>{{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</td>
                          <td>
                                <div><a href="">

@@ -90,6 +90,7 @@ Route::get('/reporte_section','App\Http\Controllers\SectionsController@reporte')
 Route::get('/reporte_aula','App\Http\Controllers\AulaController@reporte');
 Route::get('/reporte_grupo','App\Http\Controllers\GrupoController@reporte');
 Route::get('/reporte_docente','App\Http\Controllers\UsuarioController@reporte');
+Route::get('/reporte_user_rol','App\Http\Controllers\UserRolController@reporte');
 
 
 Route::get('/carrera', [CarrerasController::class, 'index'])->name('carreras');

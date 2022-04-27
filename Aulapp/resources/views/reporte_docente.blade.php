@@ -1,10 +1,9 @@
 @extends('plantilla')
-@section('title', 'Seccion')
+@section('title', 'Docente')
 @section('Titulo')
 <h3 text-center>Administracion de docentes </h3>
 @endsection
 @section('Contenido formulario')
-@section('Tabla')
 <div id="C_tabla">
       <h3 id="T_tabla">Lista de docentes</h3>
       <table class="table">
@@ -14,6 +13,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">CI</th>
+                        <th scope="col">Email</th>
                   </tr>
             </thead>
             <tbody>
@@ -22,6 +22,7 @@
                          <td>{{$usuario->Nombre}}</td>
                          <td>{{$usuario->Apellido}}</td>
                          <td>{{$usuario->CI}}</td>
+                         <td>{{$usuario->Email}}</td>
                          
                          <td>
                                <div><a href="">

@@ -10,6 +10,6 @@ class Rol extends Model
     use HasFactory;
     public function user_rol()
     {
-        return $this->hasMany(UserRol::class, 'rol');
+        return $this->hasMany(UserRol::class, 'rol_id');
     }
 }
