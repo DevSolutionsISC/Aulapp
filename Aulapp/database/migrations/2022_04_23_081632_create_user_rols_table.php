@@ -21,6 +21,7 @@ class CreateUserRolsTable extends Migration
                 ->references('id')->on('usuarios')->constrained()->onDelete('cascade');
             $table->foreign('rol_id')
                 ->references('id')->on('rols')->constrained()->onDelete('cascade');
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }

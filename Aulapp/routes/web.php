@@ -8,6 +8,7 @@ use App\Http\Controllers\MateriaCarreraController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UserRolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,6 +99,7 @@ Route::get('/reporte_section', 'App\Http\Controllers\SectionsController@reporte'
 Route::get('/reporte_aula', 'App\Http\Controllers\AulaController@reporte');
 Route::get('/reporte_grupo', 'App\Http\Controllers\GrupoController@reporte');
 Route::get('/reporte_docente', 'App\Http\Controllers\UsuarioController@reporte');
+Route::get('/reporte_user_rol', 'App\Http\Controllers\UserRolController@reporte');
 
 //----------------------Rutas de edicion--------------------------------------------------
 Route::get('/carreraEdit', [CarrerasController::class, 'showEdit'])->name('carrera_edit');

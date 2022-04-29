@@ -17,7 +17,9 @@ class CreateSectionsTable extends Migration
             $table->id();
             $table->string('nombre')->unique();
             $table->string('descripcion');
+            $table->boolean('estado')->default(true);
             $table->timestamps();
+            
 
         });
     }
