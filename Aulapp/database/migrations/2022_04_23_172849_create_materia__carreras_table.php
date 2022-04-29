@@ -21,6 +21,8 @@ class CreateMateriaCarrerasTable extends Migration
 
             $table->unsignedBigInteger('materia_id');
             $table->foreign('materia_id')->references('id')->on('materias')->constrained()->onDelete('cascade');
+            $table->boolean('estado')->default(true);
+            
             $table->timestamps();
         });
     }

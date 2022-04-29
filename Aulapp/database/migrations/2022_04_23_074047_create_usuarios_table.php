@@ -21,6 +21,7 @@ class CreateUsuariosTable extends Migration
             $table->string('Email')->unique();
             $table->string('usuario');
             $table->string('contrasenia');
+            $table->boolean('estado')->default(true);
           
             $table->timestamps();
         
