@@ -49,6 +49,9 @@
 
         @elseif (count($aulas) == 1)
         @foreach ($aulas as $aula)
+        @if ($aula->estado == true && $aula->section->estado == true)
+
+
         <div class="p-1" id="datosEliminar">
           <h6><b>Datos del aula</b></h6>
 
@@ -75,6 +78,7 @@
       <a href="{{url('/eliminar-aula')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
+    @endif
     @endforeach
     @endif
 

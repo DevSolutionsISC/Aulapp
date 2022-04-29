@@ -8,7 +8,6 @@ use App\Http\Controllers\MateriaCarreraController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\UserRolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +22,11 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return view('welcome');
+ return view('welcome');
 });
 
 Route::get('/menu_adm', function () {
-    return view('menu_administrador');
+ return view('menu_administrador');
 });
 
 //--------------------------------Rutas de eliminacion --------------------------------------------------------
@@ -53,15 +52,15 @@ Route::delete('/grupo/{id}', [GrupoController::class, 'destroy'])->name('grupos-
 
 Route::delete('/asignacionDocente/{asignacionDocente}', [AsignacionDocenteController::class, 'destroy'])->name('asignacionDocente-destroy');
 
-Route::delete('/carrera/{carrera}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
+Route::delete('/carrera/{carrera}', [CarrerasController::class, 'estado'])->name('carreras-destroy');
 
-Route::delete('/seccion/{section}', [SectionsController::class, 'destroy'])->name('secciones-destroy');
+Route::delete('/seccion/{section}', [SectionsController::class, 'estado'])->name('secciones-destroy');
 
-Route::delete('/aula/{id}', [AulaController::class, 'destroy'])->name('aulas-destroy');
+Route::delete('/aula/{id}', [AulaController::class, 'estado'])->name('aulas-destroy');
 
-Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::class, 'destroy'])->name('materiasCarreras-destroy');
+Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::class, 'estado'])->name('materiasCarreras-destroy');
 
-Route::delete('/materia/{materia}', [MateriaController::class, 'destroy'])->name('materias-destroy');
+Route::delete('/materia/{materia}', [MateriaController::class, 'estado'])->name('materias-destroy');
 
 //--------------------------------------------------------------------------------------------
 

@@ -51,6 +51,7 @@
 
         @elseif (count($carreras) == 1)
         @foreach ($carreras as $carrera )
+        @if ($carrera->estado == true)
         <div class="p-1" id="datosEliminar">
 
           <h6><b>Datos de la carrera</b></h6>
@@ -77,6 +78,7 @@
       <a href="{{url('eliminar-carrera')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
+    @endif
     @endforeach
     @endif
 
