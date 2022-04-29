@@ -46,11 +46,11 @@ Route::get('/eliminar-asignacion-docente', [AsignacionDocenteController::class, 
 
 Route::get('/eliminar-docente', [UsuarioController::class, 'busqueda'])->name('eliminar-docente');
 
-Route::delete('/eliminar-docente{usuario}', [UsuarioController::class, 'destroy'])->name('docente-destroy');
+Route::delete('/eliminar-docente{usuario}', [UsuarioController::class, 'estado'])->name('docente-destroy');
 
-Route::delete('/grupo/{id}', [GrupoController::class, 'destroy'])->name('grupos-destroy');
+Route::delete('/grupo/{id}', [GrupoController::class, 'estado'])->name('grupos-destroy');
 
-Route::delete('/asignacionDocente/{asignacionDocente}', [AsignacionDocenteController::class, 'destroy'])->name('asignacionDocente-destroy');
+Route::delete('/asignacionDocente/{asignacionDocente}', [AsignacionDocenteController::class, 'estado'])->name('asignacionDocente-destroy');
 
 Route::delete('/carrera/{carrera}', [CarrerasController::class, 'estado'])->name('carreras-destroy');
 

@@ -48,6 +48,8 @@
 
         @elseif (count($materiasCarrera) == 1)
         @foreach ($materiasCarrera as $materiaCarrera )
+        @if ($materiaCarrera->estado == true && ($materiaCarrera->materia->estado == true &&
+        $materiaCarrera->carrera->estado == true))
         <div class="p-1" id="datosEliminar">
           <h6> <b>Datos de la materia-carrera</b></h6>
 
@@ -73,6 +75,7 @@
       <a href="{{url('eliminar-materia-carrera')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
+    @endif
     @endforeach
     @endif
 

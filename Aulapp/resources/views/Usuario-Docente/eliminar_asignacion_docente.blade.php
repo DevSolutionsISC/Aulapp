@@ -48,6 +48,9 @@
 
         @elseif (count($asignacionDocentes) == 1)
         @foreach ($asignacionDocentes as $asignacionDocente )
+        @if ($asignacionDocente->estado == true)
+
+
         <div class="p-1" id="datosEliminar">
           <h6> <b>Datos de la asignacion materia-docente</b></h6>
 
@@ -80,6 +83,7 @@
       <a href="{{url('eliminar-asignacion-docente')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
+    @endif
     @endforeach
     @endif
 

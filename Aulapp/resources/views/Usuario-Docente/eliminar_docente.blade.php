@@ -51,6 +51,9 @@
 
         @elseif (count($usuarios) == 1)
         @foreach ($usuarios as $usuario )
+        @if ($usuario->estado == true)
+
+
         <div class="p-1" id="datosEliminar">
           <h6> <b>Datos del docente</b></h6>
 
@@ -78,6 +81,7 @@
       <a href="{{url('eliminar-docente')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
+    @endif
     @endforeach
     @endif
 
