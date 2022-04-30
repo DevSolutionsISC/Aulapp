@@ -32,9 +32,6 @@ class AsignacionDocenteController extends Controller
   $asignacion_docente->save();
 
   $asignacion_docente->where('id', $asignacion_docente->id)->update(['estado' => false]);
-  $asignacion_docente->grupos()->each(function ($grupo) {
-   $grupo->where('id', $grupo->id)->update(['estado' => false]);
-  });
 
   return redirect()->route('eliminar-asignacion-docente')->with('eliminar', 'ok');
  }

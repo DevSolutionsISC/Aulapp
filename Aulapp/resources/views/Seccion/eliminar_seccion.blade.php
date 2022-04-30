@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}"
           width="50" id="logo"></a>
-      <h3 text-center id="Titulo"> Administracion de seccion</h3>
+      <h3 text-center id="Titulo"> Administración de sección</h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="{{url('/menu_adm')}}">Inicio</a>
@@ -26,10 +26,10 @@
   <div class="col-12">
 
     <form id="formulario" method="GET" action="{{route('eliminar-seccion')}}">
-      <h3 text-center>Eliminar seccion</h3>
+      <h3 text-center>Eliminar sección</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el nombre de la seccion que quiere eliminar</label>
+      <label for="inputNombre" class="form-label">Coloque el nombre de la sección que quiere eliminar</label>
       <input type="text" id="inputNombre" class="form-control search" name="search" id="inputtexto">
 
 
@@ -50,7 +50,7 @@
 
 
         <div class="p-1" id="datosEliminar">
-          <h6><b>Datos de la seccion</b> </h6>
+          <h6><b>Datos de la sección</b> </h6>
 
           <span><b>Nombre:</b> {{$section->nombre}}</span>
           <br>
@@ -98,7 +98,7 @@
   Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Seccion eliminada',
+  title: 'Sección eliminada',
   showConfirmButton: false,
   timer: 1500
   })
@@ -110,7 +110,7 @@
 position: 'center',
 icon: 'error',
 title: 'Oops...',
-text: 'No se encontro ninguna seccion con ese nombre',
+text: 'No se encontro ninguna sección con ese nombre',
 showConfirmButton: true,
 
 })

@@ -194,4 +194,5 @@ class UsuarioController extends Controller
 
         return redirect()->route('eliminar-docente')->with('eliminar', 'ok');
     }
+
 }

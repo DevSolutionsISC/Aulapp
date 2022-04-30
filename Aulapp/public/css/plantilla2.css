@@ -86,3 +86,20 @@ svg {
 #datosEliminar {
     background-color: rgba(146, 143, 143, 0.466);
 }
+body {
+    font-family: "Poppins", sans-serif;
+}
+#Nlogo {
+    font-family: "Gruppo", cursive;
+    font-family: "Poppins", sans-serif;
+    margin-left: 10px;
+    font-size: 30px;
+    display: block;
+    float: left;
+}
+#logo {
+    margin-left: 10px;
+    margin-top: 0;
+    display: block;
+    float: right;
+}
