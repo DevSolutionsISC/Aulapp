@@ -5,12 +5,12 @@
 <header>
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}"
-          width="50" id="logo"></a>
+      <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
+          src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
 
-      <h3 text-center id="Titulo">Administracion de asignacion-docente </h3>
+      <h3 text-center id="Titulo">Administración de asignación-docente </h3>
 
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
@@ -29,7 +29,7 @@
   <div class="col-12">
 
     <form id="formulario" method="GET" action="{{route('eliminar-asignacion-docente')}}">
-      <h3 text-center>Eliminar asignacion docente</h3>
+      <h3 text-center>Eliminar asignación del docente</h3>
       @csrf
 
       <label for="inputNombre" class="form-label">Introduzca el id de registro</label>

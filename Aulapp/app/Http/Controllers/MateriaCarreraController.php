@@ -108,9 +108,7 @@ class MateriaCarreraController extends Controller
   $materia_carrera->save();
   $materia_carrera->asignacionDocentes()->each(function ($asignacion_docente) {
    $asignacion_docente->where('id', $asignacion_docente->id)->update(['estado' => false]);
-   $asignacion_docente->grupos()->each(function ($grupo) {
-    $grupo->where('id', $grupo->id)->update(['estado' => false]);
-   });
+
   });
 
   return redirect()->route('eliminar-materia-carrera')->with('eliminar', 'ok');

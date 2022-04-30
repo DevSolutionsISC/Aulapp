@@ -224,9 +224,7 @@ class UsuarioController extends Controller
    $user_rol->where('id', $user_rol->id)->update(['estado' => false]);
    $user_rol->asignacionDocentes()->each(function ($asignacion_docente) {
     $asignacion_docente->where('id', $asignacion_docente->id)->update(['estado' => false]);
-    $asignacion_docente->grupos()->each(function ($grupo) {
-     $grupo->where('id', $grupo->id)->update(['estado' => false]);
-    });
+
    });
   });
 

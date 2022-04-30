@@ -191,9 +191,7 @@ class MateriaController extends Controller
    $materia_carrera->where('id', $materia_carrera->id)->update(['estado' => false]);
    $materia_carrera->asignacionDocentes()->each(function ($asignacion_docente) {
     $asignacion_docente->where('id', $asignacion_docente->id)->update(['estado' => false]);
-    $asignacion_docente->grupos()->each(function ($grupo) {
-     $grupo->where('id', $grupo->id)->update(['estado' => false]);
-    });
+
    });
   });
 
