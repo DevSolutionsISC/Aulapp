@@ -103,7 +103,7 @@ class AulaController extends Controller
         ]);
         $aula->nombre = $request->Nombre;
         $aula->capacidad = $request->capacidad;
-        $aula->section_id = $request->section;
+        $aula->id_section = $request->section;
         $aula->save();
 
         return redirect()->route('aulas_edit')->with('actualizar', 'ok');
