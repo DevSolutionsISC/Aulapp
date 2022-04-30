@@ -106,7 +106,7 @@ class CarrerasController extends Controller
 
   $carrera = Carrera::find($id);
   $request->validate([
-   'Nombre' => 'bail|required|min:3|max:20|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
+   'Nombre' => 'bail|required|min:3|max:50|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
    'Codigo' => 'bail|required|numeric|digits_between:6,10|unique:carreras,Codigo,' . $carrera->id,
   ]);
 
