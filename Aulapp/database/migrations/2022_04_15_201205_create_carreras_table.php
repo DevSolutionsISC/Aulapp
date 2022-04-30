@@ -17,6 +17,7 @@ class CreateCarrerasTable extends Migration
             $table->id();
             $table->string('Nombre');
             $table->integer('Codigo')->unique();
+            $table->boolean('estado')->default(true);
     
             $table->timestamps();
         });

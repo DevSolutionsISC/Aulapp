@@ -20,6 +20,8 @@ class CreateAulasTable extends Migration
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')
                 ->on('sections')->constrained()->onDelete('cascade');
+
+            $table->boolean('estado')->default(true);
             $table->timestamps();
 
         });

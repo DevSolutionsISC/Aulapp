@@ -49,6 +49,9 @@
 
         @elseif (count($grupos) == 1)
         @foreach ($grupos as $grupo )
+        @if ($grupo->estado == true)
+
+
         <div class="p-1" id="datosEliminar">
           <h6>Datos del grupo</h6>
           <span><b>id:</b>{{$grupo->id}}</span>
@@ -77,6 +80,7 @@
       <a href="{{url('eliminar-grupo')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
+    @endif
     @endforeach
     @endif
 

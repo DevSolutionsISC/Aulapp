@@ -46,6 +46,9 @@
 
         @elseif (count($sections) == 1)
         @foreach ($sections as $section )
+        @if ($section->estado == true)
+
+
         <div class="p-1" id="datosEliminar">
           <h6><b>Datos de la seccion</b> </h6>
 
@@ -70,6 +73,7 @@
       <a href="{{url('/eliminar-seccion')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
         type="button">Cancelar</a>
     </div>
+    @endif
     @endforeach
     @endif
 

@@ -25,6 +25,7 @@ class CreateAsignacionDocentesTable extends Migration
             $table->foreign('materia_carreras_id')
                 ->references('id')->on('materia_carreras')->constrained()->onDelete('cascade');
 
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }

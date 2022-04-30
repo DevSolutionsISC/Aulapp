@@ -22,11 +22,11 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return view('welcome');
+ return view('welcome');
 });
 
 Route::get('/menu_adm', function () {
-    return view('menu_administrador');
+ return view('menu_administrador');
 });
 
 //--------------------------------Rutas de eliminacion --------------------------------------------------------
@@ -46,21 +46,21 @@ Route::get('/eliminar-asignacion-docente', [AsignacionDocenteController::class, 
 
 Route::get('/eliminar-docente', [UsuarioController::class, 'busqueda'])->name('eliminar-docente');
 
-Route::delete('/eliminar-docente{usuario}', [UsuarioController::class, 'destroy'])->name('docente-destroy');
+Route::delete('/eliminar-docente{usuario}', [UsuarioController::class, 'estado'])->name('docente-destroy');
 
-Route::delete('/grupo/{id}', [GrupoController::class, 'destroy'])->name('grupos-destroy');
+Route::delete('/grupo/{id}', [GrupoController::class, 'estado'])->name('grupos-destroy');
 
-Route::delete('/asignacionDocente/{asignacionDocente}', [AsignacionDocenteController::class, 'destroy'])->name('asignacionDocente-destroy');
+Route::delete('/asignacionDocente/{asignacionDocente}', [AsignacionDocenteController::class, 'estado'])->name('asignacionDocente-destroy');
 
-Route::delete('/carrera/{carrera}', [CarrerasController::class, 'destroy'])->name('carreras-destroy');
+Route::delete('/carrera/{carrera}', [CarrerasController::class, 'estado'])->name('carreras-destroy');
 
-Route::delete('/seccion/{section}', [SectionsController::class, 'destroy'])->name('secciones-destroy');
+Route::delete('/seccion/{section}', [SectionsController::class, 'estado'])->name('secciones-destroy');
 
-Route::delete('/aula/{id}', [AulaController::class, 'destroy'])->name('aulas-destroy');
+Route::delete('/aula/{id}', [AulaController::class, 'estado'])->name('aulas-destroy');
 
-Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::class, 'destroy'])->name('materiasCarreras-destroy');
+Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::class, 'estado'])->name('materiasCarreras-destroy');
 
-Route::delete('/materia/{materia}', [MateriaController::class, 'destroy'])->name('materias-destroy');
+Route::delete('/materia/{materia}', [MateriaController::class, 'estado'])->name('materias-destroy');
 
 //--------------------------------------------------------------------------------------------
 
@@ -98,6 +98,7 @@ Route::get('/reporte_section', 'App\Http\Controllers\SectionsController@reporte'
 Route::get('/reporte_aula', 'App\Http\Controllers\AulaController@reporte');
 Route::get('/reporte_grupo', 'App\Http\Controllers\GrupoController@reporte');
 Route::get('/reporte_docente', 'App\Http\Controllers\UsuarioController@reporte');
+Route::get('/reporte_user_rol', 'App\Http\Controllers\UserRolController@reporte');
 
 //----------------------Rutas de edicion--------------------------------------------------
 Route::get('/carreraEdit', [CarrerasController::class, 'showEdit'])->name('carrera_edit');

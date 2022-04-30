@@ -142,9 +142,10 @@ class UsuarioController extends Controller
         ]);
         $docente->Nombre=$request->Nombre;
         $docente->Apellido=$request->Apellido;
-        $docente->CI=$request->CI;
         $docente->Email=$request->Correo;
+        $docente->CI=$request->CI;
         $docente->save();
+        
         return redirect()->route('docentes_edit')->with('actualizar', 'ok');
     }
 
@@ -152,7 +153,7 @@ class UsuarioController extends Controller
     {
         $docentes = Usuario::all();
         $urs = UserRol::all();
-        return view('Usuario-Docente\editardocente', ['docentes' => $docentes,'urs' => $urs]);
+        return view('Usuario-Docente\editardocente', ['docentes' => $docentes, 'urs' => $urs]);
 
     }
     /**
