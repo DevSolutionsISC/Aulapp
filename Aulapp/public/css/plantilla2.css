@@ -86,3 +86,6 @@ svg {
 #datosEliminar {
     background-color: rgba(146, 143, 143, 0.466);
 }
+body{
+    font-family: 'Poppins', sans-serif;
+}
