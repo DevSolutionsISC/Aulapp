@@ -12,6 +12,7 @@
   </script>
   <link rel="stylesheet" href="{{asset('css/plantilla.css')}}" />
   <link rel="stylesheet" href="{{asset('css/editar.css')}}" />
+  <link rel="stylesheet" href="{{asset('css/bandeja.css')}}" />
   <title>@yield('title')</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,31 +28,49 @@
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
-        @yield('Titulo')
+        <h3>Aulas asignadas</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-          <a class="nav-link active" aria-current="page" href="menu_adm" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">Registrar</a>
-          <a class="nav-link active" aria-current="page" href="@yield("editar")" id="editar">Editar</a>
-          <a class="nav-link active" aria-current="page" href="@yield("eliminar")" id="eliminar">Eliminar</a>
-          <a class="nav-link active" aria-current="page" href="@yield("reporte")" id="reporte">Ver reporte</a>
-          
+            <a href="bandeja_docente"><span class="material-symbols-outlined" id="campana">
+                notifications
+                </span></a>
+          <a class="nav-link active" aria-current="page" href="menu_docente" id="inicio">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">DevSolution</a>
         </form>
       </div>
     </nav>
   </header>
   <div id="Container" class="container-fluid">
-
-    @csrf
-
-    @yield('Contenido formulario')
-
-  </div>
+      
+        <div id="tabla_a">
+            <table class="table">
+                <thead>
+                    <th>Fecha</th>
+                    <th>Aula</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01/05/2022</td>
+                        <td>692F</td>
+                    </tr>
+                    <tr >
+                        <td>01/05/2022</td>
+                        <td>692B</td>
+                        </tr>
+                    <tr >
+                        <td>01/05/2022</td>
+                        <td>691A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
   <footer>
   </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
 <script>
+    //menu hamburguesa
   var menu=document.getElementsByClassName("nav-link");
   var btn_menu=document.getElementById("menu")
   btn_menu.onclick=function(){
@@ -67,6 +86,19 @@
     btn_menu.innerHTML="menu";
     }
   }
+</script>
+<script>
+ var enviados=document.getElementById("enviados")
+ var recibidos=document.getElementById("recibidos")
+ recibidos.style.background="grey"
+ enviados.onclick=function(){
+     enviados.style.background="grey"
+     recibidos.style.background="white"
+ }
+ recibidos.onclick=function(){
+     enviados.style.background="white"
+     recibidos.style.background="grey"
+ }
 </script>
 </body>
 

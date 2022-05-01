@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="{{asset('css/formulario.css')}}" />
-    <link rel="stylesheet" href="{{asset('css/plantilla.css')}}" />
-    <link rel="stylesheet" href="{{asset('css/login.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/inicio.css')}}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gruppo&family=Poppins:wght@300&display=swap" rel="stylesheet">
@@ -26,10 +25,7 @@
                 <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
                 @yield('Titulo')
                 <form class="d-flex">
-                  <a href="@yield("notificacion")"><span class="material-symbols-outlined" id="campana">
-                    notifications
-                    </span></a>
-                  <a class="nav-link active" aria-current="page" href="#" id="inicio">Inicio</a>
+                  <a class="nav-link active" aria-current="page" href="/login" id="sesion">Iniciar sesion</a>
                   <span class="nav-link " >DevSolutions</span>
                 </form>
               </div>
@@ -37,7 +33,12 @@
           </header>
     </header>
 <div>
-    @yield('Contenido')
+    <div id="inicio">
+        <h5>Facultad de ciencias y tecnologia</h5>
+        <h1>Reserve y administre sus aulas para los examenes presenciales</h1>
+        <a class="btn" id="btn_init" href="/login">iniciar</a>
+    </div>
 </div>
 </body>
+
 </html>
