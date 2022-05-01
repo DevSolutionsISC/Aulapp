@@ -19,13 +19,13 @@ class CarrerasController extends Controller
  public function index()
  {
 
-  return view('Carrera\registrar_carrera');
+  return view('Carrera.registrar_carrera');
 
  }
  public function reporte()
  {
   $carreras = Carrera::all();
-  return view('Carrera\reporte_carrera', compact('carreras'));
+  return view('Carrera.reporte_carrera', compact('carreras'));
 
  }
 

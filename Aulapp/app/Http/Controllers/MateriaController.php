@@ -29,7 +29,7 @@ class MateriaController extends Controller
  public function reporte()
  {
   $materias = Materia::all();
-  return view('Materia\reporte_materia', compact('materias'));
+  return view('Materia.reporte_materia', compact('materias'));
 
  }
  public function showEdit()

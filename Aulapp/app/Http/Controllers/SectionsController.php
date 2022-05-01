@@ -10,19 +10,19 @@ class SectionsController extends Controller
 {
  public function index()
  {
-  return view('/Seccion/registrar_seccion_de_aula');
+  return view('Seccion.registrar_seccion_de_aula');
  }
 
  public function showEdit()
  {
   $secciones = Section::all();
-  return view('/Seccion/editarseccion', ['secciones' => $secciones]);
+  return view('Seccion.editarseccion', ['secciones' => $secciones]);
 
  }
  public function reporte()
  {
   $sections = Section::all();
-  return view('/Seccion/reporte_seccion', compact('sections'));
+  return view('Seccion.reporte_seccion', compact('sections'));
  }
 
  public function store(StoreSeccion $request)
