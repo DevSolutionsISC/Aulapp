@@ -27,6 +27,8 @@
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Código</th>
+                        <th scope="col">Activo</th>
+                        
 
                   </tr>
             </thead>
@@ -36,6 +38,16 @@
                          <td>{{$materia_carrera->id}}</td>
                          <td>{{$materia_carrera->carrera->Nombre}}</td>
                          <td>{{$materia_carrera->materia->nombre_materia}}</td>
+                         
+                         @if($materia_carrera->estado==1)
+                                                
+                            <td>SI</td>
+
+                          @else
+                          
+                           <td>NO</td>
+                                          
+                         @endif
     
                    </tr>     
                   @endforeach
