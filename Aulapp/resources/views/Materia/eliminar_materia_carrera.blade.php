@@ -32,12 +32,12 @@
       <h3 text-center>Eliminar materia-carrera</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Introduzca el id de registro</label>
+      <label for="inputNombre" class="form-label">Introduzca el ID</label>
       <input type="text" id="inputNombre" class="form-control search" name="search">
 
       <br>
       <div class="d-flex justify-content-center">
-        <button class="btn btn-dark btn-block btn-lg">
+        <button class="btn btn-dark btn-block btn-lg" id="buscar">
           Buscar
         </button>
       </div>
@@ -125,10 +125,40 @@
   Swal.fire({
   icon: 'error',
   title: 'Oops...',
-  text: 'No se encontro ninguna asignacion materia-carrera con ese codigo',
+  text: 'No se encontro ninguna asignacion materia-carrera con ese id',
   showConfirmButton: true,
   })
 
 </script>
 @endif
+@php
+use App\Models\Materia_Carrera;
+$mcs=Materia_Carrera::all();
+@endphp
+<script>
+  var buscar=document.getElementById("buscar");
+var nombre=document.getElementById("inputNombre");
+buscar.onclick=function(evento){
+  var encontrado=0
+
+  @foreach ($mcs as $mc)
+    if(nombre.value== '{{$mc->id}}' && {{$mc->estado}}==1){
+      encontrado=1;
+    }
+  @endforeach
+  if(encontrado==0){
+    event.preventDefault();
+    Swal.fire({
+position: 'center',
+icon: 'error',
+title: 'Oops...',
+text: 'No se encontro ninguna asignacion materia-carrera con ese id',
+showConfirmButton: true,
+
+})
+  }
+  
+
+}
+</script>
 @endsection

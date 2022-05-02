@@ -87,7 +87,24 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
+<script>
+  $('.Eliminar').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+            title: '¿Estás seguro que quieres eliminar seccion?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
+            }).then((result) => {
+                  if (result.isConfirmed) {
+                  this.submit();
+            }
+            })
+      });
+</script>
 
 @if (session('eliminar')=='ok')
 <script>
@@ -113,8 +130,8 @@ showConfirmButton: true,
 </script>
 @endif
 @php
-  use App\Models\Section;
-  $ss=Section::all();
+use App\Models\Section;
+$ss=Section::all();
 @endphp
 <script>
   var buscar=document.getElementById("buscar");
