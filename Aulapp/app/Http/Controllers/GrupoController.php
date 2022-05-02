@@ -50,7 +50,7 @@ class GrupoController extends Controller
 
  }
 
- public function reporte()
+ /*public function reporte()
  {
   $grupos   = Grupo::all();
   $docentes = Usuario::all();
@@ -61,8 +61,13 @@ class GrupoController extends Controller
   $mcs      = Materia_Carrera::all();
   return view('Grupo.reporte_grupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
 
- }
+ }*/
+ public function reporte()
+    {
+        $grupos = Grupo::all();
+        return view('Grupo.reporte_grupo', compact('grupos'));
 
+    }
  /**
   * Show the form for creating a new resource.
   *
