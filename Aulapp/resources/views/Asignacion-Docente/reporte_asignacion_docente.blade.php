@@ -28,6 +28,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Materia</th>
+                        <th scope="col">Activo</th>
 
                   </tr>
             </thead>
@@ -38,7 +39,15 @@
                          <td>{{$asignacionDocente->user_rol->usuario->Nombre}}</td>
                          <td>{{$asignacionDocente->user_rol->usuario->Apellido}}</td>
                          <td>{{$asignacionDocente->materia_carrera->materia->nombre_materia}}</td>
-    
+
+                         @if($asignacionDocente->estado==1)
+                                                
+                                <td>SI</td>
+                    
+                          @else
+                                <td>NO</td>
+                                                              
+                          @endif
                    </tr>     
                   @endforeach
             </tbody>
