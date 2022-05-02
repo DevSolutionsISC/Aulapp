@@ -89,6 +89,10 @@ Route::get('/docente', [UsuarioController::class, 'registro'])->name('docentes')
 
 Route::post('/docente', [UsuarioController::class, 'store'])->name('docentes');
 
+Route::get('/materia_carrera', [MateriaCarreraController::class, 'registro'])->name('materia_carrera');
+
+Route::post('/materia_carrera', [MateriaCarreraController::class, 'store'])->name('materia_carrera');
+
 //-----------------------------------------------------------------------------------
 
 //Reportes

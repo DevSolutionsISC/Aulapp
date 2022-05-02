@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrera;
 use App\Models\Materia_Carrera;
+use App\Models\Materia;
 use Illuminate\Http\Request;
 
 class MateriaCarreraController extends Controller
@@ -17,6 +19,14 @@ class MateriaCarreraController extends Controller
   //
  }
 
+ public function registro(){
+     $materias=Materia::all();
+     $carrera_materias=Materia_Carrera::all();
+     $carreras=Carrera::all();
+     return view('Planilla-de-carrera-materia\registro_planilla_carrera_materia',['carreras'=>$carreras,'materias'=>$materias,'carrera_materias'=>$carrera_materias]);
+ }
+
+ 
  /**
   * Show the form for creating a new resource.
   *

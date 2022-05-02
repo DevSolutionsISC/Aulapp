@@ -88,18 +88,9 @@ class UsuarioController extends Controller
   $userRol->rol_id     = 2;
   $userRol->save();
 
-  $id_userRol = UserRol::select('id')->orderBy('id', 'desc')->first();
+  
 
-  $ids = explode("+", $request->Nuevo);
-  for ($i = 1; $i < sizeof($ids); $i++) {
-   $asignacion                      = new asignacionDocentes();
-   $asignacion->user_rol_id         = $id_userRol->id;
-   $asignacion->materia_carreras_id = $ids[$i];
-
-   $asignacion->save();
-  }
-
-  return redirect()->route('docentes')->with('registrar', 'ok');
+  return redirect()->route('docentes',['registrar'=>"ok"]);
  }
 
  /**
