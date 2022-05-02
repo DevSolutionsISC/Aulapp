@@ -18,16 +18,19 @@ class MateriaCarreraController extends Controller
  {
   //
  }
-
- public function registro(){
-     $materias=Materia::all();
-     $carrera_materias=Materia_Carrera::all();
-     $carreras=Carrera::all();
-     return view('Planilla-de-carrera-materia\registro_planilla_carrera_materia',['carreras'=>$carreras,'materias'=>$materias,'carrera_materias'=>$carrera_materias]);
+ public function reporte()
+ {
+  $materia_carreras = Materia_Carrera::all();
+  return view('Planilla-de-carrera-materia.reporte_materia_carrera', compact('materia_carreras'));
  }
 
- 
- /**
+ public function registro(){
+    $materias=Materia::all();
+    $carrera_materias=Materia_Carrera::all();
+    $carreras=Carrera::all();
+    return view('Planilla-de-carrera-materia\registro_planilla_carrera_materia',['carreras'=>$carreras,'materias'=>$materias,'carrera_materias'=>$carrera_materias]);
+}
+ /**s
   * Show the form for creating a new resource.
   *
   * @return \Illuminate\Http\Response
@@ -118,9 +121,7 @@ class MateriaCarreraController extends Controller
   $materia_carrera->save();
   $materia_carrera->asignacionDocentes()->each(function ($asignacion_docente) {
    $asignacion_docente->where('id', $asignacion_docente->id)->update(['estado' => false]);
-   $asignacion_docente->grupos()->each(function ($grupo) {
-    $grupo->where('id', $grupo->id)->update(['estado' => false]);
-   });
+
   });
 
   return redirect()->route('eliminar-materia-carrera')->with('eliminar', 'ok');

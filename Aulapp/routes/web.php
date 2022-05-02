@@ -21,9 +21,11 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
+
+/*Route::get('/', function () {
  return view('welcome');
-});
+});*/
+
 
 Route::get('/menu_adm', function () {
  return view('menu_administrador');
@@ -95,15 +97,15 @@ Route::post('/materia_carrera', [MateriaCarreraController::class, 'store'])->nam
 
 //-----------------------------------------------------------------------------------
 
-//Reportes
+//--------------------Rutas de reportes---------------------------------------------------
 Route::get('/reporte_materia', 'App\Http\Controllers\MateriaController@reporte');
 Route::get('/reporte_carrera', 'App\Http\Controllers\CarrerasController@reporte');
 Route::get('/reporte_section', 'App\Http\Controllers\SectionsController@reporte');
 Route::get('/reporte_aula', 'App\Http\Controllers\AulaController@reporte');
 Route::get('/reporte_grupo', 'App\Http\Controllers\GrupoController@reporte');
-Route::get('/reporte_docente', 'App\Http\Controllers\UsuarioController@reporte');
 Route::get('/reporte_user_rol', 'App\Http\Controllers\UserRolController@reporte');
-
+Route::get('/reporte_carrera_materia', 'App\Http\Controllers\MateriaCarreraController@reporte');
+Route::get('/reporte_asignacion_docente', 'App\Http\Controllers\AsignacionDocenteController@reporte');
 //----------------------Rutas de edicion--------------------------------------------------
 Route::get('/carreraEdit', [CarrerasController::class, 'showEdit'])->name('carrera_edit');
 
@@ -130,3 +132,31 @@ Route::get('/grupoEdit', [GrupoController::class, 'showEdit'])->name('grupo_edit
 Route::get('/grupo/{id}', [GrupoController::class, 'update'])->name('grupo-update');
 //------------------------------------------------------------------------------
 
+Route::get('/materia', 'App\Http\Controllers\MateriaController@reporte');
+Route::get('/carrera', 'App\Http\Controllers\CarrerasController@reporte');
+Route::get('/section', 'App\Http\Controllers\SectionsController@reporte');
+Route::get('/aulas', 'App\Http\Controllers\AulaController@reporte');
+Route::get('/grupo', 'App\Http\Controllers\GrupoController@reporte');
+
+//-----------------
+Route::get('/', function () {
+    return view('login');
+   });
+   Route::get('/menu_docente', function () {
+    return view('menu_docente');
+   });
+   Route::get('/registrarreserva', function () {
+    return view('registrarreserva');
+   });
+   Route::get('/bandeja_docente', function () {
+    return view('bandeja_docente');
+   });
+   Route::get('/bandeja_administrador', function () {
+    return view('bandeja_administrador');
+   });
+   Route::get('/respuesta', function () {
+    return view('respuesta');
+   });
+   Route::get('/aulas_asignadas', function () {
+    return view('aulas_asignadas');
+   });

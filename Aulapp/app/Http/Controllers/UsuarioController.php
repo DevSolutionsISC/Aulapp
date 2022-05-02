@@ -26,7 +26,7 @@ class UsuarioController extends Controller
  public function reporte()
  {
   $usuarios = Usuario::all();
-  return view('Usuario-Docente\reporte_docente', compact('usuarios'));
+  return view('Usuario-Docente.reporte_docente', compact('usuarios'));
 
  }
 
@@ -37,7 +37,7 @@ class UsuarioController extends Controller
   $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras", "carreras.id", "=", "materia_carreras.carrera_id")
    ->select("materia_carreras.id as id", "materias.id as id_materia", "carreras.id as id_carrera", "materias.nombre_materia as nom_materia", "carreras.Nombre as nom_carrera")->get();
 
-  return view('Usuario-Docente\registrar_docente', ['materias' => $materias, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
+  return view('Usuario-Docente.registrar_docente', ['materias' => $materias, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
  }
 
  /**
@@ -171,18 +171,12 @@ class UsuarioController extends Controller
  }
 
  public function showEdit()
- {
-  $carreras        = Carrera::all();
-  $materias        = Materia::all();
-  $docentes        = Usuario::all();
-  $a_docentes      = asignacionDocentes::all();
-  $userRol         = UserRol::all();
-  $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras", "carreras.id", "=", "materia_carreras.carrera_id")
-   ->select("materia_carreras.id as id", "materias.id as id_materia", "carreras.id as id_carrera", "materias.nombre_materia as nom_materia", "carreras.Nombre as nom_carrera")->get();
+    {
+        $docentes = Usuario::all();
+        $urs = UserRol::all();
+        return view('Usuario-Docente.editardocente', ['docentes' => $docentes, 'urs' => $urs]);
 
-  return view('Usuario-Docente\editardocente', ['materias' => $materias, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera, 'docentes' => $docentes, 'a_docentes' => $a_docentes, 'userRol' => $userRol]);
-
- }
+    }
  /**
   * Remove the specified resource from storage.
   *
@@ -215,9 +209,7 @@ class UsuarioController extends Controller
    $user_rol->where('id', $user_rol->id)->update(['estado' => false]);
    $user_rol->asignacionDocentes()->each(function ($asignacion_docente) {
     $asignacion_docente->where('id', $asignacion_docente->id)->update(['estado' => false]);
-    $asignacion_docente->grupos()->each(function ($grupo) {
-     $grupo->where('id', $grupo->id)->update(['estado' => false]);
-    });
+
    });
   });
 

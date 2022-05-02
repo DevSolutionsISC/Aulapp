@@ -8,8 +8,8 @@
 <h3 text-center>Administracion de grupos </h3>
 @endsection
 @section('Contenido formulario')
-<div id="C_tabla">
-<h3 id="T_tabla" class="row justify-content-center justify-content-md-start">&nbsp;&nbsp;Lista de grupos</h3>
+
+<h3 class="row justify-content-center justify-content-md-start">&nbsp;&nbsp;Lista de grupos</h3>
       @if(count($grupos) == 0)
       
       <br>
@@ -21,7 +21,7 @@
 
       <table class="table table-striped">
       
-            <thead>                
+      <thead>                
                   <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Materia</th>
@@ -37,13 +37,16 @@
                    <tr>
                          
                          <td>{{$grupo->nombre}}</td>
+                         <td>{{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</td> 
+                         <td>{{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</td>
+                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Nombre}}</td>
+                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</td>
                          
-                         
-                   </tr>   
+                  </tr>   
                    @endforeach  
                   
             </tbody>
       </table>
       @endif
-</div>
+
 @endsection

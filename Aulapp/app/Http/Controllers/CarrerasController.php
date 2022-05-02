@@ -19,13 +19,13 @@ class CarrerasController extends Controller
  public function index()
  {
 
-  return view('Carrera\registrar_carrera');
+  return view('Carrera.registrar_carrera');
 
  }
  public function reporte()
  {
   $carreras = Carrera::all();
-  return view('Carrera\reporte_carrera', compact('carreras'));
+  return view('Carrera.reporte_carrera', compact('carreras'));
 
  }
 
@@ -98,7 +98,7 @@ class CarrerasController extends Controller
  public function showEdit()
  {
   $carreras = Carrera::all();
-  return view('Carrera\editarcarrera', ['carreras' => $carreras]);
+  return view('Carrera.editarcarrera', ['carreras' => $carreras]);
 
  }
  public function update(Request $request, $id)
@@ -106,7 +106,7 @@ class CarrerasController extends Controller
 
   $carrera = Carrera::find($id);
   $request->validate([
-   'Nombre' => 'bail|required|min:3|max:20|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
+   'Nombre' => 'bail|required|min:3|max:50|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
    'Codigo' => 'bail|required|numeric|digits_between:6,10|unique:carreras,Codigo,' . $carrera->id,
   ]);
 
@@ -149,9 +149,7 @@ class CarrerasController extends Controller
 
    $materia_carrera->asignacionDocentes()->each(function ($asignacion_docente) {
     $asignacion_docente->where('id', $asignacion_docente->id)->update(['estado' => false]);
-    $asignacion_docente->grupos()->each(function ($grupo) {
-     $grupo->where('id', $grupo->id)->update(['estado' => false]);
-    });
+
    });
   });
 

@@ -7,17 +7,17 @@
 <header>
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}"
-          width="50" id="logo"></a>
+      <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
+          src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
-      <h3 text-center id="Titulo">Administracion de materias-carreras </h3>
+      <h3 text-center id="Titulo">Administración de materias-carreras </h3>
       <form class="d-flex">
         <a class="nav-link active" aria-current="page" href="{{url('/menu_adm')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="{{url('/materias')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/materiaEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-materia-carrera')}}">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{url('/materia')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_materia')}}">Ver reporte</a>
 
       </form>
     </div>

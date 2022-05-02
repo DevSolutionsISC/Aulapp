@@ -2,7 +2,7 @@
 @section('title', 'Aulas')
 @section("editar","aulaEdit")
 @section("registrar","aula")
-@section("reporte","aulas")
+@section("reporte","reporte_aula")
 @section("eliminar","eliminar-aula")
 
 @section('Titulo')
@@ -103,7 +103,7 @@
       encontrado=1;
       var asignaciones= document.getElementById("asignar");
       @foreach ($secciones as $seccion )
-        if ({{$seccion->id}} == {{$aula->id_section}}){
+        if ({{$seccion->id}} == {{$aula->section_id}}){
             asignaciones.innerHTML+="<option selected='selected'value={{$seccion->id}}>{{$seccion->nombre}}</option>"
             localStorage.setItem("key",'{{$seccion->nombre}}');
         }else{

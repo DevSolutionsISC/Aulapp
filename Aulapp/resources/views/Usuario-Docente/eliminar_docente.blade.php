@@ -10,8 +10,8 @@
 <header>
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}"
-          width="50" id="logo"></a>
+      <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
+          src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
       @yield('Titulo')
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <h3 text-center id="Titulo">Administracion de docentes </h3>
@@ -20,7 +20,7 @@
         <a class="nav-link active" aria-current="page" href="{{url('/docente')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/docenteEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-docente')}}">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{url('/reporte_docente')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_user_rol')}}">Ver reporte</a>
 
       </form>
     </div>

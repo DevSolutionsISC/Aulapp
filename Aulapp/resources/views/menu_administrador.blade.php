@@ -1,4 +1,5 @@
 @extends('header')
+@section("notificacion","bandeja_administrador")
 @section('Titulo')
     <h3>Menu del Administrador</h3>
 @endsection
@@ -6,7 +7,7 @@
     </div>
     <div id="funcionalidades">
         <div>
-            <a href="reporte_docente" class="funcion btn"><span class="letras">Administracion de docentes</span> 
+            <a href="reporte_user_rol" class="funcion btn"><span class="letras">Administracion de docentes</span> 
                 <span class="material-symbols-outlined icon" >
                     person
                     </span>

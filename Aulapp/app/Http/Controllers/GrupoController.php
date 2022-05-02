@@ -32,7 +32,7 @@ class GrupoController extends Controller
   $Urs      = UserRol::all();
   $ads      = asignacionDocentes::all();
   $mcs      = Materia_Carrera::all();
-  return view('Grupo\editargrupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
+  return view('Grupo.editargrupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
 
  }
 
@@ -46,11 +46,11 @@ class GrupoController extends Controller
   $user_rol   = UserRol::all();
   $asignacion = asignacionDocentes::all();
 
-  return view('Grupo\registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
+  return view('Grupo.registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
 
  }
 
- public function reporte()
+ /*public function reporte()
  {
   $grupos   = Grupo::all();
   $docentes = Usuario::all();
@@ -59,10 +59,15 @@ class GrupoController extends Controller
   $Urs      = UserRol::all();
   $ads      = asignacionDocentes::all();
   $mcs      = Materia_Carrera::all();
-  return view('Grupo\reporte_grupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
+  return view('Grupo.reporte_grupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
 
- }
+ }*/
+ public function reporte()
+    {
+        $grupos = Grupo::all();
+        return view('Grupo.reporte_grupo', compact('grupos'));
 
+    }
  /**
   * Show the form for creating a new resource.
   *

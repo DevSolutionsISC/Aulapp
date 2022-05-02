@@ -1,0 +1,41 @@
+.tipo_m{
+    display: block;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+#tipos{
+    width: 20%;
+    margin-left: 5%;
+    float: left;
+}
+#tabla{
+float: right;
+width: 70%;
+padding-right: 5%;
+}
+#campana{
+    display: block;
+    color: black;
+    padding-top: 8px;
+}
+a{
+    text-decoration: none;
+}
+input {
+    box-shadow: 6px 6px 1px white;
+}
+.check{
+    display: block;
+}
+.enviar{
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin-left: 80%;
+}
+#tabla_a{
+    margin-left: 5%;
+    margin-right: 5%;
+}
