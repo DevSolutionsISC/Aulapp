@@ -38,6 +38,12 @@
       @endif
    
       <br>
+      <input type="text" name="estadoE" id="estadoE" value="{{old('estadoE')}}">
+      <label class=" oculto">Estado:</label>
+      <div class="form-check form-switch oculto">
+        <input class="form-check-input" type="checkbox" role="switch" id="estado" name="estado" >
+        <label class="form-check-label" for="flexSwitchCheckDefault">Baja/Alta</label>
+      </div>
       <div class="d-grid gap-2">
         <button class="btn btn-dark btn-block btn-lg ed" id="botonRegistrar" type="submit">Guardar</button>
         <a href="" class="btn btn-danger btn-block btn-lg ed" id="botonRegistrar"
@@ -67,12 +73,16 @@
 @section('js')
 <script>
   var buscar=document.getElementById("buscar");
-  buscar.onclick=function(){
   var nombre= document.getElementById("inputNombre");
   var codigo=document.getElementById("inputCodigo");
   var texto=document.getElementById("inputtexto");
   var encontrado=0;
+  var estado=document.getElementById("estado")
+  var estadoE=document.getElementById("estadoE")
+  estadoE.value=1
   var formulario=document.getElementById("formulario");
+  buscar.onclick=function(){
+
   @foreach ($secciones as $seccion)
     if(texto.value =='{{$seccion->nombre}}'){
       nombre.value='{{$seccion->nombre}}'
@@ -86,7 +96,23 @@
       }
       texto.disabled=true;
       encontrado=1;
+      if({{$seccion->estado}}==0){
+            Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'La sección se encuentra de baja, dar de alta para poder editarlo',
+            })
+            var oculto=document.getElementsByClassName("oculto");
+           
+            for(var i=0;i<oculto.length;i++){
+            oculto[i].style.display="block"
+            nombre.disabled=true
+            codigo.disabled=true
+          }
+          estadoE.value=0
+          }
     }
+
   @endforeach
   if(encontrado==0){
     Swal.fire({
@@ -96,6 +122,22 @@
     })
   }
   
+  }
+  estado.onclick=function(){
+    console.log(estado.value)
+    if(estadoE.value==0){
+      estadoE.value=1
+            nombre.disabled=false
+            codigo.disabled=false
+            estado.disabled=true
+    }
+  }
+  var registrar=document.getElementById("botonRegistrar");
+  registrar.onclick=function(){
+    nombre.disabled=false
+            nombre.disabled=false
+            codigo.disabled=false
+            estado.disabled=false
   }
 </script>
 @endsection

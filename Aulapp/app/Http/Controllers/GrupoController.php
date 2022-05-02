@@ -120,10 +120,11 @@ class GrupoController extends Controller
   */
  public function update(Request $request, $id)
  {
-  $grupo = asignacionDocentes::find($id);
-  if($request->docente != ""){
-      $grupo->user_rol_id=$request->docente;
+  $grupo = Grupo::find($id);
+  if($request->docente != 0){
+      $grupo->asignacion_docentes_id=$request->docente;
   }
+  $grupo->estado=$request->estadoE;
   $grupo->save();
   return redirect()->route('grupo_edit')->with('actualizar', 'ok');
  }

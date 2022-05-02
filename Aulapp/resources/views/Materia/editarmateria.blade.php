@@ -38,6 +38,12 @@
       <br>
       @endif
       <br>
+      <input type="text" name="estadoE" id="estadoE" value="{{old('estadoE')}}">
+      <label class=" oculto">Estado:</label>
+      <div class="form-check form-switch oculto">
+        <input class="form-check-input" type="checkbox" role="switch" id="estado" name="estado" >
+        <label class="form-check-label" for="flexSwitchCheckDefault">Baja/Alta</label>
+      </div>
       <div class="d-grid gap-2">
         <button class="btn btn-dark btn-block btn-lg ed" id="botonRegistrar" type="submit">Guardar</button>
         <a href="" class="btn btn-danger btn-block btn-lg ed " 
@@ -68,14 +74,19 @@
 @section('js')
 <script>
   var buscar=document.getElementById("buscar");
-  buscar.onclick=function(){
+  var estado=document.getElementById("estado")
+  var estadoE=document.getElementById("estadoE")
   var nombre= document.getElementById("inputNombre");
   var codigo=document.getElementById("inputCodigo");
+  estadoE.value=1
+  buscar.onclick=function(){
   var texto=document.getElementById("inputtexto");
   var encontrado=0;
   var formulario=document.getElementById("formulario");
+  var asignado=0
   @foreach ($materias as $materia)
     if(texto.value =='{{$materia->Cod_materia}}'){
+
         buscar.disabled=true;
       nombre.value='{{$materia->nombre_materia}}'
       codigo.value='{{$materia->Cod_materia}}'
@@ -88,6 +99,28 @@
       }
       texto.disabled=true;
       encontrado=1;
+      if({{$materia->estado}}==0){
+            Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'La materia se encuentra de baja, dar de alta para poder editarlo',
+            })
+            var oculto=document.getElementsByClassName("oculto");
+           
+            for(var i=0;i<oculto.length;i++){
+            oculto[i].style.display="block"
+            nombre.disabled=true
+            codigo.disabled=true
+          }
+          estadoE.value=0
+          }
+      @foreach ($mcs as $mc)
+        if({{$materia->id}}== {{$mc->materia_id}}){
+          asignado=1
+          nombre.disabled=true
+          codigo.disabled=true
+        }
+      @endforeach
     }
   @endforeach
   if(encontrado==0){
@@ -98,7 +131,23 @@
     })
 
     }
+    estado.onclick=function(){
+    console.log(estado.value)
+    estadoE.value=1
+    estado.disabled=true
+    if(asignado == 0){
+            nombre.disabled=false
+            codigo.disabled=false
+    }
   }
-
+  }
+  
+  var registrar=document.getElementById("botonRegistrar");
+  registrar.onclick=function(){
+    nombre.disabled=false
+            nombre.disabled=false
+            codigo.disabled=false
+            estado.disabled=false
+  }
 </script>
 @endsection

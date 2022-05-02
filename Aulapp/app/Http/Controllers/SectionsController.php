@@ -51,6 +51,7 @@ class SectionsController extends Controller
 
   $section->nombre      = $request->nombre;
   $section->descripcion = $request->descripcion;
+  $section->estado= $request->estadoE;
   $section->save();
   return redirect()->route('seccion_edit')->with('actualizar', 'ok');
 
@@ -70,8 +71,8 @@ class SectionsController extends Controller
    return view('Seccion.eliminar_seccion', compact('sections'));
 
   } catch (\Throwable $th) {
-
-   return redirect()->route('eliminar-seccion')->with('buscar', 'error');
+    
+   return redirect()->route('eliminar-seccion')->with('buscar', 'error') ;
 
   }}
 

@@ -6,6 +6,7 @@ session_start();
 
 use App\Http\Requests\StoreCarrera;
 use App\Models\Carrera;
+use App\Models\Materia_Carrera;
 use Illuminate\Http\Request;
 
 class CarrerasController extends Controller
@@ -98,7 +99,8 @@ class CarrerasController extends Controller
  public function showEdit()
  {
   $carreras = Carrera::all();
-  return view('Carrera.editarcarrera', ['carreras' => $carreras]);
+  $mcs=Materia_Carrera::all();
+  return view('Carrera.editarcarrera', ['carreras' => $carreras, 'mcs'=>$mcs]);
 
  }
  public function update(Request $request, $id)
@@ -112,6 +114,7 @@ class CarrerasController extends Controller
 
   $carrera->Nombre = $request->Nombre;
   $carrera->Codigo = $request->Codigo;
+  $carrera->estado = $request->estadoE;
   $carrera->save();
   return redirect()->route('carrera_edit')->with('actualizar', 'ok');
  }

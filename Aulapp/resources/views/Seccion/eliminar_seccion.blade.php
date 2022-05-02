@@ -116,4 +116,33 @@ showConfirmButton: true,
 })
 </script>
 @endif
+@php
+  use App\Models\Section;
+  $ss=Section::all();
+@endphp
+<script>
+  var buscar=document.getElementById("buscar");
+var nombre=document.getElementById("inputNombre");
+buscar.onclick=function(evento){
+  var encontrado=0
+
+  @foreach ($ss as $s )
+    if(nombre.value== '{{$s->nombre}}' && {{$s->estado}}==1){
+      encontrado=1;
+    }
+  @endforeach
+  if(encontrado==0){
+    event.preventDefault();
+    Swal.fire({
+position: 'center',
+icon: 'error',
+title: 'Oops...',
+text: 'No se encontro ninguna sección con ese nombre',
+showConfirmButton: true,
+
+})
+  }
+
+}
+</script>
 @endsection

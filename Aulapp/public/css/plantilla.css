@@ -113,3 +113,10 @@ body{
     border-radius: 15px;
     color: white;
 }
+.form-check-input{
+    box-shadow: 6px 6px 1px #E8EDEA;
+   
+}
+#estadoE{
+    display: none;
+}

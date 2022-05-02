@@ -38,6 +38,12 @@
       @endif
    
       <br>
+      <input type="text" name="estadoE" id="estadoE" value="{{old('estadoE')}}">
+      <label class=" oculto">Estado:</label>
+      <div class="form-check form-switch oculto">
+        <input class="form-check-input" type="checkbox" role="switch" id="estado" name="estado" >
+        <label class="form-check-label" for="flexSwitchCheckDefault">Baja/Alta</label>
+      </div>
       <div class="d-grid gap-2">
         <button class="btn btn-dark btn-block btn-lg ed" id="botonRegistrar" type="submit">Guardar</button>
         <a href="" class="btn btn-danger btn-block btn-lg ed" id="botonRegistrar"
@@ -67,10 +73,14 @@
 @section('js')
 <script>
   var buscar=document.getElementById("buscar");
-  buscar.onclick=function(){
   var nombre= document.getElementById("inputNombre");
   var codigo=document.getElementById("inputCodigo");
   var texto=document.getElementById("inputtexto");
+  var estado=document.getElementById("estado")
+  var estadoE=document.getElementById("estadoE")
+  estadoE.value=1
+  var asignado=0
+  buscar.onclick=function(){
   var encontrado=0;
   var formulario=document.getElementById("formulario");
   @foreach ($carreras as $carrera)
@@ -86,6 +96,28 @@
         ed[i].style.display="block"
       }
       texto.disabled=true;
+      if({{$carrera->estado}}==0){
+            Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'La carrera se encuentra de baja, dar de alta para poder editarlo',
+            })
+            var oculto=document.getElementsByClassName("oculto");
+           
+            for(var i=0;i<oculto.length;i++){
+            oculto[i].style.display="block"
+            nombre.disabled=true
+            codigo.disabled=true
+          }
+          estadoE.value=0
+          }
+          @foreach ($mcs as $mc)
+            if({{$carrera->id}} == {{$mc->carrera_id}}){
+             asignado=1
+             nombre.disabled=true
+              codigo.disabled=true
+              }
+           @endforeach
     }
   @endforeach
   if(encontrado == 0){
@@ -94,6 +126,22 @@
     title: 'Oops...',
     text: 'No se encontro ninguna carrera con ese codigo',
     })
+  }
+  estado.onclick=function(){
+    
+    estadoE.value=1
+    estado.disabled=true
+    if(asignado == 0){
+            nombre.disabled=false
+            codigo.disabled=false
+    }
+  }
+  var registrar=document.getElementById("botonRegistrar");
+  registrar.onclick=function(){
+    nombre.disabled=false
+            nombre.disabled=false
+            codigo.disabled=false
+            estado.disabled=false
   }
   }
 </script>
