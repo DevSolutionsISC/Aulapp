@@ -2,7 +2,7 @@
 @section('title', 'Aulas')
 @section("editar","aulaEdit")
 @section("registrar","aula")
-@section("reporte","aulas")
+@section("reporte","reporte_aula")
 @section("eliminar","eliminar-aula")
 
 @section('Titulo')

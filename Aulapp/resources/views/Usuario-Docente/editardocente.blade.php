@@ -3,8 +3,10 @@
 @section('Titulo')
 @section("editar","docenteEdit")
 @section("registrar","docente")
-@section("reporte","carrera")
-@section("eliminar","reporte_docente")
+@section("reporte","reporte_user_rol")
+@section("eliminar","eliminar-docente")
+@section('Titulo')
+
 <h3 text-center id="Titulo">Administracion de Docentes</h3>
 @endsection
 @section('Contenido formulario')

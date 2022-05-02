@@ -19,7 +19,7 @@ class UserRolController extends Controller
     public function reporte()
     {
         $user_rols = UserRol::all();
-        return view('Usuario-Docente/reporte_user_rol', compact('user_rols'));
+        return view('Usuario-Docente.reporte_user_rol', compact('user_rols'));
 
     }
 

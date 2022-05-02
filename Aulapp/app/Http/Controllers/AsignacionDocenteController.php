@@ -25,6 +25,13 @@ class AsignacionDocenteController extends Controller
   }
 
  }
+ public function reporte()
+ {
+
+  $asignacionDocentes = asignacionDocentes::all();
+  return view('Asignacion-Docente.reporte_asignacion_docente', compact('asignacionDocentes'));
+
+ }
  public function estado($asignacion_docente)
  {
   $asignacion_docente         = asignacionDocentes::find($asignacion_docente);

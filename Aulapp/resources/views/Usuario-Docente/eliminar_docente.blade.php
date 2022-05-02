@@ -20,7 +20,7 @@
         <a class="nav-link active" aria-current="page" href="{{url('/docente')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/docenteEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-docente')}}">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{url('/reporte_docente')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_user_rol')}}">Ver reporte</a>
 
       </form>
     </div>
