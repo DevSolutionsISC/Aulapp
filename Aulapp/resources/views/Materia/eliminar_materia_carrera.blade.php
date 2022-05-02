@@ -17,7 +17,7 @@
         <a class="nav-link active" aria-current="page" href="{{url('/materias')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/materiaEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-materia-carrera')}}">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{url('/materia')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_materia')}}">Ver reporte</a>
 
       </form>
     </div>

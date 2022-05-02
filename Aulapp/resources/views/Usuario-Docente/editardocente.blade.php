@@ -2,7 +2,7 @@
 @section('title', 'Docente')
 @section("editar","docenteEdit")
 @section("registrar","docente")
-@section("reporte","reporte_docente")
+@section("reporte","reporte_user_rol")
 @section("eliminar","eliminar-docente")
 @section('Titulo')
 <h3 text-center id="Titulo">Administracion de Docentes</h3>

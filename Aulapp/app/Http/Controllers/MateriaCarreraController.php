@@ -16,7 +16,12 @@ class MateriaCarreraController extends Controller
  {
   //
  }
+ public function reporte()
+ {
+  $materia_carreras = Materia_Carrera::all();
+  return view('Planilla-de-carrera-materia.reporte_materia_carrera', compact('materia_carreras'));
 
+ }
  /**
   * Show the form for creating a new resource.
   *

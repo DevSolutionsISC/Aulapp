@@ -98,7 +98,7 @@ class CarrerasController extends Controller
  public function showEdit()
  {
   $carreras = Carrera::all();
-  return view('Carrera\editarcarrera', ['carreras' => $carreras]);
+  return view('Carrera.editarcarrera', ['carreras' => $carreras]);
 
  }
  public function update(Request $request, $id)

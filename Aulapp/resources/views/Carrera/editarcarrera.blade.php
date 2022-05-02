@@ -3,7 +3,7 @@
 @section('Titulo')
 @section("editar","carreraEdit")
 @section("registrar","carreras")
-@section("reporte","carrera")
+@section("reporte","reporte_carrera")
 @section("eliminar","eliminar-carrera")
 <h3 text-center id="Titulo">Administracion de Carreras</h3>
 @endsection

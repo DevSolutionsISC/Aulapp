@@ -6,7 +6,7 @@
     </div>
     <div id="funcionalidades">
         <div>
-            <a href="reporte_docente" class="funcion btn"><span class="letras">Administracion de docentes</span> 
+            <a href="reporte_user_rol" class="funcion btn"><span class="letras">Administracion de docentes</span> 
                 <span class="material-symbols-outlined icon" >
                     person
                     </span>
