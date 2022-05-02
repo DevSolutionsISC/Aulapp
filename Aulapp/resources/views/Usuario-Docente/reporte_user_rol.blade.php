@@ -11,14 +11,7 @@
 
       <h3 class="row justify-content-center justify-content-md-start">&nbsp;&nbsp;Lista de docentes</h3>
 
-      @if(count($user_rols) == 1)
-      
-      <br>
-      <br>
-      <br>
-      <h4 class="row justify-content-center">No hay resultados</h4>
- 
-      @else
+    
       
       <table class="table table-striped">
       
@@ -49,6 +42,5 @@
                   
             </tbody>
       </table>
-      @endif
 
 @endsection

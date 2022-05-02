@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
  */
 
 
-Route::get('/', function () {
+/*Route::get('/', function () {
  return view('welcome');
-});
+});*/
 
 
 Route::get('/menu_adm', function () {
@@ -99,7 +99,6 @@ Route::get('/reporte_carrera', 'App\Http\Controllers\CarrerasController@reporte'
 Route::get('/reporte_section', 'App\Http\Controllers\SectionsController@reporte');
 Route::get('/reporte_aula', 'App\Http\Controllers\AulaController@reporte');
 Route::get('/reporte_grupo', 'App\Http\Controllers\GrupoController@reporte');
-Route::get('/reporte_docente', 'App\Http\Controllers\UsuarioController@reporte');
 Route::get('/reporte_user_rol', 'App\Http\Controllers\UserRolController@reporte');
 Route::get('/reporte_carrera_materia', 'App\Http\Controllers\MateriaCarreraController@reporte');
 Route::get('/reporte_asignacion_docente', 'App\Http\Controllers\AsignacionDocenteController@reporte');
@@ -136,7 +135,7 @@ Route::get('/aulas', 'App\Http\Controllers\AulaController@reporte');
 Route::get('/grupo', 'App\Http\Controllers\GrupoController@reporte');
 
 //-----------------
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('login');
    });
    Route::get('/menu_docente', function () {

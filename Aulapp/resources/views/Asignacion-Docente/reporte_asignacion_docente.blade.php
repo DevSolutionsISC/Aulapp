@@ -27,7 +27,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
-                        <th scope="col">Código</th>
+                        <th scope="col">Materia</th>
 
                   </tr>
             </thead>
