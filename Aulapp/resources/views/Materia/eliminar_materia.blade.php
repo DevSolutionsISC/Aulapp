@@ -62,18 +62,15 @@
 
     </form>
   </div>
-  <div class="row">
-    <div class="col-6">
-      <form action="{{route('materias-destroy', ['materia'=>$materia->id])}}" method="POST" class="Eliminar">
-        @method('DELETE')
-        @csrf
-        <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Eliminar</button>
-      </form>
-    </div>
-    <div class="col-6">
-      <a href="{{url('/eliminar-materia')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
-        type="button">Cancelar</a>
-    </div>
+  <div class="d-flex justify-content-center">
+
+    <form action="{{route('materias-destroy', ['materia'=>$materia->id])}}" method="POST" class="Eliminar">
+      @method('DELETE')
+      @csrf
+      <button class="btn btn-dark btn-block btn-lg" type="submit">Eliminar</button>
+    </form>
+
+
     @endif
     @endforeach
     @endif
