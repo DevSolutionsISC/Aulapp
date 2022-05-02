@@ -23,13 +23,13 @@ class MateriaController extends Controller
  public function index()
  {
   $carreras = Carrera::all();
-  return view('Materia\registrar_materia', ['carreras' => $carreras]);
+  return view('Materia.registrar_materia', ['carreras' => $carreras]);
 
  }
  public function reporte()
  {
   $materias = Materia::all();
-  return view('Materia\reporte_materia', compact('materias'));
+  return view('Materia.reporte_materia', compact('materias'));
 
  }
  public function showEdit()
@@ -37,7 +37,7 @@ class MateriaController extends Controller
   $materias   = Materia::all();
   $carreras   = Carrera::all();
   $conexiones = Materia_Carrera::all();
-  return view('Materia\editarmateria', ['materias' => $materias, 'carreras' => $carreras, 'conexiones' => $conexiones]);
+  return view('Materia.editarmateria', ['materias' => $materias, 'carreras' => $carreras, 'conexiones' => $conexiones]);
 
  }
 

@@ -1,7 +1,7 @@
 @extends('registrar')
 @section("editar","seccionEdit")
 @section("registrar","seccion")
-@section("reporte","section")
+@section("reporte","reporte_section")
 @section("eliminar","eliminar-seccion")
 @section('title', 'Seccion')
 @section('Titulo')
