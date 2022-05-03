@@ -88,7 +88,7 @@ class GrupoController extends Controller
  public function store(StoreGrupo $request)
  {
   $grupo                         = new Grupo();
-  $grupo->nombre                 = $request->nombre;
+  $grupo->nombre                 = "G:".$request->nombre;
   $grupo->asignacion_docentes_id = $request->docente;
   $grupo->save();
 

@@ -13,7 +13,17 @@
       <h3 text-center>Registrar grupos</h3>
       @csrf
       <label for="input1" class="form-label">Nombre</label>
-      <input type="text" id="input1" class="form-control" name="nombre" value="{{old("nombre")}}" autofocus>
+      <br>
+      <div class="row">
+        <div class="col-2">
+          <label>G :</label>
+        </div>
+        <div class="col">
+          <input type="text" id="input1" class="form-control" name="nombre" value="{{old("nombre")}}" autofocus>
+        </div>
+      </div>
+      
+     
       @if ($errors->has("nombre"))
       <span class="error text-danger" for="input1">{{ $errors->first("nombre") }}</span>
       @endif
@@ -61,7 +71,7 @@
                   });
     </script>
       <label for="input2" class="form-label">Docente</label>
-        <select name="docente" id="docente" class="form-select">
+        <select name="docente" id="docente" class="form-select" >
             <option selected>Seleccione un docente</option>
             
 
@@ -164,7 +174,7 @@
       var alerta=0;
       @foreach ($grupos as $grupo)
         @foreach ($materias as $materia)
-          if('{{$grupo->nombre}}' == text.value && '{{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}'== materia.options[materia.selectedIndex].text){
+          if('{{$grupo->nombre}}' == 'G:'+text.value && '{{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}'== materia.options[materia.selectedIndex].text){
             alerta=1
             
           }

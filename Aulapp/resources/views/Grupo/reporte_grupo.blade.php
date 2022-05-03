@@ -27,7 +27,8 @@
       <table class="table table-striped" id="tablaGrupo">
       
       <thead>                
-                  <tr>
+                  <tr>  
+                        <th scope="col">Id</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Materia</th>
                         <th scope="col">Carrera</th>
@@ -41,12 +42,18 @@
             <tbody>
                     @foreach($grupos as $grupo)
                    <tr>
-                         
+                         <td>{{$grupo->id}}</td>
                          <td>{{$grupo->nombre}}</td>
                          <td>{{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</td> 
                          <td>{{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</td>
-                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Nombre}}</td>
-                         <td>{{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</td>
+                         @if ($grupo->asignacionDocente->user_rol_id=="")
+                              <td>POR DESIGNAR</td>  
+                              <td>-</td>
+                         @else
+                              <td>{{$grupo->asignacionDocente->user_rol->usuario->Nombre}}</td>
+                              <td>{{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</td>
+                         @endif
+                        
                          
                          @if($grupo->estado==1)
                               
