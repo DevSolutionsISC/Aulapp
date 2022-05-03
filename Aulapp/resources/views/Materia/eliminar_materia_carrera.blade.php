@@ -9,15 +9,15 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
           src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
-      @yield('Titulo')
+      <h3 text-center id="Titulo">Administración de carrera-materia </h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
-      <h3 text-center id="Titulo">Administración de materias-carreras </h3>
-      <form class="d-flex">
+
+      <form class="d-flex m-0">
         <a class="nav-link active" aria-current="page" href="{{url('/menu_adm')}}">Inicio</a>
-        <a class="nav-link active" aria-current="page" href="{{url('/materias')}}">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="{{url('/materiaEdit')}}">Editar</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/materia_carrera')}}">Registrar</a>
+        {{-- <a class="nav-link active" aria-current="page" href="{{url('/materiaEdit')}}">Editar</a> --}}
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-materia-carrera')}}">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="{{url('/reporte_materia')}}">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_carrera_materia')}}">Ver reporte</a>
 
       </form>
     </div>
@@ -29,7 +29,7 @@
   <div class="col-12">
 
     <form id="formulario" method="GET" action="{{route('eliminar-materia-carrera')}}">
-      <h3 text-center>Eliminar materia-carrera</h3>
+      <h3 text-center>Eliminar carrera-materia</h3>
       @csrf
 
       <label for="inputNombre" class="form-label">Introduzca el ID</label>
@@ -51,7 +51,7 @@
         @if ($materiaCarrera->estado == true && ($materiaCarrera->materia->estado == true &&
         $materiaCarrera->carrera->estado == true))
         <div class="p-1" id="datosEliminar">
-          <h6> <b>Datos de la materia-carrera</b></h6>
+          <h6> <b>Datos de la carrera-materia</b></h6>
 
           <span> <b>Carrera:</b> {{$materiaCarrera->carrera->Nombre}}</span>
           <br>

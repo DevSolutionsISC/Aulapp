@@ -7,17 +7,14 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
           src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
-      @yield('Titulo')
+      <h3 text-center id="Titulo">Administracion de docente-materia </h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
-
-      <h3 text-center id="Titulo">Administración de asignación-docente </h3>
-
-      <form class="d-flex">
-        <a class="nav-link active" aria-current="page" href="{{url('menu-adm')}}">Inicio</a>
-        <a class="nav-link active" aria-current="page" href="#">Registrar</a>
-        <a class="nav-link active" aria-current="page" href="#">Editar</a>
+      <form class="d-flex m-0">
+        <a class="nav-link active" aria-current="page" href="{{url('menu_adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('materia_docente')}}">Registrar</a>
+        {{-- <a class="nav-link active" aria-current="page" href="#">Editar</a> --}}
         <a class="nav-link active" aria-current="page" href="{{url('eliminar-asignacion-docente')}}">Eliminar</a>
-        <a class="nav-link active" aria-current="page" href="#">Ver reporte</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/reporte_asignacion_docente')}}">Ver reporte</a>
 
       </form>
     </div>

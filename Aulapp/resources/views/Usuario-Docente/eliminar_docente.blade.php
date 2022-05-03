@@ -12,10 +12,10 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
           src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
-      @yield('Titulo')
-      <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <h3 text-center id="Titulo">Administracion de docentes </h3>
-      <form class="d-flex">
+      <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+
+      <form class="d-flex m-0">
         <a class="nav-link active" aria-current="page" href="{{url('menu_adm')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="{{url('/docente')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/docenteEdit')}}">Editar</a>
