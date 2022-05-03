@@ -58,10 +58,9 @@
           <br>
           <span><b>{{$grupo->nombre}}</b></span>
           <br>
-          <span><b>Docente:</b> {{$grupo->asignacionDocente->user_rol->usuario->Nombre}}
-            {{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</span>
+          @if ($grupo->asignacionDocente->user_rol_id=="")
+          <span><b>Docente:</b>POR DESIGNAR</span>
           <br>
-
           <span><b>Carrera:</b> {{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</span>
           <br>
           <span><b>Materia:</b> {{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</span>
@@ -75,13 +74,31 @@
       @csrf
       <button class="btn btn-dark btn-block btn-lg" type="submit">Eliminar</button>
     </form>
+    @else
+    <span><b>Docente:</b> {{$grupo->asignacionDocente->user_rol->usuario->Nombre}}
+      {{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</span>
+    <br>
 
-
-    @endif
-    @endforeach
-    @endif
-
+    <span><b>Carrera:</b> {{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</span>
+    <br>
+    <span><b>Materia:</b> {{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</span>
   </div>
+  </form>
+</div>
+<div class="d-flex justify-content-center">
+
+  <form action="{{route('grupos-destroy', [$grupo->id])}}" method="POST" class="Eliminar">
+    @method('DELETE')
+    @csrf
+    <button class="btn btn-dark btn-block btn-lg" type="submit">Eliminar</button>
+  </form>
+
+  @endif
+  @endif
+  @endforeach
+  @endif
+
+</div>
 
 
 
