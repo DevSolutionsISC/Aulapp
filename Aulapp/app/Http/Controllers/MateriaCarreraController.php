@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMateriaCarrera;
 use App\Models\asignacionDocentes;
 use App\Models\Carrera;
-use App\Models\Materia_Carrera;
 use App\Models\Materia;
+use App\Models\Materia_Carrera;
 use Illuminate\Http\Request;
 
 class MateriaCarreraController extends Controller
@@ -26,12 +26,13 @@ class MateriaCarreraController extends Controller
   return view('Planilla-de-carrera-materia.reporte_materia_carrera', compact('materia_carreras'));
  }
 
- public function registro(){
-    $materias=Materia::where('estado',true)->get();
-    $carrera_materias=Materia_Carrera::all();
-    $carreras=Carrera::where('estado',true)->get();
-    return view('Planilla-de-carrera-materia\registro_planilla_carrera_materia',['carreras'=>$carreras,'materias'=>$materias,'carrera_materias'=>$carrera_materias]);
-}
+ public function registro()
+ {
+  $materias         = Materia::where('estado', true)->get();
+  $carrera_materias = Materia_Carrera::all();
+  $carreras         = Carrera::where('estado', true)->get();
+  return view('Planilla-de-carrera-materia\registro_planilla_carrera_materia', ['carreras' => $carreras, 'materias' => $materias, 'carrera_materias' => $carrera_materias]);
+ }
  /**s
   * Show the form for creating a new resource.
   *
@@ -50,19 +51,19 @@ class MateriaCarreraController extends Controller
   */
  public function store(StoreMateriaCarrera $request)
  {
-  $materia_carrera=new Materia_Carrera();
-  $materia_carrera->carrera_id=$request->carrera;
-  $materia_carrera->materia_id=$request->materia;
+  $materia_carrera             = new Materia_Carrera();
+  $materia_carrera->carrera_id = $request->carrera;
+  $materia_carrera->materia_id = $request->materia;
   $materia_carrera->save();
 
- $materia_carrera_id=Materia_Carrera::orderByDesc('id')->first();
+  $materia_carrera_id = Materia_Carrera::orderByDesc('id')->first();
 
-   $asignacion_null=new asignacionDocentes();
-   $asignacion_null->materia_carreras_id=$materia_carrera_id->id;
-  
-   $asignacion_null->save();
+  $asignacion_null                      = new asignacionDocentes();
+  $asignacion_null->materia_carreras_id = $materia_carrera_id->id;
 
-   return redirect()->route('materia_carrera')->with('registrar', 'ok');
+  $asignacion_null->save();
+
+  return redirect()->route('materia_carrera')->with('registrar', 'ok');
  }
 
  /**
@@ -114,18 +115,11 @@ class MateriaCarreraController extends Controller
     $materiaCarrera->where('id', 'like', $request->search);
    }
    $materiasCarrera = $materiaCarrera->get();
-   return view('Materia.eliminar_materia_carrera', compact('materiasCarrera'));
+   return view('Planilla-de-carrera-materia.eliminar_materia_carrera', compact('materiasCarrera'));
   } catch (\Throwable $th) {
    return redirect()->route('eliminar-materia-carrera')->with('buscar', 'error');
 
   }
-  $materiaCarrera = Materia_Carrera::query();
-
-  if ($request->has('search')) {
-   $materiaCarrera->where('id', 'like', $request->search);
-  }
-  $materiasCarrera = $materiaCarrera->get();
-  return view('eliminar_materia_carrera', compact('materiasCarrera'));
 
  }
  public function estado($materia_carrera)

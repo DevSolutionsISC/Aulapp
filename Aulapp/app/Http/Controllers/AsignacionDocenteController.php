@@ -12,22 +12,23 @@ use Illuminate\Http\Request;
 class AsignacionDocenteController extends Controller
 {
 
+ public function registro()
+ {
+  $materias         = Materia_Carrera::where('estado', true)->get();
+  $docentes         = UserRol::all();
+  $docente_materias = asignacionDocentes::all();
+  return view('Asignacion-Docente.registro_asignacion_docente', ['materias' => $materias, 'docentes' => $docentes, 'docente_materias' => $docente_materias]);
+ }
 
- public function registro(){
-    $materias=Materia_Carrera::where('estado',true)->get();
-    $docentes=UserRol::all();
-    $docente_materias=asignacionDocentes::all();
-    return view('Asignacion-Docente.registro_asignacion_docente',['materias'=>$materias,'docentes'=>$docentes,'docente_materias'=>$docente_materias]);
- } 
+ public function store(StoreAsignacion $request)
+ {
+  $asignacion_docente                      = new asignacionDocentes();
+  $asignacion_docente->user_rol_id         = $request->docente;
+  $asignacion_docente->materia_carreras_id = $request->materia;
+  $asignacion_docente->save();
 
- public function store(StoreAsignacion $request){
-    $asignacion_docente=new asignacionDocentes();
-    $asignacion_docente->user_rol_id=$request->docente;
-    $asignacion_docente->materia_carreras_id=$request->materia;
-    $asignacion_docente->save();
-    
-    return redirect()->route('materia_docente')->with('registrar', 'ok');
- 
+  return redirect()->route('materia_docente')->with('registrar', 'ok');
+
  }
 
  public function busqueda(Request $request)
@@ -40,7 +41,7 @@ class AsignacionDocenteController extends Controller
     $asignacionDocente->where('id', 'like', $request->search);
    }
    $asignacionDocentes = $asignacionDocente->get();
-   return view('Usuario-Docente.eliminar_asignacion_docente', compact('asignacionDocentes'));
+   return view('Asignacion-Docente.eliminar_asignacion_docente', compact('asignacionDocentes'));
 
   } catch (\Throwable $th) {
    return redirect()->route('eliminar-asignacion-docente')->with('buscar', 'error');
