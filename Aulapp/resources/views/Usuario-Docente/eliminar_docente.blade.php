@@ -55,7 +55,7 @@
 
         @elseif (count($usuarios) == 1)
         @foreach ($usuarios as $usuario )
-        @if ($usuario->estado == true && $userRol->usuario_id == $usuario->id && $userRol->rol->nombre == "docente")
+        @if ($usuario->estado == true && $userRol->usuario_id == $usuario->id && $userRol->rol->id == 2)
 
 
         <div class="p-1" id="datosEliminar">
@@ -156,7 +156,7 @@ buscar.onclick=function(evento){
   
 
   @foreach ($docentes as $docente)
-    if(nombre.value== '{{$docente->CI}}' && {{$docente->estado}}==1 && '{{$userRol->usuario_id}}'=='{{$docente->id}}' && '{{$userRol->rol->nombre}}'=='docente'){
+    if(nombre.value== '{{$docente->CI}}' && {{$docente->estado}}==1 && '{{$userRol->usuario_id}}'=='{{$docente->id}}' && '{{$userRol->rol->id}}'==2){
       encontrado=1;
     }
   @endforeach
