@@ -10,7 +10,6 @@ use App\Models\Materia_Carrera;
 use App\Models\UserRol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
@@ -88,9 +87,7 @@ class UsuarioController extends Controller
   $userRol->rol_id     = 2;
   $userRol->save();
 
-  
-
-  return redirect()->route('docentes')->with('registrar',"ok");
+  return redirect()->route('docentes')->with('registrar', "ok");
  }
 
  /**
@@ -131,22 +128,22 @@ class UsuarioController extends Controller
    'CI'       => 'bail|required|numeric|digits_between:6,10|unique:usuarios,CI,' . $docente->id,
    'Correo'   => 'bail|required|email|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 @ . _]+$/|unique:usuarios,Email,' . $docente->id,
   ]);
-  $docente->estado=$request->estadoE;
-  $docente->Nombre=$request->Nombre;
-  $docente->Apellido=$request->Apellido;
-  $docente->CI=$request->CI;
-  $docente->Email=$request->Correo;
+  $docente->estado   = $request->estadoE;
+  $docente->Nombre   = $request->Nombre;
+  $docente->Apellido = $request->Apellido;
+  $docente->CI       = $request->CI;
+  $docente->Email    = $request->Correo;
   $docente->save();
   return redirect()->route('docentes_edit')->with('actualizar', 'ok');
  }
 
  public function showEdit()
-    {
-        $docentes = Usuario::all();
-        $urs = UserRol::all();
-        return view('Usuario-Docente.editardocente', ['docentes' => $docentes, 'urs' => $urs]);
+ {
+  $docentes = Usuario::all();
+  $urs      = UserRol::all();
+  return view('Usuario-Docente.editardocente', ['docentes' => $docentes, 'urs' => $urs]);
 
-    }
+ }
  /**
   * Remove the specified resource from storage.
   *
@@ -155,6 +152,7 @@ class UsuarioController extends Controller
   */
  public function busqueda(Request $request)
  {
+  $rols = UserRol::all();
   try {
    $usuario = Usuario::query();
 
@@ -162,7 +160,7 @@ class UsuarioController extends Controller
     $usuario->where('CI', 'like', $request->search);
    }
    $usuarios = $usuario->get();
-   return view('Usuario-Docente.eliminar_docente', compact('usuarios'));
+   return view('Usuario-Docente.eliminar_docente', compact('usuarios', 'rols'));
 
   } catch (\Throwable $th) {
    return redirect()->route('eliminar-docente')->with('buscar', 'error');

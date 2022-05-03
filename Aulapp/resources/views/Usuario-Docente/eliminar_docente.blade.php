@@ -47,12 +47,15 @@
 
 
       <br>
+      @foreach ($rols as $userRol)
+
+
       @if (count($usuarios) <= 0) @elseif (count($usuarios)> 1)
 
 
         @elseif (count($usuarios) == 1)
         @foreach ($usuarios as $usuario )
-        @if ($usuario->estado == true)
+        @if ($usuario->estado == true && $userRol->usuario_id == $usuario->id && $userRol->rol->nombre == "docente")
 
 
         <div class="p-1" id="datosEliminar">
@@ -82,6 +85,7 @@
     @endif
     @endforeach
     @endif
+    @endforeach
 
   </div>
 
@@ -147,11 +151,15 @@ $docentes=Usuario::all();
 var nombre=document.getElementById("inputNombre");
 buscar.onclick=function(evento){
   var encontrado=0
+  
+@foreach ($rols as $userRol)
+  
 
   @foreach ($docentes as $docente)
-    if(nombre.value== '{{$docente->CI}}' && {{$docente->estado}}==1){
+    if(nombre.value== '{{$docente->CI}}' && {{$docente->estado}}==1 && '{{$userRol->usuario_id}}'=='{{$docente->id}}' && '{{$userRol->rol->nombre}}'=='docente'){
       encontrado=1;
     }
+  @endforeach
   @endforeach
   if(encontrado==0){
     event.preventDefault();
