@@ -25,7 +25,7 @@ class StoreMateria extends FormRequest
     public function rules()
     {
         return [      
-        'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:5|max:60|unique:materias,nombre_materia',
+        'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:5|max:60',
         'codigo' => 'bail|required|numeric|digits_between:6,10|unique:materias,Cod_materia',
         
         ];

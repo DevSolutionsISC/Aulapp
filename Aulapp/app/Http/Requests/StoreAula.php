@@ -28,8 +28,8 @@ class StoreAula extends FormRequest
     {
         
         $validacion=[
-            'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/|min:3|max:10|unique:sections',
-            'capacidad' => 'bail|required|numeric|between:10,500',
+            'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/|min:3|max:5|unique:aulas',
+            'capacidad' => 'bail|required|numeric|between:1,300',
             'seccion'=>'required'
         ];
 
@@ -41,7 +41,7 @@ class StoreAula extends FormRequest
         return[
             'nombre.required'=>'El campo nombre es obligatorio',
             'nombre.regex' => 'Solo se aceptan caracteres alfanuméricos',
-            'nombre.unique'=> 'Ya existe una seccion de aula registrado con ese nombre.',
+            'nombre.unique'=> 'Ya existe un aula registrado con ese nombre.',
             'capacidad.required'=>'El campo capacidad es obligatorio',
 
         ];
