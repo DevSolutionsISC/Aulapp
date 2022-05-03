@@ -32,13 +32,13 @@
       <h3 text-center>Eliminar grupo</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Introduzca el id de registro</label>
+      <label for="inputNombre" class="form-label">Introduzca el ID</label>
       <input type="text" id="inputNombre" class="form-control search" name="search">
 
 
       <br>
       <div class="d-flex justify-content-center">
-        <button class="btn btn-dark btn-block btn-lg">
+        <button class="btn btn-dark btn-block btn-lg" id="buscar">
           Buscar
         </button>
       </div>
@@ -68,18 +68,15 @@
         </div>
     </form>
   </div>
-  <div class="row">
-    <div class="col-6">
-      <form action="{{route('grupos-destroy', [$grupo->id])}}" method="POST" class="Eliminar">
-        @method('DELETE')
-        @csrf
-        <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Eliminar</button>
-      </form>
-    </div>
-    <div class="col-6">
-      <a href="{{url('eliminar-grupo')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
-        type="button">Cancelar</a>
-    </div>
+  <div class="d-flex justify-content-center">
+
+    <form action="{{route('grupos-destroy', [$grupo->id])}}" method="POST" class="Eliminar">
+      @method('DELETE')
+      @csrf
+      <button class="btn btn-dark btn-block btn-lg" type="submit">Eliminar</button>
+    </form>
+
+
     @endif
     @endforeach
     @endif
@@ -133,10 +130,40 @@
   Swal.fire({
   icon: 'error',
   title: 'Oops...',
-  text: 'No se encontro ningun grupo con ese codigo',
+  text: 'No se encontro ningun grupo con ese id',
   showConfirmButton: true,
   })
 
 </script>
 @endif
+@php
+use App\Models\Grupo;
+$grupos=Grupo::all();
+@endphp
+<script>
+  var buscar=document.getElementById("buscar");
+var nombre=document.getElementById("inputNombre");
+buscar.onclick=function(evento){
+  var encontrado=0
+
+  @foreach ($grupos as $grupo)
+    if(nombre.value== '{{$grupo->id}}' && {{$grupo->estado}}==1){
+      encontrado=1;
+    }
+  @endforeach
+  if(encontrado==0){
+    event.preventDefault();
+    Swal.fire({
+position: 'center',
+icon: 'error',
+title: 'Oops...',
+text: 'No se encontro ningun grupo con ese id',
+showConfirmButton: true,
+
+})
+  }
+  
+
+}
+</script>
 @endsection

@@ -61,18 +61,14 @@
 
     </form>
   </div>
-  <div class="row">
-    <div class="col-6">
-      <form action="{{route('secciones-destroy', ['section'=>$section->id])}}" method="POST" class="Eliminar">
-        @method('DELETE')
-        @csrf
-        <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Eliminar</button>
-      </form>
-    </div>
-    <div class="col-6">
-      <a href="{{url('/eliminar-seccion')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
-        type="button">Cancelar</a>
-    </div>
+  <div class="d-flex justify-content-center">
+
+    <form action="{{route('secciones-destroy', ['section'=>$section->id])}}" method="POST" class="Eliminar">
+      @method('DELETE')
+      @csrf
+      <button class="btn btn-dark btn-block btn-lg" type="submit">Eliminar</button>
+    </form>
+
     @endif
     @endforeach
     @endif
@@ -91,7 +87,24 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
+<script>
+  $('.Eliminar').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+            title: '¿Estás seguro que quieres eliminar seccion?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
+            }).then((result) => {
+                  if (result.isConfirmed) {
+                  this.submit();
+            }
+            })
+      });
+</script>
 
 @if (session('eliminar')=='ok')
 <script>
@@ -116,4 +129,33 @@ showConfirmButton: true,
 })
 </script>
 @endif
+@php
+use App\Models\Section;
+$ss=Section::all();
+@endphp
+<script>
+  var buscar=document.getElementById("buscar");
+var nombre=document.getElementById("inputNombre");
+buscar.onclick=function(evento){
+  var encontrado=0
+
+  @foreach ($ss as $s )
+    if(nombre.value== '{{$s->nombre}}' && {{$s->estado}}==1){
+      encontrado=1;
+    }
+  @endforeach
+  if(encontrado==0){
+    event.preventDefault();
+    Swal.fire({
+position: 'center',
+icon: 'error',
+title: 'Oops...',
+text: 'No se encontro ninguna sección con ese nombre',
+showConfirmButton: true,
+
+})
+  }
+
+}
+</script>
 @endsection

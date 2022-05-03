@@ -16,31 +16,22 @@
       
       @csrf
       <h3 text-center>Editar Grupo</h3>
-      <label  class="form-label " id="titulo">Selecione docente, materia , carrera y nombre del grupo que desee editar</label>
-      <label for="carreras">Carrera</label><br>
-      <select name="Carrera" id="carreras" class="form-select"> <option value="0">Seleccione una carrera</option>
-      </select>
+      <label  class="form-label " id="titulo">Ingrese el id del grupo que desea editar</label>
+      <input type="text" id="buscador" class="form-control">
       <br>
-      <label for="materias">Materia</label><br>
-      <select name="Materia" id="materias" class="form-select"><option value="0">Seleccione una materia</option></select>
-      <br>
-      <label for="docentes">Docente</label> <br>
-      <select name="Docente" id="docentes" class="form-select" > <option value="0">Seleccione un docente</option>
-      </select>
-      <br>
-      <label for="grupos">Grupo</label><br>
-      <input type="text" id="inputGrupo" class="form-control " name="Grupo" value="{{old('Grupo')}}" autofocus>
-      <label id="mensaje"></label>
-      @if ($errors->has('Grupo'))
-      <span class="error text-danger" for="inputCorreo">{{ $errors->first('Grupo') }}</span>
-      <br>
-      @endif<br>
-      <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="editar">
-       Editar
-      </button>
-      <br>
-      <input type="text" id="ac" class="form-control oculto" name="ac" value="{{old('ac')}}" autofocus>
-      <div class="d-grid gap-2">
+      <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="buscar">
+       Buscar
+      </button><br>
+      <span id="carrera"></span><br>
+      <span id="materia"></span><br>
+      <span id="grupo"></span><br>
+      <div id="docente"><select name="docente" id="asignado" class="form-select ed"></select></div>
+      <input type="text" name="estadoE" id="estadoE" value="{{old('estadoE')}}">
+      <label class=" oculto">Estado:</label>
+      <div class="form-check form-switch oculto">
+        <input class="form-check-input" type="checkbox" role="switch" id="estado" name="estado" >
+        <label class="form-check-label" for="flexSwitchCheckDefault">Baja/Alta</label>
+      </div>
         <button class="btn btn-dark btn-block btn-lg ed" id="botonRegistrar" type="submit">Guardar</button>
         <a href="" class="btn btn-danger btn-block btn-lg ed" id="botonRegistrar"
           type="button">Cancelar</a>
@@ -49,85 +40,92 @@
   </div>
 
 </div>
-@if ($errors->has('Grupo'))
-<script>
-   var ed=document.getElementsByClassName("ed");
-      for(var i=0;i<ed.length;i++){
-        ed[i].style.display="block"
-      }
-  formulario.action=localStorage.getItem("ruta");
-
-</script>
-@endif
-@if (session('actualizar')=='ok')
-  <script>localStorage.setItem('ruta',"")</script>
-@endif
-
 @endsection
 @section('js')
     <script>
-        var carreras=document.getElementById("carreras");
-        var docentes=document.getElementById("docentes");
-                
-            @foreach ($carreras as $carrera )
-                    carreras.innerHTML+="<option id='{{$carrera->id}}'>{{$carrera->Nombre}}</option>"
-            @endforeach
-            carreras.addEventListener('change', (event) => {
-                var materias=document.getElementById("materias");
-                materias.innerHTML="<option value='0'>Seleccione una materia</option>";
-                docentes.innerHTML="<option value='0'>Seleccione un docente</option>";
-                @foreach ($materias as $materia )
-                    @foreach ($mcs as $mc)
-                        if('{{$mc->materia_id}}'== '{{$materia->id}}' && {{$mc->carrera_id}}== carreras.options[carreras.selectedIndex].id){
-                            materias.innerHTML+="<option id='{{$mc->id}}'>{{$materia->nombre_materia}}</option>"
-                        }
-                    @endforeach
-                @endforeach
-            });
-            var materias=document.getElementById("materias");
-            materias.addEventListener('change', (event) => {
-                var docentes=document.getElementById("docentes");
-                docentes.innerHTML="<option value='0'>Seleccione un docente</option>";
-                @foreach ($docentes as $docente)
-                    @foreach ($ads as $ad)
-                        @foreach ($urs as $ur)
-                            if('{{$ad->materia_carreras_id}}'==materias.options[materias.selectedIndex].id && '{{$ad->user_rol_id}}'=='{{$ur->id}}' && '{{$ur->usuario_id}}'=='{{$docente->id}}' ){
-                                docentes.innerHTML+="<option id='{{$ad->id}}'>{{$docente->Nombre}} {{$docente->Apellido}}</option>"
-                            }
-                        @endforeach
-                    @endforeach
-                @endforeach
-            });
-
-            var editar=document.getElementById("editar");
-            editar.onclick=function(){
-                var nombre=document.getElementById("inputGrupo");
-                var encontrado=0;
-                @foreach ($grupos as $grupo)
-                    if(nombre.value== '{{$grupo->nombre}}' && docentes.options[docentes.selectedIndex].id){
-                        encontrado=1;
-                        formulario.action="{{route('grupo-update', ['id'=>$grupo->id])}}"
-                        localStorage.setItem('ruta',formulario.action)
-                        localStorage.setItem("id", {{$grupo->id}})
-                        var ac=document.getElementById("ac");
-                        ac.value=docentes.options[docentes.selectedIndex].id;
-                        ed=document.getElementsByClassName("ed")
-                        for(var i=0;i<ed.length;i++){
+        var buscar=document.getElementById("buscar");
+        var buscador=document.getElementById("buscador");
+        var estado=document.getElementById("estado")
+         var estadoE=document.getElementById("estadoE")
+        estadoE.value=1
+        buscar.onclick=function(){
+            var asignado=document.getElementById("asignado")
+            var encontrado=0;
+            var carrera=document.getElementById("carrera")
+            var materia=document.getElementById("materia")
+            var grupo=document.getElementById("grupo")
+            @foreach ($grupos as $grupo )
+                if('{{$grupo->id}}'==buscador.value ){
+                     encontrado=1;
+                     console.log("Encontrado")
+                     grupo.innerHTML="Grupo: {{$grupo->nombre}}"
+                     materia.innerHTML="Materia: {{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}"
+                     carrera.innerHTML="Carrera: {{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}"
+                     formulario.action="{{route('grupo-update', ['id'=>$grupo->id])}}"
+                     ed=document.getElementsByClassName("ed")
+                     for(var i=0;i<ed.length;i++){
                         ed[i].style.display="block";
                          }
-                         editar.style.display="none";
-                         var titulo=document.getElementById("titulo")
-                         titulo.innerHTML="Ahora puedes editar los campos"
+                         
+                         var docente=document.getElementById("docente")
+                    if('{{$grupo->asignacionDocente->user_rol_id}}'!=""){
+                        @foreach ($urs as $ur )
+                            @foreach ($docentes as $docente )
+                                if("{{$grupo->asignacionDocente->user_rol_id}}"== "{{$ur->id}}" && "{{$docente->id}}"=="{{$ur->usuario_id}}"){
+                                    docente.innerHTML="Docente: {{$docente->Nombre}} {{$docente->Apellido}}"
+                                }
+                            @endforeach
+                        @endforeach
+                    }else{
+                        var asignado=document.getElementById("asignado")
+                        asignado.innerHTML+="<option value='0'>Por designar</option>"
+                        @foreach ($docentes as $docente)
+                            @foreach ($urs as $ur)
+                                @foreach ($ads as $ad)
+                                    if('{{$grupo->asignacionDocente->materia_carreras_id}}'=='{{$ad->materia_carreras_id}}' && "{{$ad->user_rol_id}}"=='{{$ur->id}}' && '{{$ur->usuario_id}}'=='{{$docente->id}}' && {{$ad->estado}}==1){
+                                        asignado.innerHTML+="<option value='{{$ad->id}}'>{{$docente->Nombre}} {{$docente->Apellido}}</option>"
+                                    }
+                                @endforeach
+                            @endforeach
+                        @endforeach
                     }
-                @endforeach
-                if(encontrado==0){
-                    Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'No se encontro ningun grupo con esas especificaciones',
-    })
-                }
-            }
 
+                } 
+                if({{$grupo->estado}}==0){
+            Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'El grupo se encuentra de baja, dar de alta para poder editarlo',
+            })
+            var oculto=document.getElementsByClassName("oculto");
+           
+            for(var i=0;i<oculto.length;i++){
+            oculto[i].style.display="block"
+          }
+          var asignado=document.getElementById("asignado")
+          asignado.disabled=true
+          estadoE.value=0
+          }
+            @endforeach
+            if(encontrado==0){
+                Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se encontro ningun grupo con ese id',
+    })
+            }
+            var asignado=document.getElementById("asignado")
+        estado.onclick=function(){
+        console.log(estado.value)
+            estadoE.value=1
+            asignado.disabled=false
+            estado.disabled=true
+  }
+  var registrar=document.getElementById("botonRegistrar");
+  registrar.onclick=function(){
+            asignado.disabled=false
+            estado.disabled=false
+  }
+        }
     </script>
 @endsection

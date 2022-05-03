@@ -36,8 +36,8 @@ class MateriaController extends Controller
  {
   $materias   = Materia::all();
   $carreras   = Carrera::all();
-  $conexiones = Materia_Carrera::all();
-  return view('Materia.editarmateria', ['materias' => $materias, 'carreras' => $carreras, 'conexiones' => $conexiones]);
+  $mcs = Materia_Carrera::all();
+  return view('Materia.editarmateria', ['materias' => $materias, 'carreras' => $carreras, 'mcs' => $mcs]);
 
  }
 
@@ -104,46 +104,10 @@ class MateriaController extends Controller
    'Nombre' => 'required|regex:/^[\pL\s\-]+$/u|min:5|max:60|unique:materias,nombre_materia,' . $materia->id,
    'Codigo' => 'required|numeric|digits_between:6,10|unique:materias,Cod_materia,' . $materia->id,
   ]);
-
-  $materia                 = Materia::find($id);
-  $materia->nombre_materia = $request->Nombre;
-  $materia->Cod_materia    = $request->Codigo;
-  $materia->save();
-
-  $id_materia  = Materia::firstWhere('Cod_materia', $request->Codigo);
-  $ids         = explode("+", $request->Nuevo);
-  $permanentes = explode("+", $request->permanente);
-
-  for ($i = 1; $i < sizeof($ids); $i++) {
-   $encontrado = 0;
-   for ($j = 1; $j < sizeof($permanentes); $j++) {
-    if ($ids[$i] == $permanentes[$j]) {
-     $encontrado = 1;
-    }
-   }
-   if ($encontrado == 0) {
-    $materia_carrera             = new Materia_Carrera();
-    $materia_carrera->materia_id = $id_materia->id;
-    $materia_carrera->carrera_id = $ids[$i];
-    $materia_carrera->save();
-   }
-
-  }
-  $idse = explode("+", $request->Eliminar);
-  for ($i = 1; $i < sizeof($idse); $i++) {
-   $encontrado = 0;
-   for ($j = 1; $j < sizeof($permanentes); $j++) {
-    if ($idse[$i] == $permanentes[$j]) {
-     $encontrado = 1;
-    }
-   }
-   if ($encontrado == 1) {
-    $sql = DB::table("materia_carreras")->where(['carrera_id' => $idse[$i], 'materia_id' => $id])->value('id');
-    $a   = Materia_Carrera::find($sql);
-    $a->delete();
-   }
-
-  }
+  $materia->nombre_materia=$request->Nombre;
+  $materia->Cod_materia=$request->Codigo;
+  $materia->estado=$request->estadoE;
+ $materia->save();
   return redirect()->route('materia_edit')->with('actualizar', 'ok');
 
  }

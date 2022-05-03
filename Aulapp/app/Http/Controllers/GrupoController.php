@@ -127,11 +127,10 @@ class GrupoController extends Controller
  public function update(Request $request, $id)
  {
   $grupo = Grupo::find($id);
-  $request->validate([
-   'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 : ]+$/|min:2|max:4:',
-  ]);
-  $grupo->nombre                 = $request->Grupo;
-  $grupo->id_asignacion_docentes = $request->ac;
+  if($request->docente != 0){
+      $grupo->asignacion_docentes_id=$request->docente;
+  }
+  $grupo->estado=$request->estadoE;
   $grupo->save();
   return redirect()->route('grupo_edit')->with('actualizar', 'ok');
  }

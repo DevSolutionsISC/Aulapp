@@ -35,12 +35,12 @@
       <h3 text-center>Eliminar docente</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el codigo de registro</label>
+      <label for="inputNombre" class="form-label">Coloque el CI del docente</label>
       <input type="text" id="inputNombre" class="form-control search" name="search">
 
       <br>
       <div class="d-flex justify-content-center">
-        <button class="btn btn-dark btn-block btn-lg">
+        <button class="btn btn-dark btn-block btn-lg" id="buscar">
           Buscar
         </button>
       </div>
@@ -48,6 +48,7 @@
 
       <br>
       @if (count($usuarios) <= 0) @elseif (count($usuarios)> 1)
+
 
         @elseif (count($usuarios) == 1)
         @foreach ($usuarios as $usuario )
@@ -69,18 +70,15 @@
 
     </form>
   </div>
-  <div class="row">
-    <div class="col-6">
-      <form action="{{route('docente-destroy', ['usuario'=>$usuario->id])}}" method="POST" class="Eliminar">
-        @method('DELETE')
-        @csrf
-        <button class="btn btn-dark btn-block btn-lg" id="botonRegistrar" type="submit">Eliminar</button>
-      </form>
-    </div>
-    <div class="col-6">
-      <a href="{{url('eliminar-docente')}}" class="btn btn-danger btn-block btn-lg" id="botonRegistrar"
-        type="button">Cancelar</a>
-    </div>
+  <div class="d-flex justify-content-center">
+
+    <form action="{{route('docente-destroy', ['usuario'=>$usuario->id])}}" method="POST" class="Eliminar">
+      @method('DELETE')
+      @csrf
+      <button class="btn btn-dark btn-block btn-lg" type="submit">Eliminar</button>
+    </form>
+
+
     @endif
     @endforeach
     @endif
@@ -134,10 +132,40 @@
   Swal.fire({
   icon: 'error',
   title: 'Oops...',
-  text: 'No se encontro ninguna docente con ese codigo',
+  text: 'No se encontro ningun docente con ese codigo',
   showConfirmButton: true,
   })
 
 </script>
 @endif
+@php
+use App\Models\Usuario;
+$docentes=Usuario::all();
+@endphp
+<script>
+  var buscar=document.getElementById("buscar");
+var nombre=document.getElementById("inputNombre");
+buscar.onclick=function(evento){
+  var encontrado=0
+
+  @foreach ($docentes as $docente)
+    if(nombre.value== '{{$docente->CI}}' && {{$docente->estado}}==1){
+      encontrado=1;
+    }
+  @endforeach
+  if(encontrado==0){
+    event.preventDefault();
+    Swal.fire({
+position: 'center',
+icon: 'error',
+title: 'Oops...',
+text: 'No se encontro ningun docente con ese codigo',
+showConfirmButton: true,
+
+})
+  }
+  
+
+}
+</script>
 @endsection

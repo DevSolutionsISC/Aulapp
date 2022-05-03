@@ -131,42 +131,12 @@ class UsuarioController extends Controller
    'CI'       => 'bail|required|numeric|digits_between:6,10|unique:usuarios,CI,' . $docente->id,
    'Correo'   => 'bail|required|email|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 @ . _]+$/|unique:usuarios,Email,' . $docente->id,
   ]);
+  $docente->estado=$request->estadoE;
+  $docente->Nombre=$request->Nombre;
+  $docente->Apellido=$request->Apellido;
+  $docente->CI=$request->CI;
+  $docente->Email=$request->Correo;
   $docente->save();
-  $ur          = DB::table("user_rols")->where(['usuario_id' => $id])->value('id');
-  $ids         = explode("+", $request->Nuevo);
-  $permanentes = explode("+", $request->permanente);
-
-  for ($i = 1; $i < sizeof($ids); $i++) {
-   $encontrado = 0;
-   for ($j = 1; $j < sizeof($permanentes); $j++) {
-    if ($ids[$i] == $permanentes[$j]) {
-     $encontrado = 1;
-    }
-   }
-   if ($encontrado == 0) {
-    $asignacion                      = new asignacionDocentes();
-    $asignacion->user_rol_id         = $ur;
-    $asignacion->materia_carreras_id = $ids[$i];
-    $asignacion->save();
-
-   }
-
-  }
-  $idse = explode("+", $request->Eliminar);
-  for ($i = 1; $i < sizeof($idse); $i++) {
-   $encontrado = 0;
-   for ($j = 1; $j < sizeof($permanentes); $j++) {
-    if ($idse[$i] == $permanentes[$j]) {
-     $encontrado = 1;
-    }
-   }
-   if ($encontrado == 1) {
-    $sql = DB::table("asignacion_docentes")->where(['materia_carreras_id' => $idse[$i], 'user_rol_id' => $ur])->value('id');
-    $a   = asignacionDocentes::find($sql);
-    $a->delete();
-   }
-
-  }
   return redirect()->route('docentes_edit')->with('actualizar', 'ok');
  }
 

@@ -41,6 +41,12 @@
       <label for="asignar" class="ed">Seccion a la que pertenece:</label>
       <br>
       <select name="section" id="asignar" class="form-select ed"></select>
+      <input type="text" name="estadoE" id="estadoE" value="{{old('estadoE')}}">
+      <label class=" oculto">Estado:</label>
+      <div class="form-check form-switch oculto">
+        <input class="form-check-input" type="checkbox" role="switch" id="estado" name="estado" >
+        <label class="form-check-label" for="flexSwitchCheckDefault">Baja/Alta</label>
+      </div>
       <div class="d-grid gap-2">
         <button class="btn btn-dark btn-block btn-lg ed" id="botonRegistrar" type="submit">Guardar</button>
         <a href="" class="btn btn-danger btn-block btn-lg ed" id="botonRegistrar"
@@ -62,13 +68,12 @@
       texto.disabled=true
       texto.value=localStorage.getItem('id')
   formulario.action=localStorage.getItem("ruta");
-  var asignaciones= document.getElementById("Asignaciones");
   var asignaciones= document.getElementById("asignar");
       @foreach ($secciones as $seccion )
         if ({{$seccion->id}} == localStorage.getItem("key")){
-            asignaciones.innerHTML+="<option selected='selected'value={{$seccion->id}}>{{$seccion->nombre}}</option>"
+            asignaciones.innerHTML+="<option selected='selected'value='{{$seccion->id}}'>{{$seccion->nombre}}</option>"
         }else{
-            asignaciones.innerHTML+="<option value={{$seccion->id}}>{{$seccion->nombre}}</option>"
+            asignaciones.innerHTML+="<option value='{{$seccion->id}}'>{{$seccion->nombre}}</option>"
         }
         
       @endforeach
@@ -81,11 +86,15 @@
 @section('js')
 <script>
   var buscar=document.getElementById("buscar");
-  buscar.onclick=function(){
   var nombre= document.getElementById("inputNombre");
   var codigo=document.getElementById("inputCodigo");
   var texto=document.getElementById("inputtexto");
   var encontrado=0;
+  var estado=document.getElementById("estado")
+  var estadoE=document.getElementById("estadoE")
+  estadoE.value=1
+  buscar.onclick=function(){
+
   var formulario=document.getElementById("formulario");
   @foreach ($aulas as $aula)
     if(texto.value =='{{$aula->nombre}}'){
@@ -107,9 +116,27 @@
             asignaciones.innerHTML+="<option selected='selected'value={{$seccion->id}}>{{$seccion->nombre}}</option>"
             localStorage.setItem("key",'{{$seccion->nombre}}');
         }else{
-            asignaciones.innerHTML+="<option value={{$seccion->id}}>{{$seccion->nombre}}</option>"
+            if({{$seccion->estado}}==1){
+              asignaciones.innerHTML+="<option value={{$seccion->id}}>{{$seccion->nombre}}</option>"
+            }
         }
       @endforeach
+      if({{$aula->estado}}==0){
+            Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'El aula se encuentra de baja, dar de alta para poder editarlo',
+            })
+            var oculto=document.getElementsByClassName("oculto");
+           
+            for(var i=0;i<oculto.length;i++){
+            oculto[i].style.display="block"
+            nombre.disabled=true
+            codigo.disabled=true
+            asignaciones.disabled=true
+          }
+          estadoE.value=0
+          }
     }
   @endforeach
   if(encontrado==0){
@@ -153,7 +180,23 @@
             }
             return alerta;
         }
-        
+        var asignaciones= document.getElementById("asignar");
+        estado.onclick=function(){
+    console.log(estado.value)
+            estadoE.value=1
+            nombre.disabled=false
+            codigo.disabled=false
+            asignaciones.disabled=false
+            estado.disabled=true
+  }
+  var registrar=document.getElementById("botonRegistrar");
+  registrar.onclick=function(){
 
+    nombre.disabled=false
+            nombre.disabled=false
+            codigo.disabled=false
+            asignaciones.disabled=false
+            estado.disabled=false
+  }
 </script>
 @endsection

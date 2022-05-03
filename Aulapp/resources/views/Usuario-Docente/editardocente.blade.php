@@ -47,11 +47,16 @@
       <br>
       <label for="Correo" class="form-label ed">Correo</label>
       <input type="text" id="inputCorreo" class="form-control ed" name="Correo" value="{{old('Correo')}}" autofocus>
-      @if ($errors->has('Codigo'))
+      @if ($errors->has('Correo'))
       <span class="error text-danger" for="inputCorreo">{{ $errors->first('Correo') }}</span>
       @endif
-   
       <br>
+      <input type="text" name="estadoE" id="estadoE" value="{{old('estadoE')}}">
+      <label class=" oculto">Estado:</label>
+      <div class="form-check form-switch oculto">
+        <input class="form-check-input" type="checkbox" role="switch" id="estado" name="estado" >
+        <label class="form-check-label" for="flexSwitchCheckDefault">Baja/Alta</label>
+      </div>
       <div class="d-grid gap-2">
         <button class="btn btn-dark btn-block btn-lg ed" id="botonRegistrar" type="submit">Guardar</button>
         <a href="" class="btn btn-danger btn-block btn-lg ed" id="botonRegistrar"
@@ -80,12 +85,15 @@
 @endsection
 @section('js')
 <script>
-  var buscar=document.getElementById("buscar");
-  buscar.onclick=function(){
+  var buscar=document.getElementById("buscar");  
   var nombre= document.getElementById("inputNombre");
   var apellido=document.getElementById("inputApellido");
   var ci=document.getElementById("inputCI");
   var correo=document.getElementById("inputCorreo");
+  var estado=document.getElementById("estado")
+  var estadoE=document.getElementById("estadoE")
+  estadoE.value=1
+  buscar.onclick=function(){
   var texto=document.getElementById("inputtexto");
   var encontrado=0;
   var formulario=document.getElementById("formulario");
@@ -105,7 +113,24 @@
           ed[i].style.display="block"
           }
           texto.disabled=true;
-
+          if({{$docente->estado}}==0){
+            Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'El docente se encuentra de baja, dar de alta para poder editarlo',
+            })
+            var oculto=document.getElementsByClassName("oculto");
+           
+            for(var i=0;i<oculto.length;i++){
+            oculto[i].style.display="block"
+            nombre.disabled=true
+            apellido.disabled=true
+            ci.disabled=true
+            correo.disabled=true
+          }
+          estadoE.value=0
+          }
+          
       }
     @endforeach
 
@@ -117,6 +142,27 @@
     text: 'No se encontro ningun docente con ese CI',
     })
   }
+  }
+  
+  estado.onclick=function(){
+    console.log(estado.value)
+    if(estadoE.value==0){
+      estadoE.value=1
+            nombre.disabled=false
+            apellido.disabled=false
+            ci.disabled=false
+            correo.disabled=false
+            estado.disabled=true
+    }
+  }
+  var registrar=document.getElementById("botonRegistrar");
+  registrar.onclick=function(){
+    nombre.disabled=false
+            nombre.disabled=false
+            apellido.disabled=false
+            ci.disabled=false
+            correo.disabled=false
+            estado.disabled=false
   }
 </script>
 @if (session('actualizar')=='ok')
@@ -131,7 +177,6 @@
   timer: 1500
   })
 </script>
-
-
 @endif
+
 @endsection
