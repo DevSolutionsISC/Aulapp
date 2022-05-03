@@ -44,12 +44,12 @@
               
               @csrf
               <h3 text-center>Realizar reserva</h3>
+              <label>Materia:</label>
+              <select name="materia" id="materia" class="form-select"> <option value="0">Elegir materia</option></select>
                 <label id="nombre">Nombre:</label>
               <br>
               <div id="docentes"></div>
               <label id="añadir">Añadir docente + </label> <br>
-              <label>Materia:</label>
-              <select name="materia" id="materia" class="form-select"> <option value="0">Elegir materia</option></select><br>
               <label>Grupos:</label><br>
               <label id="grupos">Añadir grupos +</label> <br>
               <div class="row">
@@ -113,5 +113,11 @@
   }
 </script>
 </body>
-
+@php
+  use App\Models\Usuario;
+  $docentes = Usuario::all();
+@endphp
+<script>
+  var nombre=document.getElementById("nombre")
+</script>
 </html>

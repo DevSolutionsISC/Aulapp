@@ -128,4 +128,14 @@
   }
         }
     </script>
+    @if (session('actualizar')=='ok')
+    <script>localStorage.setItem('ruta',"")
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Cambios guardados exitosamente',
+      showConfirmButton: false,
+      timer: 1500
+      })</script>
+      @endif
 @endsection
