@@ -39,14 +39,15 @@ class GrupoController extends Controller
  public function registro()
  {
 
-  $carreras        = Carrera::all();
-  $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras", "carreras.id", "=", "materia_carreras.carrera_id")
-   ->select("materia_carreras.id as id", "materias.id as id_materia", "carreras.id as id_carrera", "materias.nombre_materia as nom_materia", "carreras.Nombre as nom_carrera")->get();
-  $docentes   = Usuario::all();
-  $user_rol   = UserRol::all();
-  $asignacion = asignacionDocentes::all();
+  $carreras        = Carrera::where('estado',true)->get();
+  $materia_carrera = Materia_Carrera::where('estado',true)->get();
+  $materias=Materia::where('estado',true)->get();
+  $docentes   = Usuario::where('estado',true)->get();
+  $user_rol   = UserRol::where('estado',true)->get();
+  $asignacion = asignacionDocentes::where('estado',true)->get();
+  $grupos= Grupo::where('estado',true)->get();
 
-  return view('Grupo.registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
+  return view('Grupo.registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera,'grupos'=> $grupos, 'materias'=>$materias]);
 
  }
 

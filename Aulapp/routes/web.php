@@ -95,6 +95,9 @@ Route::get('/materia_carrera', [MateriaCarreraController::class, 'registro'])->n
 
 Route::post('/materia_carrera', [MateriaCarreraController::class, 'store'])->name('materia_carrera');
 
+Route::get('/materia_docente', [AsignacionDocenteController::class, 'registro'])->name('materia_docente');
+
+Route::post('/materia_docente', [AsignacionDocenteController::class, 'store'])->name('materia_docente');
 //-----------------------------------------------------------------------------------
 
 //--------------------Rutas de reportes---------------------------------------------------

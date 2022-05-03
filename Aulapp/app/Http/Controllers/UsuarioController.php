@@ -90,7 +90,7 @@ class UsuarioController extends Controller
 
   
 
-  return redirect()->route('docentes',['registrar'=>"ok"]);
+  return redirect()->route('docentes')->with('registrar',"ok");
  }
 
  /**
