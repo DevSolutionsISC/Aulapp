@@ -28,7 +28,7 @@ class StoreUsuario extends FormRequest
             'apellido' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:2|max:60',
             'ci'=>'bail|required|numeric|digits_between:6,10|unique:usuarios,CI',
             'email'=>'bail|required|email|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 @ . _]+$/|unique:usuarios,Email',
-            'Nuevo'=>'required'
+          
         ];
     }
 
@@ -47,7 +47,7 @@ class StoreUsuario extends FormRequest
             'email.unique'=> 'Ya existe un usuario registrado con ese email.',
             'email.required'=> 'El campo email es obligatorio',
 
-            'Nuevo.required'=>'Debe tener al menos una materia asignada'
+         
         ];
     }
 }

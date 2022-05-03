@@ -31,9 +31,19 @@ class StoreGrupo extends FormRequest
 
         return [
             'nombre'=>'bail|required|unique:grupos,nombre,null,id,asignacion_docentes_id,'.$this->get('docente').'|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 : ]+$/|min:2|max:4:',
+            
             'carrera'=>[new SeleccionCarrera],
             'materia'=>[new SeleccionMateri],
-            'docente'=>[new Seleccion],
+           
+        ];
+    }
+    public function messages()
+    {
+        return[
+            
+            'nombre.unique'=> 'Ya existe un grupo registrado con ese nombre en la misma materia.',
+            'nombre.required'=>'El campo nombre es obligatorio',
+           
         ];
     }
 }

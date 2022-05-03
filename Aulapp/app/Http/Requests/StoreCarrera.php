@@ -24,7 +24,7 @@ class StoreCarrera extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ ]+$/u|min:3|max:50|unique:carreras',
+            'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ ()]+$/u|min:3|max:50|unique:carreras',
             'codigo' => 'bail|required|numeric|unique:carreras|digits_between:6,10',
         ];
     }

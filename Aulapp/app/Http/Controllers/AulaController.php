@@ -18,7 +18,7 @@ class AulaController extends Controller
 
  public function index()
  {
-  $seccions = Section::all();
+  $seccions = Section::where('estado',true);
   return view('Aula.registrar_aula', ['seccions' => $seccions]);
  }
  public function reporte()

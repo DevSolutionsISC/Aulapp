@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMateriaCarrera;
+use App\Models\asignacionDocentes;
+use App\Models\Carrera;
 use App\Models\Materia_Carrera;
+use App\Models\Materia;
 use Illuminate\Http\Request;
 
 class MateriaCarreraController extends Controller
@@ -20,9 +24,15 @@ class MateriaCarreraController extends Controller
  {
   $materia_carreras = Materia_Carrera::all();
   return view('Planilla-de-carrera-materia.reporte_materia_carrera', compact('materia_carreras'));
-
  }
- /**
+
+ public function registro(){
+    $materias=Materia::where('estado',true)->get();
+    $carrera_materias=Materia_Carrera::all();
+    $carreras=Carrera::where('estado',true)->get();
+    return view('Planilla-de-carrera-materia\registro_planilla_carrera_materia',['carreras'=>$carreras,'materias'=>$materias,'carrera_materias'=>$carrera_materias]);
+}
+ /**s
   * Show the form for creating a new resource.
   *
   * @return \Illuminate\Http\Response
@@ -38,9 +48,21 @@ class MateriaCarreraController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
- public function store(Request $request)
+ public function store(StoreMateriaCarrera $request)
  {
-  //
+  $materia_carrera=new Materia_Carrera();
+  $materia_carrera->carrera_id=$request->carrera;
+  $materia_carrera->materia_id=$request->materia;
+  $materia_carrera->save();
+
+ $materia_carrera_id=Materia_Carrera::orderByDesc('id')->first();
+
+   $asignacion_null=new asignacionDocentes();
+   $asignacion_null->materia_carreras_id=$materia_carrera_id->id;
+  
+   $asignacion_null->save();
+
+   return redirect()->route('materia_carrera')->with('registrar', 'ok');
  }
 
  /**
