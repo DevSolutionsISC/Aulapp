@@ -9,7 +9,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
           src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
-      <h3 text-center id="Titulo">Administracion de aulas </h3>
+      <h3 text-center id="Titulo">Administración de aulas </h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
 
       <form class="d-flex m-0">
@@ -32,8 +32,8 @@
       <h3 text-center>Eliminar aula</h3>
       @csrf
 
-      <label for="inputNombre" class="form-label">Coloque el nombre del aula que quiere eliminar</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search">
+      <label for="inputNombre" class="form-label">Coloque el nombre del aula </label>
+      <input type="text" id="inputNombre" class="form-control search" name="search" autofocus>
 
 
       <br>

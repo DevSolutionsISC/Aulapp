@@ -9,7 +9,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
           src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
-      <h3 text-center id="Titulo">Administracion de carreras</h3>
+      <h3 text-center id="Titulo">Administración de carreras</h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
 
       <form class="d-flex m-0">
@@ -34,8 +34,8 @@
 
       @csrf
 
-      <label for="inputNombre" class="form-label">Introduzca el codigo de la carrera que quiere eliminar</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search">
+      <label for="inputNombre" class="form-label">Introduzca el codigo</label>
+      <input type="text" id="inputNombre" class="form-control search" name="search" autofocus>
 
 
       <br>

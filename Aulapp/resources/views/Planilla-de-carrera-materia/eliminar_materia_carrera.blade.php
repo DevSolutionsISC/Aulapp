@@ -33,7 +33,7 @@
       @csrf
 
       <label for="inputNombre" class="form-label">Introduzca el ID</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search">
+      <input type="text" id="inputNombre" class="form-control search" name="search" autofocus>
 
       <br>
       <div class="d-flex justify-content-center">

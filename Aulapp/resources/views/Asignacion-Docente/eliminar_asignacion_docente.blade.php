@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
           src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
-      <h3 text-center id="Titulo">Administracion de docente-materia </h3>
+      <h3 text-center id="Titulo">Administración de materia-docente </h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <form class="d-flex m-0">
         <a class="nav-link active" aria-current="page" href="{{url('menu_adm')}}">Inicio</a>
@@ -26,11 +26,11 @@
   <div class="col-12">
 
     <form id="formulario" method="GET" action="{{route('eliminar-asignacion-docente')}}">
-      <h3 text-center>Eliminar asignación del docente</h3>
+      <h3 text-center>Eliminar materia-docente</h3>
       @csrf
 
       <label for="inputNombre" class="form-label">Introduzca el ID</label>
-      <input type="text" id="inputNombre" class="form-control search" name="search">
+      <input type="text" id="inputNombre" class="form-control search" name="search" autofocus>
 
       <br>
       <div class="d-flex justify-content-center">
