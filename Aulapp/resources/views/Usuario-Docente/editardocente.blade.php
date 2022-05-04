@@ -19,7 +19,7 @@
       @csrf
       <h3 text-center>Editar docente</h3>
 
-      <label for="inputtexto" class="form-label ">Coloque el CI de la carrera que quiere editar y presione buscar</label>
+      <label for="inputtexto" class="form-label ">Coloque el CI del docente que quiere editar y presione buscar</label>
       <input type="text" id="inputtexto" class="form-control" name="nombre" value="{{old('nombre')}}" autofocus>
       <br>
       <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="buscar">
@@ -99,7 +99,7 @@
   var formulario=document.getElementById("formulario");
   @foreach ($docentes as $docente)
     @foreach ($urs as $ur )
-      if(texto.value=='{{$docente->CI}}' && '{{$ur->rol_id}}'=='2'){
+      if(texto.value=='{{$docente->CI}}' && '{{$ur->rol_id}}'=='2' && '{{$docente->id}}'== '{{$ur->usuario_id}}'){
           nombre.value='{{$docente->Nombre}}'
           apellido.value= '{{$docente->Apellido}}'
           ci.value='{{$docente->CI}}'

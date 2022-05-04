@@ -145,7 +145,7 @@ buscar.onclick=function(evento){
   var encontrado=0
 
   @foreach ($carreras as $carrera)
-    if(nombre.value== '{{$carrera->codigo}}' && {{$carrera->estado}}==1){
+    if(nombre.value== '{{$carrera->Codigo}}' && {{$carrera->estado}}==1){
       encontrado=1;
     }
   @endforeach

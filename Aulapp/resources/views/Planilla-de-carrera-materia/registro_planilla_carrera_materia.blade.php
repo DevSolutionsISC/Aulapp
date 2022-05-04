@@ -1,8 +1,8 @@
 @extends('plantilla_planillas')
 @section('Titulo','Registro de planillas carrera-materia')
-@section("registrar","grupos")
-@section("reporte","reporte_grupo")
-@section("eliminar","eliminar-grupo")
+@section("registrar","materia_carrera")
+@section("reporte","reporte_carrera_materia")
+@section("eliminar","eliminar-materia-carrera")
 @section("action")
 action={{route('materia_carrera')}}
 @endsection

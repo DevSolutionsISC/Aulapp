@@ -17,7 +17,7 @@
       @csrf
       <h3 text-center>Editar Sección</h3>
 
-      <label for="inputtexto" class="form-label ">Coloque el codigo de la seccion que quiere editar y presione buscar</label>
+      <label for="inputtexto" class="form-label ">Coloque el nombre de la seccion que quiere editar y presione buscar</label>
       <input type="text" id="inputtexto" class="form-control" name="entrada" value="{{old('entrada')}}" autofocus>
       <br>
       <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="buscar">

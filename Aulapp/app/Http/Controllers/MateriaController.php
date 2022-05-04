@@ -101,7 +101,7 @@ class MateriaController extends Controller
  {
   $materia = Materia::find($id);
   $request->validate([
-   'Nombre' => 'required|regex:/^[\pL\s\-]+$/u|min:5|max:60|unique:materias,nombre_materia,' . $materia->id,
+   'Nombre' => 'required|regex:/^[\pL\s\-]+$/u|min:5|max:60',
    'Codigo' => 'required|numeric|digits_between:6,10|unique:materias,Cod_materia,' . $materia->id,
   ]);
   $materia->nombre_materia=$request->Nombre;

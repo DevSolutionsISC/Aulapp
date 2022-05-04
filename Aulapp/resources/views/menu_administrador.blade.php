@@ -30,14 +30,14 @@
         <div>
             <a href="reporte_carrera"class="funcion btn"><span class="letras">Administrador de carreras</span>
                 <span class="material-symbols-outlined icon">
-                    home_pin
+                    book
                     </span>
             </a> 
         </div>
         <div>
             <a href="reporte_aula"class="funcion btn"><span class="letras">Administrador de aulas</span>
                 <span class="material-symbols-outlined icon">
-                    book
+                    home_pin
                     </span>
                     
             </a>
@@ -49,6 +49,21 @@
                     </span>
             </a>
         </div> 
+        <div>
+            <a href="reporte_carrera_materia"class="funcion btn"><span class="letras">Administrador de materia-carrera</span>
+                <span class="material-symbols-outlined icon">
+                    auto_stories
+                    </span> 
+            </a>
+        </div> 
+        <div>
+            <a href="reporte_asignacion_docente"class="funcion btn"><span class="letras">Administrador de materia-docente</span>
+                <span class="material-symbols-outlined icon">
+                    gbadge
+                    </span>
+            </a>
+        </div> 
+
     </div>
     <div class="card mb-3" style="max-width: 540px;" id="presentacion">
         <div class="row g-0">
