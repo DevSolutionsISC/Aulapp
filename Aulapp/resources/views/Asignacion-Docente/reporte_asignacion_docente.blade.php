@@ -28,6 +28,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Materia</th>
+                        <th scope="col">Carrera</th>
                         <th scope="col">Activo</th>
 
                   </tr>
@@ -35,11 +36,14 @@
             <tbody>
                     @foreach($asignacionDocentes as $asignacionDocente)
                    <tr>
-                         <td>{{$asignacionDocente->id}}</td>
-                         <td>{{$asignacionDocente->user_rol->usuario->Nombre}}</td>
-                         <td>{{$asignacionDocente->user_rol->usuario->Apellido}}</td>
-                         <td>{{$asignacionDocente->materia_carrera->materia->nombre_materia}}</td>
-
+                        @if ($asignacionDocente->user_rol_id!="")
+                             
+                       
+                        <td>{{$asignacionDocente->id}}</td>
+                        <td>{{$asignacionDocente->user_rol->usuario->Nombre}}</td>
+                        <td>{{$asignacionDocente->user_rol->usuario->Apellido}}</td>
+                        <td>{{$asignacionDocente->materia_carrera->materia->nombre_materia}}</td>
+                        <td>{{$asignacionDocente->materia_carrera->carrera->Nombre}}</td>
                          @if($asignacionDocente->estado==1)
                                                 
                                 <td>SI</td>
@@ -47,6 +51,7 @@
                           @else
                                 <td>NO</td>
                                                               
+                          @endif
                           @endif
                    </tr>     
                   @endforeach

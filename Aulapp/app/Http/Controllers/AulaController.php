@@ -99,7 +99,7 @@ class AulaController extends Controller
   $aula = Aula::find($id);
   $request->validate([
    'Nombre'    => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/|min:3|max:10|unique:aulas,nombre,' . $aula->id,
-   'capacidad' => 'bail|required|numeric|between:10,500',
+   'capacidad' => 'bail|required|numeric|between:1,300',
   ]);
   $aula->nombre     = $request->Nombre;
   $aula->capacidad  = $request->capacidad;

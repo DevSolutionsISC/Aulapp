@@ -141,7 +141,7 @@ buscar.onclick=function(evento){
   var encontrado=0
 
   @foreach ($materias as $materia)
-    if(nombre.value== '{{$materia->codigo}}' && {{$materia->estado}}==1){
+    if(nombre.value== '{{$materia->Cod_materia}}' && {{$materia->estado}}==1){
       encontrado=1;
     }
   @endforeach

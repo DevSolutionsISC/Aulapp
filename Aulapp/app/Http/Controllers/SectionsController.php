@@ -45,8 +45,8 @@ class SectionsController extends Controller
  {
   $section = Section::find($id);
   $request->validate([
-   'nombre'      => 'required|min:3|max:50|regex:/^[a-zA-Z-ñÑ\s]+$/u|unique:sections,nombre,' . $section->id,
-   'descripcion' => 'required|min:3|max:50|regex:/^[a-zA-Z0-9-ñÑ\s]+$/u',
+   'nombre'      => 'required|min:10|max:50|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/u|unique:sections,nombre,' . $section->id,
+   'descripcion' => 'required|min:10|max:50',
   ]);
 
   $section->nombre      = $request->nombre;

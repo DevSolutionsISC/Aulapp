@@ -28,7 +28,7 @@ class StoreAula extends FormRequest
     {
         
         $validacion=[
-            'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/|min:3|max:5|unique:aulas',
+            'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/|min:3|max:10|unique:aulas',
             'capacidad' => 'bail|required|numeric|between:1,300',
             'seccion'=>'required'
         ];

@@ -7,48 +7,63 @@
     </div>
     <div id="funcionalidades">
         <div>
-            <a href="reporte_user_rol" class="funcion btn"><span class="letras">Administracion de docentes</span> 
+            <a href="reporte_user_rol" class="funcion btn"><span class="letras">Administración de docentes</span> 
                 <span class="material-symbols-outlined icon" >
                     person
                     </span>
             </a>
         </div>
         <div>
-            <a href="reporte_materia" class="funcion btn"><span class="letras">Administracion de materias</span>
+            <a href="reporte_materia" class="funcion btn"><span class="letras">Administración de materias</span>
                 <span class="material-symbols-outlined icon" >
                     menu_book
                     </span>
             </a> 
         </div>
         <div>
-            <a href="reporte_grupo"class="funcion btn"><span class="letras">Administrador de grupos</span>
+            <a href="reporte_grupo"class="funcion btn"><span class="letras">Administración de grupos</span>
                 <span class="material-symbols-outlined icon">
                     group
                     </span>
             </a>
         </div>
         <div>
-            <a href="reporte_carrera"class="funcion btn"><span class="letras">Administrador de carreras</span>
+            <a href="reporte_carrera"class="funcion btn"><span class="letras">Administración de carreras</span>
                 <span class="material-symbols-outlined icon">
-                    home_pin
+                    book
                     </span>
             </a> 
         </div>
         <div>
-            <a href="reporte_aula"class="funcion btn"><span class="letras">Administrador de aulas</span>
+            <a href="reporte_aula"class="funcion btn"><span class="letras">Administración de aulas</span>
                 <span class="material-symbols-outlined icon">
-                    book
+                    home_pin
                     </span>
                     
             </a>
         </div>
         <div>
-            <a href="reporte_section"class="funcion btn"><span class="letras">Administrador de secciones</span>
+            <a href="reporte_section"class="funcion btn"><span class="letras">Administración de secciones</span>
                 <span class="material-symbols-outlined icon">
                     map
                     </span>
             </a>
         </div> 
+        <div>
+            <a href="reporte_carrera_materia"class="funcion btn"><span class="letras">Administración de materia-carrera</span>
+                <span class="material-symbols-outlined icon">
+                    auto_stories
+                    </span> 
+            </a>
+        </div> 
+        <div>
+            <a href="reporte_asignacion_docente"class="funcion btn"><span class="letras">Administración de materia-docente</span>
+                <span class="material-symbols-outlined icon">
+                    gbadge
+                    </span>
+            </a>
+        </div> 
+
     </div>
     <div class="card mb-3" style="max-width: 540px;" id="presentacion">
         <div class="row g-0">

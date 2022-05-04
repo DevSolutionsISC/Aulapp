@@ -1,9 +1,9 @@
 @extends('plantilla')
-@section('title', 'Carreras')
+@section('title', 'Carrera-Materia')
 @section("editar","carreraEdit")
-@section("registrar","carreras")
-@section("reporte","")
-@section("eliminar","eliminar-carrera")
+@section("registrar","materia_carrera")
+@section("reporte","reporte_carrera_materia")
+@section("eliminar","eliminar-materia-carrera")
 @section('Titulo')
 <h3 text-center>Administración de materia-carrera </h3>
 @endsection
@@ -81,5 +81,9 @@
         }
       });
      
+</script>
+<script>
+      var editar=document.getElementById("editar")
+      editar.style.display="none"
 </script>
 @endsection

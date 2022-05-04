@@ -29,7 +29,7 @@
                           <tr>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Capacidad</th>
-                                <th scope="col">Seccion</th>
+                                <th scope="col">Sección</th>
                                 <th scope="col">Activo</th>
                           </tr>
                     </thead>
@@ -67,7 +67,7 @@
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
 <script>
-      $('#tablaAula').DataTable({
+     /* $('#tablaAula').DataTable({
       responsive:true,
       autoWidth:false,
       "language": {
@@ -82,7 +82,7 @@
                   "previous":"Anterior"
             }
         }
-      });
+      });*/
      
 </script>
 @endsection

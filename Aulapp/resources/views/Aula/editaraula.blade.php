@@ -6,7 +6,7 @@
 @section("eliminar","eliminar-aula")
 
 @section('Titulo')
-<h3 text-center id="Titulo">Administracion de Aulas</h3>
+<h3 text-center id="Titulo">Administración de aulas</h3>
 @endsection
 @section('Contenido formulario')
 
@@ -16,9 +16,9 @@
     <form method="GET" action="" id="formulario">
       
       @csrf
-      <h3 text-center>Editar Aula</h3>
+      <h3 text-center>Editar aula</h3>
 
-      <label for="inputtexto" class="form-label ">Coloque el codigo del aula que quiere editar y presione buscar</label>
+      <label for="inputtexto" class="form-label ">Coloque el código del aula que quiere editar y presione buscar</label>
       <input type="text" id="inputtexto" class="form-control" name="nombre" value="{{old('nombre')}}" autofocus>
       <br>
       <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="buscar">
@@ -38,7 +38,7 @@
       <span class="error text-danger" for="inputApellido">{{ $errors->first('capacidad') }}</span>
       <br>
       @endif
-      <label for="asignar" class="ed">Seccion a la que pertenece:</label>
+      <label for="asignar" class="ed">Sección</label>
       <br>
       <select name="section" id="asignar" class="form-select ed"></select>
       <input type="text" name="estadoE" id="estadoE" value="{{old('estadoE')}}">

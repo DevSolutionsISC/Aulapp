@@ -5,7 +5,7 @@
 @section("registrar","carreras")
 @section("reporte","reporte_carrera")
 @section("eliminar","eliminar-carrera")
-<h3 text-center id="Titulo">Administracion de Carreras</h3>
+<h3 text-center id="Titulo">Administración de carreras</h3>
 @endsection
 @section('Contenido formulario')
 

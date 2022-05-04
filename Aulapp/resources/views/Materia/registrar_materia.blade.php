@@ -24,7 +24,7 @@ value="{{old('nombre')}}"
       @endif
       <br>
 @endsection
-@section('NombreCampo2','Codigo')
+@section('NombreCampo2','Código')
 @section('Name2')
 name="codigo"
 @endsection
