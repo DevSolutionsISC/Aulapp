@@ -5,7 +5,7 @@
 @section("registrar","docente")
 @section("reporte","reporte_user_rol")
 @section("eliminar","eliminar-docente")
-<h3 text-center  id="Titulo"> Administracion de docentes</h3>
+<h3 text-center  id="Titulo"> Administración de docentes</h3>
 @endsection
 @section('action')
 action="{{route('docentes')}}"
@@ -39,7 +39,7 @@ value="{{old('apellido')}}"
       <br>
 @endsection
 @section('campos')
-    <label for="input3" class="form-label">Cédula de identidad</label>
+    <label for="input3" class="form-label">CI</label>
     <input type="text" id="input3" class="form-control" name='ci' value="{{old('ci')}}"   autofocus>
     @if ($errors->has('ci'))
           <span class="error text-danger" for="input3"> {{ $errors->first('ci') }}</span>

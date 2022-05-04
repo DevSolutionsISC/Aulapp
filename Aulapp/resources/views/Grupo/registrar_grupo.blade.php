@@ -4,7 +4,11 @@
 @section("reporte","reporte_grupo")
 @section("eliminar","eliminar-grupo")
 @section('Contenido formulario')
-
+@section("Titulo")
+<H3>
+  Administración de grupos
+</H3>
+@endsection
 <div class="row" >
 
   <div class="d-flex" id="formularioEditar">

@@ -7,7 +7,7 @@
 @section("eliminar","eliminar-docente")
 @section('Titulo')
 
-<h3 text-center id="Titulo">Administracion de Docentes</h3>
+<h3 text-center id="Titulo">Administración de docentes</h3>
 @endsection
 @section('Contenido formulario')
 
@@ -45,7 +45,7 @@
       <span class="error text-danger" for="inputCI">{{ $errors->first('CI') }}</span>
       @endif
       <br>
-      <label for="Correo" class="form-label ed">Correo</label>
+      <label for="Correo" class="form-label ed">Email</label>
       <input type="text" id="inputCorreo" class="form-control ed" name="Correo" value="{{old('Correo')}}" autofocus>
       @if ($errors->has('Correo'))
       <span class="error text-danger" for="inputCorreo">{{ $errors->first('Correo') }}</span>

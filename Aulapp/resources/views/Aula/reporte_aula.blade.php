@@ -29,7 +29,7 @@
                           <tr>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Capacidad</th>
-                                <th scope="col">Seccion</th>
+                                <th scope="col">Sección</th>
                                 <th scope="col">Activo</th>
                           </tr>
                     </thead>

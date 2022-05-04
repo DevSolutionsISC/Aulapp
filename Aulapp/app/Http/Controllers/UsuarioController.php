@@ -136,8 +136,9 @@ class UsuarioController extends Controller
   $docente->Email    = $request->Correo;
   $docente->save();
   $sql=DB::table("user_rols")->where(['usuario_id'=>$id])->value('id');
-  $asignacion=asignacionDocentes::find($sql);
+  $asignacion=UserRol::find($sql);
   $asignacion->estado=$request->estadoE;
+  $asignacion->save();
   return redirect()->route('docentes_edit')->with('actualizar', 'ok');
  }
 
