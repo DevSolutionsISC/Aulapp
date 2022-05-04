@@ -5,7 +5,7 @@
 @section("registrar","docente")
 @section("reporte","reporte_user_rol")
 @section("eliminar","eliminar-docente")
-<h3 text-center>Administracion de docentes </h3>
+<h3 text-center>Administración de docentes </h3>
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
