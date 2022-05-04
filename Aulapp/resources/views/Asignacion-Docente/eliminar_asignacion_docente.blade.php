@@ -48,6 +48,8 @@
         @if ($asignacionDocente->estado == true)
 
 
+
+        @if ($asignacionDocente->user_rol_id != "")
         <div class="p-1" id="datosEliminar">
           <h6> <b>Datos de la asignacion materia-docente</b></h6>
 
@@ -60,9 +62,12 @@
           <span><b>Carrera:</b> {{$asignacionDocente->materia_carrera->carrera->Nombre}}</span>
           <br>
           <span><b>Materia:</b> {{$asignacionDocente->materia_carrera->materia->nombre_materia}}</span>
-
-
         </div>
+        @endif
+
+
+
+
 
 
     </form>
