@@ -5,7 +5,7 @@
 @section("reporte","reporte_grupo")
 @section("eliminar","eliminar-grupo")
 @section('Titulo')
-<h3 text-center>Administracion de grupos </h3>
+<h3 text-center>Administración de grupos </h3>
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">

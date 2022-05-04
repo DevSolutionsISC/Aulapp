@@ -5,7 +5,7 @@
 @section("reporte","")
 @section("eliminar","eliminar-carrera")
 @section('Titulo')
-<h3 text-center>Administracion de docentes </h3>
+<h3 text-center>Administracion de materia-docente </h3>
 @endsection
 
 @section('css')

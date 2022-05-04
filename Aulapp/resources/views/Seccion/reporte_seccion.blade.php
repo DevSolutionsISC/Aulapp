@@ -5,7 +5,7 @@
 @section("reporte","reporte_section")
 @section("eliminar","eliminar-seccion")
 @section('Titulo')
-<h3 text-center>Administracion de secciones </h3>
+<h3 text-center>Administración de secciones </h3>
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
