@@ -5,7 +5,7 @@
 @section("reporte","reporte_aula")
 @section("eliminar","eliminar-aula")
 @section('Titulo')
-<h3 text-center>Administracion de aulas </h3>
+<h3 text-center>Administración de aulas </h3>
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
