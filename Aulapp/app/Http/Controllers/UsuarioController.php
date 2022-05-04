@@ -10,6 +10,7 @@ use App\Models\Materia_Carrera;
 use App\Models\UserRol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
@@ -134,6 +135,9 @@ class UsuarioController extends Controller
   $docente->CI       = $request->CI;
   $docente->Email    = $request->Correo;
   $docente->save();
+  $sql=DB::table("user_rols")->where(['usuario_id'=>$id])->value('id');
+  $asignacion=asignacionDocentes::find($sql);
+  $asignacion->estado=$request->estadoE;
   return redirect()->route('docentes_edit')->with('actualizar', 'ok');
  }
 
