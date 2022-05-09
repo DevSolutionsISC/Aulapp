@@ -1,7 +1,7 @@
 @extends('plantilla')
 @section('title', 'Carreras')
 @section("editar","carreraEdit")
-@section("registrar","carreras")
+@section("registrar","materia_docente")
 @section("reporte","")
 @section("eliminar","eliminar-carrera")
 @section('Titulo')

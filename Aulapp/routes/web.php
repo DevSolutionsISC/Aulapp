@@ -8,6 +8,7 @@ use App\Http\Controllers\MateriaCarreraController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\reservaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,6 +99,8 @@ Route::post('/materia_carrera', [MateriaCarreraController::class, 'store'])->nam
 Route::get('/materia_docente', [AsignacionDocenteController::class, 'registro'])->name('materia_docente');
 
 Route::post('/materia_docente', [AsignacionDocenteController::class, 'store'])->name('materia_docente');
+
+Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
 //-----------------------------------------------------------------------------------
 
 //--------------------Rutas de reportes---------------------------------------------------
@@ -143,9 +146,7 @@ Route::get('/', function () {
    Route::get('/menu_docente', function () {
     return view('menu_docente');
    });
-   Route::get('/registrarreserva', function () {
-    return view('registrarreserva');
-   });
+
    Route::get('/bandeja_docente', function () {
     return view('bandeja_docente');
    });

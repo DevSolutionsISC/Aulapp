@@ -107,11 +107,13 @@ body{
         font-family: 'Poppins', sans-serif;
     
 }
-#añadir ,#grupos{
+#añadirD ,#añadirG{
     background-color: black;
-    padding: 10px;
+    margin-top: 10px;
+    font-size: 15px;
     border-radius: 15px;
     color: white;
+    cursor: pointer;
 }
 .form-check-input{
     box-shadow: 6px 6px 1px #E8EDEA;
