@@ -136,7 +136,7 @@
   @if ($ad->user_rol_id == "")
     
   @else
-    if('{{$ad->user_rol->usuario->CI}}'== localStorage.getItem('usuario')){
+    if('{{$ad->user_rol->id}}'== localStorage.getItem('usuario')){
         materia.innerHTML+="<option>{{$ad->materia_carrera->materia->nombre_materia}}</option>"}
         nombre="{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}"
   @endif
