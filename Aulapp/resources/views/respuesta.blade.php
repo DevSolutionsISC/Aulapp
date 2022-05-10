@@ -45,8 +45,11 @@
           <span class="tipo_m">Docentes:</span>
           <span class="tipo_m">Motivo:</span>
           <span class="tipo_m">Fecha:</span>
+          <button class="btn btn-dark" id="btn_aceptar">Aceptar</button>
+          <button class="btn btn-dark" id="btn_rechazar">Rechazar</button>
+          <button class="btn btn-danger" id="btn_cancelar">Cancelar</button>
       </div>
-        <div id="tabla">
+        <div id="aceptado">
            <h5>Seleccione las aulas necesarias para la reserva de:1000 estudiantes</h5>
            <h5>Capacidad asignada</h5>
            <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -106,6 +109,11 @@
             </div>
           </div>
         </div>
+        <div id="rechazado">
+          <h3>Motivo de rechazo</h3>
+          <textarea name="motivo_rechazo" id="motivo_rechazo" cols="60" rows="8"></textarea><br>
+          <button class="btn btn-dark enviar">Enviar</button>
+        </div>
     </div>
   <footer>
   </footer>
@@ -130,16 +138,20 @@
   }
 </script>
 <script>
- var enviados=document.getElementById("enviados")
- var recibidos=document.getElementById("recibidos")
- recibidos.style.background="grey"
- enviados.onclick=function(){
-     enviados.style.background="grey"
-     recibidos.style.background="white"
+ 
+ var btn_aceptar=document.getElementById("btn_aceptar")
+ var btn_rechazar=document.getElementById("btn_rechazar")
+ var btn_cancelar=document.getElementById("btn_cancelar")
+ var aceptado=document.getElementById("aceptado")
+ var rechazado=document.getElementById("rechazado")
+ rechazado.style.display="none"
+ btn_aceptar.onclick=function(){
+   rechazado.style.display="none"
+   aceptado.style.display="block"
  }
- recibidos.onclick=function(){
-     enviados.style.background="white"
-     recibidos.style.background="grey"
+ btn_rechazar.onclick=function(){
+   rechazado.style.display="block"
+   aceptado.style.display="none"
  }
 </script>
 </body>

@@ -93,6 +93,7 @@
                             <option value="3:00">3:00</option>    
                         </select></div>
                         <div class="col"><label>Hrs.</label></div>
+                        <input type="text" name="fechaf" value="8:15" id="fechaf">
                 </div>
               <div class="d-grid gap-2">
                 <button class="btn btn-dark btn-block btn-lg " id="botonRegistrar" type="submit">Guardar</button>
@@ -289,6 +290,29 @@ var valg=document.getElementById("lista_grupos");
 var valc=document.getElementById("cantidad");
 var valm=document.getElementById("motivo");
 var valf=document.getElementById("fecha");
+var fechaf=document.getElementById("fechaf")
+var duracion=document.getElementById("duracion")
+var horario=document.getElementById("horario")
+//--------------------Cambiar hora-------------------------------
+function cambiarHora(){
+  var modificador=fechaf.value.split(":")
+  var entrada=horario.options[horario.selectedIndex].text.split(":")
+  var fin=duracion.options[duracion.selectedIndex].text.split(":")
+  var minutos=parseInt(entrada[1])+parseInt(fin[1])
+  var hora=parseInt(entrada[0])+parseInt(fin[0])
+  if(minutos>=60){
+    minutos-=60
+    hora+=1
+  }
+  fechaf.value=hora+":"+minutos
+}
+duracion.addEventListener('change', (event) => {
+  cambiarHora();
+})
+horario.addEventListener('change', (event) => {
+  cambiarHora();
+})
+//----------------------------------------------------------------
 registrar.onclick=function(event){
   var alerta=0;
   errorg.innerHTML=""
