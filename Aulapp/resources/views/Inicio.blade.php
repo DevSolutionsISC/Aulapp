@@ -32,7 +32,7 @@
             </nav>
           </header>
     </header>
-<div>
+<div id="cont">
     <div id="inicio">
         <h5>Facultad de ciencias y tecnologia</h5>
         <h1>Reserve y administre sus aulas para los examenes presenciales</h1>
