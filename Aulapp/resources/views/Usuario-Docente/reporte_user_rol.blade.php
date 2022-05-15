@@ -66,7 +66,7 @@
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
 <script>
-    /*  $('#tablaDocente').DataTable({
+      $('#tablaDocente').DataTable({
       responsive:true,
       autoWidth:false,
       "language": {
@@ -81,7 +81,6 @@
                   "previous":"Anterior"
             }
         }
-      }); */
-     
+      }); 
 </script>
 @endsection
