@@ -1,9 +1,9 @@
 @extends('plantilla')
-@section('title', 'Carreras')
-@section("editar","carreraEdit")
-@section("registrar","carreras")
+@section('title', 'Asignacion docente')
+@section("editar","")
+@section("registrar","materia_docente")
 @section("reporte","")
-@section("eliminar","eliminar-carrera")
+@section("eliminar","eliminar-asignacion-docente")
 @section('Titulo')
 <h3 text-center>Administracion de materia-docente </h3>
 @endsection
@@ -85,5 +85,9 @@
         }
       });
      
+</script>
+<script>
+      var editar=document.getElementById("editar")
+      editar.style.display="none"
 </script>
 @endsection

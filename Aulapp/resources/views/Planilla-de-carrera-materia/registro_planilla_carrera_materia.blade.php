@@ -1,5 +1,7 @@
 @extends('plantilla_planillas')
-@section('Titulo','Registro de planillas carrera-materia')
+@section('Titulo')
+<h3 text-center id="Titulo">Administración de materia-carrera</h3>
+@endsection
 @section("registrar","materia_carrera")
 @section("reporte","reporte_carrera_materia")
 @section("eliminar","eliminar-materia-carrera")

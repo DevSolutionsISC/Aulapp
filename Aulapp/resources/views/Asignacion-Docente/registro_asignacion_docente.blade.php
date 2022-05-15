@@ -1,13 +1,16 @@
 @extends('plantilla_planillas')
-@section('Titulo','Registro de planillas docente-materia')
-@section("registrar","grupos")
-@section("reporte","reporte_grupo")
-@section("eliminar","eliminar-grupo")
+@section('Titulo')
+<h3>Administración de materia-docente</h3>
+
+@endsection
+@section("registrar","materia_docente")
+@section("reporte","reporte_asignacion_docente")
+@section("eliminar","eliminar-asignacion-docente")
 @section("action")
 action={{route('materia_docente')}}
 @endsection
 @section('Titulo form')
-<h3>Registro de asignacion de docente a materia</h3>
+<h3>Registro de asignación de docente a materia</h3>
 @endsection
 @section('Contenido formulario')
 <label class="form-label">Docente</label>
