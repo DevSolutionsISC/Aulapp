@@ -1,4 +1,5 @@
 @extends('plantilla_planillas')
+
 @section('Titulo')
 <h3>Administración de materia-docente</h3>
 
@@ -6,6 +7,7 @@
 @section("registrar","materia_docente")
 @section("reporte","reporte_asignacion_docente")
 @section("eliminar","eliminar-asignacion-docente")
+
 @section("action")
 action={{route('materia_docente')}}
 @endsection
@@ -17,7 +19,7 @@ action={{route('materia_docente')}}
     <select name="docente" id="docente" class="form-select">
         <option>Seleccione un docente</option>
         @foreach($docentes as $docente)          
-        <option value="{{$docente->id}}">{{$docente->usuario->Nombre}}</option>
+        <option value="{{$docente->id}}">{{$docente->usuario->Nombre}} {{$docente->usuario->Apellido}}</option>
         @endforeach
     </select>
     @if ($errors->has("docente"))

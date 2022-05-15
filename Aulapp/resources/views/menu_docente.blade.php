@@ -7,7 +7,7 @@
     </div>
     <div id="funcionalidades_d">
         <div>
-            <a href="registrarreserva" class="funcion btn"><span class="letras">Realizar reserva</span> 
+            <a href="reserva" class="funcion btn"><span class="letras">Realizar reserva</span> 
                 <span class="material-symbols-outlined icon" >
                     person
                     </span>

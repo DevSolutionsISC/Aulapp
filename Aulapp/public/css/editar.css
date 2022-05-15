@@ -65,6 +65,7 @@ h3{
     
 }
 .A_cont{
+    margin-top: 10px;
     background: white;
     border: solid black 1px;
     width: 200px;
@@ -86,5 +87,8 @@ h3{
     display: none;
 }
 #error_asignacion{
+    color: red;
+}
+.error{
     color: red;
 }

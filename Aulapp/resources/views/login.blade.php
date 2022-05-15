@@ -18,7 +18,7 @@
           <label id="mensajeContraseña"></label>
           <br>
           <div class="d-grid gap-2">
-            <a href="" class="btn btn-dark btn-block btn-lg ed" id="botonRegistrar"
+            <a href="#" class="btn btn-dark btn-block btn-lg ed" id="acceder"
               type="button">Acceder</a>
           </div>
         </form>
@@ -32,5 +32,24 @@
      var campana=document.getElementById("campana");
      campana.style.display="none"
 
+    </script>
+    @php
+      use App\Models\UserRol;
+      $usuarios=UserRol::all();
+    @endphp
+    <script>
+      var acceder=document.getElementById("acceder")
+      var usuario=document.getElementById("inputUsuario")
+      var contraseña=document.getElementById("inputcontraseña")
+      acceder.onclick=function(){
+        @foreach ($usuarios as $u )
+        if('{{$u->usuario->usuario}}'== usuario.value && '{{$u->usuario->usuario}}'==usuario.value){
+          if('{{$u->rol_id}}'==1){
+            location.href="menu_adm"
+          }else{location.href="menu_docente"}
+          localStorage.setItem("usuario", {{$u->id}});
+        }
+      @endforeach
+      }
     </script>
     @endsection

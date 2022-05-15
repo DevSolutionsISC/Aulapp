@@ -1,4 +1,5 @@
 @extends('plantilla')
+
 @section('title', 'Asignacion docente')
 @section("editar","")
 @section("registrar","materia_docente")
