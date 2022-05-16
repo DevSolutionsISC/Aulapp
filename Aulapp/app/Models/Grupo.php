@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\asignacionDocentes;
+
+use App\Models\Materia_Carrera;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,8 +13,8 @@ class Grupo extends Model
     use HasFactory;
     protected $primaryKey = 'id';
     protected $table = 'grupos';
-    public function asignacionDocente()
+    public function materia_carrera()
     {
-        return $this->belongsTo(asignacionDocentes::class, 'asignacion_docentes_id');
+        return $this->belongsTo(Materia_Carrera::class, 'materia_carrera_id');
     }
 }
