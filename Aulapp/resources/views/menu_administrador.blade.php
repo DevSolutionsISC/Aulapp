@@ -63,6 +63,13 @@
                     </span>
             </a>
         </div> 
+        <div>
+            <a href="gestion"class="funcion btn"><span class="letras">Administración de gestion</span>
+                <span class="material-symbols-outlined icon">
+                    date_range
+                    </span>
+            </a>
+        </div> 
 
     </div>
     <div class="card mb-3" style="max-width: 540px;" id="presentacion">

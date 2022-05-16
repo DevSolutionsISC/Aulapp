@@ -31,7 +31,7 @@
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
           <a class="nav-link active" aria-current="page" href="menu_docente" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">DevSolution</a>
+          <a class="nav-link active" aria-current="page" href="#" id="registrar">DevSolution</a>
         </form>
       </div>
     </nav>
@@ -49,13 +49,13 @@
               </select>
                 <label id="nombre">Nombre:</label>
               <br>
-              <input type="text" name="docentes" id="lista_docentes" class="form-control">
+              <input type="text" name="docentes" id="lista_docentes" class="form-control oculto">
               <div id="docentes"></div>
               <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="añadirD">
                 Añadir docente +
                </button><br>
               <label>Grupos:</label><br>
-              <input type="text" name="grupos" id="lista_grupos" class="form-control">
+              <input type="text" name="grupos" id="lista_grupos" class="form-control oculto">
               <div id="grupos"></div>
               <span id="errorg" class="error"></span><br>
               <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="añadirG">
@@ -93,7 +93,7 @@
                             <option value="3:00">3:00</option>    
                         </select></div>
                         <div class="col"><label>Hrs.</label></div>
-                        <input type="text" name="fechaf" value="8:15" id="fechaf">
+                        <input type="text" name="fechaf" value="8:15" id="fechaf" class="oculto">
                 </div>
               <div class="d-grid gap-2">
                 <button class="btn btn-dark btn-block btn-lg " id="botonRegistrar" type="submit">Guardar</button>
@@ -340,10 +340,17 @@ registrar.onclick=function(event){
     alerta=1
   }
   var fecha=new Date(valf.value);
+  var hoy= new Date();
+  console.log(hoy);
+  if(fecha.getTime()<hoy.getTime()){
+    errorf.innerHTML="La fecha no es valida"
+    alerta=1;
+  }
   if(fecha.getDay()==6){
     errorf.innerHTML="La fecha no puede ser domingo"
     alerta=1;
   }
+
   if(valf.value==""){
     errorf.innerHTML="Fecha no valida"
     alerta=1
@@ -351,6 +358,7 @@ registrar.onclick=function(event){
 
   if(alerta==1){
     event.preventDefault();
+
   }
 }
 </script>
