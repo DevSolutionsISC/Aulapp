@@ -16,14 +16,12 @@ class CreateAsignacionDocentesTable extends Migration
         Schema::create('asignacion_docentes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_rol_id')->nullable();
-            $table->unsignedBigInteger('materia_carreras_id');
+            $table->unsignedBigInteger('grupo_id');
 
-            $table->foreign('user_rol_id')
+            $table->foreign('grupo_id')
 
-            ->nullable()->references('id')->on('user_rols')->constrained()->onDelete('cascade');
+            ->references('id')->on('grupos')->constrained()->onDelete('cascade');
 
-            $table->foreign('materia_carreras_id')
-                ->references('id')->on('materia_carreras')->constrained()->onDelete('cascade');
 
             $table->boolean('estado')->default(true);
             $table->timestamps();
