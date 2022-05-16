@@ -89,7 +89,7 @@ class GrupoController extends Controller
  {
   $grupo                         = new Grupo();
   $grupo->nombre                 = "G:".$request->nombre;
-  $grupo->asignacion_docentes_id = $request->docente;
+  $grupo->materia_carrera_id     = $request->materia;
   $grupo->save();
 
   return redirect()->route('grupos')->with('registrar', 'ok');

@@ -5,7 +5,7 @@
 @section("registrar","docente")
 @section("reporte","reporte_user_rol")
 @section("eliminar","eliminar-docente")
-<h3 text-center  id="Titulo"> Administración de docentes</h3>
+<h3 > Administración de docentes</h3>
 @endsection
 @section('action')
 action="{{route('docentes')}}"
