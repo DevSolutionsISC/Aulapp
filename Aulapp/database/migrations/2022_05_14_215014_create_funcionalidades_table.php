@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGruposTable extends Migration
+class CreateFuncionalidadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateGruposTable extends Migration
      */
     public function up()
     {
-        Schema::create('grupos', function (Blueprint $table) {
+        Schema::create('funcionalidades', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->unsignedBigInteger('asignacion_docentes_id');
-            // $table->foreign('asignacion_docentes_id')->references('id')->on('asignacion_docentes')->constrained()->onDelete('cascade');
+            $table->string('icono');
+            $table->string('ruta');
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateGruposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grupos');
+        Schema::dropIfExists('funcionalidades');
     }
 }
