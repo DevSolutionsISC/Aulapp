@@ -30,7 +30,7 @@
         <h3>Realizar reserva</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex" >
-          <a class="nav-link active" aria-current="page" href="menu_docente" id="inicio">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
           <a class="nav-link active" aria-current="page" href="#" id="registrar">DevSolution</a>
         </form>
       </div>
@@ -138,7 +138,7 @@
   
   @foreach ($ads as $ad)
   
-    if('{{$ad->user_rol->id}}'== localStorage.getItem('usuario')  ){
+    if('{{$ad->user_rol->usuario->id}}'== localStorage.getItem('usuario')  ){
       if(!encontrarMateria("{{$ad->grupos->materia_carrera->materia->nombre_materia}}")){
         materia.innerHTML+="<option class='materias'>{{$ad->grupos->materia_carrera->materia->nombre_materia}}</option>"
         nombre='{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}'
