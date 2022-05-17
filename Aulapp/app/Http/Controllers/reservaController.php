@@ -8,6 +8,7 @@ use App\Models\Carrera;
 use App\Models\Grupo;
 use App\Models\Materia;
 use App\Models\Materia_Carrera;
+use App\Models\reserva;
 use App\Models\UserRol;
 use App\Models\Usuario;
 class reservaController extends Controller
@@ -22,14 +23,10 @@ class reservaController extends Controller
     }
     public function registro(){
 
-        $docentes=Usuario::all();
-        $urs=UserRol::all();
-        $mcs=Materia_Carrera::all();
-        $ms=Materia::all();
-        $cs=Carrera::all();
+
         $ads=asignacionDocentes::all();
-        $gs=Grupo::all();
-        return view('registrarreserva',['docentes'=>$docentes,'urs'=>$urs,'mcs'=>$mcs,'ms'=>$ms, 'cs'=>$ms,'cs'=>$cs,'ads'=>$ads,'gs'=>$gs]);
+ 
+        return view('registrarreserva',['ads'=>$ads]);
     }
 
     /**
@@ -51,6 +48,19 @@ class reservaController extends Controller
     public function store(Request $request)
     {
         //
+        $reserva=new reserva();
+        $reserva->motivo=$request->motivo;
+        $reserva->estado="enviado";
+        $reserva->fecha_examen=$request->fecha;
+        $reserva->hora_inicio=$request->horario;
+        $reserva->hora_fin=$request->fechaf;
+        $reserva->cantE=$request->cantidad;
+        $reserva->grupos=$request->grupos;
+        $reserva->docentes=$request->docentes;
+        $reserva->materia=$request->materia;
+        $reserva->user_rol_id=$request->id;
+        $reserva->motivo_rechazo="";
+        $reserva->save();
     }
 
     /**

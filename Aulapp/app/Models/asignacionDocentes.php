@@ -11,13 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 class asignacionDocentes extends Model
 {
     use HasFactory;
-    public function materia_carrera()
-    {
-        return $this->belongsTo(Materia_Carrera::class, 'materia_carreras_id');
-    }
+    
     public function grupos()
     {
-        return $this->hasMany(Grupo::class, 'asignacion_docentes_id');
+        return $this->belongsTo(Grupo::class, 'grupo_id');
     }
     public function user_rol()
     {

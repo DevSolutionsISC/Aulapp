@@ -102,6 +102,7 @@ Route::get('/materia_docente', [AsignacionDocenteController::class, 'registro'])
 Route::post('/materia_docente', [AsignacionDocenteController::class, 'store'])->name('materia_docente');
 
 Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
+Route::post('/reserva', [reservaController::class, 'store'])->name('reserva');
 //-----------------------------------------------------------------------------------
 
 //--------------------Rutas de reportes---------------------------------------------------
