@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\asignacionDocentes;
+use App\Models\reserva;
 use App\Models\Rol;
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,5 +23,9 @@ class UserRol extends Model
     public function asignacionDocentes()
     {
         return $this->hasMany(asignacionDocentes::class, 'user_rol_id');
+    }
+    public function reserva()
+    {
+        return $this->hasMany(reserva::class, 'user_rol_id');
     }
 }

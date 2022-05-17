@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\asignacionDocentes;
-use App\Models\Carrera;
-use App\Models\Grupo;
 use App\Models\Materia;
-use App\Models\Materia_Carrera;
 use App\Models\reserva;
-use App\Models\UserRol;
-use App\Models\Usuario;
+use Illuminate\Http\Request;
+
 class reservaController extends Controller
 {
     /**
@@ -21,12 +17,12 @@ class reservaController extends Controller
     public function index()
     {
     }
-    public function registro(){
+    public function registro()
+    {
 
+        $ads = asignacionDocentes::all();
 
-        $ads=asignacionDocentes::all();
- 
-        return view('registrarreserva',['ads'=>$ads]);
+        return view('registrarreserva', ['ads' => $ads]);
     }
 
     /**
@@ -48,18 +44,18 @@ class reservaController extends Controller
     public function store(Request $request)
     {
         //
-        $reserva=new reserva();
-        $reserva->motivo=$request->motivo;
-        $reserva->estado="enviado";
-        $reserva->fecha_examen=$request->fecha;
-        $reserva->hora_inicio=$request->horario;
-        $reserva->hora_fin=$request->fechaf;
-        $reserva->cantE=$request->cantidad;
-        $reserva->grupos=$request->grupos;
-        $reserva->docentes=$request->docentes;
-        $reserva->materia=$request->materia;
-        $reserva->user_rol_id=$request->id;
-        $reserva->motivo_rechazo="";
+        $reserva = new reserva();
+        $reserva->motivo = $request->motivo;
+        $reserva->estado = "enviado";
+        $reserva->fecha_examen = $request->fecha;
+        $reserva->hora_inicio = $request->horario;
+        $reserva->hora_fin = $request->fechaf;
+        $reserva->cantE = $request->cantidad;
+        $reserva->grupos = $request->grupos;
+        $reserva->docentes = $request->docentes;
+        $reserva->materia = $request->materia;
+        $reserva->user_rol_id = $request->id;
+        $reserva->motivo_rechazo = "";
         $reserva->save();
     }
 
@@ -71,7 +67,8 @@ class reservaController extends Controller
      */
     public function show($id)
     {
-        //
+        $reserva = reserva::find($id);
+        return view('respuesta', compact('reserva'));
     }
 
     /**
