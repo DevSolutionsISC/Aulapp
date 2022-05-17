@@ -1,7 +1,7 @@
 @extends('header')
 @section("notificacion","bandeja_administrador")
 @section('Titulo')
-    <h3>Menu del Administrador</h3>
+    <h3>Menu - Administrador</h3>
 @endsection
 @section('Contenido')
     </div>

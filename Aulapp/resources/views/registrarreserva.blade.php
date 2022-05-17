@@ -365,7 +365,6 @@ registrar.onclick=function(event){
     errorf.innerHTML="La fecha no puede ser domingo"
     alerta=1;
   }
-
   if(valf.value==""){
     errorf.innerHTML="Fecha no valida"
     alerta=1
@@ -373,7 +372,6 @@ registrar.onclick=function(event){
 
   if(alerta==1){
     event.preventDefault();
-
   }
    
 }

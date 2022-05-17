@@ -25,13 +25,20 @@
               <div class="container-fluid">
                 <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
                 @yield('Titulo')
-                <form class="d-flex">
+                <div class="d-flex">
                   <a href="@yield("notificacion")"><span class="material-symbols-outlined" id="campana">
                     notifications
-                    </span></a>
+                    </span>
+                  </a>
                   <a class="nav-link active" aria-current="page" href="#" id="inicio">Inicio</a>
                   <span class="nav-link " >DevSolutions</span>
-                </form>
+                    @if(\Illuminate\Support\Facades\Auth::check())
+                        <form action="/logout" method="POST">
+                            @csrf
+                            <button type="submit" class="nav-link">Salir</button>
+                        </form>
+                    @endif
+                </div>
               </div>
             </nav>
           </header>
