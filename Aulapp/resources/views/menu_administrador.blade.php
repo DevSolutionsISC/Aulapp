@@ -1,7 +1,7 @@
 @extends('header')
 @section("notificacion","bandeja_administrador")
 @section('Titulo')
-    <h3>Menu del Administrador</h3>
+    <h3>Menu - Administrador</h3>
 @endsection
 @section('Contenido')
     </div>
@@ -60,6 +60,13 @@
             <a href="reporte_asignacion_docente"class="funcion btn"><span class="letras">Administración de materia-docente</span>
                 <span class="material-symbols-outlined icon">
                     gbadge
+                    </span>
+            </a>
+        </div> 
+        <div>
+            <a href="gestion"class="funcion btn"><span class="letras">Administración de gestion</span>
+                <span class="material-symbols-outlined icon">
+                    date_range
                     </span>
             </a>
         </div> 

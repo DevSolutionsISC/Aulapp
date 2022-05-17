@@ -29,9 +29,9 @@
         <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
         <h3>Realizar reserva</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
-        <form class="d-flex">
-          <a class="nav-link active" aria-current="page" href="menu_docente" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">DevSolution</a>
+        <form class="d-flex" >
+          <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="#" id="registrar">DevSolution</a>
         </form>
       </div>
     </nav>
@@ -40,22 +40,23 @@
     <div class="row">
         <div >
           <div class="d-flex" id="formularioEditar">
-            <form method="GET" action="" id="formulario">
+            <form method="POST"  id="formulario" {{route('reserva')}}>
               
               @csrf
               <h3 text-center>Realizar reserva</h3>
+              <input type="text" name="id" id="id" class="form-control oculto">
               <label>Materia:</label>
               <select name="materia" id="materia" class="form-select"> 
               </select>
                 <label id="nombre">Nombre:</label>
               <br>
-              <input type="text" name="docentes" id="lista_docentes" class="form-control">
+              <input type="text" name="docentes" id="lista_docentes" class="form-control oculto">
               <div id="docentes"></div>
               <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="añadirD">
                 Añadir docente +
                </button><br>
               <label>Grupos:</label><br>
-              <input type="text" name="grupos" id="lista_grupos" class="form-control">
+              <input type="text" name="grupos" id="lista_grupos" class="form-control oculto">
               <div id="grupos"></div>
               <span id="errorg" class="error"></span><br>
               <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="añadirG">
@@ -63,7 +64,7 @@
                </button>
               <div class="row">
                   <div class="col"><label>Cantidad de estudiantes:</label></div>
-                  <div class="col"><input type="text" id="cantidad" class="form-control"></div>
+                  <div class="col"><input type="text" id="cantidad" name="cantidad" class="form-control"></div>
                   <span id="errorc" class="error"></span>
               </div> 
 
@@ -76,14 +77,14 @@
                     <div class="col"><label>Horario:</label></div>
                     <div class="col"><select name="horario" id="horario" class="form-select">
                         <option value="6:45">6:45</option>
-                        <option value="6:45">8:15</option>
-                        <option value="6:45">9:45</option>
-                        <option value="6:45">11:15</option>
-                        <option value="6:45">12:45</option>
-                        <option value="6:45">14:15</option>
-                        <option value="6:45">15:45</option>
-                        <option value="6:45">17:15</option>
-                        <option value="6:45">18:45</option>
+                        <option value="8:15">8:15</option>
+                        <option value="9:45">9:45</option>
+                        <option value="11:15">11:15</option>
+                        <option value="12:45">12:45</option>
+                        <option value="14:15">14:15</option>
+                        <option value="15:45">15:45</option>
+                        <option value="17:15">17:15</option>
+                        <option value="18:45">18:45</option>
                     </select></div>
                 </div><br>
                 <div class="row">
@@ -93,7 +94,7 @@
                             <option value="3:00">3:00</option>    
                         </select></div>
                         <div class="col"><label>Hrs.</label></div>
-                        <input type="text" name="fechaf" value="8:15" id="fechaf">
+                        <input type="text" name="fechaf" value="8:15" id="fechaf" class="oculto">
                 </div>
               <div class="d-grid gap-2">
                 <button class="btn btn-dark btn-block btn-lg " id="botonRegistrar" type="submit">Guardar</button>
@@ -110,6 +111,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
 <script>
+  var id=document.getElementById("id");
+  id.value=localStorage.getItem('usuario')
   var menu=document.getElementsByClassName("nav-link");
   var btn_menu=document.getElementById("menu")
   btn_menu.onclick=function(){
@@ -132,15 +135,17 @@
   var listaD=document.getElementById("lista_docentes");
   var listaG=document.getElementById("lista_grupos");
   var nombre="";
+  
   @foreach ($ads as $ad)
-  @if ($ad->user_rol_id == "")
-    
-  @else
-    if('{{$ad->user_rol->id}}'== localStorage.getItem('usuario')){
-        materia.innerHTML+="<option>{{$ad->materia_carrera->materia->nombre_materia}}</option>"}
-        nombre="{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}"
-  @endif
-    
+  
+    if('{{$ad->user_rol->usuario->id}}'== localStorage.getItem('usuario')  ){
+      if(!encontrarMateria("{{$ad->grupos->materia_carrera->materia->nombre_materia}}")){
+        materia.innerHTML+="<option class='materias'>{{$ad->grupos->materia_carrera->materia->nombre_materia}}</option>"
+        nombre='{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}'
+      };
+        
+        
+      }
   @endforeach
   listaD.value=nombre
   //--------------------------------------Añadir docente-----------------------------------
@@ -154,13 +159,19 @@
     var docentes= document.createElement("select");
   docentes.className="form-select"
  @foreach ($ads as $ad)
-  @if ($ad->user_rol_id == "")
-    
-  @else
-    if('{{$ad->materia_carrera->materia->nombre_materia}}'== materia.options[materia.selectedIndex].text && !encontrardocente("{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}") ){
-        docentes.innerHTML+="<option>{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}</option>"
-      }
-  @endif
+    if(materia.options[materia.selectedIndex].text == "{{$ad->grupos->materia_carrera->materia->nombre_materia}}" && !encontrardocente('{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}')){
+      
+      setTimeout(() => {
+        if(!encontrarD("{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}")){
+          docentes.innerHTML+='<option class="docs">{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}</option>'
+        }
+       
+      }, 0);
+      
+       
+      
+      
+    }
   @endforeach
     Swal.fire({
   title: 'Elija un docente',
@@ -251,16 +262,18 @@
     grupos.className="form-select"
     var listado=listaD.value.split(",")
 
-    @foreach ($gs as $g)
-    @if ($g->asignacionDocente->user_rol_id == "")
-    
-    @else
-      for(var i=0;i<listado.length;i++){
-        if('{{$g->asignacionDocente->user_rol->usuario->Nombre}} {{$g->asignacionDocente->user_rol->usuario->Apellido}}'== listado[i] && !encontrargrupo('{{$g->nombre}}')){
-          grupos.innerHTML+="<option>{{$g->nombre}}</option>"
+    @foreach ($ads as $ad)
+     for(var i=0; i<listado.length;i++){
+       if("{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}"==listado[i] && materia.options[materia.selectedIndex].text == "{{$ad->grupos->materia_carrera->materia->nombre_materia}}" && !encontrargrupo('{{$ad->grupos->nombre}}')){
+        setTimeout(() => {
+          if(!encontrarG("{{$ad->grupos->nombre}}"))  {
+          grupos.innerHTML+="<option class='groups'>{{$ad->grupos->nombre}}</option>"
         }
-      }
-    @endif
+    
+      }, 0);
+        
+        }
+     }
     @endforeach
     Swal.fire({
   title: 'Elija un grupo',
@@ -314,6 +327,8 @@ horario.addEventListener('change', (event) => {
 })
 //----------------------------------------------------------------
 registrar.onclick=function(event){
+  var formulario=document.getElementById("formulario")
+  
   var alerta=0;
   errorg.innerHTML=""
   errorm.innerHTML=""
@@ -340,6 +355,12 @@ registrar.onclick=function(event){
     alerta=1
   }
   var fecha=new Date(valf.value);
+  var hoy= new Date();
+  
+  if(fecha.getTime()+86399999<hoy.getTime()){
+    errorf.innerHTML="La fecha menor a hoy"
+    alerta=1;
+  }
   if(fecha.getDay()==6){
     errorf.innerHTML="La fecha no puede ser domingo"
     alerta=1;
@@ -352,6 +373,50 @@ registrar.onclick=function(event){
   if(alerta==1){
     event.preventDefault();
   }
+   
 }
+
+  //-------------------------buscar materia----------
+  
+  function encontrarMateria(texto){
+   
+    var materias=document.getElementsByClassName("materias");
+    var alerta=false;
+    for(var i=0;i<materias.length;i++){
+      if(texto== materias[i].innerHTML){
+        alerta=true
+      }
+    }
+    return alerta
+  }
+  //---------------------buscar docente----------------------
+  function encontrarD(texto){
+   
+   var docs=document.getElementsByClassName("docs");
+   var alerta=false;
+   
+   for(var i=0;i<docs.length;i++){
+    
+     
+     if(texto== docs[i].innerHTML){
+       alerta=true
+     }
+   }
+   return alerta
+ }
+ function encontrarG(texto){
+   
+   var groups=document.getElementsByClassName("groups");
+   var alerta=false;
+   
+   for(var i=0;i<groups.length;i++){
+     
+     
+     if(texto== groups[i].innerHTML){
+       alerta=true
+     }
+   }
+   return alerta
+ }
 </script>
 </html>

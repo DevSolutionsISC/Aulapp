@@ -2,23 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Grupo;
-use App\Models\Materia_Carrera;
-use App\Models\UserRol;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class asignacionDocentes extends Model
+class reserva extends Model
 {
     use HasFactory;
-    
-    public function grupos()
-    {
-        return $this->belongsTo(Grupo::class, 'grupo_id');
-    }
     public function user_rol()
     {
         return $this->belongsTo(UserRol::class, 'user_rol_id');
     }
-
 }

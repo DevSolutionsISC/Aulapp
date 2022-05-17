@@ -3,37 +3,33 @@
 <div class="row">
     <div >
       <div class="d-flex" id="formularioEditar">
-        <form method="GET" action="" id="formulario">
-          
+        <form method="POST" action="/login" id="formulario">
+
           @csrf
           <h3 text-center>Iniciar sesión</h3>
           <br>
           <span class="error text-danger" for="input-nombre"></span>
           <label for="inputNombre" class="form-label ">Usuario</label>
-          <input type="text" id="inputUsuario" class="form-control ed" name="Usuario" value="{{old('Usuario')}}" autofocus>
+          <input type="text" id="inputUsuario" class="form-control ed" name="usuario" value="{{old('usuario')}}" autofocus>
           <label id="mensajeUsuario"></label>
           <br>
           <label for="Contraseña" class="form-label ">Contraseña</label>
-          <input type="text" id="inputcontraseña" class="form-control " name="Contraseña" value="{{old('Contraseña')}}" autofocus>
+          <input type="text" id="inputcontraseña" class="form-control " name="contrasenia" value="{{old('contrasenia')}}" autofocus>
           <label id="mensajeContraseña"></label>
           <br>
           <div class="d-grid gap-2">
-            <a href="#" class="btn btn-dark btn-block btn-lg ed" id="acceder"
-              type="button">Acceder</a>
+
+            <button class="btn btn-dark btn-block btn-lg ed" id="acceder" type="submit">
+                Acceder
+            </button>
+
           </div>
         </form>
       </div>
-    
+
     </div>
-    <script>
-      var inicio=document.getElementById("inicio");
-      inicio.href="/"
-
-     var campana=document.getElementById("campana");
-     campana.style.display="none"
-
-    </script>
-    @php
+     <!-- </script>
+    {{--@php
       use App\Models\UserRol;
       $usuarios=UserRol::all();
     @endphp
@@ -51,5 +47,15 @@
         }
       @endforeach
       }
-    </script>
-    @endsection
+    </script>--}}-->
+    <script>
+      var inicio=document.getElementById("inicio");
+      inicio.href="/"
+
+     var campana=document.getElementById("campana");
+     campana.style.display="none"
+
+    
+  
+ @endsection
+

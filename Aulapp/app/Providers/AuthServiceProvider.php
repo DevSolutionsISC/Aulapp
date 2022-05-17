@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        \Illuminate\Support\Facades\Auth::provider('myuserprovider', function($app, array $config) {
+            return new EloquentUserProvider($app['hash'], $config['model']);
+        });
     }
 }
