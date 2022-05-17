@@ -56,12 +56,8 @@ class MateriaCarreraController extends Controller
   $materia_carrera->materia_id = $request->materia;
   $materia_carrera->save();
 
-  $materia_carrera_id = Materia_Carrera::orderByDesc('id')->first();
 
-  $asignacion_null                      = new asignacionDocentes();
-  $asignacion_null->materia_carreras_id = $materia_carrera_id->id;
-
-  $asignacion_null->save();
+  
 
   return redirect()->route('materia_carrera')->with('registrar', 'ok');
  }

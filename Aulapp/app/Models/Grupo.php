@@ -7,6 +7,7 @@ use App\Models\Materia_Carrera;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Grupo extends Model
 {
     //
@@ -17,4 +18,6 @@ class Grupo extends Model
     {
         return $this->belongsTo(Materia_Carrera::class, 'materia_carrera_id');
     }
+
+   
 }

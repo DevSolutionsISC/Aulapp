@@ -48,7 +48,7 @@
       <select name="materia" id="materia" class="form-select">
         <option selected>Seleccione una materia</option>
         @foreach ($materias as $materia)
-        <option value="{{$materia->Cod_materia}}">{{$materia->Cod_materia}} - {{$materia->nombre_materia}}</option>
+        <option value="{{$materia->id}}">{{$materia->Cod_materia}} - {{$materia->nombre_materia}}</option>
         @endforeach
       </select>
       @if ($errors->has("materia"))
@@ -81,7 +81,7 @@
                    if(carrera.options[carrera.selectedIndex].text=="Seleccione una carrera"){
                     
                      @foreach ($materias as $materia)
-                     materias.innerHTML+="<option value={{$materia->Cod_materia}}>{{$materia->Cod_materia}} - {{$materia->nombre_materia}} </option>"
+                     materias.innerHTML+="<option value={{$materia->id}}>{{$materia->Cod_materia}} - {{$materia->nombre_materia}} </option>"
                     @endforeach
                    }
                   });
@@ -103,8 +103,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+  var carrera=document.getElementById("carrera");
   var materia=document.getElementById("materia");
-  if(materia.options[materia.selectedIndex].text=="Seleccione una materia"){
+  if(carrera.options[carrera.selectedIndex].text=="Seleccione una carrera" && materia.options[materia.selectedIndex].text!="Seleccione una materia"){
     $('.Grupo').submit(function(e){
             e.preventDefault();
             Swal.fire({

@@ -4,6 +4,8 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
+
+
 class SeleccionMateri implements Rule
 {
     /**
@@ -11,6 +13,7 @@ class SeleccionMateri implements Rule
      *
      * @return void
      */
+   
     public function __construct()
     {
         //
@@ -23,11 +26,14 @@ class SeleccionMateri implements Rule
      * @param  mixed  $value
      * @return bool
      */
+
+
     public function passes($attribute, $value)
     {
         return $value!="Seleccione una materia";
     }
 
+    
     /**
      * Get the validation error message.
      *
