@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class reserva extends Model
 {
     use HasFactory;
+    public function user_rol()
+    {
+        return $this->belongsTo(UserRol::class, 'user_rol_id');
+    }
 }

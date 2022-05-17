@@ -26,8 +26,12 @@ class CreateReservasTable extends Migration
             $table->string("grupos");
             $table->string("docentes");
             $table->string("materia");
-            $table->string("motivo_rechazo");
+            $table->string("motivo_rechazo")->default(null);
             $table->timestamps();
+            $table->unsignedBigInteger('user_rol_id');
+            $table->foreign('user_rol_id')
+
+            ->references('id')->on('user_rols')->constrained()->onDelete('cascade');
         });
     }
 

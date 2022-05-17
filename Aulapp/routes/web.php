@@ -44,6 +44,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('login', [AuthController::class, 'authenticate']);
 });
 
+
 Route::middleware(['auth'])->group(function () {
 Route::get('/menu', [MenuController::class, 'loadMenu']);
    
@@ -87,6 +88,8 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        Route::get('/materia_docente', [AsignacionDocenteController::class, 'registro'])->name('materia_docente');
        Route::post('/materia_docente', [AsignacionDocenteController::class, 'store'])->name('materia_docente');
        Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
+       Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
+       Route::post('/reserva', [reservaController::class, 'store'])->name('reserva');
        //-----------------------------------------------------------------------------------
        
        //--------------------Rutas de reportes---------------------------------------------------
@@ -138,8 +141,10 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
           Route::get('/aulas_asignadas', function () {
            return view('aulas_asignadas');
           });
-
+          Route::get('/gestion', [gestionController::class, 'index'])->name('estadogestion');
+          Route::get('/gestion/{id}/{id2}/{tipo}', [gestionController::class, 'update'])->name('gestion-update');
 
 
 Route::post('logout', [AuthController::class, 'logout']);
 });
+

@@ -28,7 +28,7 @@ class AuthController extends Controller
         if ($usuario) {
             Auth::login($usuario);
             $request->session()->regenerate();
-            return redirect()->intended('/menu');
+            return redirect()->intended('/menu')->with('id',$usuario->id);
         }
 
         return back()->withErrors([

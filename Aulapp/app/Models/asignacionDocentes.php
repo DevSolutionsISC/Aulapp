@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 class asignacionDocentes extends Model
 {
     use HasFactory;
-
     public function grupos()
     {
         return $this->belongsTo(Grupo::class, 'grupo_id');

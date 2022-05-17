@@ -34,6 +34,11 @@
           </div>
         </div>
       </div>
+      
+  <script>localStorage.setItem("usuario",{{session('id')}});
+ 
+  </script>
+
 @endsection
 </body>
 </html>

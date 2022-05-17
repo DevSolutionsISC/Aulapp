@@ -15,7 +15,7 @@ class CreateAsignacionDocentesTable extends Migration
     {
         Schema::create('asignacion_docentes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_rol_id')->nullable();
+            $table->unsignedBigInteger('user_rol_id');
             $table->unsignedBigInteger('grupo_id');
 
             $table->foreign('grupo_id')
