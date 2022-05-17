@@ -20,8 +20,7 @@ class CreateAsignacionDocentesTable extends Migration
 
             $table->foreign('grupo_id')
 
-            ->references('id')->on('grupos')->constrained()->onDelete('cascade');
-
+                ->references('id')->on('grupos')->constrained()->onDelete('cascade');
 
             $table->boolean('estado')->default(true);
             $table->timestamps();

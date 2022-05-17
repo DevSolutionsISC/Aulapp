@@ -12,150 +12,151 @@ use Illuminate\Http\Request;
 class CarrerasController extends Controller
 {
 
- /**
-  * Display a listing of the resource.
-  *
-  * @return \Illuminate\Http\Response
-  */
- public function index()
- {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
 
-  return view('Carrera.registrar_carrera');
+        return view('Carrera.registrar_carrera');
 
- }
- public function reporte()
- {
-  $carreras = Carrera::all();
-  return view('Carrera.reporte_carrera', compact('carreras'));
+    }
+    public function reporte()
+    {
+        $carreras = Carrera::all();
+        return view('Carrera.reporte_carrera', compact('carreras'));
 
- }
+    }
 
- /**
-  * Show the form for creating a new resource.
-  *
-  * @return \Illuminate\Http\Response
-  */
- public function create()
- {
-  //
- }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
- /**
-  * Store a newly created resource in storage.
-  *
-  * @param  \Illuminate\Http\Request  $request
-  * @return \Illuminate\Http\Response
-  */
- public function store(StoreCarrera $request)
- {
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreCarrera $request)
+    {
 
-  $carrera         = new Carrera();
-  $carrera->Nombre = $request->nombre;
-  $carrera->Codigo = $request->codigo;
+        $carrera = new Carrera();
+        $carrera->Nombre = $request->nombre;
+        $carrera->Codigo = $request->codigo;
 
-  $carrera->save();
+        $carrera->save();
 
-  return redirect()->route('carreras')->with('registrar', 'ok');
- }
+        return redirect()->route('carreras')->with('registrar', 'ok');
+    }
 
- public function cancelar()
- {
+    public function cancelar()
+    {
 
-  return redirect()->route('carreras');
+        return redirect()->route('carreras');
 
- }
- /**
-  * Display the specified resource.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
- public function show($id)
- {
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
 
-  $carrera = Carrera::find($id);
+        $carrera = Carrera::find($id);
 
-  return redirect()->route('carreras')->cookie('id', $carrera->id)->cookie('nombre', $carrera->Nombre)->cookie('codigo', $carrera->Codigo)->cookie('editar', 'ok');
- }
+        return redirect()->route('carreras')->cookie('id', $carrera->id)->cookie('nombre', $carrera->Nombre)->cookie('codigo', $carrera->Codigo)->cookie('editar', 'ok');
+    }
 
- /**
-  * Show the form for editing the specified resource.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
- public function edit($id)
- {
-  //
- }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
- /**
-  * Update the specified resource in storage.
-  *
-  * @param  \Illuminate\Http\Request  $request
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
- public function showEdit()
- {
-  $carreras = Carrera::all();
-  $mcs=Materia_Carrera::all();
-  return view('Carrera.editarcarrera', ['carreras' => $carreras, 'mcs'=>$mcs]);
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showEdit()
+    {
+        $carreras = Carrera::all();
+        $mcs = Materia_Carrera::all();
+        return view('Carrera.editarcarrera', ['carreras' => $carreras, 'mcs' => $mcs]);
 
- }
- public function update(Request $request, $id)
- {
+    }
+    public function update(Request $request, $id)
+    {
 
-  $carrera = Carrera::find($id);
-  $request->validate([
-   'Nombre' => 'bail|required|min:20|max:60|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|unique:carreras,Nombre,'. $carrera->id,
-   'Codigo' => 'bail|required|numeric|digits_between:5,8|unique:carreras,Codigo,' . $carrera->id,
-  ]);
+        $carrera = Carrera::find($id);
+        $request->validate([
+            'Nombre' => 'bail|required|min:20|max:60|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|unique:carreras,Nombre,' . $carrera->id,
+            'Codigo' => 'bail|required|numeric|digits_between:5,8|unique:carreras,Codigo,' . $carrera->id,
+        ]);
 
-  $carrera->Nombre = $request->Nombre;
-  $carrera->Codigo = $request->Codigo;
-  $carrera->estado = $request->estadoE;
-  $carrera->save();
-  return redirect()->route('carrera_edit')->with('actualizar', 'ok');
- }
+        $carrera->Nombre = $request->Nombre;
+        $carrera->Codigo = $request->Codigo;
+        $carrera->estado = $request->estadoE;
+        $carrera->save();
+        return redirect()->route('carrera_edit')->with('actualizar', 'ok');
+    }
 
- /**
-  * Remove the specified resource from storage.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
- public function busqueda(Request $request)
- {
-  try {
-   $carrera = Carrera::query();
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function busqueda(Request $request)
+    {
+        try {
+            $carrera = Carrera::query();
 
-   if ($request->has('search')) {
-    $carrera->where('Codigo', 'like', $request->search);
-   }
-   $carreras = $carrera->get();
-   return view('Carrera.eliminar_carrera', compact('carreras'));
+            if ($request->has('search')) {
+                $carrera->where('Codigo', 'like', $request->search);
+            }
+            $carreras = $carrera->get();
+            return view('Carrera.eliminar_carrera', compact('carreras'));
 
-  } catch (\Throwable $th) {
-   return redirect()->route('eliminar-carrera')->with('buscar', 'error');
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-carrera')->with('buscar', 'error');
 
-  }
+        }
 
- }
- public function estado(Request $request, $carrera)
- {
-  $carrera = Carrera::find($carrera);
-  $carrera->where('id', $request->carrera)->update(['estado' => false]);
+    }
+    public function estado(Request $request, $carrera)
+    {
+        $carrera = Carrera::find($carrera);
+        $carrera->where('id', $request->carrera)->update(['estado' => false]);
 
-  $carrera->materia__carreras()->each(function ($materia_carrera) {
-   $materia_carrera->where('id', $materia_carrera->id)->update(['estado' => false]);
+        $carrera->materia__carreras()->each(function ($materia_carrera) {
+            $materia_carrera->where('id', $materia_carrera->id)->update(['estado' => false]);
+            $materia_carrera->grupos()->each(function ($grupo) {
+                $grupo->where('id', $grupo->id)->update(['estado' => false]);
+                $grupo->asignacionDocentes()->each(function ($asignacionDocentes) {
+                    $asignacionDocentes->where('id', $asignacionDocentes->id)->update(['estado' => false]);
+                });
+            });
+        });
 
-   $materia_carrera->asignacionDocentes()->each(function ($asignacion_docente) {
-    $asignacion_docente->where('id', $asignacion_docente->id)->update(['estado' => false]);
-
-   });
-  });
-
-  return redirect()->route('eliminar-carrera')->with('eliminar', 'ok');
- }
+        return redirect()->route('eliminar-carrera')->with('eliminar', 'ok');
+    }
 }

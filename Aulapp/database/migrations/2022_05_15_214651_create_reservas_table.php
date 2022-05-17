@@ -15,6 +15,8 @@ class CreateReservasTable extends Migration
     {
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_rol_id');
+            $table->foreign('user_rol_id')->references('id')->on('user_rols');
             $table->string("motivo");
             $table->string("estado");
             $table->date("fecha_examen");
