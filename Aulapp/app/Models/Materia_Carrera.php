@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\asignacionDocentes;
 use App\Models\Carrera;
 use App\Models\Materia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,9 +21,9 @@ class Materia_Carrera extends Model
     {
         return $this->belongsTo(Materia::class, 'materia_id');
     }
-    public function asignacionDocentes()
+    public function grupos()
     {
-        return $this->hasMany(AsignacionDocentes::class, 'materia_carreras_id');
+        return $this->hasMany(Grupo::class, 'materia_carrera_id');
     }
 
 }

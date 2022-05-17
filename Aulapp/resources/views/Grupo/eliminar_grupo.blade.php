@@ -40,29 +40,35 @@
         <button class="btn btn-dark btn-block btn-lg" id="buscar">
           Buscar
         </button>
+
       </div>
 
 
       <br>
+
       @if (count($grupos) <= 0) @elseif (count($grupos)> 1)
 
         @elseif (count($grupos) == 1)
         @foreach ($grupos as $grupo )
         @if ($grupo->estado == true)
 
+        @foreach ($asignacionDocentes as $asignacionDocente)
 
+
+        @if ($asignacionDocente->user_rol_id=="")
         <div class="p-1" id="datosEliminar">
           <h6>Datos del grupo</h6>
           <span><b>id:</b>{{$grupo->id}}</span>
           <br>
           <span><b>{{$grupo->nombre}}</b></span>
           <br>
-          @if ($grupo->asignacionDocente->user_rol_id=="")
+
+
           <span><b>Docente:</b>POR DESIGNAR</span>
           <br>
-          <span><b>Carrera:</b> {{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</span>
+          <span><b>Carrera:</b> {{$grupo->materia_carrera->carrera->Nombre}}</span>
           <br>
-          <span><b>Materia:</b> {{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</span>
+          <span><b>Materia:</b> {{$grupo->materia_carrera->materia->nombre_materia}}</span>
         </div>
     </form>
   </div>
@@ -74,30 +80,38 @@
       <button class="btn btn-dark btn-block btn-lg" type="submit">Eliminar</button>
     </form>
     @else
-    <span><b>Docente:</b> {{$grupo->asignacionDocente->user_rol->usuario->Nombre}}
-      {{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</span>
-    <br>
+    <div class="p-1" id="datosEliminar">
+      <h6>Datos del grupo</h6>
+      <span><b>id:</b>{{$grupo->id}}</span>
+      <br>
+      <span><b>{{$grupo->nombre}}</b></span>
+      <br>
+      <span><b>Docente:</b> {{$asignacionDocente->user_rol->usuario->Nombre}}
+        {{$asignacionDocente->user_rol->usuario->Apellido}}</span>
+      <br>
 
-    <span><b>Carrera:</b> {{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</span>
-    <br>
-    <span><b>Materia:</b> {{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</span>
+      <span><b>Carrera:</b> {{$grupo->materia_carrera->carrera->Nombre}}</span>
+      <br>
+      <span><b>Materia:</b> {{$grupo->materia_carrera->materia->nombre_materia}}</span>
+    </div>
+    </form>
   </div>
-  </form>
-</div>
-<div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center">
 
-  <form action="{{route('grupos-destroy', [$grupo->id])}}" method="POST" class="Eliminar">
-    @method('DELETE')
-    @csrf
-    <button class="btn btn-dark btn-block btn-lg" type="submit">Eliminar</button>
-  </form>
+    <form action="{{route('grupos-destroy', [$grupo->id])}}" method="POST" class="Eliminar">
+      @method('DELETE')
+      @csrf
+      <button class="btn btn-dark btn-block btn-lg" type="submit">Eliminar</button>
+    </form>
 
-  @endif
-  @endif
-  @endforeach
-  @endif
+    @endif
+    @break
+    @endforeach
+    @endif
+    @endforeach
+    @endif
 
-</div>
+  </div>
 
 
 
