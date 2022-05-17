@@ -18,8 +18,10 @@ action={{route('materia_docente')}}
 <label class="form-label">Docente</label>
     <select name="docente" id="docente" class="form-select">
         <option>Seleccione un docente</option>
-        @foreach($docentes as $docente)          
+        @foreach($docentes as $docente) 
+        @if ($docente->rol->id != 1)
         <option value="{{$docente->id}}">{{$docente->usuario->Nombre}} {{$docente->usuario->Apellido}}</option>
+        @endif         
         @endforeach
     </select>
     @if ($errors->has("docente"))

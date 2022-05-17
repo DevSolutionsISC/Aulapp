@@ -43,26 +43,14 @@
   <div id="Container" class="container-fluid">
       <div id="tipos"><span class="tipo_m" id="recibidos">Recibidos</span><span class="tipo_m" id="enviados">Enviados</span></div>
         <div id="tabla">
-            <table class="table">
-                <thead>
-                    <th>Fecha de envio</th>
-                    <th>Descripcion</th>
-                </thead>
-                <tbody>
-                    <tr class="table-info">
-                        <td>01/05/2022</td>
-                        <td>Aceptado</td>
-                    </tr>
-                    <tr class="table-warning">
-                        <td>01/05/2022</td>
-                        <td>Cancelado</td>
-                        </tr>
-                    <tr class="table-danger">
-                        <td>01/05/2022</td>
-                        <td>Rechazado</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row" id="titulo_tabla">
+              <div class="col-5">Fecha</div>
+              <div class="col">Descripcion</div>
+            </div>
+            <a href="menu" class="row mensaje">
+              <div class="col-5">17/may/2022</div>
+              <div class="col">Examen elementos primer parcial</div>
+            </a>
         </div>
     </div>
   <footer>

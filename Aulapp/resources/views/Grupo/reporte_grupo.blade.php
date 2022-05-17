@@ -97,4 +97,8 @@
       });
      
 </script>
+<script>
+      var editar=document.getElementById("editar")
+      editar.style.display="none"
+</script>
 @endsection

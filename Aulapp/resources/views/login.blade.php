@@ -54,7 +54,8 @@
 
      var campana=document.getElementById("campana");
      campana.style.display="none"
-
+     
+</script>
     
   
  @endsection

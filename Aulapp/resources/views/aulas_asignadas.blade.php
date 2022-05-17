@@ -34,8 +34,7 @@
             <a href="bandeja_docente"><span class="material-symbols-outlined" id="campana">
                 notifications
                 </span></a>
-          <a class="nav-link active" aria-current="page" href="menu_docente" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">DevSolution</a>
+          <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
         </form>
       </div>
     </nav>
