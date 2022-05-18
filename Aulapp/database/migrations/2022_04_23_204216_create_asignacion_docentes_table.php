@@ -17,14 +17,14 @@ class CreateAsignacionDocentesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_rol_id');
             $table->unsignedBigInteger('grupo_id');
-
-            $table->foreign('grupo_id')
-
-            ->references('id')->on('grupos')->constrained()->onDelete('cascade');
-
+            
             $table->foreign('user_rol_id')
 
             ->references('id')->on('user_rols')->constrained()->onDelete('cascade');
+
+            $table->foreign('grupo_id')
+
+                ->references('id')->on('grupos')->constrained()->onDelete('cascade');
 
             $table->boolean('estado')->default(true);
             $table->timestamps();

@@ -49,15 +49,23 @@
                     <th>Descripcion</th>
                 </thead>
                 <tbody>
-                    <tr class="table-info">
-                        <td>01/05/2022</td>
-                        <td>Aceptado</td>
-                    </tr>
-                    <tr class="table-warning">
+                    
+                 
+                        <tr class="efecto" data-url="{{route('reserva')}}">
+                        
+                            <td>01/05/2022</td>
+                            <td>Aceptado</td>
+                          
+                        </tr>
+
+                 
+                       
+                   
+                    <tr class="efecto">
                         <td>01/05/2022</td>
                         <td>Cancelado</td>
                         </tr>
-                    <tr class="table-danger">
+                    <tr class="efecto">
                         <td>01/05/2022</td>
                         <td>Rechazado</td>
                     </tr>
@@ -69,6 +77,9 @@
   </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
+  <script>
+    $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });})
+  </script>
 <script>
     //menu hamburguesa
   var menu=document.getElementsByClassName("nav-link");

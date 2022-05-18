@@ -43,8 +43,8 @@
                         <td>{{$asignacionDocente->id}}</td>
                         <td>{{$asignacionDocente->user_rol->usuario->Nombre}}</td>
                         <td>{{$asignacionDocente->user_rol->usuario->Apellido}}</td>
-                        <td>{{$asignacionDocente->materia_carrera->materia->nombre_materia}}</td>
-                        <td>{{$asignacionDocente->materia_carrera->carrera->Nombre}}</td>
+                        <td>{{$asignacionDocente->grupos->materia_carrera->materia->nombre_materia}}</td>
+                        <td>{{$asignacionDocente->grupos->materia_carrera->carrera->Nombre}}</td>
                          @if($asignacionDocente->estado==1)
                                                 
                                 <td>SI</td>

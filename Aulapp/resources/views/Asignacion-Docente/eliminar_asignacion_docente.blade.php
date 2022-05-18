@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img id="logo"
           src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
-      <h3 text-center >Administración de materia-docente </h3>
+      <h3 text-center>Administración de materia-docente </h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <form class="d-flex m-0">
         <a class="nav-link active" aria-current="page" href="{{url('menu_adm')}}">Inicio</a>
@@ -59,9 +59,9 @@
             {{$asignacionDocente->user_rol->usuario->Apellido}}</span>
 
           <br>
-          <span><b>Carrera:</b> {{$asignacionDocente->materia_carrera->carrera->Nombre}}</span>
+          <span><b>Carrera:</b> {{$asignacionDocente->grupos->materia_carrera->carrera->Nombre}}</span>
           <br>
-          <span><b>Materia:</b> {{$asignacionDocente->materia_carrera->materia->nombre_materia}}</span>
+          <span><b>Materia:</b> {{$asignacionDocente->grupos->materia_carrera->materia->nombre_materia}}</span>
         </div>
         @endif
 
