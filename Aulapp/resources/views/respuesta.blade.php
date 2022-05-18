@@ -103,15 +103,6 @@
     @yield('js')
 
     <script>
-      @foreach ($aulas_asignadas as $aula_asignada)
-       
-        console.log("aula asignada: "+'{{$aula_asignada->aula->nombre}}');
-        console.log("aula asignada capacidad: "+{{$aula_asignada->aula->capacidad}});
-        console.log("aula asignada cantidad estudiantes: "+{{$aula_asignada->reserva->cantE}});
-        console.log("aula asignada fecha de examen: "+'{{$aula_asignada->reserva->fecha_examen}}');
-        console.log("hora inicio: "+'{{$aula_asignada->reserva->hora_inicio}}');
-        console.log("hora fin: "+'{{$aula_asignada->reserva->hora_fin}}');
-      @endforeach
       var cantidad = {{$reserva->cantE}};    
               @foreach ($sections as $section)
              var seccion = document.getElementById('{{$section->id}}');
@@ -119,14 +110,21 @@
               //console.log('{{$section->nombre}}');
               @foreach ($aulas as $aula)
                 var aula = document.getElementById('{{$aula->id}}');
-              
-              if ('{{$aula->section_id}}'=='{{$section->id}}'){
-                if({{$aula->capacidad}}>90){
-                 aula.innerHTML= 'hola' 
+                if ('{{$aula->section_id}}'=='{{$section->id}}'){
+                @foreach ($aulasAsignadas as $aulaAsignada)
+                  if({{$aula->id}}=={{$aulaAsignada->aula_id}}){
+                    aula.style.display = 'none';
+                    suma = suma - {{$aula->capacidad}};
+                  }else{
+                    suma = suma + {{$aula->capacidad}};
+                    aula.style.display = 'block';
+                  }
+                @endforeach
                 }
-               else{suma = suma + {{$aula->capacidad}};}
+              
+            
                
-              }
+            
               @endforeach
                 console.log(suma);
              if (suma>=cantidad) {

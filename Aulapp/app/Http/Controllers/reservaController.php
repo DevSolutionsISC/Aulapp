@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\asignacionDocentes;
+use App\Models\AulaAsignada;
 use App\Models\Materia;
 use App\Models\reserva;
 use Illuminate\Http\Request;
@@ -68,7 +69,8 @@ class reservaController extends Controller
     public function show($id)
     {
         $reserva = reserva::find($id);
-        return view('respuesta', compact('reserva'));
+        $aulasAsignadas = AulaAsignada::all();
+        return view('respuesta', compact('reserva', 'aulasAsignadas'));
     }
 
     /**
