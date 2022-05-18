@@ -32,8 +32,6 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Materia</th>
                         <th scope="col">Carrera</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
                         <th scope="col">Activo</th>
                       
                     
@@ -44,16 +42,9 @@
                    <tr>
                          <td>{{$grupo->id}}</td>
                          <td>{{$grupo->nombre}}</td>
-                         <td>{{$grupo->asignacionDocente->materia_carrera->materia->nombre_materia}}</td> 
-                         <td>{{$grupo->asignacionDocente->materia_carrera->carrera->Nombre}}</td>
-                         @if ($grupo->asignacionDocente->user_rol_id=="")
-                              <td>POR DESIGNAR</td>  
-                              <td>-</td>
-                         @else
-                              <td>{{$grupo->asignacionDocente->user_rol->usuario->Nombre}}</td>
-                              <td>{{$grupo->asignacionDocente->user_rol->usuario->Apellido}}</td>
-                         @endif
-                        
+                         <td>{{$grupo->materia_carrera->materia->nombre_materia}}</td> 
+                         <td>{{$grupo->materia_carrera->carrera->Nombre}}</td>
+                      
                          
                          @if($grupo->estado==1)
                               
