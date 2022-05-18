@@ -30,7 +30,7 @@
         <h3>Estado de gestion</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-          <a class="nav-link active" aria-current="page" href="menu_adm" id="inicio">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
           <a class="nav-link active" aria-current="page" href="#" id="registrar">DevSolution</a>
         </form>
       </div>

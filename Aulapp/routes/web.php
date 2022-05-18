@@ -122,13 +122,13 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        
        //------------------------------------------------------------------------------------
       
-        Route::get('/menu_adm', function () {
-        return view('menu_administrador');
-        });
-
-        Route::get('/menu_docente', function () {
-           return view('menu_docente');
+         /* Route::get('/menu_adm', function () {
+          return view('menu_administrador');
           });
+
+          Route::get('/menu_docente', function () {
+           return view('menu_docente');
+          });*/
           Route::get('/bandeja_docente', function () {
            return view('bandeja_docente');
           });
