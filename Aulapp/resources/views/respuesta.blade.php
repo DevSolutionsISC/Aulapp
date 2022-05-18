@@ -61,6 +61,8 @@
       $sections=Section::all();
       use App\Models\Aula;
       $aulas=Aula::all();
+      use App\Models\AulaAsignada;
+      $aulas_asignadas=AulaAsignada::all();
 
       @endphp
       <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -78,18 +80,15 @@
             <div class="accordion-body">
               @foreach ($aulas as $aula )
               @if ($aula->section_id==$section->id)
-              <div class="check"><input class="form-check-input" type="checkbox" value="">
+              <div id="{{$aula->id}}" class="check"><input class="form-check-input" type="checkbox" value="">
                 <span>{{$aula->nombre}} {{$aula->capacidad}}</span>
               </div>
               @endif
               @endforeach
-
               <button class="btn enviar">Enviar</button>
             </div>
           </div>
-
         </div>
-
         @endforeach
       </div>
       <div id="rechazado">
@@ -102,18 +101,34 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @yield('js')
+
     <script>
+      @foreach ($aulas_asignadas as $aula_asignada)
+       
+        console.log("aula asignada: "+'{{$aula_asignada->aula->nombre}}');
+        console.log("aula asignada capacidad: "+{{$aula_asignada->aula->capacidad}});
+        console.log("aula asignada cantidad estudiantes: "+{{$aula_asignada->reserva->cantE}});
+        console.log("aula asignada fecha de examen: "+'{{$aula_asignada->reserva->fecha_examen}}');
+        console.log("hora inicio: "+'{{$aula_asignada->reserva->hora_inicio}}');
+        console.log("hora fin: "+'{{$aula_asignada->reserva->hora_fin}}');
+      @endforeach
       var cantidad = {{$reserva->cantE}};    
               @foreach ($sections as $section)
              var seccion = document.getElementById('{{$section->id}}');
               var suma = 0;
               //console.log('{{$section->nombre}}');
               @foreach ($aulas as $aula)
+                var aula = document.getElementById('{{$aula->id}}');
+              
               if ('{{$aula->section_id}}'=='{{$section->id}}'){
-               suma = suma + {{$aula->capacidad}};
+                if({{$aula->capacidad}}>90){
+                 aula.innerHTML= 'hola' 
+                }
+               else{suma = suma + {{$aula->capacidad}};}
+               
               }
-                @endforeach
-                //console.log(suma);
+              @endforeach
+                console.log(suma);
              if (suma>=cantidad) {
              seccion.style.display = 'block';
              }else{
