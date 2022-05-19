@@ -8,14 +8,20 @@
           @csrf
           <h3 text-center>Iniciar sesión</h3>
           <br>
-          <span class="error text-danger" for="input-nombre"></span>
+          <span class="error text-danger" for="input-usuario"></span>
           <label for="inputNombre" class="form-label ">Usuario</label>
           <input type="text" id="inputUsuario" class="form-control ed" name="usuario" value="{{old('usuario')}}" autofocus>
-          <label id="mensajeUsuario"></label>
+          @if ($errors->has('usuario'))
+            <span class="error text-danger" for="input-usuario">{{ $errors->first('usuario') }}</span>
+          @endif
+     
           <br>
           <label for="Contraseña" class="form-label ">Contraseña</label>
           <input type="text" id="inputcontraseña" class="form-control " name="contrasenia" value="{{old('contrasenia')}}" autofocus>
-          <label id="mensajeContraseña"></label>
+          @if ($errors->has('contrasenia'))
+            <span class="error text-danger" for="Contraseña">{{ $errors->first('contrasenia') }}</span>
+          @endif
+     
           <br>
           <div class="d-grid gap-2">
 
