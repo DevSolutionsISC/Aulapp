@@ -2,16 +2,16 @@
 
 use App\Http\Controllers\AsignacionDocenteController;
 use App\Http\Controllers\AulaController;
-use App\Http\Controllers\CarrerasController;
-use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarrerasController;
+use App\Http\Controllers\gestionController;
+use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\MateriaCarreraController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\reservaController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\reservaController;
-use App\Http\Controllers\gestionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,15 +27,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('Inicio');
-   });
-    
+});
 
 /*Route::get('/pass-generate', function () {
-    return bcrypt('papaya');
+return bcrypt('papaya');
 });*/
- 
 
-          
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
         return view('login');
@@ -43,7 +40,6 @@ Route::middleware(['guest'])->group(function () {
 
     Route::post('login', [AuthController::class, 'authenticate']);
 });
-
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/menu', [MenuController::class, 'loadMenu']);
@@ -89,6 +85,7 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        Route::post('/materia_docente', [AsignacionDocenteController::class, 'store'])->name('materia_docente');
        Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
        Route::post('/reserva', [reservaController::class, 'store'])->name('reserva');
+       Route::get('/reserva/{id}', [reservaController::class, 'show'])->name('reserva_show');
        //-----------------------------------------------------------------------------------
        
        //--------------------Rutas de reportes---------------------------------------------------
@@ -146,4 +143,3 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
 
 Route::post('logout', [AuthController::class, 'logout']);
 });
-

@@ -32,10 +32,8 @@
         <form class="d-flex">
           <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
             notifications
-            </span>
+            </span></a>
           <a class="nav-link active" aria-current="page" href="menu_adm" id="inicio">Inicio</a>
-          
-          </a>
         </form>
       </div>
     </nav>
@@ -113,13 +111,13 @@
     cambiar.onclick=function(e){
       e.preventDefault();
 
-      window.location.href="/gestion/{{$id}}/"+id2+"/0";
+      window.location.href="/gestión/{{$id}}/"+id2+"/0";
 
     }
     var nuevo=document.getElementById("nuevo")
     nuevo.onclick=function(e){
       e.preventDefault();
-      window.location.href="/gestion/{{$año}}/{{$id}}/1"
+      window.location.href="/gestión/{{$año}}/{{$id}}/1"
       
     }
   </script>
