@@ -116,23 +116,25 @@
                   suma = suma + {{$aula->capacidad}};
                   @else
                 @foreach ($aulasAsignadas as $aulaAsignada)
-                  if({{$aula->id}}=={{$aulaAsignada->aula_id}} && (('{{$aulaAsignada->reserva->fecha_examen}}'== '{{$reserva->fecha_examen}}') && ('{{$aulaAsignada->reserva->hora_inicio}}' < '{{$aulaAsignada->reserva->hora_fin}}' && '{{$reserva->hora_inicio}}' < '{{$reserva->hora_fin}}'  ) ) ){
+                
+                  @if($aula->id==$aulaAsignada->aula_id && $aulaAsignada->reserva->fecha_examen== $reserva->fecha_examen && ($aulaAsignada->reserva->hora_inicio < $reserva->hora_fin) && ($aulaAsignada->reserva->hora_fin > $reserva->hora_inicio  ) )
+                  
                     aula.style.display = 'none';
-                    suma = suma - {{$aula->capacidad}};
-                  }else{
-                    suma = suma + {{$aula->capacidad}};
-                    aula.style.display = 'block';
-                  }
+                    suma = suma - {{$aula->capacidad}};  
+                                   
+                  @endif
+                  
                 @endforeach
+                suma = suma + {{$aula->capacidad}};                
                 @endif
-                }
+                }            
               @endforeach
-                console.log(suma);
-             if (suma>=cantidad) {
+                console.log(suma);               
+             /* if (suma>=cantidad) {
              seccion.style.display = 'block';
              }else{
-             seccion.style.display = 'none';
-             }
+              seccion.style.display = 'none';
+             } */
               @endforeach
     </script>
 
