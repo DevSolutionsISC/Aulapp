@@ -118,10 +118,12 @@
                 @foreach ($aulasAsignadas as $aulaAsignada)
                   if({{$aula->id}}=={{$aulaAsignada->aula_id}} && (('{{$aulaAsignada->reserva->fecha_examen}}'== '{{$reserva->fecha_examen}}') && ('{{$aulaAsignada->reserva->hora_inicio}}' < '{{$aulaAsignada->reserva->hora_fin}}' && '{{$reserva->hora_inicio}}' < '{{$reserva->hora_fin}}'  ) ) ){
                     aula.style.display = 'none';
-                    suma = suma - {{$aula->capacidad}};
+                    //suma = suma - {{$aula->capacidad}};
+                    //console.log(suma)
                   }else{
                     suma = suma + {{$aula->capacidad}};
                     aula.style.display = 'block';
+                    //console.log(suma)
                   }
                 @endforeach
                 @endif
