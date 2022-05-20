@@ -1,68 +1,96 @@
 @extends("header")
 @section("Contenido")
-<div class="row">
-    <div >
-      <div class="d-flex" id="formularioEditar">
-        <form method="POST" action="/login" id="formulario">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
 
-          @csrf
-          <h3 text-center>Iniciar sesión</h3>
-          <br>
-          <span class="error text-danger" for="input-usuario"></span>
-          <label for="inputNombre" class="form-label ">Usuario</label>
-          <input type="text" id="inputUsuario" class="form-control ed" name="usuario" value="{{old('usuario')}}" autofocus>
-          @if ($errors->has('usuario'))
-            <span class="error text-danger" for="input-usuario">{{ $errors->first('usuario') }}</span>
-          @endif
-     
-          <br>
-          <label for="Contraseña" class="form-label ">Contraseña</label>
-          <input type="text" id="inputcontraseña" class="form-control " name="contrasenia" value="{{old('contrasenia')}}" autofocus>
-          @if ($errors->has('contrasenia'))
-            <span class="error text-danger" for="Contraseña">{{ $errors->first('contrasenia') }}</span>
-          @endif
-     
-          <br>
-          <div class="d-grid gap-2">
+<!-- font awesome  -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
 
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center align-items-center m-0" style="height: 100vh;">
+    <div  class="d-flex" id="formularioEditar">
+
+      <form method="POST" action="/login" id="formulario">
+      @csrf
+      <h3 text-center>Iniciar sesión</h3>
+        <div class="form-row">    
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+              </div>
+              <input name="usuario" type="text" class="form-control" id="username" placeholder="Usuario"  autofocus value="{{old('usuario')}}"/>
+            </div>
+            @if ($errors->has('usuario'))
+               <span class="error text-danger" for="input-usuario">{{ $errors->first('usuario') }}</span>
+            @endif  
+            <br>        
+          </div>
+          
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+              </div>
+              <input name="contrasenia" type="password" class="form-control" id="password" placeholder="Contraseña"  value="{{old('contrasenia')}}" />
+              <div class="input-group-append">
+                <span class="input-group-text" onclick="password_show_hide();">
+                  <i class="fas fa-eye" id="show_eye"></i>
+                  <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                </span>
+              </div>
+            </div>
+            @if ($errors->has('contrasenia'))
+                <span class="error text-danger" for="password">{{ $errors->first('contrasenia') }}</span>
+            @endif
+          </div>
+
+
+          <div class="col-12">
             <button class="btn btn-dark btn-block btn-lg ed" id="acceder" type="submit">
                 Acceder
             </button>
-
           </div>
-        </form>
-      </div>
-
+        </div>
+      </form>
     </div>
-     <!-- </script>
-    {{--@php
-      use App\Models\UserRol;
-      $usuarios=UserRol::all();
-    @endphp
-    <script>
-      var acceder=document.getElementById("acceder")
-      var usuario=document.getElementById("inputUsuario")
-      var contraseña=document.getElementById("inputcontraseña")
-      acceder.onclick=function(){
-        @foreach ($usuarios as $u )
-        if('{{$u->usuario->usuario}}'== usuario.value && '{{$u->usuario->usuario}}'==usuario.value){
-          if('{{$u->rol_id}}'==1){
-            location.href="menu_adm"
-          }else{location.href="menu_docente"}
-          localStorage.setItem("usuario", {{$u->id}});
-        }
-      @endforeach
-      }
-    </script>--}}-->
-    <script>
+  </div>
+</div>
+<script>
       var inicio=document.getElementById("inicio");
       inicio.href="/"
 
      var campana=document.getElementById("campana");
      campana.style.display="none"
-     
 </script>
-    
-  
- @endsection
-
+<script>
+.login_oueter {
+    width: 360px;
+    max-width: 100%;
+}
+.logo_outer{
+    text-align: center;
+}
+.logo_outer img{
+    width:120px;
+    margin-bottom: 40px;
+}
+</script>
+<script>
+function password_show_hide() {
+  var x = document.getElementById("password");
+  var show_eye = document.getElementById("show_eye");
+  var hide_eye = document.getElementById("hide_eye");
+  hide_eye.classList.remove("d-none");
+  if (x.type === "password") {
+    x.type = "text";
+    show_eye.style.display = "none";
+    hide_eye.style.display = "block";
+  } else {
+    x.type = "password";
+    show_eye.style.display = "block";
+    hide_eye.style.display = "none";
+  }
+}
+</script>
+@endsection
