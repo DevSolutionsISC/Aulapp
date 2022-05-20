@@ -33,11 +33,11 @@
         <h3>Responder a solicitud</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-          <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
-              notifications
-            </span></a>
-          <a class="nav-link active" aria-current="page" href="menu_adm" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="@yield(" registrar")" id="registrar">DevSolution</a>
+            <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
+                notifications
+                </span></a>
+          <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">DevSolution</a>
         </form>
       </div>
     </nav>
@@ -124,25 +124,25 @@
                   suma = suma + {{$aula->capacidad}};
                   @else
                 @foreach ($aulasAsignadas as $aulaAsignada)
-                  if({{$aula->id}}=={{$aulaAsignada->aula_id}} && (('{{$aulaAsignada->reserva->fecha_examen}}'== '{{$reserva->fecha_examen}}') && ('{{$aulaAsignada->reserva->hora_inicio}}' < '{{$aulaAsignada->reserva->hora_fin}}' && '{{$reserva->hora_inicio}}' < '{{$reserva->hora_fin}}'  ) ) ){
+                
+                  @if($aula->id==$aulaAsignada->aula_id && $aulaAsignada->reserva->fecha_examen== $reserva->fecha_examen && ($aulaAsignada->reserva->hora_inicio < $reserva->hora_fin) && ($aulaAsignada->reserva->hora_fin > $reserva->hora_inicio  ) )
+                  
                     aula.style.display = 'none';
-                    //suma = suma - {{$aula->capacidad}};
-                    //console.log(suma)
-                  }else{
-                    suma = suma + {{$aula->capacidad}};
-                    aula.style.display = 'block';
-                    //console.log(suma)
-                  }
+                    suma = suma - {{$aula->capacidad}};  
+                                   
+                  @endif
+                  
                 @endforeach
+                suma = suma + {{$aula->capacidad}};                
                 @endif
-                }
+                }            
               @endforeach
-                console.log(suma);
-             if (suma>=cantidad) {
+                console.log(suma);               
+             /* if (suma>=cantidad) {
              seccion.style.display = 'block';
              }else{
-             seccion.style.display = 'none';
-             }
+              seccion.style.display = 'none';
+             } */
               @endforeach
     </script>
 
