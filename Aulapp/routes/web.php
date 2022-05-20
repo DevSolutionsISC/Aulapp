@@ -113,6 +113,7 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        Route::get('/docente/{id}', [UsuarioController::class, 'update'])->name('docente-update');
        Route::get('/grupoEdit', [GrupoController::class, 'showEdit'])->name('grupo_edit');
        Route::get('/grupo/{id}', [GrupoController::class, 'update'])->name('grupo-update');
+       Route::post('/bandeja_administrador/{id}/{estado}', [reservaController::class, 'respuesta'])->name('responder');
        //------------------------------------------------------------------------------
        
        
@@ -130,7 +131,7 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
           });
           Route::get('/bandeja_administrador', function () {
            return view('bandeja_administrador');
-          });
+          })->name("bandeja_administrador");
           Route::get('/respuesta', function () {
            return view('respuesta');
           });

@@ -72,7 +72,12 @@ class reservaController extends Controller
         $aulasAsignadas = AulaAsignada::all();
         return view('respuesta', compact('reserva', 'aulasAsignadas'));
     }
-
+    public function respuesta(Request $request,$id, $estado){
+        $request->validate([
+            'motivo_rechazo' => 'required'
+        ]);
+       // return redirect()->route('bandeja_administrador')->with('actualizar', 'ok');
+    }
     /**
      * Show the form for editing the specified resource.
      *

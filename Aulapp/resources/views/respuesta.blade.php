@@ -92,11 +92,19 @@
         </div>
         @endforeach
       </div>
-      <div id="rechazado">
+      
+    </div>
+    <div id="rechazado">
+      <form action="{{route('responder', ['id'=>$reserva->id, 'estado'=>0])}}" method="post">
+        @csrf
         <h3>Motivo de rechazo</h3>
         <textarea name="motivo_rechazo" id="motivo_rechazo" cols="60" rows="8"></textarea><br>
+        @if ($errors->has("motivo_rechazo"))
+            <span class="error text-danger" for="motivo_rechazo">{{ $errors->first("motivo_rechazo") }}</span>
+            @endif
         <button class="btn btn-dark enviar">Enviar</button>
-      </div>
+      </form>
+     
     </div>
     <footer>
     </footer>
