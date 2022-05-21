@@ -30,8 +30,11 @@
         <h3>Realizar reserva</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex" >
+          <a href="bandeja_docente"><span class="material-symbols-outlined" id="campana">
+            notifications
+            </span></a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="#" id="registrar">DevSolution</a>
+          
         </form>
       </div>
     </nav>
@@ -55,7 +58,7 @@
               <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="añadirD">
                 Añadir docente +
                </button><br>
-              <label>Grupos:</label><br>
+              <label>Grupos:</label>
               <input type="text" name="grupos" id="lista_grupos" class="form-control oculto">
               <div id="grupos"></div>
               <span id="errorg" class="error"></span><br>
@@ -63,19 +66,23 @@
                 Añadir grupo +
                </button>
               <div class="row">
-                  <div class="col"><label>Cantidad de estudiantes:</label></div>
-                  <div class="col"><input type="text" id="cantidad" name="cantidad" class="form-control"></div>
+                  <div class="col-5"><label>Cantidad de estudiantes:</label></div>
+                  <div class="col-5"><input type="text" id="cantidad" name="cantidad" class="form-control"></div>
                   <span id="errorc" class="error"></span>
               </div> 
 
-              <label>Motivo</label><br>
+              <label>Motivo:</label><br>
               <textarea name="motivo" id="motivo" cols="45" rows="3" class="form-control"></textarea>
               <span id="errorm" class="error"></span><br>
-                <label>Fecha: </label> <input type="date" name="fecha" id="fecha" class="date"><br>
+                <div class="row">
+                  <div class="col-5"><label>Fecha: </label></div> 
+                    <div class="col-5"><input type="date" name="fecha" id="fecha" class="date"><br></div>
+                </div>
+                
                 <span id="errorf" class="error"></span><br>
                 <div class="row">
-                    <div class="col"><label>Horario:</label></div>
-                    <div class="col"><select name="horario" id="horario" class="form-select">
+                    <div class="col-5"><label>Horario:</label></div>
+                    <div class="col-5"><select name="horario" id="horario" class="form-select">
                         <option value="6:45">6:45</option>
                         <option value="8:15">8:15</option>
                         <option value="9:45">9:45</option>
@@ -88,8 +95,8 @@
                     </select></div>
                 </div><br>
                 <div class="row">
-                        <div class="col"><label>Duración:</label></div>
-                        <div class="col"><select name="duracion" id="duracion" class="form-select">
+                        <div class="col-5"><label>Duración:</label></div>
+                        <div class="col-5"><select name="duracion" id="duracion" class="form-select">
                             <option value="1:30">1:30</option>
                             <option value="3:00">3:00</option>    
                         </select></div>

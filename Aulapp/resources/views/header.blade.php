@@ -31,7 +31,7 @@
                     </span>
                   </a>
                   <a class="nav-link active" aria-current="page" href="#" id="inicio">Inicio</a>
-                  <span class="nav-link " >DevSolutions</span>
+                  
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <form action="/logout" method="POST">
                             @csrf

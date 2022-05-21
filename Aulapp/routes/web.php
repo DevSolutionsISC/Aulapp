@@ -30,11 +30,19 @@ Route::get('/', function () {
    });
     
 
-/*Route::get('/pass-generate', function () {
-    return bcrypt('papaya');
-});*/
- 
+       /*Route::get('/pass-generate', function () {
+                return bcrypt('papaya');
+          });
+            Route::get('/menu_adm', function () {
+                return view('menu_administrador');
+                });
 
+          Route::get('/menu_docente', function () {
+           return view('menu_docente');
+          });
+                   /* Route::get('/bandeja_administrador', function () {
+           return view('bandeja_administrador');
+          });*/
           
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
@@ -122,22 +130,16 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        
        //------------------------------------------------------------------------------------
       
-        Route::get('/menu_adm', function () {
-        return view('menu_administrador');
-        });
 
-        Route::get('/menu_docente', function () {
-           return view('menu_docente');
-          });
           Route::get('/bandeja_docente', function () {
            return view('bandeja_docente');
           });
-          Route::get('/bandeja_administrador', function () {
-           return view('bandeja_administrador');
-          });
+
           Route::get('/respuesta', function () {
-           return view('respuesta');
-          });
+            return view('respuesta');
+           });
+           Route::get('/respuesta/{id}', [reservaController::class, 'show'])->name('respuesta');
+           Route::get('/respuestaAdmin', [reservaController::class, 'reportePeticiones'])->name('respuestaAdmin');
           Route::get('/aulas_asignadas', function () {
            return view('aulas_asignadas');
           });

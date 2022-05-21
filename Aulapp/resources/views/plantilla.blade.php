@@ -30,7 +30,7 @@
         @yield('Titulo')
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-          <a class="nav-link active" aria-current="page" href="menu_adm" id="inicio">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
           <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">Registrar</a>
           <a class="nav-link active" aria-current="page" href="@yield("editar")" id="editar">Editar</a>
           <a class="nav-link active" aria-current="page" href="@yield("eliminar")" id="eliminar">Eliminar</a>

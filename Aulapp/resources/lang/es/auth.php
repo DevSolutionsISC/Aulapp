@@ -12,8 +12,8 @@ return [
     | Estas líneas lingüísticas de acuerdo a los requisitos de su aplicación.
     |
      */
-
-    'failed' => 'Las credenciales introducidas son incorrectas.',
+    
+    'failed' => 'Usuario y/o contraseña no válido.',
     'password' => 'La contraseña es incorrecta.',
     'throttle' => 'Demasiados intentos de acceso. Inténtelo de nuevo en :seconds segundos.',
 

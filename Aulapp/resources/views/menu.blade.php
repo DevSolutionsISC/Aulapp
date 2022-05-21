@@ -1,7 +1,7 @@
 @extends('header')
 @section("notificacion")
   @if($rol->id == 1)
-      bandeja_administrador
+      respuestaAdmin
   @else
       bandeja_docente
   @endif
@@ -20,20 +20,38 @@
             />
         @endforeach
     </div>
+    @if ($rol->id == 1)
     <div class="card mb-3" style="max-width: 540px;" id="presentacion">
-        <div class="row g-0">
-          <div class="col-md-6">
-            <img src="{{asset('Imagenes/admi.svg')}}" class="img-fluid rounded-start" alt="..." id="admi">
-          </div>
-          <div class="col-md-6">
-            <div class="card-body">
-              <h5 class="card-title">{{ $rol->nombre }}</h5>
-              <p class="card-text">Con Aulapp ahora podrás administrar las solicitudes y asignaciones de reservas de aulas de la Facultad de Ciencias y Tecnologia de la Universidad Mayor de San Simón</p>
-              <p class="card-text"><small class="text-muted">Aqui tienes las diferentes funciones que te ofrece Aulapp</small></p>
-            </div>
+      <div class="row g-0">
+        <div class="col-md-6">
+          <img src="{{asset('Imagenes/admi.svg')}}" class="img-fluid rounded-start" alt="..." id="admi">
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title">{{ $rol->nombre }}</h5>
+            <p class="card-text">Con Aulapp ahora podrás administrar las solicitudes y asignaciones de reservas de aulas de la Facultad de Ciencias y Tecnologia de la Universidad Mayor de San Simón</p>
+            <p class="card-text"><small class="text-muted">Aqui tienes las diferentes funciones que te ofrece Aulapp</small></p>
           </div>
         </div>
       </div>
+    </div>
+    @else
+    <div class="card mb-3" style="max-width: 540px;" id="presentacion">
+      <div class="row g-0">
+        <div class="col-md-6">
+          <img src="{{asset('Imagenes/docente.svg')}}" class="img-fluid rounded-start" alt="..." id="doc">
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title">Administrador</h5>
+            <p class="card-text">Con Aulapp ahora podrás administrar las solicitudes y asignaciones de reservas de aulas de la Facultad de Ciencias y Tecnologia de la Universidad Mayor de San Simón</p>
+            <p class="card-text"><small class="text-muted">Aqui tienes las diferentes funciones que te ofrece Aulapp</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    @endif
+    
       
   <script>localStorage.setItem("usuario",{{session('id')}});
  

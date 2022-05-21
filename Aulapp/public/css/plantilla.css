@@ -1,5 +1,17 @@
 .nav-link {
     color: black;
+    border: 0px black solid;
+    background-color: #F8F9FA;
+}
+#campana{
+    display: block;
+    color: black;
+    padding-top: 8px;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+    color: black;
 }
 nav {
     border-bottom: #c7c6c8 solid;
@@ -121,4 +133,16 @@ body{
 }
 #estadoE{
     display: none;
+}
+#titulo_tabla{
+    border-bottom: black solid 2px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+.mensaje{
+    
+    background-color: aqua;
+}
+.mensaje:hover{
+color: black;
 }
