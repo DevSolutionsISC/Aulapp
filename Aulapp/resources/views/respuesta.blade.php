@@ -69,7 +69,7 @@
       @endphp
       <div class="accordion accordion-flush" id="accordionFlushExample">
         @foreach ($sections as $section)
-        <div id="{{$section->id}}" class="accordion-item">
+        <div id="seccion-{{$section->id}}" class="accordion-item">
 
           <h2 class="accordion-header" id="flush-headingOne">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -107,7 +107,7 @@
     <script>
       var cantidad = {{$reserva->cantE}};    
               @foreach ($sections as $section)
-             var seccion = document.getElementById('{{$section->id}}');
+             var seccion = document.getElementById('seccion-{{$section->id}}');
               var suma = 0;
               //console.log('{{$section->nombre}}');
               @foreach ($aulas as $aula)
