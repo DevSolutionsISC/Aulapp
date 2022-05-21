@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\asignacionDocentes;
+use App\Models\Aula;
 use App\Models\AulaAsignada;
 use App\Models\Materia;
 use App\Models\reserva;
@@ -83,9 +84,21 @@ class reservaController extends Controller
             $rechazado->estado="Rechazado";
             $rechazado->motivo_rechazo=$request->motivo_rechazo;
             $rechazado->save();
+        }else{
+            $aceptado=reserva::find($id);
+            $aceptado->estado="Aceptado";
+            $aceptado->save();
+            $aulas=explode(",",$request->aulas_nombres);
+            for( $i =0;$i<sizeof($aulas);$i++){
+                $aula_asignada=new AulaAsignada();
+                $sql=Aula::where("nombre",$aulas[$i])->value("id");
+                $aula_asignada->reserva_id=$id;
+                $aula_asignada->aula_id=$sql;
+                $aula_asignada->save();
+            }
         }
         
-       // return redirect()->route('bandeja_administrador')->with('actualizar', 'ok');
+       return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
     }
     public function reportePeticiones()
     {

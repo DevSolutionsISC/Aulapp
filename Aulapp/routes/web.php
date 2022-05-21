@@ -96,7 +96,6 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        Route::get('/materia_docente', [AsignacionDocenteController::class, 'registro'])->name('materia_docente');
        Route::post('/materia_docente', [AsignacionDocenteController::class, 'store'])->name('materia_docente');
        Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
-       Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
        Route::post('/reserva', [reservaController::class, 'store'])->name('reserva');
        //-----------------------------------------------------------------------------------
        
@@ -135,14 +134,6 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
           Route::get('/bandeja_docente', function () {
            return view('bandeja_docente');
           });
-          Route::get('/bandeja_administrador', function () {
-           return view('bandeja_administrador');
-          })->name("bandeja_administrador");
-
-
-          Route::get('/respuesta', function () {
-            return view('respuesta');
-           });
            Route::get('/respuesta/{id}', [reservaController::class, 'show'])->name('respuesta');
            Route::get('/respuestaAdmin', [reservaController::class, 'reportePeticiones'])->name('respuestaAdmin');
           Route::get('/aulas_asignadas', function () {
