@@ -33,17 +33,17 @@
         <h3>Responder a solicitud</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-            <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
-                notifications
-                </span></a>
+          <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
+              notifications
+            </span></a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">DevSolution</a>
+          <a class="nav-link active" aria-current="page" href="@yield(" registrar")" id="registrar">DevSolution</a>
         </form>
       </div>
     </nav>
   </header>
   <div id="Container" class="container-fluid">
-    
+
     <div id="tipos">
       <span class="tipo_m"><b>Docentes:</b> {{$reserva->docentes }}</span>
       <span class="tipo_m"><b>Motivo:</b>{{$reserva->motivo }}</span>
@@ -130,12 +130,10 @@
                 @endif
                 }            
               @endforeach
-                console.log(suma);               
-             /* if (suma>=cantidad) {
-             seccion.style.display = 'block';
-             }else{
-              seccion.style.display = 'none';
-             } */
+                console.log(suma);  
+                if(suma<cantidad){
+                  seccion.style.display = 'none';
+                }             
               @endforeach
     </script>
 
