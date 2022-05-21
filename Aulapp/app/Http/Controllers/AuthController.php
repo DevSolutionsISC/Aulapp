@@ -15,14 +15,15 @@ class AuthController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
+   
     public function authenticate(StoreLogin $request): RedirectResponse
     {
+
         $credentials = $request->validate([
             'usuario' => ['required'],
             'contrasenia' => ['required'],
         ]);
-
-
+       
         $usuario = Usuario::query()
             ->where('usuario', $credentials['usuario'])
             ->where('contrasenia', $credentials['contrasenia'])
@@ -37,8 +38,8 @@ class AuthController extends Controller
         }
          else{
             throw \Illuminate\Validation\ValidationException::withMessages([
-                'usuario' => __('auth.failed'),
-                'contrasenia' => __('auth.failed')
+    
+                'contrasenia' => __('auth.password')
                 
             ]);
          }     

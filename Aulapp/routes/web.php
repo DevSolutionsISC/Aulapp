@@ -2,16 +2,16 @@
 
 use App\Http\Controllers\AsignacionDocenteController;
 use App\Http\Controllers\AulaController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarrerasController;
-use App\Http\Controllers\gestionController;
 use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MateriaCarreraController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\reservaController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\reservaController;
+use App\Http\Controllers\gestionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,12 +27,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('Inicio');
-});
+   });
+    
 
-/*Route::get('/pass-generate', function () {
-return bcrypt('papaya');
-});*/
+       /*Route::get('/pass-generate', function () {
+                return bcrypt('papaya');
+          });
+            Route::get('/menu_adm', function () {
+                return view('menu_administrador');
+                });
 
+          Route::get('/menu_docente', function () {
+           return view('menu_docente');
+          });
+                   /* Route::get('/bandeja_administrador', function () {
+           return view('bandeja_administrador');
+          });*/
+          
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
         return view('login');
@@ -40,6 +51,7 @@ Route::middleware(['guest'])->group(function () {
 
     Route::post('login', [AuthController::class, 'authenticate']);
 });
+
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/menu', [MenuController::class, 'loadMenu']);
@@ -84,8 +96,8 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        Route::get('/materia_docente', [AsignacionDocenteController::class, 'registro'])->name('materia_docente');
        Route::post('/materia_docente', [AsignacionDocenteController::class, 'store'])->name('materia_docente');
        Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
+       Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
        Route::post('/reserva', [reservaController::class, 'store'])->name('reserva');
-       Route::get('/reserva/{id}', [reservaController::class, 'show'])->name('reserva_show');
        //-----------------------------------------------------------------------------------
        
        //--------------------Rutas de reportes---------------------------------------------------
@@ -119,28 +131,27 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        
        //------------------------------------------------------------------------------------
       
-        Route::get('/menu_adm', function () {
-        return view('menu_administrador');
-        });
 
-        Route::get('/menu_docente', function () {
-           return view('menu_docente');
-          });
           Route::get('/bandeja_docente', function () {
            return view('bandeja_docente');
           });
           Route::get('/bandeja_administrador', function () {
            return view('bandeja_administrador');
           })->name("bandeja_administrador");
+
+
           Route::get('/respuesta', function () {
-           return view('respuesta');
-          });
+            return view('respuesta');
+           });
+           Route::get('/respuesta/{id}', [reservaController::class, 'show'])->name('respuesta');
+           Route::get('/respuestaAdmin', [reservaController::class, 'reportePeticiones'])->name('respuestaAdmin');
           Route::get('/aulas_asignadas', function () {
            return view('aulas_asignadas');
           });
-          Route::get('/gestión', [gestionController::class, 'index'])->name('estadogestion');
-          Route::get('/gestión/{id}/{id2}/{tipo}', [gestionController::class, 'update'])->name('gestion-update');
+          Route::get('/gestion', [gestionController::class, 'index'])->name('estadogestion');
+          Route::get('/gestion/{id}/{id2}/{tipo}', [gestionController::class, 'update'])->name('gestion-update');
 
 
 Route::post('logout', [AuthController::class, 'logout']);
 });
+

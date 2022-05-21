@@ -28,10 +28,10 @@
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
-        <h3>Bandeja de solicitudes pendientes</h3>
+        <h3>Bandeja de solicitudes </h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-            <a href=""><span class="material-symbols-outlined" id="campana">
+            <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
                 notifications
                 </span></a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
@@ -39,35 +39,46 @@
       </div>
     </nav>
   </header>
-  <div id="Container" class="container-fluid">
-      <div id="tipos"><span class="tipo_m" id="recibidos">Por llegada</span><span class="tipo_m" id="enviados">Por urgencia</span></div>
+    <div id="Container" class="container-fluid">
+            <div id="tipos">
+              
+            <span class="tipo_m" id="recibidos">Por llegada</span>
+            <span class="tipo_m" id="enviados">Por urgencia</span>
+
+           </div>
         <div id="tabla">
             <table class="table">
                 <thead>
-                    <th>Fecha de envio</th>
-                    <th>Descripcion</th>
+                    <th>Nombre</th>
+                    <th>Motivo</th>
+                    <th>Fecha de envío</th>
                 </thead>
                 <tbody>
+                   @foreach($reservas as $reservaBandeja)
                     <tr >
-                        <td>01/05/2022</td>
-                        <td>Aceptado</td>
-                    </tr>
-                    <tr >
-                        <td>01/05/2022</td>
-                        <td>Cancelado</td>
-                        </tr>
-                    <tr >
-                        <td>01/05/2022</td>
-                        <td>Rechazado</td>
-                    </tr>
+    
+                        <td>{{$reservaBandeja->docentes}}</td>
+                        <td>{{$reservaBandeja->motivo}}</td>
+                        <td>{{$reservaBandeja->created_at}}</td>
+                       
+                        <td>    
+                       
+                        <a href="{{ url("/respuesta/{$reservaBandeja->id}") }}">Ver detalles</a>
+                      
+                        </td>
+      
+                    </tr>   
+                    @endforeach           
                 </tbody>
             </table>
         </div>
     </div>
+
   <footer>
   </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
+
 <script>
     //menu hamburguesa
   var menu=document.getElementsByClassName("nav-link");
@@ -99,6 +110,8 @@
      recibidos.style.background="grey"
  }
 </script>
+
+
 </body>
 
 </html>
