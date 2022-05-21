@@ -37,7 +37,6 @@
                 notifications
                 </span></a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">DevSolution</a>
         </form>
       </div>
     </nav>
@@ -100,9 +99,9 @@
         <h3>Motivo de rechazo</h3>
         <textarea name="motivo_rechazo" id="motivo_rechazo" cols="60" rows="8"></textarea><br>
         @if ($errors->has("motivo_rechazo"))
-            <span class="error text-danger" for="motivo_rechazo">{{ $errors->first("motivo_rechazo") }}</span>
+            <span class="error text-danger" for="motivo_rechazo" id="error_mr">{{ $errors->first("motivo_rechazo") }}</span>
             @endif
-        <button class="btn btn-dark enviar">Enviar</button>
+        <button class="btn btn-dark enviar" id="btn_rechazo">Enviar</button>
       </form>
      
     </div>
@@ -167,20 +166,26 @@
     </script>
     <script>
       var btn_aceptar=document.getElementById("btn_aceptar")
- var btn_rechazar=document.getElementById("btn_rechazar")
- var btn_cancelar=document.getElementById("btn_cancelar")
- var aceptado=document.getElementById("aceptado")
- var rechazado=document.getElementById("rechazado")
- rechazado.style.display="none"
- btn_aceptar.onclick=function(){
-   rechazado.style.display="none"
-   aceptado.style.display="block"
- }
- btn_rechazar.onclick=function(){
+      var btn_rechazar=document.getElementById("btn_rechazar")
+      var btn_cancelar=document.getElementById("btn_cancelar")
+      var aceptado=document.getElementById("aceptado")
+      var rechazado=document.getElementById("rechazado")
+      rechazado.style.display="none"
+      btn_aceptar.onclick=function(){
+      rechazado.style.display="none"
+      aceptado.style.display="block"
+      }
+      btn_rechazar.onclick=function(){
 
-   rechazado.style.display="block"
-   aceptado.style.display="none"
- }
+      rechazado.style.display="block"
+      aceptado.style.display="none"
+      }
+      //-----------mostrar mensaje de error de motivo rechazo vacio
+      var error_mr=document.getElementById("error_mr")
+      if(error_mr != null){
+        rechazado.style.display="block"
+        aceptado.style.display="none"
+      }
     </script>
 </body>
 

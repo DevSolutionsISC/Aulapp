@@ -73,9 +73,16 @@ class reservaController extends Controller
         return view('respuesta', compact('reserva', 'aulasAsignadas'));
     }
     public function respuesta(Request $request,$id, $estado){
-        $request->validate([
-            'motivo_rechazo' => 'required'
-        ]);
+        if($estado==0){
+            $request->validate([
+                'motivo_rechazo' => 'required'
+            ]);
+            $rechazado=reserva::find($id);
+            $rechazado->estado="Rechazado";
+            $rechazado->motivo_rechazo=$request->motivo_rechazo;
+            $rechazado->save();
+        }
+        
        // return redirect()->route('bandeja_administrador')->with('actualizar', 'ok');
     }
     /**
