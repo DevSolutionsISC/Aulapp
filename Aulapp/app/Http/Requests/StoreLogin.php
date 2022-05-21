@@ -4,8 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Models\Usuario;
 class StoreLogin extends FormRequest
 {
+
+
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,15 +28,16 @@ class StoreLogin extends FormRequest
     public function rules()
     {
         return [
-            'usuario' => ['required'],
+            'usuario' => ['required','exists:usuarios,usuario'],
             'contrasenia' => ['required'],
         ];
     }
     public function messages()
     {
         return[
-            'usuario.required'=>'El campo usuario es obligatorio',
-            'contrasenia.required'=>'El campo contraseña es obligatorio',
+            'usuario.exists'=>'El usuario ingresado no existe en nuestros registros.',
+            'usuario.required'=>'El campo usuario es obligatorio.',
+            'contrasenia.required'=>'El campo contraseña es obligatorio.',
             
         ];
     }

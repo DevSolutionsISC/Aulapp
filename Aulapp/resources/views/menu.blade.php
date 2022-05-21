@@ -1,7 +1,7 @@
 @extends('header')
 @section("notificacion")
   @if($rol->id == 1)
-      bandeja_administrador
+      respuestaAdmin
   @else
       bandeja_docente
   @endif

@@ -18,6 +18,7 @@ class reservaController extends Controller
     public function index()
     {
     }
+ 
     public function registro()
     {
 
@@ -72,6 +73,12 @@ class reservaController extends Controller
         $aulasAsignadas = AulaAsignada::all();
         return view('respuesta', compact('reserva', 'aulasAsignadas'));
     }
+    public function reportePeticiones()
+    {
+        $reservas = reserva::All();
+        return view('bandeja_administrador', compact('reservas'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

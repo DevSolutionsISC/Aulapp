@@ -43,6 +43,7 @@
     </nav>
   </header>
   <div id="Container" class="container-fluid">
+    
     <div id="tipos">
       <span class="tipo_m"><b>Docentes:</b> {{$reserva->docentes }}</span>
       <span class="tipo_m"><b>Motivo:</b>{{$reserva->motivo }}</span>
