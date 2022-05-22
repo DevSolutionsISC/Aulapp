@@ -53,7 +53,7 @@
               </select>
                 <label id="nombre">Nombre:</label>
               <br>
-              <input type="text" name="docentes" id="lista_docentes" class="form-control oculto">
+              <input type="text" name="docentes" id="lista_docentes" class="form-control oculto" value="">
               <div id="docentes"></div>
               <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="añadirD">
                 Añadir docente +
@@ -191,7 +191,7 @@
 }).then((result) => {
   if (result.isConfirmed) {
     listaD.value+=","+ docentes.options[docentes.selectedIndex].text
-    asignacionD.innerHTML+="<div class='A_cont'><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let'>"+docentes.options[docentes.selectedIndex].text+"</spam></div>"
+    asignacionD.innerHTML+="<button class='A_cont btn doc_asig' ><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let d'>"+docentes.options[docentes.selectedIndex].text+"</spam></button>"
   }
 })
   }
@@ -274,7 +274,7 @@
        if("{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}"==listado[i] && materia.options[materia.selectedIndex].text == "{{$ad->grupos->materia_carrera->materia->nombre_materia}}" && !encontrargrupo('{{$ad->grupos->nombre}}')){
         setTimeout(() => {
           if(!encontrarG("{{$ad->grupos->nombre}}"))  {
-          grupos.innerHTML+="<option class='groups'>{{$ad->grupos->nombre}}</option>"
+          grupos.innerHTML+="<option class='groups {{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}'>{{$ad->grupos->nombre}}</option>"
         }
     
       }, 0);
@@ -295,8 +295,12 @@
     if(listaG.value==""){
       listaG.value+=grupos.options[grupos.selectedIndex].text
       añadirD.disabled=true;
+      
+     
     }else{listaG.value+=","+ grupos.options[grupos.selectedIndex].text}
     asignacionG.innerHTML+="<div class='A_cont'><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let'>"+grupos.options[grupos.selectedIndex].text+"</spam></div>"
+    var d=$(".d")
+    for(var i=0; i<d.length;i++){console.log(d[i].innerHTML);}
   }
 })
   }
@@ -376,7 +380,6 @@ registrar.onclick=function(event){
     errorf.innerHTML="Fecha no valida"
     alerta=1
   }
-
   if(alerta==1){
     event.preventDefault();
   }

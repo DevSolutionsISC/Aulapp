@@ -42,7 +42,7 @@
     </nav>
   </header>
   <div id="Container" class="container-fluid">
-    
+
     <div id="tipos">
       <span class="tipo_m"><b>Docentes:</b> {{$reserva->docentes }}</span>
       <span class="tipo_m"><b>Motivo:</b>{{$reserva->motivo }}</span>
@@ -68,7 +68,7 @@
       @endphp
       <div class="accordion accordion-flush" id="accordionFlushExample">
         @foreach ($sections as $section)
-        <div id="{{$section->id}}" class="accordion-item">
+        <div id="seccion-{{$section->id}}" class="accordion-item">
 
           <h2 class="accordion-header" id="flush-headingOne">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -117,7 +117,7 @@
     <script>
       var cantidad = {{$reserva->cantE}};    
               @foreach ($sections as $section)
-             var seccion = document.getElementById('{{$section->id}}');
+             var seccion = document.getElementById('seccion-{{$section->id}}');
               var suma = 0;
               //console.log('{{$section->nombre}}');
               @foreach ($aulas as $aula)
@@ -140,12 +140,10 @@
                 @endif
                 }            
               @endforeach
-                console.log(suma);               
-             /* if (suma>=cantidad) {
-             seccion.style.display = 'block';
-             }else{
-              seccion.style.display = 'none';
-             } */
+                console.log(suma);  
+                if(suma<cantidad){
+                  seccion.style.display = 'none';
+                }             
               @endforeach
     </script>
 
