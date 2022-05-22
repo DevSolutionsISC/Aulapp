@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\Seleccion;
+use App\Rules\SeleccionGrupo;
 use App\Rules\SeleccionMateri;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,7 +27,7 @@ class StoreAsignacion extends FormRequest
     public function rules()
     {
         return [
-  
+            'grupo'=>[new SeleccionGrupo],
             'docente'=>[new Seleccion],
             'materia'=>[new SeleccionMateri]
         ];

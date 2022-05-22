@@ -11,6 +11,7 @@ use App\Models\Materia_Carrera;
 use App\Models\UserRol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GrupoController extends Controller
 {
@@ -69,6 +70,7 @@ class GrupoController extends Controller
         return view('Grupo.reporte_grupo', compact('grupos'));
 
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -87,12 +89,31 @@ class GrupoController extends Controller
      */
     public function store(StoreGrupo $request)
     {
-        $grupo = new Grupo();
-        $grupo->nombre = "G:" . $request->nombre;
-        $grupo->materia_carrera_id = $request->materia;
-        $grupo->save();
+       
+  if($request->carrera=="Seleccione una carrera"){
+    
+    $lista_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('estado',true)->get();
+    
+    for($i=0;$i<sizeof($lista_materia_carrera);$i=$i+1){
+        if(!Grupo::where('materia_carrera_id',$lista_materia_carrera[$i]->id)->where('nombre',"G:".$request->nombre)->exists()){
+            $grupo                         = new Grupo();
+            $grupo->nombre                 = "G:".$request->nombre;
+            $grupo->materia_carrera_id     = $lista_materia_carrera[$i]->id;
+            $grupo->save();
+        }
+       
+        
+        
+    }
+  }else{
+    $grupo                         = new Grupo();
+    $grupo->nombre                 = "G:".$request->nombre;
+    $grupo->materia_carrera_id     = $request->materia;
+    $grupo->save();
+  }
+  
 
-        return redirect()->route('grupos')->with('registrar', 'ok');
+  return redirect()->route('grupos')->with('registrar', 'ok');
     }
 
     /**

@@ -42,3 +42,59 @@ input {
 textarea,#error_mr{
     margin-left: 25%;
 }
+
+.efecto {
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #dbdbdb;
+    transition: all 0.2s ease;
+    
+    font-size: 14px;
+    font-weight: 600;
+    color: #3f3f3f;
+    
+  }
+  
+  .efecto2 {
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #dbdbdb;
+    transition: all 0.2s ease;
+    
+    font-size: 14px;
+    font-weight: 600;
+    color: #3f3f3f;
+    
+  }
+
+  .efecto:hover {
+   
+    box-shadow: 9px 9px 22px #616161, -1px -1px 5px #cfcfcf;
+    transform: translateY(-2px);
+}
+
+.efecto2:hover {
+   
+    box-shadow: 9px 9px 22px #cfcfcf, -1px -1px 5px #cfcfcf;
+    transform: translateY(-2px);
+}
+  
+  .efecto:active {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+  }
+  
+  .efecto.check {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+  }
+  
+.aceptado{
+background-color:#EBEBEB;
+}
+.rechazado{
+   background-color: #908E8F;
+}
+.reasignado{
+background-color:#BABABA;
+}

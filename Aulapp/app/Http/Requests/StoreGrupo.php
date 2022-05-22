@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Seleccion;
 use App\Rules\SeleccionMateri;
-use App\Rules\SeleccionCarrera;
+use App\Rules\ValidacionGrupo;
 
 class StoreGrupo extends FormRequest
 {
@@ -31,11 +30,15 @@ class StoreGrupo extends FormRequest
         $nombre='G:'.$this->get('nombre');
         return [
             'nombre'=>'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 ]+$/|max:3:',
+            'carrera'=>[new ValidacionGrupo],
             'materia'=>[new SeleccionMateri,'unique:grupos,materia_carrera_id,null,id,nombre,'. $nombre],
             
            
         ];
     }
+
+   
+
     public function messages()
     {
         return[

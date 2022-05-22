@@ -51,7 +51,7 @@ action={{route('materia_carrera')}}
                 }
               @endforeach
               if(bandera==0){
-                materias.innerHTML+="<option value='{{$materia->id}}'>{{$materia->nombre_materia}}</option>"
+                materias.innerHTML+="<option value='{{$materia->id}}'>{{$materia->Cod_materia}} - {{$materia->nombre_materia}}</option>"
                 
               }
            @endforeach

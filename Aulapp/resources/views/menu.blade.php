@@ -7,7 +7,7 @@
   @endif
 @endsection
 @section('Titulo')
-    <h3>Menu - {{ $rol->nombre }}</h3>
+    <h3>Menú de {{ $rol->nombre }}</h3>
 @endsection
 @section('Contenido')
     </div>

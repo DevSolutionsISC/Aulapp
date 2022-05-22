@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAsignacion;
 use App\Models\asignacionDocentes;
+use App\Models\gestion;
+use App\Models\Grupo;
 use App\Models\Materia;
-use App\Models\Materia_Carrera;
 use App\Models\UserRol;
 use Illuminate\Http\Request;
 
@@ -14,18 +15,36 @@ class AsignacionDocenteController extends Controller
 
     public function registro()
     {
-        $materias = Materia_Carrera::where('estado', true)->get();
+        $materias = Materia::where('estado', true)->get();
+        $grupos=Grupo::join("materia_carreras","materia_carreras.id","=","grupos.materia_carrera_id")->join("materias","materias.id","=","materia_carreras.materia_id")->where('grupos.estado', true)->select("grupos.*","materias.id as materia_id")->get();
+        $grupos=$grupos->unique('nombre','materia_id');
         $docentes = UserRol::all();
-        $docente_materias = asignacionDocentes::all();
-        return view('Asignacion-Docente.registro_asignacion_docente', ['materias' => $materias, 'docentes' => $docentes, 'docente_materias' => $docente_materias]);
+        $gestion=gestion::firstWhere('estado',true);
+        $docente_grupos= asignacionDocentes::where('gestion_id',$gestion->id)->get();
+        $filtered = $grupos->reject(function ($value, $key) {
+            $gestion=gestion::firstWhere('estado',true);
+            $docente_grupos= asignacionDocentes::where('gestion_id',$gestion->id)->get();
+            return $docente_grupos->contains('grupo_id',$value->id);
+        });
+  
+        return view('Asignacion-Docente.registro_asignacion_docente', ['materias' => $materias, 'docentes' => $docentes, 'docente_materias' => $docente_grupos,'grupos'=>$filtered]);
     }
 
     public function store(StoreAsignacion $request)
     {
-        $asignacion_docente = new asignacionDocentes();
-        $asignacion_docente->user_rol_id = $request->docente;
-        $asignacion_docente->materia_carreras_id = $request->materia;
-        $asignacion_docente->save();
+        
+        $grupos=Grupo::join("materia_carreras","materia_carreras.id","=","grupos.materia_carrera_id")->join("materias","materias.id","=","materia_carreras.materia_id")->where('grupos.estado', true)->where('grupos.nombre',$request->grupo)->where('materias.id',$request->materia)->select("grupos.id")->get();
+        
+        
+       $gestion=gestion::firstWhere('estado', true);
+        foreach($grupos as $grupo){
+            $asignacion_docente = new asignacionDocentes();
+            $asignacion_docente->user_rol_id = $request->docente;
+            $asignacion_docente->grupo_id = $grupo->id;
+            $asignacion_docente->gestion_id=$gestion->id;
+            $asignacion_docente->save();
+        }
+        
 
         return redirect()->route('materia_docente')->with('registrar', 'ok');
 
