@@ -144,8 +144,8 @@
   var nombre="";
   
   @foreach ($ads as $ad)
-  
-    if('{{$ad->user_rol->usuario->id}}'== localStorage.getItem('usuario')  ){
+          
+    if('{{$ad->user_rol->usuario->id}}'== localStorage.getItem('usuario')){
       if(!encontrarMateria("{{$ad->grupos->materia_carrera->materia->nombre_materia}}")){
         materia.innerHTML+="<option class='materias'>{{$ad->grupos->materia_carrera->materia->nombre_materia}}</option>"
         nombre='{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}'

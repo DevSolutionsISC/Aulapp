@@ -30,10 +30,10 @@
         <h3>Estado de gestion</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-          <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
+          <a href="/bandeja_administrador"><span class="material-symbols-outlined" id="campana">
             notifications
             </span></a>
-          <a class="nav-link active" aria-current="page" href="menu_adm" id="inicio">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="/menu" id="inicio">Inicio</a>
         </form>
       </div>
     </nav>
@@ -111,13 +111,13 @@
     cambiar.onclick=function(e){
       e.preventDefault();
 
-      window.location.href="/gestión/{{$id}}/"+id2+"/0";
+      window.location.href="/gestion/{{$id}}/"+id2+"/0";
 
     }
     var nuevo=document.getElementById("nuevo")
     nuevo.onclick=function(e){
       e.preventDefault();
-      window.location.href="/gestión/{{$año}}/{{$id}}/1"
+      window.location.href="/gestion/{{$año}}/{{$id}}/1"
       
     }
   </script>

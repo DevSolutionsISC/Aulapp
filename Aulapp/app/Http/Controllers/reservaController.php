@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\asignacionDocentes;
 use App\Models\Aula;
 use App\Models\AulaAsignada;
+use App\Models\gestion;
 use App\Models\Materia;
 use App\Models\reserva;
 use App\Notifications\NotificacionReserva;
@@ -24,9 +25,8 @@ class reservaController extends Controller
 
  public function registro()
  {
-
-  $ads = asignacionDocentes::all();
-
+    $gestion=gestion::where("estado",1)->get();
+  $ads = asignacionDocentes::where("gestion_id",$gestion[0]->id)->get();
   return view('registrarreserva', ['ads' => $ads]);
  }
 
