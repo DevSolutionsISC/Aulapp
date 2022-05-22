@@ -53,7 +53,7 @@
               </select>
                 <label id="nombre">Nombre:</label>
               <br>
-              <input type="text" name="docentes" id="lista_docentes" class="form-control oculto">
+              <input type="text" name="docentes" id="lista_docentes" class="form-control oculto" value="">
               <div id="docentes"></div>
               <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="añadirD">
                 Añadir docente +
@@ -191,7 +191,7 @@
 }).then((result) => {
   if (result.isConfirmed) {
     listaD.value+=","+ docentes.options[docentes.selectedIndex].text
-    asignacionD.innerHTML+="<div class='A_cont'><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let'>"+docentes.options[docentes.selectedIndex].text+"</spam></div>"
+    asignacionD.innerHTML+="<button class='A_cont btn doc_asig' ><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let d'>"+docentes.options[docentes.selectedIndex].text+"</spam></button>"
   }
 })
   }
@@ -259,8 +259,19 @@
         }else{listaG.value+= ','+listado[i]}
       }
     }
-    if(listaG.value==""){
-      añadirD.disabled=false;
+    var d=$(".d")
+    var g=$(".g")
+    for(var i=0; i<d.length;i++){
+      var alerta=false;
+      for(var j=0; j<g.length;j++){
+        if(d[i].innerHTML==g[j].id){
+        //d[i].parentNode.disabled=true;
+        alerta=true
+        }
+        if(alerta==false){
+          d[i].parentNode.disabled=false;
+        }
+      }
     }
   }
   //----------------Añadir grupo-------------------------------
@@ -274,7 +285,7 @@
        if("{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}"==listado[i] && materia.options[materia.selectedIndex].text == "{{$ad->grupos->materia_carrera->materia->nombre_materia}}" && !encontrargrupo('{{$ad->grupos->nombre}}')){
         setTimeout(() => {
           if(!encontrarG("{{$ad->grupos->nombre}}"))  {
-          grupos.innerHTML+="<option class='groups'>{{$ad->grupos->nombre}}</option>"
+          grupos.innerHTML+="<option class='groups' id='{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}'>{{$ad->grupos->nombre}}</option>"
         }
     
       }, 0);
@@ -294,9 +305,17 @@
   if (result.isConfirmed) {
     if(listaG.value==""){
       listaG.value+=grupos.options[grupos.selectedIndex].text
-      añadirD.disabled=true;
     }else{listaG.value+=","+ grupos.options[grupos.selectedIndex].text}
-    asignacionG.innerHTML+="<div class='A_cont'><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let'>"+grupos.options[grupos.selectedIndex].text+"</spam></div>"
+    asignacionG.innerHTML+="<div class='A_cont'><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let g' id='"+grupos.options[grupos.selectedIndex].id+"'>"+grupos.options[grupos.selectedIndex].text+"</spam></div>"
+    var d=$(".d")
+    var g=$(".g")
+    for(var i=0; i<d.length;i++){
+      for(var j=0; j<g.length;j++){
+        if(d[i].innerHTML==g[j].id){
+        d[i].parentNode.disabled=true;
+        }
+      }
+    }
   }
 })
   }
@@ -376,7 +395,22 @@ registrar.onclick=function(event){
     errorf.innerHTML="Fecha no valida"
     alerta=1
   }
-
+  var val_doc=listaD.value.split(",");
+  var g=$(".g");
+    for(var i=0; i<val_doc.length;i++){
+      var esta=false;
+      for(var j=0;j<g.length;j++){
+        if(val_doc[i]==g[j].id){
+          esta=true;
+        }
+      }
+      if(esta==false){
+        alerta=1 
+        if(valg.value!=""){
+          errorg.innerHTML="No puedes hacer una solicitud de docentes compartidos si no añades grupos de dichos docentes"
+        }
+        }
+    }
   if(alerta==1){
     event.preventDefault();
   }
