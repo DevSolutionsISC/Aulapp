@@ -81,12 +81,12 @@ class reservaController extends Controller
                 'motivo_rechazo' => 'required'
             ]);
             $rechazado=reserva::find($id);
-            $rechazado->estado="Rechazado";
+            $rechazado->estado="rechazado";
             $rechazado->motivo_rechazo=$request->motivo_rechazo;
             $rechazado->save();
         }else{
             $aceptado=reserva::find($id);
-            $aceptado->estado="Aceptado";
+            $aceptado->estado="aceptado";
             $aceptado->save();
             $aulas=explode(",",$request->aulas_nombres);
             for( $i =0;$i<sizeof($aulas);$i++){
