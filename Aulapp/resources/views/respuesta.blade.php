@@ -33,9 +33,9 @@
         <h3>Responder a solicitud</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-            <a href="/respuestaAdmin"><span class="material-symbols-outlined" id="campana">
-                notifications
-                </span></a>
+          <a href="/respuestaAdmin"><span class="material-symbols-outlined" id="campana">
+              notifications
+            </span></a>
           <a class="nav-link active" aria-current="page" href="/menu" id="inicio">Inicio</a>
         </form>
       </div>
@@ -82,11 +82,11 @@
               @foreach ($aulas as $aula )
               @if ($aula->section_id==$section->id)
               <div id="{{$aula->id}}" class="check"><input class="form-check-input aula" type="checkbox" value="">
-                <span >{{$aula->nombre}}</span><span> </span><span>{{$aula->capacidad}}</span>
+                <span>{{$aula->nombre}}</span><span> </span><span>{{$aula->capacidad}}</span>
               </div>
               @endif
               @endforeach
-              <form  action="{{route('responder', ['id'=>$reserva->id, 'estado'=>1])}}" method="post">
+              <form action="{{route('responder', ['id'=>$reserva->id, 'estado'=>1])}}" method="post">
                 @csrf
                 <input type="text" name="aulas_capacidad" class="form-control aulas" value=0>
                 <input type="text" name="aulas_nombres" class="form-control aulas" value="">
@@ -97,7 +97,7 @@
         </div>
         @endforeach
       </div>
-      
+
     </div>
     <div id="rechazado">
       <form action="{{route('responder', ['id'=>$reserva->id, 'estado'=>0])}}" method="post">
@@ -105,11 +105,11 @@
         <h3>Motivo de rechazo</h3>
         <textarea name="motivo_rechazo" id="motivo_rechazo" cols="60" rows="8"></textarea><br>
         @if ($errors->has("motivo_rechazo"))
-            <span class="error text-danger" for="motivo_rechazo" id="error_mr">{{ $errors->first("motivo_rechazo") }}</span>
-            @endif
+        <span class="error text-danger" for="motivo_rechazo" id="error_mr">{{ $errors->first("motivo_rechazo") }}</span>
+        @endif
         <button class="btn btn-dark enviar" id="btn_rechazo">Enviar</button>
       </form>
-     
+
     </div>
     <footer>
     </footer>
