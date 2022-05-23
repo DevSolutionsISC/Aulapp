@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGrupo;
 use App\Models\asignacionDocentes;
 use App\Models\Carrera;
+use App\Models\gestion;
 use App\Models\Grupo;
 use App\Models\Materia;
 use App\Models\Materia_Carrera;
@@ -45,10 +46,9 @@ class GrupoController extends Controller
         $materias = Materia::where('estado', true)->get();
         $docentes = Usuario::where('estado', true)->get();
         $user_rol = UserRol::where('estado', true)->get();
-        $asignacion = asignacionDocentes::where('estado', true)->get();
-        $grupos = Grupo::where('estado', true)->get();
+      
 
-        return view('Grupo.registrar_grupo', ['urs' => $user_rol, 'ads' => $asignacion, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera, 'grupos' => $grupos, 'materias' => $materias]);
+        return view('Grupo.registrar_grupo', ['urs' => $user_rol, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera,  'materias' => $materias]);
 
     }
 
@@ -89,27 +89,49 @@ class GrupoController extends Controller
      */
     public function store(StoreGrupo $request)
     {
+        $lista_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('estado',true)->get();
+        $id_grupo=Grupo::where('materia_carrera_id',$lista_materia_carrera[0]->id)->get();
        
-  if($request->carrera=="Seleccione una carrera"){
+        $id_docente="";
+        if($id_grupo!="[]"){
+            $id_docente=asignacionDocentes::where('grupo_id',$id_grupo[0]->id)->get();
+        }
     
-    $lista_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('estado',true)->get();
+        $id_gestion=gestion::firstWhere('estado', true);
+        if($request->carrera=="Seleccione una carrera"){
     
-    for($i=0;$i<sizeof($lista_materia_carrera);$i=$i+1){
-        if(!Grupo::where('materia_carrera_id',$lista_materia_carrera[$i]->id)->where('nombre',"G:".$request->nombre)->exists()){
+    
+        for($i=0;$i<sizeof($lista_materia_carrera);$i=$i+1){
+            if(!Grupo::where('materia_carrera_id',$lista_materia_carrera[$i]->id)->where('nombre',"G:".$request->nombre)->exists()){
             $grupo                         = new Grupo();
             $grupo->nombre                 = "G:".$request->nombre;
             $grupo->materia_carrera_id     = $lista_materia_carrera[$i]->id;
             $grupo->save();
+            if($id_docente!="[]" && $id_docente!=""){
+                $asignacion= new asignacionDocentes();
+                $asignacion->user_rol_id=$id_docente[0]->user_rol_id;
+                $asignacion->grupo_id=$grupo->id;
+                $asignacion->gestion_id=$id_gestion->id;
+                $asignacion->save();
+            }
+            }   
         }
-       
-        
-        
-    }
-  }else{
+
+     }else{
+         
+    $id_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('carrera_id',$request->carrera)->get();
     $grupo                         = new Grupo();
     $grupo->nombre                 = "G:".$request->nombre;
-    $grupo->materia_carrera_id     = $request->materia;
+    $grupo->materia_carrera_id     = $id_materia_carrera[0]->id;
     $grupo->save();
+    if($id_docente!="[]" && $id_docente!=""){
+        $asignacion= new asignacionDocentes();
+        $asignacion->user_rol_id=$id_docente[0]->user_rol_id;
+        $asignacion->grupo_id=$grupo->id;
+        $asignacion->gestion_id=$id_gestion->id;
+        $asignacion->save();
+    }
+
   }
   
 
