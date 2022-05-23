@@ -31,9 +31,13 @@
         <h3>Aulas asignadas</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-            <a href="bandeja_docente"><span class="material-symbols-outlined" id="campana">
-                notifications
-                </span></a>
+            <a href="bandeja_docente"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30">
+            </a>
+            <a  class=" position-relative" >
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                99+
+              </span>
+            </a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
         </form>
       </div>

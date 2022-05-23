@@ -30,9 +30,13 @@
         <h3>Realizar reserva</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex" >
-          <a href="bandeja_docente"><span class="material-symbols-outlined" id="campana">
-            notifications
-            </span></a>
+          <a href="bandeja_docente"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30">
+          </a>
+          <a  class=" position-relative" >
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              99+
+            </span>
+          </a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
           
         </form>
@@ -147,7 +151,7 @@
           
     if('{{$ad->user_rol->usuario->id}}'== localStorage.getItem('usuario')){
       if(!encontrarMateria("{{$ad->grupos->materia_carrera->materia->nombre_materia}}")){
-        materia.innerHTML+="<option class='materias'>{{$ad->grupos->materia_carrera->materia->nombre_materia}}</option>"
+        materia.innerHTML+="<option >{{$ad->grupos->materia_carrera->materia->nombre_materia}}</option>"
         nombre='{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}'
       };
         
