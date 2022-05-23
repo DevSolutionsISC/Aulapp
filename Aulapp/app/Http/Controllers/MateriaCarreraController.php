@@ -56,9 +56,6 @@ class MateriaCarreraController extends Controller
   $materia_carrera->materia_id = $request->materia;
   $materia_carrera->save();
 
-
-  
-
   return redirect()->route('materia_carrera')->with('registrar', 'ok');
  }
 
@@ -123,9 +120,11 @@ class MateriaCarreraController extends Controller
   $materia_carrera         = Materia_Carrera::find($materia_carrera);
   $materia_carrera->estado = false;
   $materia_carrera->save();
-  $materia_carrera->asignacionDocentes()->each(function ($asignacion_docente) {
-   $asignacion_docente->where('id', $asignacion_docente->id)->update(['estado' => false]);
-
+  $materia_carrera->grupos()->each(function ($grupo) {
+   $grupo->where('id', $grupo->id)->update(['estado' => false]);
+   $grupo->asignacionDocentes()->each(function ($asignacionDocentes) {
+    $asignacionDocentes->where('id', $asignacionDocentes->id)->update(['estado' => false]);
+   });
   });
 
   return redirect()->route('eliminar-materia-carrera')->with('eliminar', 'ok');

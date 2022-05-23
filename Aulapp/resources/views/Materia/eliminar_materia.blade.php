@@ -13,7 +13,7 @@
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
 
       <form class="d-flex m-0">
-        <a class="nav-link active" aria-current="page" href="{{url('/menu_adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/menu')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="{{url('/materias')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/materiaEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-materia')}}">Eliminar</a>
