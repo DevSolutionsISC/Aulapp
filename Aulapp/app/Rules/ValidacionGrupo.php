@@ -64,6 +64,6 @@ class ValidacionGrupo implements Rule,DataAwareRule
      */
     public function message()
     {
-        return 'Ya existe el registro del grupo en todas las carreras';
+        return 'Ya existe el registro del grupo en todas las carreras que contienen la materia';
 }
 }
