@@ -13,6 +13,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\reservaController;
 use App\Http\Controllers\gestionController;
 use App\Http\Controllers\respuestaAdmin;
+use App\Models\reserva;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -134,12 +135,12 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
 
 
           Route::get('/bandeja_docente', [respuestaAdmin::class, 'show'])->name('bandeja_docente');
-          Route::get('/respuestaAdmin/{id}', [respuestaAdmin::class, 'respuestasAdmin'])->name('respuestaAdmin');
+          Route::get('/respuestas/{id}', [respuestaAdmin::class, 'respuestasAdmin'])->name('respuestas');
 
           Route::get('/respuesta', function () {
             return view('respuesta');
            });
-
+           Route::get('/respuestaAdmin', [reservaController::class, 'reportePeticiones'])->name('respuestaAdmin');
            Route::get('/respuesta/{id}', [reservaController::class, 'show'])->name('respuesta');
           Route::get('/aulas_asignadas', function () {
            return view('aulas_asignadas');
