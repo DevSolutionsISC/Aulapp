@@ -40,7 +40,7 @@ class UniqueGrupo implements Rule,DataAwareRule
         if($this->data['carrera']!="Seleccione una carrera"){
             $nombre='G:'. $this->data['nombre'];
             $materia_carrera=Materia_Carrera::where('materia_id',$value)->where('carrera_id',$this->data['carrera'])->get();
-            $grupo=Grupo::where('nombre',$nombre)->where('materia_carrera_id',$materia_carrera[0]->id)->get();
+            $grupo=Grupo::where('nombre',$nombre)->where('materia_carrera_id',$materia_carrera[0]->id)->where('estado',true)->get();
             $bool=$grupo->count()==0;
         }
         

@@ -23,7 +23,7 @@ class AsignacionDocenteController extends Controller
         $docente_grupos= asignacionDocentes::where('gestion_id',$gestion->id)->get();
         $filtered = $grupos->reject(function ($value, $key) {
             $gestion=gestion::firstWhere('estado',true);
-            $docente_grupos= asignacionDocentes::where('gestion_id',$gestion->id)->get();
+            $docente_grupos= asignacionDocentes::where('gestion_id',$gestion->id)->where('estado',true)->get();
             return $docente_grupos->contains('grupo_id',$value->id);
         });
   

@@ -15,10 +15,7 @@ class Grupo extends Model
     protected $primaryKey = 'id';
     protected $table = 'grupos';
 
-    public function asignacionDocentes()
-    {
-        return $this->belongsTo(asignacionDocentes::class,'id');
-    }
+    
     public function materia_carrera()
     {
         return $this->belongsTo(Materia_Carrera::class, 'materia_carrera_id');
