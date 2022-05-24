@@ -31,7 +31,7 @@
         <h3>Bandeja de solicitudes </h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-            <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
+            <a href="respuestaAdmin"><span class="material-symbols-outlined" id="campana">
                 notifications
                 </span></a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
