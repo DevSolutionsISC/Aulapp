@@ -43,7 +43,7 @@
     </nav>
   </header>
   <div id="Container" class="container-fluid">
-    
+
     <div id="tipos">
       <span class="tipo_m"><b>Docentes:</b> {{$reserva->docentes }}</span>
       <span class="tipo_m"><b>Motivo:</b>{{$reserva->motivo }}</span>
@@ -69,7 +69,7 @@
       @endphp
       <div class="accordion accordion-flush" id="accordionFlushExample">
         @foreach ($sections as $section)
-        <div id="{{$section->id}}" class="accordion-item">
+        <div id="seccion-{{$section->id}}" class="accordion-item">
 
           <h2 class="accordion-header" id="flush-headingOne">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -82,32 +82,43 @@
             <div class="accordion-body">
               @foreach ($aulas as $aula )
               @if ($aula->section_id==$section->id)
-              <div id="{{$aula->id}}" class="check"><input class="form-check-input" type="checkbox" value="">
-                <span>{{$aula->nombre}} {{$aula->capacidad}}</span>
+              <div id="{{$aula->id}}" class="check"><input class="form-check-input aula" type="checkbox" value="">
+                <span>{{$aula->nombre}}</span><span> </span><span>{{$aula->capacidad}}</span>
               </div>
               @endif
               @endforeach
-              <button class="btn enviar">Enviar</button>
+              <form action="{{route('responder', ['id'=>$reserva->id, 'estado'=>1])}}" method="post">
+                @csrf
+                <input type="text" name="aulas_capacidad" class="form-control aulas" value=0>
+                <input type="text" name="aulas_nombres" class="form-control aulas" value="">
+                <button class="btn enviar" disabled>Enviar</button>
+              </form>
             </div>
           </div>
         </div>
         @endforeach
       </div>
-      <div id="rechazado">
+
+    </div>
+    <div id="rechazado">
+      <form action="{{route('responder', ['id'=>$reserva->id, 'estado'=>0])}}" method="post">
+        @csrf
         <h3>Motivo de rechazo</h3>
         <textarea name="motivo_rechazo" id="motivo_rechazo" cols="60" rows="8"></textarea><br>
-        <button class="btn btn-dark enviar">Enviar</button>
-      </div>
+        @if ($errors->has("motivo_rechazo"))
+        <span class="error text-danger" for="motivo_rechazo" id="error_mr">{{ $errors->first("motivo_rechazo") }}</span>
+        @endif
+        <button class="btn btn-dark enviar" id="btn_rechazo">Enviar</button>
+      </form>
+
     </div>
     <footer>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    @yield('js')
-
     <script>
       var cantidad = {{$reserva->cantE}};    
               @foreach ($sections as $section)
-             var seccion = document.getElementById('{{$section->id}}');
+             var seccion = document.getElementById('seccion-{{$section->id}}');
               var suma = 0;
               //console.log('{{$section->nombre}}');
               @foreach ($aulas as $aula)
@@ -130,12 +141,10 @@
                 @endif
                 }            
               @endforeach
-                console.log(suma);               
-             /* if (suma>=cantidad) {
-             seccion.style.display = 'block';
-             }else{
-              seccion.style.display = 'none';
-             } */
+                console.log(suma);  
+                if(suma<cantidad){
+                  seccion.style.display = 'none';
+                }             
               @endforeach
     </script>
 
@@ -160,20 +169,70 @@
     </script>
     <script>
       var btn_aceptar=document.getElementById("btn_aceptar")
- var btn_rechazar=document.getElementById("btn_rechazar")
- var btn_cancelar=document.getElementById("btn_cancelar")
- var aceptado=document.getElementById("aceptado")
- var rechazado=document.getElementById("rechazado")
- rechazado.style.display="none"
- btn_aceptar.onclick=function(){
-   rechazado.style.display="none"
-   aceptado.style.display="block"
- }
- btn_rechazar.onclick=function(){
+      var btn_rechazar=document.getElementById("btn_rechazar")
+      var btn_cancelar=document.getElementById("btn_cancelar")
+      var aceptado=document.getElementById("aceptado")
+      var rechazado=document.getElementById("rechazado")
+      rechazado.style.display="none"
+      btn_aceptar.onclick=function(){
+      rechazado.style.display="none"
+      aceptado.style.display="block"
+      }
+      btn_rechazar.onclick=function(){
 
-   rechazado.style.display="block"
-   aceptado.style.display="none"
- }
+      rechazado.style.display="block"
+      aceptado.style.display="none"
+      }
+      //-----------mostrar mensaje de error de motivo rechazo vacio
+      var error_mr=document.getElementById("error_mr")
+      if(error_mr != null){
+        rechazado.style.display="block"
+        aceptado.style.display="none"
+      }
+    </script>
+    <script>
+      //-------------elegir aulas---------------------------
+      $(".aula").change(function(){
+        var nombre_aula=$(this).parent().find("span")[0].innerHTML;
+        var capacidad_aula=parseInt($(this).parent().find("span")[2].innerHTML);
+        var inputs= $(this).parent().parent().find(".aulas")
+        var aulas=inputs[1].value.split(",");
+        var alerta=false;
+        inputs[1].value=""
+        for(var i=0; i<aulas.length; i++){
+          if(nombre_aula == aulas[i]){
+            alerta=true;
+            inputs[0].value=parseInt(inputs[0].value)-capacidad_aula;
+          }else{
+            if(inputs[1].value == ""){
+              inputs[1].value = aulas[i];
+            }else{inputs[1].value +=","+aulas[i];}
+          }
+        }
+        if(alerta==false){
+          inputs[0].value=parseInt(inputs[0].value)+capacidad_aula
+          if(inputs[1].value == ""){
+              inputs[1].value = nombre_aula;
+            }else{inputs[1].value +=","+nombre_aula}
+        }
+        var btn_enviar=$(this).parent().parent().find("button");
+        if(parseInt(inputs[0].value)>= {{$reserva->cantE}}){
+          btn_enviar[0].disabled=false;
+          var checks=$(this).parent().parent().find(".check").find("input")
+          for(var i=0 ;i<checks.length;i++){
+            checks[i].disabled=true;
+          }
+        }else{
+          btn_enviar[0].disabled=true
+          var checks=$(this).parent().parent().find(".check").find("input")
+          for(var i=0 ;i<checks.length;i++){
+            checks[i].disabled=false;
+          }
+        }
+        $(this).parent().find("input")[0].disabled=false;
+       
+      })
+      
     </script>
 </body>
 

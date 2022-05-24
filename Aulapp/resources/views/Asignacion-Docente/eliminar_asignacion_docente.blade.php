@@ -10,7 +10,7 @@
       <h3 text-center>Administración de materia-docente </h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <form class="d-flex m-0">
-        <a class="nav-link active" aria-current="page" href="{{url('menu_adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('menu')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="{{url('materia_docente')}}">Registrar</a>
         {{-- <a class="nav-link active" aria-current="page" href="#">Editar</a> --}}
         <a class="nav-link active" aria-current="page" href="{{url('eliminar-asignacion-docente')}}">Eliminar</a>

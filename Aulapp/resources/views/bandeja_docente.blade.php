@@ -43,20 +43,38 @@
   <div id="Container" class="container-fluid">
       <div id="tipos"><span class="tipo_m" id="recibidos">Recibidos</span><span class="tipo_m" id="enviados">Enviados</span></div>
         <div id="tabla">
-            <div class="row" id="titulo_tabla">
-              <div class="col-5">Fecha</div>
-              <div class="col">Descripcion</div>
-            </div>
-            <a href="menu" class="row mensaje">
-              <div class="col-5">17/may/2022</div>
-              <div class="col">Examen elementos primer parcial</div>
-            </a>
+            <table class="table">
+                <thead>
+                    <th>Fecha de envio</th>
+                    <th>Descripcion</th>
+                </thead>
+                <tbody>
+                    
+                 @foreach ($respuestas as $respuesta)
+                    
+                        
+                   @if ($respuesta->estado != "enviado")
+                   <tr class="efecto {{$respuesta->estado}}" data-url="{{route('respuestaAdmin',['id'=>$respuesta->id])}}">     
+                    <td>{{$respuesta->created_at}}</td>     
+                     <td>{{$respuesta->estado}} - {{$respuesta->motivo}}</td>
+                    </tr>
+                     @endif
+              
+                  
+                 
+                 @endforeach
+                </tbody>
+            </table>
+
         </div>
     </div>
   <footer>
   </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
+  <script>
+    $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });}) 
+  </script>
 <script>
     //menu hamburguesa
   var menu=document.getElementsByClassName("nav-link");
@@ -79,15 +97,40 @@
  var enviados=document.getElementById("enviados")
  var recibidos=document.getElementById("recibidos")
  recibidos.style.background="grey"
+ //click enviados
  enviados.onclick=function(){
      enviados.style.background="grey"
      recibidos.style.background="white"
+     var tbody=document.getElementsByTagName("tbody");
+    
+     tbody[0].innerHTML="";
+     @foreach ($respuestas as $respuesta)
+     @if ($respuesta->estado == "enviado")
+      tbody[0].innerHTML+="<tr class='efecto2' data-url='{{route('respuestaAdmin',['id'=>$respuesta->id])}}'><td>{{$respuesta->created_at}}</td><td>{{$respuesta->motivo}}</td></tr>"
+      @endif
+     @endforeach
+     $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });})
+  
+     
  }
+ //click recibido
  recibidos.onclick=function(){
      enviados.style.background="white"
      recibidos.style.background="grey"
+     var tbody=document.getElementsByTagName("tbody");
+     tbody[0].innerHTML="";
+     @foreach ($respuestas as $respuesta)
+     @if ($respuesta->estado != "enviado")
+        tbody[0].innerHTML+="<tr class='efecto {{$respuesta->estado}}' data-url='{{route('respuestas',['id'=>$respuesta->id])}}'> <td>{{$respuesta->created_at}}</td><td>{{$respuesta->estado}} - {{$respuesta->motivo}}</td></tr>"
+      @endif
+     @endforeach
+     $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });})
+  
  }
+ 
+  
 </script>
+
 </body>
 
 </html>

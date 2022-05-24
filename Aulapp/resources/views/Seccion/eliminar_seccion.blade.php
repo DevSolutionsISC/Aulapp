@@ -10,7 +10,7 @@
       <h3 text-center id="Titulo"> Administración de secciones</h3>
       <a href="#" class="material-symbols-outlined" id="menu">menu</a>
       <form class="d-flex m-0">
-        <a class="nav-link active" aria-current="page" href="{{url('/menu_adm')}}">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="{{url('/menu')}}">Inicio</a>
         <a class="nav-link active" aria-current="page" href="{{url('/seccion')}}">Registrar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/seccionEdit')}}">Editar</a>
         <a class="nav-link active" aria-current="page" href="{{url('/eliminar-seccion')}}">Eliminar</a>

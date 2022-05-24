@@ -12,6 +12,8 @@ use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\reservaController;
 use App\Http\Controllers\gestionController;
+use App\Http\Controllers\respuestaAdmin;
+use App\Models\reserva;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -96,7 +98,6 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        Route::get('/materia_docente', [AsignacionDocenteController::class, 'registro'])->name('materia_docente');
        Route::post('/materia_docente', [AsignacionDocenteController::class, 'store'])->name('materia_docente');
        Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
-       Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
        Route::post('/reserva', [reservaController::class, 'store'])->name('reserva');
        //-----------------------------------------------------------------------------------
        
@@ -125,21 +126,22 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        Route::get('/docente/{id}', [UsuarioController::class, 'update'])->name('docente-update');
        Route::get('/grupoEdit', [GrupoController::class, 'showEdit'])->name('grupo_edit');
        Route::get('/grupo/{id}', [GrupoController::class, 'update'])->name('grupo-update');
+       Route::post('/bandeja_administrador/{id}/{estado}', [reservaController::class, 'respuesta'])->name('responder');
        //------------------------------------------------------------------------------
        
        
        //------------------------------------------------------------------------------------
       
 
-          Route::get('/bandeja_docente', function () {
-           return view('bandeja_docente');
-          });
+
+          Route::get('/bandeja_docente', [respuestaAdmin::class, 'show'])->name('bandeja_docente');
+          Route::get('/respuestas/{id}', [respuestaAdmin::class, 'respuestasAdmin'])->name('respuestas');
 
           Route::get('/respuesta', function () {
             return view('respuesta');
            });
-           Route::get('/respuesta/{id}', [reservaController::class, 'show'])->name('respuesta');
            Route::get('/respuestaAdmin', [reservaController::class, 'reportePeticiones'])->name('respuestaAdmin');
+           Route::get('/respuesta/{id}', [reservaController::class, 'show'])->name('respuesta');
           Route::get('/aulas_asignadas', function () {
            return view('aulas_asignadas');
           });

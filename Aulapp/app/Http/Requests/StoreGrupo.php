@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-
+use App\Models\Materia_Carrera;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Seleccion;
 use App\Rules\SeleccionMateri;
-use App\Rules\SeleccionCarrera;
+use App\Rules\UniqueGrupo;
+use App\Rules\ValidacionGrupo;
 
 class StoreGrupo extends FormRequest
 {
@@ -28,14 +28,19 @@ class StoreGrupo extends FormRequest
     public function rules()
     {   
         
-        $nombre='G:'.$this->get('nombre');
+       
+        
         return [
             'nombre'=>'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 ]+$/|max:3:',
-            'materia'=>[new SeleccionMateri,'unique:grupos,materia_carrera_id,null,id,nombre,'. $nombre],
+            'carrera'=>[new ValidacionGrupo],
+            'materia'=>[new SeleccionMateri,new UniqueGrupo],
             
            
         ];
     }
+
+   
+
     public function messages()
     {
         return[
@@ -43,7 +48,7 @@ class StoreGrupo extends FormRequest
             'nombre.unique'=> 'Ya existe un grupo registrado con ese nombre en la misma materia.',
             'nombre.required'=>'El campo nombre es obligatorio',
              'nombre.regex'=>'Solo se aceptan caracteres alfanuméricos',
-             'materia.unique'=>'Ya existe el grupo G:'.$this->get('nombre').' en esta materia'
+             
                         
            
         ];

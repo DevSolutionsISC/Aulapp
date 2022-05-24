@@ -17,7 +17,7 @@ class CreateAsignacionDocentesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_rol_id');
             $table->unsignedBigInteger('grupo_id');
-            
+            $table->unsignedBigInteger('gestion_id');
             $table->foreign('user_rol_id')
 
             ->references('id')->on('user_rols')->constrained()->onDelete('cascade');
@@ -25,6 +25,9 @@ class CreateAsignacionDocentesTable extends Migration
             $table->foreign('grupo_id')
 
                 ->references('id')->on('grupos')->constrained()->onDelete('cascade');
+
+            $table->foreign('gestion_id')
+                ->references('id')->on('gestions');
 
             $table->boolean('estado')->default(true);
             $table->timestamps();
