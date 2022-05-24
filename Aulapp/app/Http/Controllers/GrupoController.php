@@ -114,7 +114,12 @@ class GrupoController extends Controller
                 $asignacion->gestion_id=$id_gestion->id;
                 $asignacion->save();
             }
-            }   
+            }else{
+                $grupo=Grupo::where('materia_carrera_id',$lista_materia_carrera[$i]->id)->where('nombre',"G:".$request->nombre)->get();
+                if(!$grupo[0]->estado){
+                    
+                }
+            }
         }
 
      }else{
