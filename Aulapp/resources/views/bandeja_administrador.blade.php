@@ -50,25 +50,23 @@
             <table class="table">
                 <thead>
                     <th>Nombre</th>
-                    <th>Motivo</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
                     <th>Fecha de envío</th>
+
                 </thead>
                 <tbody>
                  @foreach($reservas as $reservaBandeja)
-                   
-                    <tr >
+                 @if ($reservaBandeja->estado == 0)
+                    <tr class="efecto {{$reservaBandeja->estado}}" data-url="{{route('respuesta',['id'=>$reservaBandeja->id])}}">
     
                         <td>{{$reservaBandeja->docentes}}</td>
                         <td>{{$reservaBandeja->motivo}}</td>
+                        <td>{{$reservaBandeja->estado}}</td>
                         <td>{{$reservaBandeja->created_at}}</td>
                        
-                        <td>    
-                       
-                        <a href="{{ url("/respuesta/{$reservaBandeja->id}") }}">Ver detalles</a>
-                      
-                        </td>
-      
-                    </tr>   
+                    </tr> 
+                    @endif  
                     @endforeach          
                 </tbody>
             </table>
@@ -79,7 +77,9 @@
   </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
-
+  <script>
+    $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });}) 
+  </script>
 <script>
     //menu hamburguesa
   var menu=document.getElementsByClassName("nav-link");

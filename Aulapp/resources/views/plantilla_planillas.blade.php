@@ -60,6 +60,19 @@
   </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session('registrar')=='ok')
+<script>
+  Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Registro exitoso',
+  showConfirmButton: false,
+  timer: 1500
+  })
+</script>
+@endif
 <script>
   var menu=document.getElementsByClassName("nav-link");
   var btn_menu=document.getElementById("menu")
