@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\asignacionDocentes;
 use App\Models\Aula;
 use App\Models\AulaAsignada;
@@ -25,9 +25,13 @@ class reservaController extends Controller
 
  public function registro()
  {
-    $gestion=gestion::where("estado",1)->get();
+  $usuario = Auth::user();
+  $gestion=gestion::where("estado",1)->get();
+  $materias= asignacionDocentes::join("user_rols","user_rols.id","=","asignacion_docentes.user_rol_id")->where("user_rols.usuario_id",$usuario->id)->where("asignacion_docentes.gestion_id",$gestion[0]->id)->join("grupos","grupos.id",'=','asignacion_docentes.grupo_id')->join("materia_carreras","materia_carreras.id","=","grupos.materia_carrera_id")->join("materias","materias.id","=","materia_carreras.materia_id")->select("materias.nombre_materia")->get()->unique("nombre_materia");
+
   $ads = asignacionDocentes::where("gestion_id",$gestion[0]->id)->get();
-  return view('registrarreserva', ['ads' => $ads]);
+
+  return view('registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario]);
  }
 
  /**
@@ -62,6 +66,7 @@ class reservaController extends Controller
   $reserva->user_rol_id    = $request->id;
   $reserva->motivo_rechazo = "";
   $reserva->save();
+  return redirect()->route('registro_reserva')->with('actualizar', 'ok');
  }
 
  /**

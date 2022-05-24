@@ -26,11 +26,11 @@
   <header>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
+        <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo" alt="logo"></a>
         <h3>Realizar reserva</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex" >
-          <a href="bandeja_docente"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30">
+          <a href="bandeja_docente"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30" alt="notificaciones">
           </a>
           <a  class=" position-relative" >
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -147,18 +147,10 @@
   var listaG=document.getElementById("lista_grupos");
   var nombre="";
   
-  @foreach ($ads as $ad)
-          
-    if('{{$ad->user_rol->usuario->id}}'== localStorage.getItem('usuario')){
-      if(!encontrarMateria("{{$ad->grupos->materia_carrera->materia->nombre_materia}}")){
-        materia.innerHTML+="<option >{{$ad->grupos->materia_carrera->materia->nombre_materia}}</option>"
-        nombre='{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}'
-      };
-        
-        
-      }
+  @foreach ($materias as $materia) 
+        materia.innerHTML+="<option >{{$materia->nombre_materia}}</option>"
   @endforeach
-  listaD.value=nombre
+  listaD.value="{{$usuario->Nombre}} {{$usuario->Apellido}}";
   //--------------------------------------Añadir docente-----------------------------------
   var añadirD=document.getElementById("añadirD");
   var añadirG=document.getElementById("añadirG");
@@ -277,6 +269,7 @@
         }
       }
     }
+    if(listaG.value==""){for(var i=0;i<d.length;i++){d[i].parentNode.disabled=false;}}
   }
   //----------------Añadir grupo-------------------------------
   añadirG.onclick=function(){
@@ -420,20 +413,6 @@ registrar.onclick=function(event){
   }
    
 }
-
-  //-------------------------buscar materia----------
-  
-  function encontrarMateria(texto){
-   
-    var materias=document.getElementsByClassName("materias");
-    var alerta=false;
-    for(var i=0;i<materias.length;i++){
-      if(texto== materias[i].innerHTML){
-        alerta=true
-      }
-    }
-    return alerta
-  }
   //---------------------buscar docente----------------------
   function encontrarD(texto){
    
@@ -464,4 +443,14 @@ registrar.onclick=function(event){
    return alerta
  }
 </script>
+@if (session('actualizar')=='ok')
+  <script>localStorage.setItem('ruta',"")
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Reserva registrada exitosamente',
+    showConfirmButton: false,
+    timer: 1500
+    })</script>
+@endif
 </html>
