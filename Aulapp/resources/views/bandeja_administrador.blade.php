@@ -54,7 +54,8 @@
                     <th>Fecha de envío</th>
                 </thead>
                 <tbody>
-                   @foreach($reservas as $reservaBandeja)
+                 @foreach($reservas as $reservaBandeja)
+                   
                     <tr >
     
                         <td>{{$reservaBandeja->docentes}}</td>
@@ -68,7 +69,7 @@
                         </td>
       
                     </tr>   
-                    @endforeach           
+                    @endforeach          
                 </tbody>
             </table>
         </div>
@@ -109,6 +110,7 @@
      enviados.style.background="white"
      recibidos.style.background="grey"
  }
+ 
 </script>
 
 
