@@ -34,6 +34,8 @@
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
 
         <form class="d-flex">
+
+
         <div class="navbar-brand " style="padding-left:5%" href="/" >
           <a href="javascript: history.go(-1)">
           <span class="material-symbols-outlined">
@@ -41,6 +43,7 @@
           </span>   
           </a>
         </div>
+
         </form>
       
       </div>
@@ -75,8 +78,12 @@
             <label class="col-5" style="font-weight: bold">Docente(s):</label>
             <label class="col">{{$mensaje->docentes}}</label>
         </div>
+        <div class="row">
+          <label class="col-5" style="font-weight: bold">Fecha de Examen:</label>
+          <label class="col">{{$mensaje->fecha_examen}}</label>
+      </div>
         <br>
-        @if ($mensaje->estado!="enviado" && $mensaje->estado!="rechazado" )
+        @if ($mensaje->estado!="enviado" && $mensaje->estado!="rechazado" && $tipo=="recibido")
      
         <div class="row">
             <label class="col-5" style="font-weight: bold">Hora Inicio-Fin:</label>
@@ -88,17 +95,14 @@
             <label class="col">{{$aulas}}</label>
         </div>
         @endif
-        @if ($mensaje->estado =="rechazado" )
+        @if ($mensaje->estado =="rechazado" && $tipo=="recibido" )
         <div class="row">
             <label class="col-5" style="font-weight: bold">Motivo de rechazo:</label>
             <label class="col">{{$mensaje->motivo_rechazo}}</label>
         </div>
         @endif
-        @if ($mensaje->estado =="enviado")
-        <div class="row">
-            <label class="col-5" style="font-weight: bold">Fecha de Examen:</label>
-            <label class="col">{{$mensaje->fecha_examen}}</label>
-        </div>
+        @if ($tipo =="enviado")
+       
         <br>
         <div class="row">
             <label class="col-5" style="font-weight: bold">Hora Inicio-Fin:</label>

@@ -67,7 +67,7 @@
                        
                     </tr> 
                     @else 
-                    <tr class="efecto {{$reservaBandeja->estado}}" data-url="{{route('respuestas',['id'=>$reservaBandeja->id])}}">
+                    <tr class="efecto {{$reservaBandeja->estado}}" data-url="{{route('respuestas',['tipo'=>'recibido','id'=>$reservaBandeja->id])}}">
     
                         <td>{{$reservaBandeja->docentes}}</td>
                         <td>{{$reservaBandeja->motivo}}</td>
