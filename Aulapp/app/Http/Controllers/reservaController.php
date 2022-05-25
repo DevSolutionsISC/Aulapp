@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Notification;
 
 class reservaController extends Controller
 {
+
  /**
   * Display a listing of the resource.
   *
@@ -75,12 +76,6 @@ class reservaController extends Controller
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
- public function show($id)
- {
-  $reserva        = reserva::find($id);
-  $aulasAsignadas = AulaAsignada::all();
-  return view('respuesta', compact('reserva', 'aulasAsignadas'));
- }
 
  public function respuesta(Request $request, $id, $estado)
  {
@@ -109,48 +104,59 @@ class reservaController extends Controller
     $aulas_asignadas[] = $aula_asignada;
    }
    Notification::route('mail', $aceptado->user_rol->usuario->Email)->notify(new NotificacionReserva($aceptado, $aulas_asignadas)); /* para usar cuando se guarde la reserva */
+   return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
+}}
 
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show($id)
+  {
+    $reserva        = reserva::find($id);
+    $aulasAsignadas = AulaAsignada::all();
+    return view('respuesta', compact('reserva', 'aulasAsignadas'));
   }
 
-  return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
- }
- public function reportePeticiones()
- {
-  $reservas = reserva::All();
-  return view('bandeja_administrador', compact('reservas'));
- }
+  public function reportePeticiones()
+  {
+    $reservas = reserva::All();
+    return view('bandeja_administrador', compact('reservas'));
+  }
 
- /**
-  * Show the form for editing the specified resource.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
- public function edit($id)
- {
-  //
- }
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit($id)
+  {
+    //
+  }
 
- /**
-  * Update the specified resource in storage.
-  *
-  * @param  \Illuminate\Http\Request  $request
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
- public function update(Request $request, $id)
- {
-  //
- }
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, $id)
+  {
+    //
+  }
 
- /**
-  * Remove the specified resource from storage.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
- public function destroy($id)
- {
-  //
- }
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy($id)
+  {
+    //
+  }
 }

@@ -34,7 +34,7 @@
             <a href="bandeja_docente"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30">
             </a>
             <a  class=" position-relative" >
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
                 99+
               </span>
             </a>

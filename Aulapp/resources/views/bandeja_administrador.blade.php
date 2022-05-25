@@ -31,7 +31,7 @@
         <h3>Bandeja de solicitudes </h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-            <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
+            <a href="respuestaAdmin"><span class="material-symbols-outlined" id="campana">
                 notifications
                 </span></a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
@@ -50,25 +50,33 @@
             <table class="table">
                 <thead>
                     <th>Nombre</th>
-                    <th>Motivo</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
                     <th>Fecha de envío</th>
+
                 </thead>
                 <tbody>
-                   @foreach($reservas as $reservaBandeja)
-                    <tr >
+                 @foreach($reservas as $reservaBandeja)
+                 @if ($reservaBandeja->estado == 'enviado')
+                    <tr class="efecto {{$reservaBandeja->estado}}" data-url="{{route('respuesta',['id'=>$reservaBandeja->id])}}">
     
                         <td>{{$reservaBandeja->docentes}}</td>
                         <td>{{$reservaBandeja->motivo}}</td>
+                        <td>{{$reservaBandeja->estado}}</td>
                         <td>{{$reservaBandeja->created_at}}</td>
                        
-                        <td>    
+                    </tr> 
+                    @else 
+                    <tr class="efecto {{$reservaBandeja->estado}}" data-url="{{route('respuestas',['id'=>$reservaBandeja->id])}}">
+    
+                        <td>{{$reservaBandeja->docentes}}</td>
+                        <td>{{$reservaBandeja->motivo}}</td>
+                        <td>{{$reservaBandeja->estado}}</td>
+                        <td>{{$reservaBandeja->created_at}}</td>
                        
-                        <a href="{{ url("/respuesta/{$reservaBandeja->id}") }}">Ver detalles</a>
-                      
-                        </td>
-      
-                    </tr>   
-                    @endforeach           
+                    </tr> 
+                    @endif  
+                    @endforeach          
                 </tbody>
             </table>
         </div>
@@ -78,7 +86,9 @@
   </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
-
+  <script>
+    $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });}) 
+  </script>
 <script>
     //menu hamburguesa
   var menu=document.getElementsByClassName("nav-link");
@@ -109,9 +119,19 @@
      enviados.style.background="white"
      recibidos.style.background="grey"
  }
+ 
 </script>
 
-
+@if (session('actualizar')=='ok')
+  <script>localStorage.setItem('ruta',"")
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Respuesta enviada exitosamente',
+    showConfirmButton: false,
+    timer: 1500
+    })</script>
+@endif
 </body>
 
 </html>

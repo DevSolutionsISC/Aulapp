@@ -140,11 +140,14 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
           Route::get('/respuesta', function () {
             return view('respuesta');
            });
-           Route::get('/respuestaAdmin', [reservaController::class, 'reportePeticiones'])->name('respuestaAdmin');
-           Route::get('/respuesta/{id}', [reservaController::class, 'show'])->name('respuesta');
+
+          Route::get('/respuestaAdmin', [reservaController::class, 'reportePeticiones'])->name('respuestaAdmin');
+          Route::get('/respuesta/{id}', [reservaController::class, 'show'])->name('respuesta');
+          
           Route::get('/aulas_asignadas', function () {
            return view('aulas_asignadas');
           });
+          
           Route::get('/gestion', [gestionController::class, 'index'])->name('estadogestion');
           Route::get('/gestion/{id}/{id2}/{tipo}', [gestionController::class, 'update'])->name('gestion-update');
 
