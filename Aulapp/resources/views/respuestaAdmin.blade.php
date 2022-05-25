@@ -32,13 +32,20 @@
             width="50" id="logo"></a>
         <h3>Mensaje detallado</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+
         <form class="d-flex">
-          <a href="/bandeja_docente"><span class="material-symbols-outlined" id="campana">
-              notifications
-            </span></a>
-          <a class="nav-link active" aria-current="page" href="/menu" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="@yield(" registrar")" id="registrar">DevSolution</a>
+
+
+        <div class="navbar-brand " style="padding-left:5%" href="/" >
+          <a href="javascript: history.go(-1)">
+          <span class="material-symbols-outlined">
+          arrow_back
+          </span>   
+          </a>
+        </div>
+
         </form>
+      
       </div>
     </nav>
   </header>

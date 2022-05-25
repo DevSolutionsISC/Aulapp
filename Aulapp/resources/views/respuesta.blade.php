@@ -33,10 +33,13 @@
         <h3>Responder a solicitud</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-          <a href="/respuestaAdmin"><span class="material-symbols-outlined" id="campana">
-              notifications
-            </span></a>
-          <a class="nav-link active" aria-current="page" href="/menu" id="inicio">Inicio</a>
+        <div class="navbar-brand " style="padding-left:5%" href="/" >
+          <a href="/respuestaAdmin">
+          <span class="material-symbols-outlined">
+          arrow_back
+          </span>   
+          </a>
+        </div>
         </form>
       </div>
     </nav>
