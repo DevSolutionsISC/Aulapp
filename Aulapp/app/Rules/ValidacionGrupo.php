@@ -44,7 +44,7 @@ class ValidacionGrupo implements Rule,DataAwareRule
           
             if(sizeof($ids_materias_carreras)>0){
                 for($i=0;$i<sizeof($ids_materias_carreras);$i=$i+1){
-                   if(!Grupo::where('materia_carrera_id',$ids_materias_carreras[$i]->id)->where('nombre','G:'.$this->data['nombre'])->exists()){
+                   if(!Grupo::where('materia_carrera_id',$ids_materias_carreras[$i]->id)->where('nombre','G:'.$this->data['nombre'])->where('estado',true)->exists()){
                     $respuesta=true;
                     
                    }

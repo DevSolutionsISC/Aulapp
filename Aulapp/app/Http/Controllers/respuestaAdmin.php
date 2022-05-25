@@ -16,7 +16,7 @@ class respuestaAdmin extends Controller
   return view('bandeja_docente', ['respuestas' => $respuestas]);
  }
 
- public function respuestasAdmin($id)
+ public function respuestasAdmin($tipo,$id)
  {
   $mensaje = reserva::firstWhere('id', $id);
   $aulas   = AulaAsignada::join("aulas", "aulas.id", "aula_asignadas.aula_id")->where('reserva_id', $mensaje->id)->select("aulas.nombre")->get();
@@ -25,6 +25,6 @@ class respuestaAdmin extends Controller
 
   //Notification::route('mail', $mensaje->user_rol->usuario->Email)->notify(new NotificacionReserva($mensaje, $aulas)); /* para usar cuando se guarde la reserva */
 
-  return view('respuestaAdmin', ['mensaje' => $mensaje, 'aulas' => $aulas]);
+  return view('respuestaAdmin', ['mensaje' => $mensaje, 'aulas' => $aulas,'tipo'=>$tipo]);
  }
 }

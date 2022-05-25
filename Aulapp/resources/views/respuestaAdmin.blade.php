@@ -33,7 +33,7 @@
         <h3>Mensaje detallado</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-          <a href="bandeja_administrador"><span class="material-symbols-outlined" id="campana">
+          <a href="/bandeja_docente"><span class="material-symbols-outlined" id="campana">
               notifications
             </span></a>
           <a class="nav-link active" aria-current="page" href="/menu" id="inicio">Inicio</a>
@@ -71,8 +71,12 @@
             <label class="col-5" style="font-weight: bold">Docente(s):</label>
             <label class="col">{{$mensaje->docentes}}</label>
         </div>
+        <div class="row">
+          <label class="col-5" style="font-weight: bold">Fecha de Examen:</label>
+          <label class="col">{{$mensaje->fecha_examen}}</label>
+      </div>
         <br>
-        @if ($mensaje->estado!="enviado" && $mensaje->estado!="rechazado" )
+        @if ($mensaje->estado!="enviado" && $mensaje->estado!="rechazado" && $tipo=="recibido")
      
         <div class="row">
             <label class="col-5" style="font-weight: bold">Hora Inicio-Fin:</label>
@@ -84,17 +88,14 @@
             <label class="col">{{$aulas}}</label>
         </div>
         @endif
-        @if ($mensaje->estado =="rechazado" )
+        @if ($mensaje->estado =="rechazado" && $tipo=="recibido" )
         <div class="row">
             <label class="col-5" style="font-weight: bold">Motivo de rechazo:</label>
             <label class="col">{{$mensaje->motivo_rechazo}}</label>
         </div>
         @endif
-        @if ($mensaje->estado =="enviado")
-        <div class="row">
-            <label class="col-5" style="font-weight: bold">Fecha de Examen:</label>
-            <label class="col">{{$mensaje->fecha_examen}}</label>
-        </div>
+        @if ($tipo =="enviado")
+       
         <br>
         <div class="row">
             <label class="col-5" style="font-weight: bold">Hora Inicio-Fin:</label>
