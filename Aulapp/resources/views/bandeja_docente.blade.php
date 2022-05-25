@@ -54,7 +54,7 @@
                     
                         
                    @if ($respuesta->estado != "enviado")
-                   <tr class="efecto {{$respuesta->estado}}" data-url="{{route('respuestas',['id'=>$respuesta->id])}}">     
+                   <tr class="efecto {{$respuesta->estado}}" data-url="{{route('respuestas',['tipo'=>'recibido','id'=>$respuesta->id])}}">     
                     <td>{{$respuesta->created_at}}</td>     
                      <td>{{$respuesta->estado}} - {{$respuesta->motivo}}</td>
                     </tr>
@@ -105,9 +105,9 @@
     
      tbody[0].innerHTML="";
      @foreach ($respuestas as $respuesta)
-     @if ($respuesta->estado == "enviado")
-      tbody[0].innerHTML+="<tr class='efecto2' data-url='{{route('respuestas',['id'=>$respuesta->id])}}'><td>{{$respuesta->created_at}}</td><td>{{$respuesta->motivo}}</td></tr>"
-      @endif
+   
+      tbody[0].innerHTML+="<tr class='efecto2' data-url='{{route('respuestas',['tipo'=>'enviado','id'=>$respuesta->id])}}'><td>{{$respuesta->created_at}}</td><td>{{$respuesta->motivo}}</td></tr>"
+    
      @endforeach
      $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });})
   
@@ -121,7 +121,7 @@
      tbody[0].innerHTML="";
      @foreach ($respuestas as $respuesta)
      @if ($respuesta->estado != "enviado")
-        tbody[0].innerHTML+="<tr class='efecto {{$respuesta->estado}}' data-url='{{route('respuestas',['id'=>$respuesta->id])}}'> <td>{{$respuesta->created_at}}</td><td>{{$respuesta->estado}} - {{$respuesta->motivo}}</td></tr>"
+        tbody[0].innerHTML+="<tr class='efecto {{$respuesta->estado}}' data-url='{{route('respuestas',['tipo'=>'recibido','id'=>$respuesta->id])}}'> <td>{{$respuesta->created_at}}</td><td>{{$respuesta->estado}} - {{$respuesta->motivo}}</td></tr>"
       @endif
      @endforeach
      $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });})

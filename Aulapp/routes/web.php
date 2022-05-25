@@ -135,7 +135,7 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
 
 
           Route::get('/bandeja_docente', [respuestaAdmin::class, 'show'])->name('bandeja_docente');
-          Route::get('/respuestas/{id}', [respuestaAdmin::class, 'respuestasAdmin'])->name('respuestas');
+          Route::get('/respuestas/{tipo}/{id}', [respuestaAdmin::class, 'respuestasAdmin'])->name('respuestas');
 
           Route::get('/respuesta', function () {
             return view('respuesta');

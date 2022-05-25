@@ -115,33 +115,51 @@ class GrupoController extends Controller
                 $asignacion->save();
             }
             }else{
-                $grupo=Grupo::where('materia_carrera_id',$lista_materia_carrera[$i]->id)->where('nombre',"G:".$request->nombre)->get();
-                if(!$grupo[0]->estado){
-                    
+
+                $grupo=Grupo::where('materia_carrera_id',$lista_materia_carrera[$i]->id)->where('nombre',"G:".$request->nombre)->where('estado',false)->get();
+                
+                 if($grupo!="[]"){
+                   
+                    $grupo[0]->estado=true;
+                    $grupo[0]->save();
                 }
+                
             }
         }
-
+        
      }else{
          
-    $id_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('carrera_id',$request->carrera)->get();
-    $grupo                         = new Grupo();
-    $grupo->nombre                 = "G:".$request->nombre;
-    $grupo->materia_carrera_id     = $id_materia_carrera[0]->id;
-    $grupo->save();
-    if($id_docente!="[]" && $id_docente!=""){
-        $asignacion= new asignacionDocentes();
-        $asignacion->user_rol_id=$id_docente[0]->user_rol_id;
-        $asignacion->grupo_id=$grupo->id;
-        $asignacion->gestion_id=$id_gestion->id;
-        $asignacion->save();
-    }
-
+        $id_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('carrera_id',$request->carrera)->get();
+        $grupo=Grupo::where('materia_carrera_id',$id_materia_carrera[0]->id)->where('nombre',"G:".$request->nombre)->get();
+       
+        
+            if($grupo!="[]"){
+                $grupo[0]->estado=true;
+                $grupo[0]->save();
+            }else{
+             $grupo                         = new Grupo();
+             $grupo->nombre                 = "G:".$request->nombre;
+             $grupo->materia_carrera_id     = $id_materia_carrera[0]->id;
+             $grupo->save();
+            }
+    
+            if($id_docente!="[]" && $id_docente!=""){
+                $asignacion= new asignacionDocentes();
+                $asignacion->user_rol_id=$id_docente[0]->user_rol_id;
+                $asignacion->grupo_id=$grupo->id;
+                $asignacion->gestion_id=$id_gestion->id;
+                $asignacion->save();
+            }
+            
   }
+
+    
+    
+
   
 
   return redirect()->route('grupos')->with('registrar', 'ok');
-    }
+}
 
     /**
      * Display the specified resource.
