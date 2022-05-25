@@ -7,7 +7,9 @@ use App\Models\Aula;
 use App\Models\AulaAsignada;
 use App\Models\gestion;
 use App\Models\Materia;
+use App\Models\nuevasnotificacion;
 use App\Models\reserva;
+use App\Models\UserRol;
 use App\Notifications\NotificacionReserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
@@ -66,7 +68,21 @@ class reservaController extends Controller
   $reserva->materia        = $request->materia;
   $reserva->user_rol_id    = $request->id;
   $reserva->motivo_rechazo = "";
-  $reserva->save();
+ $reserva->save();
+  $buscar_usuario=UserRol::where("rol_id",1)->get();
+  $buscar_not=nuevasnotificacion::where("user_rol_id",$buscar_usuario[0]->id)->get();
+  echo($buscar_not);
+  if($buscar_not=="[]"){
+    $notificacion=new nuevasnotificacion();
+    $notificacion->user_rol_id=$buscar_usuario[0]->id;
+    $notificacion->cantidad_not=1;
+    $notificacion->save();
+    echo("nuevo");
+  }else{
+    $buscar_not[0]->cantidad_not=$buscar_not[0]->cantidad_not+1;
+    $buscar_not[0]->save();
+    echo("encontrado");
+  }
   return redirect()->route('registro_reserva')->with('actualizar', 'ok');
  }
 
@@ -104,8 +120,10 @@ class reservaController extends Controller
     $aulas_asignadas[] = $aula_asignada;
    }
    Notification::route('mail', $aceptado->user_rol->usuario->Email)->notify(new NotificacionReserva($aceptado, $aulas_asignadas)); /* para usar cuando se guarde la reserva */
-   return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
-}}
+   
+}
+return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
+}
 
   /**
    * Display the specified resource.
