@@ -111,9 +111,11 @@ class reservaController extends Controller
   }
   public function reportePeticiones()
   {
-    $reservas = reserva::All();
+    $reservas = reserva::orderBy('created_at','DESC')->get();
     return view('bandeja_administrador', compact('reservas'));
   }
+
+
 
   /**
    * Show the form for editing the specified resource.
