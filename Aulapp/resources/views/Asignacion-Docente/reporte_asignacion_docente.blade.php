@@ -6,7 +6,7 @@
 @section("reporte","")
 @section("eliminar","eliminar-asignacion-docente")
 @section('Titulo')
-<h3 text-center>Administracion de materia-docente </h3>
+<h3 text-center>Administracion de docente-grupo</h3>
 @endsection
 
 @section('css')

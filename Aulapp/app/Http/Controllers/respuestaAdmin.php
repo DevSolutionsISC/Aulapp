@@ -12,7 +12,7 @@ class respuestaAdmin extends Controller
  {
   $usuario = Auth::user();
 
-  $respuestas = reserva::where('docentes', 'LIKE', '%' . $usuario->Nombre . '%')->get();
+  $respuestas = reserva::where('docentes', 'LIKE', '%' . $usuario->Nombre." ".$usuario->Apellido . '%')->get()->sortDesc();
   return view('bandeja_docente', ['respuestas' => $respuestas]);
  }
 
@@ -22,8 +22,6 @@ class respuestaAdmin extends Controller
   $aulas   = AulaAsignada::join("aulas", "aulas.id", "aula_asignadas.aula_id")->where('reserva_id', $mensaje->id)->select("aulas.nombre")->get();
 
   $aulas = $aulas->implode('nombre', ',');
-
-  //Notification::route('mail', $mensaje->user_rol->usuario->Email)->notify(new NotificacionReserva($mensaje, $aulas)); /* para usar cuando se guarde la reserva */
 
   return view('respuestaAdmin', ['mensaje' => $mensaje, 'aulas' => $aulas,'tipo'=>$tipo]);
  }
