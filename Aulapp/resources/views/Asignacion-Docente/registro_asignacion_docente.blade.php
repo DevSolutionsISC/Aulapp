@@ -1,7 +1,7 @@
 @extends('plantilla_planillas')
 
 @section('Titulo')
-<h3>Administración de materia-docente</h3>
+<h3>Administración de docente-grupo</h3>
 
 @endsection
 @section("registrar","materia_docente")

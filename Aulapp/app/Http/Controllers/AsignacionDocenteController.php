@@ -34,14 +34,23 @@ class AsignacionDocenteController extends Controller
  {
 
   $grupos = Grupo::join("materia_carreras", "materia_carreras.id", "=", "grupos.materia_carrera_id")->join("materias", "materias.id", "=", "materia_carreras.materia_id")->where('grupos.estado', true)->where('grupos.nombre', $request->grupo)->where('materias.id', $request->materia)->select("grupos.id")->get();
-
+  
+  
   $gestion = gestion::firstWhere('estado', true);
   foreach ($grupos as $grupo) {
-   $asignacion_docente              = new asignacionDocentes();
-   $asignacion_docente->user_rol_id = $request->docente;
-   $asignacion_docente->grupo_id    = $grupo->id;
-   $asignacion_docente->gestion_id  = $gestion->id;
-   $asignacion_docente->save();
+    $deshabilitado=asignacionDocentes::where('grupo_id',$grupo->id)->where('user_rol_id', $request->docente)->where('gestion_id',$gestion->id)->where('estado',false)->get();
+    
+    if($deshabilitado->isNotEmpty()){
+        $deshabilitado[0]->estado=true;
+        $deshabilitado[0]->save();
+    }else{
+        $asignacion_docente              = new asignacionDocentes();
+        $asignacion_docente->user_rol_id = $request->docente;
+        $asignacion_docente->grupo_id    = $grupo->id;
+        $asignacion_docente->gestion_id  = $gestion->id;
+        $asignacion_docente->save();
+    }
+  
   }
 
   return redirect()->route('materia_docente')->with('registrar', 'ok');
