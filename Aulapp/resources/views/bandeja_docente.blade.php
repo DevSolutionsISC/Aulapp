@@ -31,11 +31,9 @@
         <h3>Bandeja de notificaciones</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-            <a href=""><span class="material-symbols-outlined" id="campana">
-                notifications
-                </span></a>
+            <a href=""><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30"></a>
+            
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
-          <a class="nav-link active" aria-current="page" href="@yield("registrar")" id="registrar">DevSolution</a>
         </form>
       </div>
     </nav>

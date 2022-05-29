@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Pagina donde los docentes reservan aulas para sus examenes" />
+  <meta name="keywords" content="Reserva,aulas,fcyt" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -12,7 +14,7 @@
   </script>
   <link rel="stylesheet" href="{{asset('css/plantilla.css')}}" />
   <link rel="stylesheet" href="{{asset('css/editar.css')}}" />
-  <title>@yield('title')</title>
+  <title>Reserva</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gruppo&family=Poppins:wght@300&display=swap" rel="stylesheet">
@@ -26,13 +28,17 @@
   <header>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
+        <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo" alt="logo"></a>
         <h3>Realizar reserva</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex" >
-          <a href="bandeja_docente"><span class="material-symbols-outlined" id="campana">
-            notifications
-            </span></a>
+          <a href="bandeja_docente"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30" alt="notificaciones">
+          </a>
+          <a  class=" position-relative" >
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+              99+
+            </span>
+          </a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
           
         </form>
@@ -66,16 +72,16 @@
                 Añadir grupo +
                </button>
               <div class="row">
-                  <div class="col-5"><label>Cantidad de estudiantes:</label></div>
+                  <div class="col-5"><label for="cantidad">Cantidad de estudiantes:</label></div>
                   <div class="col-5"><input type="text" id="cantidad" name="cantidad" class="form-control"></div>
                   <span id="errorc" class="error"></span>
               </div> 
 
-              <label>Motivo:</label><br>
+              <label for="motivo">Motivo:</label><br>
               <textarea name="motivo" id="motivo" cols="45" rows="3" class="form-control"></textarea>
               <span id="errorm" class="error"></span><br>
                 <div class="row">
-                  <div class="col-5"><label>Fecha: </label></div> 
+                  <div class="col-5"><label for="fecha">Fecha: </label></div> 
                     <div class="col-5"><input type="date" name="fecha" id="fecha" class="date"><br></div>
                 </div>
                 
@@ -105,7 +111,7 @@
                 </div>
               <div class="d-grid gap-2">
                 <button class="btn btn-dark btn-block btn-lg " id="botonRegistrar" type="submit">Guardar</button>
-                <a href="" class="btn btn-danger btn-block btn-lg " id="botonRegistrar"
+                <a href="/reserva" class="btn btn-danger btn-block btn-lg " id="botonRegistrar"
                   type="button">Cancelar</a>
               </div>
             </form>
@@ -143,18 +149,10 @@
   var listaG=document.getElementById("lista_grupos");
   var nombre="";
   
-  @foreach ($ads as $ad)
-  
-    if('{{$ad->user_rol->usuario->id}}'== localStorage.getItem('usuario')  ){
-      if(!encontrarMateria("{{$ad->grupos->materia_carrera->materia->nombre_materia}}")){
-        materia.innerHTML+="<option class='materias'>{{$ad->grupos->materia_carrera->materia->nombre_materia}}</option>"
-        nombre='{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}'
-      };
-        
-        
-      }
+  @foreach ($materias as $materia) 
+        materia.innerHTML+="<option >{{$materia->nombre_materia}}</option>"
   @endforeach
-  listaD.value=nombre
+  listaD.value="{{$usuario->Nombre}} {{$usuario->Apellido}}";
   //--------------------------------------Añadir docente-----------------------------------
   var añadirD=document.getElementById("añadirD");
   var añadirG=document.getElementById("añadirG");
@@ -273,6 +271,7 @@
         }
       }
     }
+    if(listaG.value==""){for(var i=0;i<d.length;i++){d[i].parentNode.disabled=false;}}
   }
   //----------------Añadir grupo-------------------------------
   añadirG.onclick=function(){
@@ -416,20 +415,6 @@ registrar.onclick=function(event){
   }
    
 }
-
-  //-------------------------buscar materia----------
-  
-  function encontrarMateria(texto){
-   
-    var materias=document.getElementsByClassName("materias");
-    var alerta=false;
-    for(var i=0;i<materias.length;i++){
-      if(texto== materias[i].innerHTML){
-        alerta=true
-      }
-    }
-    return alerta
-  }
   //---------------------buscar docente----------------------
   function encontrarD(texto){
    
@@ -460,4 +445,14 @@ registrar.onclick=function(event){
    return alerta
  }
 </script>
+@if (session('actualizar')=='ok')
+  <script>localStorage.setItem('ruta',"")
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Reserva registrada exitosamente',
+    showConfirmButton: false,
+    timer: 1500
+    })</script>
+@endif
 </html>

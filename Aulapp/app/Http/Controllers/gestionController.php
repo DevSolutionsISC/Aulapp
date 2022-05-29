@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\asignacionDocentes;
 use App\Models\gestion;
 use Illuminate\Http\Request;
 
@@ -89,15 +90,30 @@ class gestionController extends Controller
      */
     public function update( $id , $id2 ,$tipo)
     {
-       
-       if($tipo==0){
+       //actualizar
+       if($tipo==0 && $id != $id2){
         $antiguo= gestion::find($id);
         $nuevo=gestion::find($id2);
+        $nombre="2/".explode("/",$nuevo->nombreG)[1];
         $antiguo->estado=0;
         $nuevo->estado=1;
+        if($nuevo->nombreG ==$nombre){
+            $asignaciones_nuevas=asignacionDocentes::where("gestion_id",$id2);
+            if($asignaciones_nuevas->count()==0){
+                $gestion1=gestion::where("nombreG","1/".explode("/",$nuevo->nombreG)[1])->get();
+                $asignaciones_antiguas=asignacionDocentes::where("gestion_id",$gestion1[0]->id)->get();
+                for($i=0;$i<$asignaciones_antiguas->count();$i++){
+                    $n=new asignacionDocentes();
+                    $n->user_rol_id=$asignaciones_antiguas[$i]->user_rol_id;
+                    $n->grupo_id=$asignaciones_antiguas[$i]->grupo_id;
+                    $n->gestion_id=$id2;
+                    $n->save();
+                }
+            }
+        }
         $antiguo->save();
         $nuevo->save();
-        
+        // Nuevo año
        }
        if($tipo==1){
         $g1=new gestion();
@@ -119,6 +135,17 @@ class gestionController extends Controller
         $antigu=gestion::find($id2);
         $antigu->estado=0;
         $antigu->save();
+        $gestion_n=gestion::where("nombreG","2/". strval($id-1))->get();
+        $asig=asignacionDocentes::where("gestion_id",$gestion_n[0]->id)->get();
+        $id_nuevo=gestion::where("nombreG",$g1->nombreG)->get();
+        for($i=0; $i<$asig->count();$i++){
+            $n=new asignacionDocentes();
+                    $n->user_rol_id=$asig[$i]->user_rol_id;
+                    $n->grupo_id=$asig[$i]->grupo_id;
+                    $n->gestion_id=$id_nuevo[0]->id;
+                    $n->save();
+        }
+
        }
        return redirect()->route('estadogestion')->with('actualizar', 'ok');
     }

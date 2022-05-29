@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAula;
 use App\Models\Aula;
+use App\Models\AulaAsignada;
+use App\Models\reserva;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Redirect;
 
 class AulaController extends Controller
@@ -135,11 +138,32 @@ class AulaController extends Controller
     }
     public function estado($id)
     {
+        $aulas_asignadas = AulaAsignada::all();
         $aula = Aula::find($id);
-        $aula->estado = false;
-        $aula->save();
+        $reservas = reserva::all();
+        $fecha = Carbon::now();
 
-        return redirect()->route('eliminar-aula')->with('eliminar', 'ok');
+        $ocupado = false;
+
+        foreach ($aulas_asignadas as $aula_asignada) {
+            if ($aula_asignada->aula_id == $aula->id) {
+                foreach ($reservas as $reserva) {
+                    if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen >= $fecha->toDateString() && $reserva->estado == 'aceptado' && ($fecha->toTimeString() < $reserva->hora_inicio || $reserva->hora_fin > $fecha->toTimeString())) {
+                        $ocupado = true;
+
+                    }
+
+                }
+            }
+        }
+        if ($ocupado == true) {
+            return redirect()->route('eliminar-aula')->with('eliminar', 'error');
+
+        } else if ($ocupado == false) {
+            $aula->estado = false;
+            $aula->save();
+            return redirect()->route('eliminar-aula')->with('eliminar', 'ok');
+        }
+
     }
-
 }

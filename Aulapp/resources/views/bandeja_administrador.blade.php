@@ -122,7 +122,16 @@
  
 </script>
 
-
+@if (session('actualizar')=='ok')
+  <script>localStorage.setItem('ruta',"")
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Respuesta enviada exitosamente',
+    showConfirmButton: false,
+    timer: 1500
+    })</script>
+@endif
 </body>
 
 </html>
