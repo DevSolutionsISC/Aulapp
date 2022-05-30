@@ -91,8 +91,8 @@
               @endforeach
               <form action="{{route('responder', ['id'=>$reserva->id, 'estado'=>1])}}" method="post">
                 @csrf
-                <input type="text" name="aulas_capacidad" class="form-control aulas" value=0>
-                <input type="text" name="aulas_nombres" class="form-control aulas" value="">
+                <input type="text" name="aulas_capacidad" class="form-control aulas oculto" value=0>
+                <input type="text" name="aulas_nombres" class="form-control aulas oculto" value="">
                 <button class="btn enviar" disabled>Enviar</button>
               </form>
             </div>
