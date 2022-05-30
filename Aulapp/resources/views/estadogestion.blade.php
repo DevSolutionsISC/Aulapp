@@ -51,6 +51,7 @@
               </div>
               <input type="submit" value="Cambiar" class="btn btn-dark" id="cambiar">
               <input type="submit" value="Nuevo año" class="btn btn-dark" id="nuevo">
+              <a class="btn btn-danger" id="btn_cancelar" href="/menu">Cancelar</a>
             </form>
           </div>
         

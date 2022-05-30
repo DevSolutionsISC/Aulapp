@@ -54,7 +54,7 @@
       <span class="tipo_m"> <b>Hora de finalizacion:</b> {{$reserva->hora_fin }}</span>
       <button class="btn btn-dark" id="btn_aceptar">Aceptar</button>
       <button class="btn btn-dark" id="btn_rechazar">Rechazar</button>
-      <button class="btn btn-danger" id="btn_cancelar">Cancelar</button>
+      
     </div>
     <div id="aceptado">
       <h5>Seleccione las aulas necesarias para la reserva de: <b>{{$reserva->cantE}}</b> estudiantes</h5>
