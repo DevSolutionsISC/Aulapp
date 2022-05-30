@@ -6,7 +6,7 @@
 @section("reporte","")
 @section("eliminar","eliminar-asignacion-docente")
 @section('Titulo')
-<h3 text-center>Administracion de docente-grupo</h3>
+<h3 text-center>Administracion de grupo-docente</h3>
 @endsection
 
 @section('css')
@@ -28,9 +28,8 @@
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
-                        <th scope="col">Materia</th>
+                        <th scope="col">Materia - Código</th>
                         <th scope="col">Grupo</th>
-                        <th scope="col">Carrera</th>
                         <th scope="col">Activo</th>
 
                   </tr>
@@ -44,9 +43,9 @@
                         <td>{{$asignacionDocente->id}}</td>
                         <td>{{$asignacionDocente->user_rol->usuario->Nombre}}</td>
                         <td>{{$asignacionDocente->user_rol->usuario->Apellido}}</td>
-                        <td>{{$asignacionDocente->grupos->materia_carrera->materia->nombre_materia}}</td>
+                        <td>{{$asignacionDocente->grupos->materia_carrera->materia->nombre_materia}},   {{$asignacionDocente->grupos->materia_carrera->materia->Cod_materia}}</td>
                         <td>{{$asignacionDocente->grupos->nombre}}</td>
-                        <td>{{$asignacionDocente->grupos->materia_carrera->carrera->Nombre}}</td>
+                      
                         
                          @if($asignacionDocente->estado==1)
                                                 
