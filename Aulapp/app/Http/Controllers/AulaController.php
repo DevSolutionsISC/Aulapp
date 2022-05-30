@@ -148,9 +148,10 @@ class AulaController extends Controller
         foreach ($aulas_asignadas as $aula_asignada) {
             if ($aula_asignada->aula_id == $aula->id) {
                 foreach ($reservas as $reserva) {
-                    if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen >= $fecha->toDateString() && $reserva->estado == 'aceptado' && ($fecha->toTimeString() < $reserva->hora_inicio || $reserva->hora_fin > $fecha->toTimeString())) {
+                    if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen == $fecha->toDateString() && $reserva->estado == 'aceptado' && ($fecha->toTimeString() < $reserva->hora_inicio || $reserva->hora_fin > $fecha->toTimeString())) {
                         $ocupado = true;
-
+                    } else if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen > $fecha->toDateString() && $reserva->estado == 'aceptado') {
+                        $ocupado = true;
                     }
 
                 }
