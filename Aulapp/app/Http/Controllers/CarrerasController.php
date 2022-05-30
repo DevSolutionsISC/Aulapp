@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+session_start();
+
+use App\Http\Requests\StoreCarrera;
 use App\Models\Carrera;
+use App\Models\Materia_Carrera;
 use Illuminate\Http\Request;
 
 class CarrerasController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,15 @@ class CarrerasController extends Controller
      */
     public function index()
     {
-        return view('adm_carreras');
+
+        return view('Carrera.registrar_carrera');
+
+    }
+    public function reporte()
+    {
+        $carreras = Carrera::all();
+        return view('Carrera.reporte_carrera', compact('carreras'));
+
     }
 
     /**
@@ -33,21 +46,24 @@ class CarrerasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCarrera $request)
     {
-        $request->validate([
-            'Nombre' => 'bail|required|min:3|max:20|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u',
-            'Codigo' => 'bail|required|numeric|unique:carreras|digits_between:6,10',
-        ]);
 
-        $carrera=new Carrera();
-        $carrera->Nombre=$request->Nombre;
-        $carrera->Codigo=$request->Codigo;
+        $carrera = new Carrera();
+        $carrera->Nombre = $request->nombre;
+        $carrera->Codigo = $request->codigo;
+
         $carrera->save();
 
-        return redirect()->route('carrera')->with('registrar','ok');
+        return redirect()->route('carreras')->with('registrar', 'ok');
     }
 
+    public function cancelar()
+    {
+
+        return redirect()->route('carreras');
+
+    }
     /**
      * Display the specified resource.
      *
@@ -56,7 +72,10 @@ class CarrerasController extends Controller
      */
     public function show($id)
     {
-        
+
+        $carrera = Carrera::find($id);
+
+        return redirect()->route('carreras')->cookie('id', $carrera->id)->cookie('nombre', $carrera->Nombre)->cookie('codigo', $carrera->Codigo)->cookie('editar', 'ok');
     }
 
     /**
@@ -77,9 +96,27 @@ class CarrerasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showEdit()
+    {
+        $carreras = Carrera::all();
+        $mcs = Materia_Carrera::all();
+        return view('Carrera.editarcarrera', ['carreras' => $carreras, 'mcs' => $mcs]);
+
+    }
     public function update(Request $request, $id)
     {
-        //
+
+        $carrera = Carrera::find($id);
+        $request->validate([
+            'Nombre' => 'bail|required|min:20|max:60|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|unique:carreras,Nombre,' . $carrera->id,
+            'Codigo' => 'bail|required|numeric|digits_between:5,8|unique:carreras,Codigo,' . $carrera->id,
+        ]);
+
+        $carrera->Nombre = $request->Nombre;
+        $carrera->Codigo = $request->Codigo;
+        $carrera->estado = $request->estadoE;
+        $carrera->save();
+        return redirect()->route('carrera_edit')->with('actualizar', 'ok');
     }
 
     /**
@@ -88,8 +125,38 @@ class CarrerasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function busqueda(Request $request)
     {
-        //
+        try {
+            $carrera = Carrera::query();
+
+            if ($request->has('search')) {
+                $carrera->where('Codigo', 'like', $request->search);
+            }
+            $carreras = $carrera->get();
+            return view('Carrera.eliminar_carrera', compact('carreras'));
+
+        } catch (\Throwable $th) {
+            return redirect()->route('eliminar-carrera')->with('buscar', 'error');
+
+        }
+
+    }
+    public function estado(Request $request, $carrera)
+    {
+        $carrera = Carrera::find($carrera);
+        $carrera->where('id', $request->carrera)->update(['estado' => false]);
+
+        $carrera->materia__carreras()->each(function ($materia_carrera) {
+            $materia_carrera->where('id', $materia_carrera->id)->update(['estado' => false]);
+            $materia_carrera->grupos()->each(function ($grupo) {
+                $grupo->where('id', $grupo->id)->update(['estado' => false]);
+                $grupo->asignacionDocentes()->each(function ($asignacionDocentes) {
+                    $asignacionDocentes->where('id', $asignacionDocentes->id)->update(['estado' => false]);
+                });
+            });
+        });
+
+        return redirect()->route('eliminar-carrera')->with('eliminar', 'ok');
     }
 }

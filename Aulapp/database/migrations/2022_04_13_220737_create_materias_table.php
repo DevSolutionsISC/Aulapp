@@ -17,7 +17,9 @@ class CreateMateriasTable extends Migration
             $table->id();
 
             $table->string('nombre_materia');
-            $table->integer("Cod_materia");
+            $table->integer('Cod_materia')->unique();
+            $table->boolean('estado')->default(true);
+
             
             $table->timestamps();
         });

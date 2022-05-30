@@ -25,25 +25,23 @@ class StoreMateria extends FormRequest
     public function rules()
     {
         return [      
-        'nombre_materia' => 'required|regex:/^[\pL\s\-]+$/u|min:5|max:20|unique:materias',
-        'Cod_materia' => 'required|min:6|max:10|unique:materias'
+        'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:5|max:60',
+        'codigo' => 'bail|required|numeric|digits_between:6,10|unique:materias,Cod_materia',
+        
         ];
     }
 
-    public function attributes(){
-        return[
-            'nombre_materia'=> 'nombre',
-            'Cod_materia'=>'código'
-        ];
-    }
+    
 
     public function messages()
     {
         return[
-            'nombre_materia.regex' => 'Solo se aceptan caracteres alfabéticos y espacios.',
-            'nombre_materia.unique'=> 'Ya existe una materia registrada con ese nombre.',
-            'Cod_materia.unique'=> 'Ya existe una materia registrada con ese código.'
-
+            'nombre.regex' => 'Solo se aceptan caracteres alfabéticos y espacios.',
+            'nombre.unique'=> 'Ya existe una materia registrada con ese nombre.',
+            'nombre.required'=>'El campo nombre es obligatorio',
+            'codigo.required'=>'El campo código es obligatorio',
+            'codigo.unique'=> 'Ya existe una materia registrada con ese código.',
+            
         ];
     }
 }
