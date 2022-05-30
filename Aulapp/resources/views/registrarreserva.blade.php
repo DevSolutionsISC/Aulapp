@@ -399,10 +399,13 @@ registrar.onclick=function(event){
     errorf.innerHTML="La fecha es  menor a la de hoy"
     alerta=1;
   }
-  if(fecha.getDay()==6){
-    errorf.innerHTML="La fecha no puede ser domingo"
+  @foreach ($diasNoHabiles as $dia)
+  if(fecha.getDay()=={{$dia->dias}}){
+    errorf.innerHTML="El día elegido no es valido"
     alerta=1;
   }
+  @endforeach
+  
   if(valf.value==""){
     errorf.innerHTML="Fecha no valida"
     alerta=1
