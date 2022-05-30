@@ -9,7 +9,9 @@ use App\Models\Materia;
 use App\Models\Materia_Carrera;
 use App\Models\UserRol;
 use App\Models\Usuario;
+use App\Notifications\Usuario as NotificationsUsuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
@@ -81,6 +83,8 @@ class UsuarioController extends Controller
   $usuario->usuario     = $User;
   $usuario->contrasenia = $Usercontrasenia;
   $usuario->save();
+
+  Notification::route('mail', $request->email)->notify(new NotificationsUsuario($usuario));
 
   $userRol             = new UserRol();
   $id_usuario          = Usuario::firstWhere('CI', $request->ci);
