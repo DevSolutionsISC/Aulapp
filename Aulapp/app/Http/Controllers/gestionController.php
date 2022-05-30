@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\asignacionDocentes;
 use App\Models\gestion;
 use Illuminate\Http\Request;
-
+use App\Models\UserRol;
+use App\Models\nuevasnotificacion;
 class gestionController extends Controller
 {
     /**
@@ -15,8 +16,16 @@ class gestionController extends Controller
      */
     public function index()
     {
+        $usuario = Auth::user();
+        $gestion=gestion::where("estado",1)->get();
+        $ur = UserRol::where("usuario_id",$usuario->id)->get();
+        $not= nuevasnotificacion::where("user_rol_id",$ur[0]->id)->get();
+        $cantidad=0;
+             if($not!="[]"){
+                  $cantidad=$not[0]->cantidad_not;
+              }
         $gestiones=gestion::all();
-        return view('estadogestion', ['gestiones' => $gestiones]);
+        return view('estadogestion', ['gestiones' => $gestiones, 'not'=>$cantidad]);
     }
 
     /**

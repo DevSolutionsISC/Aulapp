@@ -30,9 +30,13 @@
         <h3>Estado de gestion</h3>
         <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
-          <a href="/bandeja_administrador"><span class="material-symbols-outlined" id="campana">
-            notifications
-            </span></a>
+          <a href="/respuestaAdmin"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30" alt="notificaciones">
+          </a>
+          <a  class=" position-relative" id="cant_not">
+           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+         {{$not}}
+          </span>
+          </a>
           <a class="nav-link active" aria-current="page" href="/menu" id="inicio">Inicio</a>
         </form>
       </div>
@@ -121,5 +125,13 @@
       window.location.href="/gestion/{{$año}}/{{$id}}/1"
       
     }
+  </script>
+  <script>
+    setTimeout(() => {
+    if("{{$not}}"!=0){
+      var not= document.getElementById("cant_not")
+      not.style.display="block";
+    }
+  },50);
   </script>
 </html>

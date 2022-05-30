@@ -84,16 +84,16 @@
             <div class="accordion-body">
               @foreach ($aulas as $aula )
               @if ($aula->section_id==$section->id)
-              <div id="{{$aula->id}}" class="check"><input class="form-check-input aula" type="checkbox" value="">
+              <div id="{{$aula->id}}" class="check"><input class="form-check-input aula" type="checkbox" value=0>
                 <span>{{$aula->nombre}}</span><span> </span><span>{{$aula->capacidad}}</span>
               </div>
               @endif
               @endforeach
-              <form action="{{route('responder', ['id'=>$reserva->id, 'estado'=>1])}}" method="post">
+              <form action="{{route('responder', ['id'=>$reserva->id, 'estado'=>1])}}" method="post" class="aceptados">
                 @csrf
                 <input type="text" name="aulas_capacidad" class="form-control aulas oculto" value=0>
                 <input type="text" name="aulas_nombres" class="form-control aulas oculto" value="">
-                <button class="btn enviar" disabled>Enviar</button>
+                <button class="btn enviar" disabled type="submit">Enviar</button>
               </form>
             </div>
           </div>
@@ -205,6 +205,7 @@
           if(nombre_aula == aulas[i]){
             alerta=true;
             inputs[0].value=parseInt(inputs[0].value)-capacidad_aula;
+            $(this).val("0")
           }else{
             if(inputs[1].value == ""){
               inputs[1].value = aulas[i];
@@ -212,6 +213,7 @@
           }
         }
         if(alerta==false){
+          $(this).val("1")
           inputs[0].value=parseInt(inputs[0].value)+capacidad_aula
           if(inputs[1].value == ""){
               inputs[1].value = nombre_aula;
@@ -232,9 +234,39 @@
           }
         }
         $(this).parent().find("input")[0].disabled=false;
-       
       })
       
+    </script>
+    <script>
+      $('.aceptados').submit(function(e){
+            e.preventDefault();
+            var alerta=0;
+            var total=parseInt($(this).parent().find(".aulas")[0].value)
+           // console.log({{$reserva->cantE}});
+            aulas_s=$(this).parent().find(".check");
+                for(var i=0; i<aulas_s.length;i++){
+                  if($(aulas_s[i]).find("input").attr("value")==1){
+                    if(total - parseInt($(aulas_s[i]).find("span")[2].innerHTML)>={{$reserva->cantE}}){
+                      alerta=1;
+                    }
+                  }
+                }
+            if(alerta==1){
+              Swal.fire({
+            title: 'Hay aulas que estas ocupando innecesariamente, ¿Seguro que quiere continuar?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
+            }).then((result) => {
+                  if (result.isConfirmed) {
+                  this.submit();
+            }
+            })
+            }else{this.submit();}
+      });
     </script>
 </body>
 
