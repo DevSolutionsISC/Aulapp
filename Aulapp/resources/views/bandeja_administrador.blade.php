@@ -43,7 +43,7 @@
             <div id="tipos">
               
             <span class="tipo_m" id="recibidos">Por llegada</span>
-            <span class="tipo_m" id="enviados">Por urgencia</span>
+
 
            </div>
         <div id="tabla">
@@ -108,9 +108,10 @@
   }
 </script>
 <script>
- var enviados=document.getElementById("enviados")
+ //var enviados=document.getElementById("enviados")
  var recibidos=document.getElementById("recibidos")
  recibidos.style.background="grey"
+ /*
  enviados.onclick=function(){
      enviados.style.background="grey"
      recibidos.style.background="white"
@@ -119,7 +120,7 @@
      enviados.style.background="white"
      recibidos.style.background="grey"
  }
- 
+ */
 </script>
 
 @if (session('actualizar')=='ok')
