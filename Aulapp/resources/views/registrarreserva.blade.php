@@ -35,10 +35,10 @@
         <form class="d-flex" >
           <a href="bandeja_docente"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30" alt="notificaciones">
           </a>
-          <a  class=" position-relative" >
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-              99+
-            </span>
+          <a  class=" position-relative" id="cant_not">
+           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+         {{$not}}
+          </span>
           </a>
           <a class="nav-link active" aria-current="page" href="menu" id="inicio">Inicio</a>
           
@@ -457,6 +457,14 @@ registrar.onclick=function(event){
    }
    return alerta
  }
+</script>
+<script>
+  setTimeout(() => {
+  if("{{$not}}"!=0){
+    var not= document.getElementById("cant_not")
+    not.style.display="block";
+  }
+},50);
 </script>
 @if (session('actualizar')=='ok')
   <script>localStorage.setItem('ruta',"")

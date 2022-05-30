@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\nuevasnotificacion;
+use App\Models\UserRol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,11 +15,18 @@ class MenuController extends Controller
         $rol = $usuario->getRol();
 
         $privilegios = $this->obtenerPrivilegios($rol);
-
-        return view('menu', [
+        $ur = UserRol::where("usuario_id",$usuario->id)->get();
+       $not= nuevasnotificacion::where("user_rol_id",$ur[0]->id)->get();
+        $cantidad=0;
+       if($not!="[]"){
+            $cantidad=$not[0]->cantidad_not;
+        }
+       return view('menu', [
             'rol' => $rol,
             'privilegios' => $privilegios,
+           "not"=> $cantidad
         ]);
+
     }
 
     private function obtenerPrivilegios($rol)

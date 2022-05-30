@@ -1,4 +1,13 @@
 @extends('header')
+@section("cant_not")
+
+<a  class=" position-relative" id="cant_not">
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+    {{$not}}
+  </span>
+</a>
+
+@endsection
 @section("notificacion")
   @if($rol->id == 1)
       respuestaAdmin
@@ -52,5 +61,13 @@
     </div>
     @endif
 @endsection
+<script>
+  setTimeout(() => {
+  if("{{$not}}"!=0){
+    var not= document.getElementById("cant_not")
+    not.style.display="block";
+  }
+},50);
+</script>
 </body>
 </html>

@@ -30,11 +30,17 @@ class reservaController extends Controller
  {
   $usuario = Auth::user();
   $gestion=gestion::where("estado",1)->get();
+  $ur = UserRol::where("usuario_id",$usuario->id)->get();
+  $not= nuevasnotificacion::where("user_rol_id",$ur[0]->id)->get();
+  $cantidad=0;
+       if($not!="[]"){
+            $cantidad=$not[0]->cantidad_not;
+        }
   $materias= asignacionDocentes::join("user_rols","user_rols.id","=","asignacion_docentes.user_rol_id")->where("user_rols.usuario_id",$usuario->id)->where("asignacion_docentes.gestion_id",$gestion[0]->id)->join("grupos","grupos.id",'=','asignacion_docentes.grupo_id')->join("materia_carreras","materia_carreras.id","=","grupos.materia_carrera_id")->join("materias","materias.id","=","materia_carreras.materia_id")->select("materias.nombre_materia")->get()->unique("nombre_materia");
 
   $ads = asignacionDocentes::where("gestion_id",$gestion[0]->id)->get();
 
-  return view('registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario]);
+  return view('registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,"not" =>$cantidad]);
  }
 
  /**
@@ -155,6 +161,13 @@ return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
 
   public function reportePeticiones()
   {
+    $usuario = Auth::user();
+    $ur = UserRol::where("usuario_id",$usuario->id)->get();
+    $not= nuevasnotificacion::where("user_rol_id",$ur[0]->id)->get();
+    if($not!="[]"){
+      $not[0]->cantidad_not=0;
+      $not[0]->save();
+    }
     $reservas = reserva::orderBy('created_at','DESC')->get();
     return view('bandeja_administrador', compact('reservas'));
   }

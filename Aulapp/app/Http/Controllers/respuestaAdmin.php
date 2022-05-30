@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\AulaAsignada;
 use App\Models\reserva;
+use App\Models\UserRol;
+use App\Models\nuevasnotificacion;
 use Illuminate\Support\Facades\Auth;
+
 
 class respuestaAdmin extends Controller
 {
@@ -12,6 +15,12 @@ class respuestaAdmin extends Controller
  {
   $usuario = Auth::user();
 
+  $ur = UserRol::where("usuario_id",$usuario->id)->get();
+  $not= nuevasnotificacion::where("user_rol_id",$ur[0]->id)->get();
+  if($not!="[]"){
+    $not[0]->cantidad_not=0;
+    $not[0]->save();
+  }
   $respuestas = reserva::where('docentes', 'LIKE', '%' . $usuario->Nombre." ".$usuario->Apellido . '%')->get()->sortDesc();
   return view('bandeja_docente', ['respuestas' => $respuestas]);
  }

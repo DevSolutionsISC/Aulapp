@@ -28,11 +28,8 @@
                 <div class="d-flex">
                   <a href="@yield("notificacion")"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30">
                   </a>
-                  <a  class=" position-relative" id="cant_not">
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-                      99+
-                    </span>
-                  </a>
+                  @yield("cant_not")
+                  
                   <a class="nav-link active" aria-current="page" href="#" id="inicio">Inicio</a>
                   
                     @if(\Illuminate\Support\Facades\Auth::check())
