@@ -122,6 +122,21 @@ class reservaController extends Controller
    Notification::route('mail', $aceptado->user_rol->usuario->Email)->notify(new NotificacionReserva($aceptado, $aulas_asignadas)); /* para usar cuando se guarde la reserva */
    
 }
+$buscar_reserva=reserva::find($id);
+
+$buscar_not=nuevasnotificacion::where("user_rol_id",$buscar_reserva->user_rol_id)->get();
+  echo($buscar_not);
+  if($buscar_not=="[]"){
+    $notificacion=new nuevasnotificacion();
+    $notificacion->user_rol_id=$buscar_reserva->user_rol_id;
+    $notificacion->cantidad_not=1;
+    $notificacion->save();
+    echo("nuevo");
+  }else{
+    $buscar_not[0]->cantidad_not=$buscar_not[0]->cantidad_not+1;
+    $buscar_not[0]->save();
+    echo("encontrado");
+  }
 return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
 }
 

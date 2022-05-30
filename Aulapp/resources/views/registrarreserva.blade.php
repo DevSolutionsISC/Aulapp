@@ -20,6 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gruppo&family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </head>
 
 <body>
@@ -111,7 +112,7 @@
                 </div>
               <div class="d-grid gap-2">
                 <button class="btn btn-dark btn-block btn-lg " id="botonRegistrar" type="submit">Guardar</button>
-                <a href="/reserva" class="btn btn-danger btn-block btn-lg " id="botonRegistrar"
+                <a href="/menu" class="btn btn-danger btn-block btn-lg " id="botonRegistrar"
                   type="button">Cancelar</a>
               </div>
             </form>
@@ -189,7 +190,7 @@
 }).then((result) => {
   if (result.isConfirmed) {
     listaD.value+=","+ docentes.options[docentes.selectedIndex].text
-    asignacionD.innerHTML+="<button class='A_cont btn doc_asig' ><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let d'>"+docentes.options[docentes.selectedIndex].text+"</spam></button>"
+    asignacionD.innerHTML+="<button type='button' class='A_cont btn doc_asig' data-toggle='button' aria-pressed='false' autocomplete='off'><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let d'>"+docentes.options[docentes.selectedIndex].text+"</spam></button>"
   }
 })
   }
@@ -217,10 +218,11 @@
   }
   //--------------------------------funcion quitar docente---------------------------------
   var letras=document.getElementsByClassName("A_let")
+  var iconos=document.getElementsByClassName("A_icon")
   asignacionD.onclick=function(a){
     var f=a.target;
     for(var i=0; i<letras.length;i++){
-      if(f==letras[i]){
+      if(f==letras[i] || f==iconos[i]){
             quitarDocente(letras[i].innerHTML)
             asignacionD.removeChild(letras[i].parentNode)
     }
@@ -241,7 +243,7 @@
   asignacionG.onclick=function(a){
     var f=a.target;
     for(var i=0; i<letras.length;i++){
-      if(f==letras[i]){
+      if(f==letras[i] || f==iconos[i]){
             quitarGrupo(letras[i].innerHTML)
             asignacionG.removeChild(letras[i].parentNode)
     }
@@ -350,6 +352,17 @@ duracion.addEventListener('change', (event) => {
 horario.addEventListener('change', (event) => {
   cambiarHora();
 })
+//------------------------
+function vacio(texto){
+var alerta=true;
+lineas=texto.split("\n")
+for(var i=0; i<lineas.length;i++){
+  if (/\w/.test(lineas[i])){
+        alerta=false;
+    }
+}
+return alerta
+}
 //----------------------------------------------------------------
 registrar.onclick=function(event){
   var formulario=document.getElementById("formulario")
@@ -363,7 +376,7 @@ registrar.onclick=function(event){
     errorg.innerHTML="Debe añadir un grupo"
     alerta=1;
   }
-  if(valm.value==""){
+  if(vacio(valm.value)){
     errorm.innerHTML="Campo obligatorio"
     alerta=1
   }
@@ -383,7 +396,7 @@ registrar.onclick=function(event){
   var hoy= new Date();
   
   if(fecha.getTime()+86399999<hoy.getTime()){
-    errorf.innerHTML="La fecha menor a hoy"
+    errorf.innerHTML="La fecha es  menor a la de hoy"
     alerta=1;
   }
   if(fecha.getDay()==6){
