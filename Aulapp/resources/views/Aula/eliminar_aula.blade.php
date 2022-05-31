@@ -125,11 +125,11 @@
 @endif
 @if (session('eliminar')=='error')
 <script>
-  Swal.fire({
+  Swal.fire({ 
 position: 'center',
 icon: 'error',
 title: 'Oops...',
-text: 'No se puede eliminar el aula porque tiene una reserva asociada pendiente',
+text: 'No se puede eliminar el aula porque tiene una reserva pendiente',
 showConfirmButton: true,
 })
 </script>
