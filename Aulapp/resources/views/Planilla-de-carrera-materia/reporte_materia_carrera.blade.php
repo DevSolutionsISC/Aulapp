@@ -25,8 +25,10 @@
 
                   <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Código</th>
+                        <th scope="col">Carrera</th>
+                        <th scope="col">Código-carrera</th>
+                        <th scope="col">Materia</th>
+                        <th scope="col">Código-materia</th>
                         <th scope="col">Activo</th>
                         
 
@@ -37,8 +39,9 @@
                    <tr>
                          <td>{{$materia_carrera->id}}</td>
                          <td>{{$materia_carrera->carrera->Nombre}}</td>
+                         <td>{{$materia_carrera->carrera->Codigo}}</td>
                          <td>{{$materia_carrera->materia->nombre_materia}}</td>
-                         
+                         <td>{{$materia_carrera->materia->Cod_materia}}</td>
                          @if($materia_carrera->estado==1)
                                                 
                             <td>SI</td>
