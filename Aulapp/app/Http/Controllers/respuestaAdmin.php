@@ -22,7 +22,7 @@ class respuestaAdmin extends Controller
     $not[0]->save();
   }
   $respuestas = reserva::where('docentes', 'LIKE', '%' . $usuario->Nombre." ".$usuario->Apellido . '%')->get()->sortDesc();
-  return view('bandeja_docente', ['respuestas' => $respuestas]);
+  return view('Bandejas.bandeja_docente', ['respuestas' => $respuestas]);
  }
 
  public function respuestasAdmin($tipo,$id)
@@ -32,6 +32,6 @@ class respuestaAdmin extends Controller
 
   $aulas = $aulas->implode('nombre', ',');
 
-  return view('respuestaAdmin', ['mensaje' => $mensaje, 'aulas' => $aulas,'tipo'=>$tipo]);
+  return view('Bandejas.respuestaAdmin', ['mensaje' => $mensaje, 'aulas' => $aulas,'tipo'=>$tipo]);
  }
 }

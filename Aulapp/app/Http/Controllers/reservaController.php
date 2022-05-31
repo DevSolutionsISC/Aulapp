@@ -45,7 +45,7 @@ class reservaController extends Controller
 
  
 
-  return view('registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad ,"id"=>$ur[0]->id]);
+  return view('Reserva.registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad ,"id"=>$ur[0]->id]);
 
  }
 
@@ -162,7 +162,7 @@ return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
   {
     $reserva        = reserva::find($id);
     $aulasAsignadas = AulaAsignada::all();
-    return view('respuesta', compact('reserva', 'aulasAsignadas'));
+    return view('Reserva.respuesta', compact('reserva', 'aulasAsignadas'));
   }
 
   public function reportePeticiones()
@@ -175,7 +175,7 @@ return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
       $not[0]->save();
     }
     $reservas = reserva::orderBy('created_at','DESC')->get();
-    return view('bandeja_administrador', compact('reservas'));
+    return view('Bandejas.bandeja_administrador', compact('reservas'));
   }
 
 

@@ -27,9 +27,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('Inicio');
-   });
+
     
 
        /*Route::get('/pass-generate', function () {
@@ -48,7 +46,7 @@ Route::get('/', function () {
           
 Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
-        return view('login');
+        return view('Login.login');
     })->name('login');
 
     Route::post('login', [AuthController::class, 'authenticate']);
@@ -130,23 +128,19 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        //------------------------------------------------------------------------------
        
        
-       //------------------------------------------------------------------------------------
+       //-----------------------------------Bandeja del docente--------------------------------------------
       
 
 
           Route::get('/bandeja_docente', [respuestaAdmin::class, 'show'])->name('bandeja_docente');
           Route::get('/respuestas/{tipo}/{id}', [respuestaAdmin::class, 'respuestasAdmin'])->name('respuestas');
 
-          Route::get('/respuesta', function () {
-            return view('respuesta');
-           });
+         //------------------------------------Bandeja de administrador----------------------------------------------
 
           Route::get('/respuestaAdmin', [reservaController::class, 'reportePeticiones'])->name('respuestaAdmin');
           Route::get('/respuesta/{id}', [reservaController::class, 'show'])->name('respuesta');
           
-          Route::get('/aulas_asignadas', function () {
-           return view('aulas_asignadas');
-          });
+        //------------------------------Gestion-------------------------------------------------------------
           
           Route::get('/gestion', [gestionController::class, 'index'])->name('estadogestion');
           Route::get('/gestion/{id}/{id2}/{tipo}', [gestionController::class, 'update'])->name('gestion-update');
