@@ -52,7 +52,7 @@
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Estado</th>
-                    <th>Fecha de envío</th>
+                    <th>Fecha de llegada</th>
 
                 </thead>
                 <tbody>

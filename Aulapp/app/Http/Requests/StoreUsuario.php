@@ -27,7 +27,7 @@ class StoreUsuario extends FormRequest
             'nombre' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:3|max:25',
             'apellido' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:2|max:30',
             'ci'=>'bail|required|numeric|digits_between:6,10|unique:usuarios,CI',
-            'email'=>'bail|required|email|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 @ . _]+$/|unique:usuarios,Email',
+            'email'=>'bail|required|email|regex:/^[a-zA-Z\s 0-9 @ . _]+$/|unique:usuarios,Email',
           
         ];
     }
@@ -46,6 +46,7 @@ class StoreUsuario extends FormRequest
             
             'email.unique'=> 'Ya existe un usuario registrado con ese email.',
             'email.required'=> 'El campo email es obligatorio',
+            'email.regex'=>'Solo se aceptan caracteres alfanuméricos (sin acento, diéresis y el caracter ñ), caracteres especiales (@ . _)',
 
          
         ];

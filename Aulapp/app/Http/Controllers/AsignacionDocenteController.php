@@ -17,17 +17,24 @@ class AsignacionDocenteController extends Controller
  {
   $materias       = Materia::where('estado', true)->get();
   $grupos         = Grupo::join("materia_carreras", "materia_carreras.id", "=", "grupos.materia_carrera_id")->join("materias", "materias.id", "=", "materia_carreras.materia_id")->where('grupos.estado', true)->select("grupos.*", "materias.id as materia_id")->get();
-  $grupos         = $grupos->unique('nombre', 'materia_id');
+  
+  $grupos=$grupos->unique(function ($item) {
+    return $item['nombre'].$item['materia_id'];
+});
+  
   $docentes       = UserRol::all();
   $gestion        = gestion::firstWhere('estado', true);
   $docente_grupos = asignacionDocentes::where('gestion_id', $gestion->id)->get();
+ 
   $filtered       = $grupos->reject(function ($value, $key) {
    $gestion        = gestion::firstWhere('estado', true);
+ 
    $docente_grupos = asignacionDocentes::where('gestion_id', $gestion->id)->where('estado', true)->get();
+  
    return $docente_grupos->contains('grupo_id', $value->id);
   });
-
-  return view('Asignacion-Docente.registro_asignacion_docente', ['materias' => $materias, 'docentes' => $docentes, 'docente_materias' => $docente_grupos, 'grupos' => $filtered]);
+  
+return view('Asignacion-Docente.registro_asignacion_docente', ['materias' => $materias, 'docentes' => $docentes, 'docente_materias' => $docente_grupos, 'grupos' => $filtered]);
  }
 
  public function store(StoreAsignacion $request)

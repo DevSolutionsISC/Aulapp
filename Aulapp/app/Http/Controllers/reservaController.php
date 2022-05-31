@@ -43,9 +43,9 @@ class reservaController extends Controller
   $diasNoHabiles=diasExamen::where("estado",false)->get();
 
 
-  return view('registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,]);
+ 
 
-  return view('registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad]);
+  return view('registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad ,"id"=>$ur[0]->id]);
 
  }
 

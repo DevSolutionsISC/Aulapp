@@ -67,7 +67,7 @@
     var not= document.getElementById("cant_not")
     not.style.display="block";
   }
-},50);
+},100);
 </script>
 </body>
 </html>

@@ -29,7 +29,7 @@ class MateriaCarreraController extends Controller
  public function registro()
  {
   $materias         = Materia::where('estado', true)->get();
-  $carrera_materias = Materia_Carrera::all();
+  $carrera_materias = Materia_Carrera::where('estado',true)->get();
   $carreras         = Carrera::where('estado', true)->get();
   return view('Planilla-de-carrera-materia\registro_planilla_carrera_materia', ['carreras' => $carreras, 'materias' => $materias, 'carrera_materias' => $carrera_materias]);
  }
@@ -51,11 +51,18 @@ class MateriaCarreraController extends Controller
   */
  public function store(StoreMateriaCarrera $request)
  {
-  $materia_carrera             = new Materia_Carrera();
-  $materia_carrera->carrera_id = $request->carrera;
-  $materia_carrera->materia_id = $request->materia;
-  $materia_carrera->save();
-
+  $existe=Materia_Carrera::where('carrera_id',$request->carrera)->where('materia_id',$request->materia)->get();
+  if($existe->isNotEmpty()){
+    $existe[0]->estado=true;
+    $existe[0]->save();
+  }else{
+    $materia_carrera             = new Materia_Carrera();
+    $materia_carrera->carrera_id = $request->carrera;
+    $materia_carrera->materia_id = $request->materia;
+    $materia_carrera->save();
+  
+  }
+  
   return redirect()->route('materia_carrera')->with('registrar', 'ok');
  }
 

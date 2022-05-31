@@ -126,7 +126,7 @@
   @yield('js')
 <script>
   var id=document.getElementById("id");
-  id.value=localStorage.getItem('usuario')
+  id.value={{$id}}
   var menu=document.getElementsByClassName("nav-link");
   var btn_menu=document.getElementById("menu")
   btn_menu.onclick=function(){
