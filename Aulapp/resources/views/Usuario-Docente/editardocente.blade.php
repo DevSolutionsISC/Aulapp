@@ -109,6 +109,7 @@
           localStorage.setItem('id',texto.value)
           var ed=document.getElementsByClassName("ed");
           encontrado=1;
+          buscar.disabled=true;
           for(var i=0;i<ed.length;i++){
           ed[i].style.display="block"
           }

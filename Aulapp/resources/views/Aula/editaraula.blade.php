@@ -18,7 +18,7 @@
       @csrf
       <h3 text-center>Editar aula</h3>
 
-      <label for="inputtexto" class="form-label ">Coloque el código del aula que quiere editar y presione buscar</label>
+      <label for="inputtexto" class="form-label ">Coloque el nombre del aula que quiere editar y presione buscar</label>
       <input type="text" id="inputtexto" class="form-control" name="nombre" value="{{old('nombre')}}" autofocus>
       <br>
       <button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="button" aria-pressed="false" autocomplete="off" id="buscar">
