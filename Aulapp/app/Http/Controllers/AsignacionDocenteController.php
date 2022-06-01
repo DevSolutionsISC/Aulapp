@@ -85,7 +85,30 @@ return view('Asignacion-Docente.registro_asignacion_docente', ['materias' => $ma
  public function reporte()
  {
 
-  $asignacionDocentes = asignacionDocentes::all();
+  
+ 
+ 
+  $asignacionDocentesH = asignacionDocentes::join("grupos","grupos.id","=","asignacion_docentes.grupo_id")->join('materia_carreras','materia_carreras.id',"=","grupos.materia_carrera_id")->where('asignacion_docentes.estado',true)->select('asignacion_docentes.*','grupos.nombre','materia_id')->get();
+  $asignacionDocentesI = asignacionDocentes::join("grupos","grupos.id","=","asignacion_docentes.grupo_id")->join('materia_carreras','materia_carreras.id',"=","grupos.materia_carrera_id")->where('asignacion_docentes.estado',false)->select('asignacion_docentes.*','grupos.nombre','materia_id')->get();
+  
+  $asignacionDocentesH=$asignacionDocentesH->unique(function ($item) {
+    return $item['nombre'].$item['materia_id'];
+    });
+ 
+  $asignacionDocentesI=$asignacionDocentesI->unique(function ($item) {
+      return $item['nombre'].$item['materia_id'];
+    });
+    
+   
+    $asignacionDocentes=$asignacionDocentesH->merge($asignacionDocentesI);
+    
+   
+
+    $asignacionDocentes=$asignacionDocentes->unique(function ($item) {
+      return $item['nombre'].$item['materia_id'];
+    });
+
+
   return view('Asignacion-Docente.reporte_asignacion_docente', compact('asignacionDocentes'));
 
  }
