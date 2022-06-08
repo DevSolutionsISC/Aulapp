@@ -77,6 +77,8 @@
         }
         
       @endforeach
+      var nombre= document.getElementById("inputNombre");
+      nombre.disabled=true
 </script>
 @endif
 @if (session('actualizar')=='ok')
@@ -110,6 +112,7 @@
     if(texto.value =='{{$aula->nombre}}'){
         buscar.disabled=true;
       nombre.value='{{$aula->nombre}}'
+      nombre.disabled=true
       codigo.value='{{$aula->capacidad}}'
       formulario.action="{{route('aula-update', ['id'=>$aula->id])}}"
       localStorage.setItem('ruta',formulario.action)
@@ -194,7 +197,7 @@
         estado.onclick=function(){
     console.log(estado.value)
             estadoE.value=1
-            nombre.disabled=false
+            nombre.disabled=true
             codigo.disabled=false
             asignaciones.disabled=false
             estado.disabled=true

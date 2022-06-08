@@ -65,6 +65,8 @@
       texto.disabled=true
       texto.value=localStorage.getItem('id')
   formulario.action=localStorage.getItem("ruta");
+  var codigo=document.getElementById("inputCodigo");
+  codigo.disabled=true;
 </script>
 @endif
 @if (session('actualizar')=='ok')
@@ -97,6 +99,7 @@
         buscar.disabled=true;
       nombre.value='{{$materia->nombre_materia}}'
       codigo.value='{{$materia->Cod_materia}}'
+      codigo.disabled=true
       formulario.action="{{route('materias-update', ['id'=>$materia->id])}}"
       localStorage.setItem('ruta',formulario.action)
       localStorage.setItem('id',texto.value)
@@ -144,7 +147,7 @@
     estado.disabled=true
     if(asignado == 0){
             nombre.disabled=false
-            codigo.disabled=false
+            codigo.disabled=true
     }
   }
   }

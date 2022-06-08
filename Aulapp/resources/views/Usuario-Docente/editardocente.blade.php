@@ -76,7 +76,10 @@
       texto.disabled=true
       texto.value=localStorage.getItem('id')
   formulario.action=localStorage.getItem("ruta");
-
+  var ci=document.getElementById("inputCI");
+  var correo=document.getElementById("inputCorreo");
+  correo.disabled=true
+  ci.disabled=true
 </script>
 @endif
 @if (session('actualizar')=='ok')
@@ -104,6 +107,8 @@
           apellido.value= '{{$docente->Apellido}}'
           ci.value='{{$docente->CI}}'
           correo.value= '{{$docente->Email}}'
+          correo.disabled=true
+          ci.disabled=true
           formulario.action="{{route('docente-update', ['id'=>$docente->id])}}"
           localStorage.setItem('ruta',formulario.action)
           localStorage.setItem('id',texto.value)
@@ -151,8 +156,8 @@
       estadoE.value=1
             nombre.disabled=false
             apellido.disabled=false
-            ci.disabled=false
-            correo.disabled=false
+            ci.disabled=true
+            correo.disabled=true
             estado.disabled=true
     }
   }

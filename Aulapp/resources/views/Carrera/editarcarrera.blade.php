@@ -63,7 +63,8 @@
       texto.disabled=true
       texto.value=localStorage.getItem('id')
   formulario.action=localStorage.getItem("ruta");
-
+  var codigo=document.getElementById("inputCodigo");
+  codigo.disabled=true;
 </script>
 @endif
 @if (session('actualizar')=='ok')
@@ -94,6 +95,7 @@
     if(texto.value =='{{$carrera->Codigo}}'){
       nombre.value='{{$carrera->Nombre}}'
       codigo.value='{{$carrera->Codigo}}'
+      codigo.disabled=true
       formulario.action="{{route('carreras-update', ['id'=>$carrera->id])}}"
       localStorage.setItem('ruta',formulario.action)
       localStorage.setItem('id',texto.value)
@@ -140,7 +142,7 @@
     estado.disabled=true
     if(asignado == 0){
             nombre.disabled=false
-            codigo.disabled=false
+            codigo.disabled=true
     }
   }
   var registrar=document.getElementById("botonRegistrar");

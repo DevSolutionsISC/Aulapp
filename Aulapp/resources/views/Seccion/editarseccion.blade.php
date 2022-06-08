@@ -63,7 +63,8 @@
       texto.disabled=true
       texto.value=localStorage.getItem('id')
   formulario.action=localStorage.getItem("ruta");
-
+  var nombre= document.getElementById("inputNombre");
+  nombre.disabled=true
 </script>
 @endif
 @if (session('actualizar')=='ok')
@@ -93,6 +94,7 @@
   @foreach ($secciones as $seccion)
     if(texto.value =='{{$seccion->nombre}}'){
       nombre.value='{{$seccion->nombre}}'
+      nombre.disabled=true;
       codigo.value='{{$seccion->descripcion}}'
       formulario.action="{{route('seccion-update', ['id'=>$seccion->id])}}"
       localStorage.setItem('ruta',formulario.action)
@@ -134,7 +136,7 @@
     console.log(estado.value)
     if(estadoE.value==0){
       estadoE.value=1
-            nombre.disabled=false
+            nombre.disabled=true
             codigo.disabled=false
             estado.disabled=true
     }
