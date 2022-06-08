@@ -12,6 +12,7 @@ use App\Models\nuevasnotificacion;
 use App\Models\reserva;
 use App\Models\UserRol;
 use App\Notifications\NotificacionReserva;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
@@ -175,7 +176,17 @@ return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
       $not[0]->save();
     }
     $reservas = reserva::orderBy('created_at','DESC')->get();
-    return view('Bandejas.bandeja_administrador', compact('reservas'));
+    $date=new DateTime('now');
+    $date=$date->format('Y-m-d H:i:s');
+    $filtered = $reservas->filter(function ($value, $key) {
+      $date=new DateTime('now');
+      $date=$date->format('Y-m-d');
+      
+      return $date < $value->fecha_examen && $value->estado=="enviado";
+    });
+    
+    $filtered=$filtered->sortBy('fecha_examen');
+    return view('Bandejas.bandeja_administrador', ['reservas'=>$reservas,'urgentes'=>$filtered]);
   }
 
 

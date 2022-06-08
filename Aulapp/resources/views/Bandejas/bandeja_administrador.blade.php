@@ -42,7 +42,8 @@
     <div id="Container" class="container-fluid">
             <div id="tipos">
               
-            <span class="tipo_m" id="recibidos">Por llegada</span>
+            <span class="tipo_m" id="llegada">Por llegada</span>
+            <span class="tipo_m" id="urgencia">Por urgencia</span>
 
 
            </div>
@@ -113,19 +114,48 @@
   }
 </script>
 <script>
- //var enviados=document.getElementById("enviados")
- var recibidos=document.getElementById("recibidos")
- recibidos.style.background="grey"
- /*
- enviados.onclick=function(){
-     enviados.style.background="grey"
-     recibidos.style.background="white"
+ var llegada=document.getElementById("llegada")
+ var urgencia=document.getElementById("urgencia")
+ llegada.style.background="grey"
+ //por llegada
+ llegada.onclick=function(){
+    llegada.style.background="grey"
+     urgencia.style.background="white"
+     var tbody=document.getElementsByTagName("tbody");
+    
+     tbody[0].innerHTML="";
+     @foreach ($reservas as $reservaBandeja)
+      @if ($reservaBandeja->estado == 'enviado')
+      tbody[0].innerHTML+="<tr class='efecto {{$reservaBandeja->estado}}' data-url='{{route('respuesta',['id'=>$reservaBandeja->id])}}'><td>{{$reservaBandeja->docentes}}</td><td>{{$reservaBandeja->motivo}}</td><td>{{$reservaBandeja->estado}}</td><td>{{$reservaBandeja->created_at}}</td></tr>"
+      @else
+      tbody[0].innerHTML+="<tr class='efecto {{$reservaBandeja->estado}}' data-url='{{route('respuestas',['tipo'=>'recibido','id'=>$reservaBandeja->id])}}'><td>{{$reservaBandeja->docentes}}</td><td>{{$reservaBandeja->motivo}}</td><td>{{$reservaBandeja->estado}}</td><td>{{$reservaBandeja->created_at}}</td></tr>"
+      @endif
+     @endforeach
+     $(function () {$('table.table tr').click(function () { 
+      if( $(this).data('url')!=null){
+        window.location.href = $(this).data('url');
+      }
+      });})
  }
- recibidos.onclick=function(){
-     enviados.style.background="white"
-     recibidos.style.background="grey"
+ //por urgencia
+ urgencia.onclick=function(){
+     llegada.style.background="white"
+     urgencia.style.background="grey"
+     var tbody=document.getElementsByTagName("tbody");
+    
+     tbody[0].innerHTML="";
+     @foreach ($urgentes as $urgente)
+     
+     tbody[0].innerHTML+="<tr class='efecto {{$urgente->estado}}' data-url='{{route('respuesta',['id'=>$urgente->id])}}'><td>{{$urgente->docentes}}</td><td>{{$urgente->motivo}}</td><td>{{$urgente->estado}}</td><td>{{$urgente->created_at}}</td></tr>"
+    
+     @endforeach
+     $(function () {$('table.table tr').click(function () { 
+      if( $(this).data('url')!=null){
+        window.location.href = $(this).data('url');
+      }
+      });})
  }
- */
+ 
 </script>
 
 @if (session('actualizar')=='ok')
