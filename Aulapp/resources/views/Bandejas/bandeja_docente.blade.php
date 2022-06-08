@@ -71,7 +71,11 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
   <script>
-    $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });}) 
+    $(function () {$('table.table tr').click(function () {  
+      if( $(this).data('url')!=null){
+        window.location.href = $(this).data('url');
+      }
+    });}) 
   </script>
 <script>
     //menu hamburguesa
@@ -107,7 +111,11 @@
       tbody[0].innerHTML+="<tr class='efecto2' data-url='{{route('respuestas',['tipo'=>'enviado','id'=>$respuesta->id])}}'><td>{{$respuesta->created_at}}</td><td>{{$respuesta->motivo}}</td></tr>"
     
      @endforeach
-     $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });})
+     $(function () {$('table.table tr').click(function () { 
+      if( $(this).data('url')!=null){
+        window.location.href = $(this).data('url');
+      }
+      });})
   
      
  }
@@ -122,7 +130,11 @@
         tbody[0].innerHTML+="<tr class='efecto {{$respuesta->estado}}' data-url='{{route('respuestas',['tipo'=>'recibido','id'=>$respuesta->id])}}'> <td>{{$respuesta->created_at}}</td><td>{{$respuesta->estado}} - {{$respuesta->motivo}}</td></tr>"
       @endif
      @endforeach
-     $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });})
+     $(function () {$('table.table tr').click(function () {  
+      if( $(this).data('url')!=null){
+        window.location.href = $(this).data('url');
+      }
+      });})
   
  }
  
