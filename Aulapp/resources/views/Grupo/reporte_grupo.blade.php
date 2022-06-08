@@ -91,5 +91,8 @@
 <script>
       var editar=document.getElementById("editar")
       editar.style.display="none"
+      var row=document.getElementsByClassName("row")
+      row[1].id="primero"
+      row[3].id="tercero"
 </script>
 @endsection

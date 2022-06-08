@@ -28,7 +28,7 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
         <h3>Estado de gestion</h3>
-        <a href="#" class="material-symbols-outlined" id="menu">menu</a>
+        
         <form class="d-flex">
           <a href="/respuestaAdmin"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30" alt="notificaciones">
           </a>
@@ -133,5 +133,7 @@
       not.style.display="block";
     }
   },100);
+  var inicio = document.getElementById("inicio")
+  inicio.style.display="block"
   </script>
 </html>

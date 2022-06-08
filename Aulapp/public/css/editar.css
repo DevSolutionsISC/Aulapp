@@ -1,9 +1,4 @@
-h3{
-        font-family: 'Gruppo', cursive;
-        font-family: 'Poppins', sans-serif;
-        font-size: 30px;
-        font-weight:  bolder;
-}
+
 .nav-link{
     font-family: 'Gruppo', cursive;
     font-family: 'Poppins', sans-serif;
@@ -91,4 +86,32 @@ h3{
 }
 .error{
     color: red;
+}
+@media (max-width: 500px) {
+   #cambiar, #nuevo, #btn_cancelar{
+       display: block;
+       margin-bottom: 10px;
+       width: 150px;
+   }
+    
+}
+@media (max-width: 300px) {
+   
+    #inicio,#registrar,#editar,#eliminar,#reporte{
+        font-size: 6px;
+    }
+    #campana{width: 20px;}
+    #formulario{
+        width: 100%;
+    }
+    #fecha{
+        font-size: 12px;
+    }
+    label{
+        font-size: 13px;
+    }
+    option, .form-select, .btn,#añadirD,#añadirG{
+        font-size: 10px;
+    }
+
 }

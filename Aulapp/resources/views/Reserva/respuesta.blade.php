@@ -31,7 +31,6 @@
         <a class="navbar-brand" href="#"><span id="Nlogo">Aulapp</span><img src="{{asset('Imagenes/logo.jpeg')}}"
             width="50" id="logo"></a>
         <h3>Responder a solicitud</h3>
-        <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <form class="d-flex">
         <div class="navbar-brand " style="padding-left:5%" href="/" >
           <a href="/respuestaAdmin">
@@ -151,24 +150,7 @@
     </script>
 
 
-    <script>
-      //menu hamburguesa
-  var menu=document.getElementsByClassName("nav-link");
-  var btn_menu=document.getElementById("menu")
-  btn_menu.onclick=function(){
-    if(btn_menu.innerHTML=="menu"){
-      for(var i=0 ; i<menu.length;i++){
-      menu[i].style.display="block"
-      }
-       btn_menu.innerHTML="close";
-    }else{
-      for(var i=0 ; i<menu.length;i++){
-      menu[i].style.display="none"
-    }
-    btn_menu.innerHTML="menu";
-    }
-  }
-    </script>
+
     <script>
       var btn_aceptar=document.getElementById("btn_aceptar")
       var btn_rechazar=document.getElementById("btn_rechazar")

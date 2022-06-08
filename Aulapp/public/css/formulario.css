@@ -98,7 +98,7 @@ label {
     width: 40%;
     margin-left: 4%;
     float: left;
-    margin-top: 2%;
+    margin-top: 1%;
 }
 #presentacion{
     float: right;
@@ -122,37 +122,6 @@ label {
     float: left;
     margin-top: 15%;
 }
-@media (max-width: 1024px) {
-    #formulario{
-        width: 35%;
-    }
-    #funcionalidades{
-        width: 70%;
-        margin-left: 25%;
-    }
-    #presentacion{
-        width: 70%;
-        height: 250px;
-    }
-}
-@media (max-width: 600px) {
-#formulario{
-    width: 90%;
-}
-#funcionalidades{
-    width: 80%;
-    margin-left: 15%;
-}
-#presentacion{
-    width: 80%;
-    height: 250px;
-    border: none;
-}
-.funcion{
-    width: 90%;
-    margin-left: 0;
-}
-}
 .funcion:hover, .funcion:active {
     -webkit-transform: translate(0px,5px);
     -ms-transform: translate(0px,5px);
@@ -173,3 +142,81 @@ label {
     display: block;
     float: right;
 }
+@media (max-width: 1024px) {
+    #formulario{
+        width: 35%;
+    }
+    #funcionalidades{
+        width: 70%;
+        margin-left: 25%;
+    }
+    #presentacion{
+        width: 70%;
+        height: 350px;
+    }
+}
+@media (max-width: 600px) {
+#formulario{
+    width: 90%;
+}
+#funcionalidades{
+    width: 80%;
+    margin-left: 15%;
+}
+#presentacion{
+    width: 80%;
+    height: 250px;
+    border: none;
+}
+.funcion{
+    width: 90%;
+    margin-left: 0;
+}
+}
+@media (max-width: 500px) {
+    
+    #funcionalidades{
+        margin-left: 8%;
+    }
+    .funcion{
+        width: 100%;
+        margin-left: 0;
+        font-size: 13px;
+    }
+    #Nlogo{
+        font-size: 15px;
+    }
+    #logo{
+        width:20px ;
+        height: 20px;
+    }
+    h3{
+        font-size: 18px;
+    }
+    #campana{
+        width: 20px;
+    }
+    #inicio, #salir{
+        font-size: 10px;
+    }
+    }
+    @media (max-width: 300px) {
+        #funcionalidades{
+            margin-left: 3%;
+        }
+        .funcion{
+            width: 100%;
+            margin-left: 0;
+            font-size: 10px;
+        }
+        .icon{
+            font-size: 18px;
+        }
+        h3{
+            font-size: 12px;
+        }
+        #Nlogo{
+            font-size: 10px;
+        }
+        }
+

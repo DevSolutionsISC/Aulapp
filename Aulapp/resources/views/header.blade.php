@@ -35,7 +35,7 @@
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <form action="/logout" method="POST">
                             @csrf
-                            <button type="submit" class="nav-link">Salir</button>
+                            <button type="submit" class="nav-link" id="salir">Salir</button>
                         </form>
                     @endif
                 </div>

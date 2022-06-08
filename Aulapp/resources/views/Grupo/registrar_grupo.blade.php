@@ -33,7 +33,7 @@
       <label for="input1" class="form-label">Nombre</label>
       <br>
       <div class="row">
-        <div class="col-2">
+        <div class="col-3">
           <label>G :</label>
         </div>
         <div class="col">
