@@ -87,7 +87,12 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   @yield('js')
   <script>
-    $(function () {$('table.table tr').click(function () {  window.location.href = $(this).data('url'); });}) 
+    $(function () {$('table.table tr').click(function () {  
+      if( $(this).data('url')!=null){
+        window.location.href = $(this).data('url');
+      }
+       });
+    }) 
   </script>
 <script>
     //menu hamburguesa

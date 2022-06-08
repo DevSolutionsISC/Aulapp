@@ -12,6 +12,7 @@ use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\reservaController;
 use App\Http\Controllers\gestionController;
+use App\Http\Controllers\infoRechazados;
 use App\Http\Controllers\respuestaAdmin;
 use App\Models\reserva;
 use Illuminate\Support\Facades\Route;
@@ -144,7 +145,8 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
           
           Route::get('/gestion', [gestionController::class, 'index'])->name('estadogestion');
           Route::get('/gestion/{id}/{id2}/{tipo}', [gestionController::class, 'update'])->name('gestion-update');
-
+        //----------------------------------Reporte de solicitudes rechazadas----------------------------------------
+          Route::get('/infoRech',[infoRechazados::class, 'reporte']);
 
 Route::post('logout', [AuthController::class, 'logout']);
 });
