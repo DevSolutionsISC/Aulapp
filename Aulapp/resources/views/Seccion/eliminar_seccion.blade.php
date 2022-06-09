@@ -118,19 +118,6 @@
 </script>
 @endif
 
-@if (session('eliminar')=='error')
-<script>
-  Swal.fire({
-  position: 'center',
-  icon: 'error',
-  title: 'Oops...',
-  text: 'No se puede eliminar la seccion porque tiene aulas asociadas a una reserva vigente',
-  showConfirmButton: true,
- 
-  })
-</script>
-@endif
-
 @if (session('buscar')=='error')
 <script>
   Swal.fire({
