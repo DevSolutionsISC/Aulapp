@@ -32,13 +32,13 @@
             width="50" id="logo"></a>
         <h3>Responder a solicitud</h3>
         <form class="d-flex">
-        <div class="navbar-brand " style="padding-left:5%" href="/" >
-          <a href="/respuestaAdmin">
-          <span class="material-symbols-outlined">
-          arrow_back
-          </span>   
-          </a>
-        </div>
+          <div class="navbar-brand " style="padding-left:5%" href="/">
+            <a href="/respuestaAdmin">
+              <span class="material-symbols-outlined">
+                arrow_back
+              </span>
+            </a>
+          </div>
         </form>
       </div>
     </nav>
@@ -53,11 +53,11 @@
       <span class="tipo_m"> <b>Hora de finalizacion:</b> {{$reserva->hora_fin }}</span>
       <button class="btn btn-dark" id="btn_aceptar">Aceptar</button>
       <button class="btn btn-dark" id="btn_rechazar">Rechazar</button>
-      
+
     </div>
     <div id="aceptado">
-      <h5>Seleccione las aulas necesarias para la reserva de: <b>{{$reserva->cantE}}</b> estudiantes</h5>
-      <h5>Capacidad asignada</h5>
+      <h5 id="ocultar">Seleccione las aulas necesarias para la reserva de: <b>{{$reserva->cantE}}</b> estudiantes</h5>
+      <h5 id="ocultar1">Capacidad asignada</h5>
       @php
       use App\Models\Section;
       $sections=Section::all();
@@ -68,8 +68,11 @@
 
 
       @endphp
+
+      <h2 id="mostrar">No hay aulas disponibles en este momento</h2>
       <div class="accordion accordion-flush" id="accordionFlushExample">
         @foreach ($sections as $section)
+        @if($section->estado==1)
         <div id="seccion-{{$section->id}}" class="accordion-item">
 
           <h2 class="accordion-header" id="flush-headingOne">
@@ -82,7 +85,7 @@
             data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
               @foreach ($aulas as $aula )
-              @if ($aula->section_id==$section->id)
+              @if ($aula->section_id==$section->id && $aula->estado==1)
               <div id="{{$aula->id}}" class="check"><input class="form-check-input aula" type="checkbox" value=0>
                 <span>{{$aula->nombre}}</span><span> </span><span>{{$aula->capacidad}}</span>
               </div>
@@ -97,6 +100,7 @@
             </div>
           </div>
         </div>
+        @endif
         @endforeach
       </div>
 
@@ -117,12 +121,15 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      var cantidad = {{$reserva->cantE}};    
+      var cantidad = {{$reserva->cantE}};  
+      var secciones_disponibles=0;
               @foreach ($sections as $section)
+              @if($section->estado==1)
              var seccion = document.getElementById('seccion-{{$section->id}}');
               var suma = 0;
               //console.log('{{$section->nombre}}');
               @foreach ($aulas as $aula)
+              @if ($aula->estado==1)
                 var aula = document.getElementById('{{$aula->id}}');
                 if ('{{$aula->section_id}}'=='{{$section->id}}'){
                   @if($aulasAsignadas->isEmpty())
@@ -140,13 +147,31 @@
                 @endforeach
                 suma = suma + {{$aula->capacidad}};                
                 @endif
-                }            
+                }
+              @endif            
               @endforeach
-                console.log(suma);  
+                console.log(suma);
+                
                 if(suma<cantidad){
                   seccion.style.display = 'none';
-                }             
+                }else{
+                  secciones_disponibles++;
+                }
+                
+              @endif             
               @endforeach
+              
+              if(secciones_disponibles>0){
+                document.getElementById('ocultar').style.display = 'block';
+                document.getElementById('ocultar1').style.display = 'block';
+                document.getElementById('mostrar').style.display = 'none';
+              }else{
+                ocultar.style.display = 'none';
+                document.getElementById('mostrar').style.display = 'block';
+                document.getElementById('ocultar1').style.display = 'none';
+                document.getElementById('ocultar').style.display = 'none';
+
+              }
     </script>
 
 
