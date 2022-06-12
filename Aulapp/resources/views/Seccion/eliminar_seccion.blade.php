@@ -117,6 +117,17 @@
   })
 </script>
 @endif
+@if (session('eliminar')=='error')
+<script>
+  Swal.fire({
+  position: 'center',
+  icon: 'error',
+  title: 'Oops...',
+  text: 'No se puede eliminar la seccion porque aun tiene aulas asociadas',
+  showConfirmButton: true,
+  })
+</script>
+@endif
 
 @if (session('buscar')=='error')
 <script>
