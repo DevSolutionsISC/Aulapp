@@ -7,8 +7,10 @@ use App\Models\Aula;
 use App\Models\AulaAsignada;
 use App\Models\reserva;
 use App\Models\Section;
+use App\Notifications\NotificacionReserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Redirect;
 
 class AulaController extends Controller
@@ -142,17 +144,18 @@ class AulaController extends Controller
   $aula            = Aula::find($id);
   $reservas        = reserva::all();
   $fecha           = Carbon::now();
-
   foreach ($aulas_asignadas as $aula_asignada) {
    if ($aula_asignada->aula_id == $aula->id) {
     foreach ($reservas as $reserva) {
+
      if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen == $fecha->toDateString() && $reserva->estado == 'aceptado' && ($fecha->toTimeString() < $reserva->hora_inicio || $reserva->hora_fin > $fecha->toTimeString())) {
       $reserva->estado = "reasignar";
       $reserva->save();
+      Notification::route('mail', $reserva->user_rol->usuario->Email)->notify(new NotificacionReserva($reserva));
      } else if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen > $fecha->toDateString() && $reserva->estado == 'aceptado') {
       $reserva->estado = "reasignar";
       $reserva->save();
-
+      Notification::route('mail', $reserva->user_rol->usuario->Email)->notify(new NotificacionReserva($reserva));
      }
     }
    }
@@ -160,6 +163,7 @@ class AulaController extends Controller
 
   $aula->estado = false;
   $aula->save();
+
   return redirect()->route('eliminar-aula')->with('eliminar', 'ok');
 
  }
