@@ -32,6 +32,7 @@ class UsuarioController extends Controller
 
  }
 
+
  public function registro()
  {
   $materias        = Materia::all();
@@ -153,6 +154,7 @@ class UsuarioController extends Controller
   return view('Usuario-Docente.editardocente', ['docentes' => $docentes, 'urs' => $urs]);
 
  }
+
  /**
   * Remove the specified resource from storage.
   *
@@ -192,4 +194,6 @@ class UsuarioController extends Controller
 
   return redirect()->route('eliminar-docente')->with('eliminar', 'ok');
  }
+
+
 }

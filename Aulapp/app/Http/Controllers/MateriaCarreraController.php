@@ -31,7 +31,7 @@ class MateriaCarreraController extends Controller
   $materias         = Materia::where('estado', true)->get();
   $carrera_materias = Materia_Carrera::where('estado',true)->get();
   $carreras         = Carrera::where('estado', true)->get();
-  return view('Planilla-de-carrera-materia\registro_planilla_carrera_materia', ['carreras' => $carreras, 'materias' => $materias, 'carrera_materias' => $carrera_materias]);
+  return view('Planilla-de-carrera-materia.registro_planilla_carrera_materia', ['carreras' => $carreras, 'materias' => $materias, 'carrera_materias' => $carrera_materias]);
  }
  /**s
   * Show the form for creating a new resource.
