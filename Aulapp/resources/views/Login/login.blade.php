@@ -59,6 +59,8 @@
 <script>
       var inicio=document.getElementById("inicio");
       inicio.href="/"
+      var perfil=document.getElementById("perfil");
+      perfil.style.display="none"
 
      var campana=document.getElementById("campana");
      campana.style.display="none"
