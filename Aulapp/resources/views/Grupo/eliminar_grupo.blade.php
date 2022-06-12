@@ -62,10 +62,6 @@
           <br>
           <span><b>{{$grupo->nombre}}</b></span>
           <br>
-
-
-          <span><b>Docente:</b>POR DESIGNAR</span>
-          <br>
           <span><b>Carrera:</b> {{$grupo->materia_carrera->carrera->Nombre}}</span>
           <br>
           <span><b>Materia:</b> {{$grupo->materia_carrera->materia->nombre_materia}}</span>
@@ -86,10 +82,6 @@
       <br>
       <span><b>{{$grupo->nombre}}</b></span>
       <br>
-      <span><b>Docente:</b> {{$asignacionDocente->user_rol->usuario->Nombre}}
-        {{$asignacionDocente->user_rol->usuario->Apellido}}</span>
-      <br>
-
       <span><b>Carrera:</b> {{$grupo->materia_carrera->carrera->Nombre}}</span>
       <br>
       <span><b>Materia:</b> {{$grupo->materia_carrera->materia->nombre_materia}}</span>
