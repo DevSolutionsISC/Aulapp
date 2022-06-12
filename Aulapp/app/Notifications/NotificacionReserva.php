@@ -59,7 +59,7 @@ class NotificacionReserva extends Notification
   } else if ($this->reserva->estado == "reasignar") {
    return (new MailMessage)
     ->greeting('Hola ' . $this->reserva->user_rol->usuario->Nombre . '! tu reserva será reasignada.')
-    ->subject('Información de la reserva')
+    ->subject('Aviso importante sobre la reserva')
     ->line('La reserva para  la materia de ' . $this->reserva->materia . ' será reasignada.')
     ->line('Recibirá un correo con la información de la nueva reserva en breve.');
   } else {
