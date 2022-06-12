@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\nuevasnotificacion;
 use App\Models\UserRol;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +28,20 @@ class MenuController extends Controller
            "not"=> $cantidad
         ]);
 
+    }
+
+
+    public function loadPerfil($id)
+    {
+        $usuario = Auth::user();
+    
+     return view('perfil', ['usuario' => $usuario]);
+    }
+    public function cambiarContraseña($id)
+    {
+        $usuario = Auth::user();
+    
+     return view('editarContraseña', ['usuario' => $usuario]);
     }
 
     private function obtenerPrivilegios($rol)

@@ -145,6 +145,10 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
           Route::get('/gestion', [gestionController::class, 'index'])->name('estadogestion');
           Route::get('/gestion/{id}/{id2}/{tipo}', [gestionController::class, 'update'])->name('gestion-update');
 
+        //------------------------------Perfil y cambio de contraseña--------------------------------------------------------------------------
+        Route::get('/perfil/{id}', [MenuController::class, 'loadPerfil']);
+        Route::get('/CambiarContraseña/{id}',[AuthController::class, 'changePassword'])->name('CambiarContraseña');
+        Route::post('/CambiarContraseña', [AuthController::class, 'updatePassword'])->name('update-password');
 
 Route::post('logout', [AuthController::class, 'logout']);
 });

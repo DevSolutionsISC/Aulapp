@@ -29,8 +29,8 @@
                   <a href="@yield("notificacion")"><img src="{{asset('Imagenes/campana.png')}}" id="campana" width="30">
                   </a>
                   @yield("cant_not")
-                  
-                  <a class="nav-link active" aria-current="page" href="#" id="inicio">Inicio</a>
+                  <a class="nav-link active" aria-current="page"href="/perfil/{id}" id="perfil">Perfil</a>
+                  <a class="nav-link active" aria-current="page" href="/menu" id="inicio">Inicio</a>
                   
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <form action="/logout" method="POST">

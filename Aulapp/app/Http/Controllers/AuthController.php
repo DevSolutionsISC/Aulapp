@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreLogin;
+use App\Http\Requests\StorePerfil;
 class AuthController extends Controller
 {
     /**
@@ -43,24 +44,9 @@ class AuthController extends Controller
                 
             ]);
          }     
-      
-
-       /* if('contrasenia'!=$credentials['contrasenia'])
-        {
-            throw \Illuminate\Validation\ValidationException::withMessages([
-                'contrasenia' => __('auth.password'),
-                
-            ]);
-        }*/
 
     }
 
-
-
-    /**
-     * @param Request $request
-     * @return string
-     */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -71,4 +57,45 @@ class AuthController extends Controller
 
         return redirect()->intended('/');
     }
+
+
+    public function changePassword()
+    {
+    return view('CambiarContrasenia');
+    }
+
+    public function updatePassword(StorePerfil $request)
+    {
+       // dd($request->all());
+        # Validacion
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+            'new_password_confirmation' =>'required',
+        ]);
+
+
+        #Coincidir con la contraseña anterior
+       
+        if(Hash::check($request->old_password, auth()->user()->contrasenia)){
+          return back()->with("error", "La contraseña es incorrecta!");
+        
+        }
+
+
+        #actualizar la nueva contraseña
+        Usuario::whereId(auth()->user()->id)->update([
+            'contrasenia' => $request->new_password
+        ]);
+
+        return back()->with("status", "Contraseña cambiada con éxito!");
+    }
+
+
+
+ 
+ 
+   
+
+
 }
