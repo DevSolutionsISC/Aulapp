@@ -38,6 +38,7 @@ class StoreLogin extends FormRequest
             'usuario.exists'=>'El usuario ingresado no existe en nuestros registros.',
             'usuario.required'=>'El campo usuario es obligatorio.',
             'contrasenia.required'=>'El campo contraseña es obligatorio.',
+           //'contrasenia.password'=>'La contraseña es incorrecta.',
             
         ];
     }

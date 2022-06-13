@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreLogin;
 use App\Http\Requests\StorePerfil;
+use Illuminate\Auth\SessionGuard;
 class AuthController extends Controller
 {
     /**
@@ -19,32 +20,29 @@ class AuthController extends Controller
    
     public function authenticate(StoreLogin $request): RedirectResponse
     {
-
         $credentials = $request->validate([
             'usuario' => ['required'],
-            'contrasenia' => ['required'],
+            'contrasenia' => ['required']
         ]);
-       
+
         $usuario = Usuario::query()
             ->where('usuario', $credentials['usuario'])
             ->where('contrasenia', $credentials['contrasenia'])
+            ->where('estado',1)
             ->first();
-
-      
-
-        if ($usuario) {
-            Auth::login($usuario);
-            $request->session()->regenerate();
-            return redirect()->intended('/menu')->with('id',$usuario->id);
-        }
-         else{
+        
+            if ($usuario) {
+                Auth::login($usuario);
+                $request->session()->regenerate();
+                return redirect()->intended('/menu')->with('id',$usuario->id);
+            }  
+          
             throw \Illuminate\Validation\ValidationException::withMessages([
     
-                'contrasenia' => __('auth.password')
+                'contrasenia' => __('auth.failed'),
                 
             ]);
-         }     
-
+             
     }
 
     public function logout(Request $request)
