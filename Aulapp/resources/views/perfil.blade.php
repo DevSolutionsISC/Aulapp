@@ -1,6 +1,7 @@
 @extends('header')
 @section('Contenido')
 <form action=""id="">
+    <div class="d-flex justify-content-center">
     <div class="container bootstrap snippets bootdey">
         <div class="col-md-8">
             <div class="panel panel-white profile-widget panel-shadow">
@@ -24,8 +25,9 @@
                                                 <p class="card-text">Email: {{$usuario->Email}}</p>
                                                 <p class="card-text">C.I: {{$usuario->CI}}</p>
                                                 <div class="mg-top-10">
-                                                <a  class="btn btn-info"  href="{{ url("/CambiarContraseña/{$usuario->id}") }}">Cambiar contraseña</a>
-                                                </div>
+                                                <a  class="btn btn-dark"  href="{{ route('CambiarContraseña',['id'=>$usuario->id])}}">Cambiar contraseña</a>
+                                                
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -36,7 +38,8 @@
                 </div>
             </div>
         </div>
-    </div>        
+    </div>    
+    </div>    
 </form>                                
 @endsection
 

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+Use Session;
+Use Redirect;
 use App\Models\Usuario;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -55,12 +56,12 @@ class AuthController extends Controller
 
         return redirect()->intended('/');
     }
-
-
-    public function changePassword()
+    public function showEditPassword()
     {
-    return view('CambiarContrasenia');
-    }
+        $usuario = Usuario::all();
+        return view('CambiarContrasenia', ['usuarios' => $usuario]);
+
+     }
 
     public function updatePassword(StorePerfil $request)
     {
@@ -76,8 +77,8 @@ class AuthController extends Controller
         #Coincidir con la contraseña anterior
        
         if(Hash::check($request->old_password, auth()->user()->contrasenia)){
-          return back()->with("error", "La contraseña es incorrecta!");
-        
+         return back()->with("error", "La contraseña es incorrecta!");
+         // return redirect()->route('CambiarContraseña')->with('modificar', 'ok');
         }
 
 
@@ -85,15 +86,9 @@ class AuthController extends Controller
         Usuario::whereId(auth()->user()->id)->update([
             'contrasenia' => $request->new_password
         ]);
+        
 
-        return back()->with("status", "Contraseña cambiada con éxito!");
+        //return back()->with("status", "Contraseña cambiada con éxito!");
+       return redirect()->route('CambiarContraseña')->with('actualizar', 'ok');
     }
-
-
-
- 
- 
-   
-
-
 }
