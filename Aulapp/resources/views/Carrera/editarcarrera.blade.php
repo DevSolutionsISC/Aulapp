@@ -96,6 +96,7 @@
       nombre.value='{{$carrera->Nombre}}'
       codigo.value='{{$carrera->Codigo}}'
       codigo.disabled=true
+      buscar.disabled=true;
       formulario.action="{{route('carreras-update', ['id'=>$carrera->id])}}"
       localStorage.setItem('ruta',formulario.action)
       localStorage.setItem('id',texto.value)

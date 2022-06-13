@@ -78,7 +78,7 @@
   formulario.action=localStorage.getItem("ruta");
   var ci=document.getElementById("inputCI");
   var correo=document.getElementById("inputCorreo");
-  correo.disabled=true
+  correo.disabled=false
   ci.disabled=true
 </script>
 @endif
@@ -107,7 +107,7 @@
           apellido.value= '{{$docente->Apellido}}'
           ci.value='{{$docente->CI}}'
           correo.value= '{{$docente->Email}}'
-          correo.disabled=true
+          correo.disabled=false
           ci.disabled=true
           formulario.action="{{route('docente-update', ['id'=>$docente->id])}}"
           localStorage.setItem('ruta',formulario.action)

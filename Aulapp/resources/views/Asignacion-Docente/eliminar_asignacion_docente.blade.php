@@ -26,7 +26,7 @@
   <div class="col-12">
 
     <form id="formulario" method="GET" action="{{route('eliminar-asignacion-docente')}}">
-      <h3 text-center>Eliminar materia-docente</h3>
+      <h3 text-center>Eliminar docente-grupo</h3>
       @csrf
 
       <label for="inputNombre" class="form-label">Introduzca el ID</label>
@@ -103,7 +103,7 @@
   $('.Eliminar').submit(function(e){
             e.preventDefault();
             Swal.fire({
-            title: '¿Estás seguro que quieres eliminar la materia asignada al docente?',
+            title: '¿Estás seguro que quieres eliminar la  asignada al docente?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -124,7 +124,7 @@
   Swal.fire({
   position: 'center',
   icon: 'success',
-  title: 'Materia asignada al docente eliminada',
+  title: 'Asignada al docente eliminada',
   showConfirmButton: false,
   timer: 1500
   })
@@ -162,7 +162,7 @@ buscar.onclick=function(evento){
 position: 'center',
 icon: 'error',
 title: 'Oops...',
-text: 'No se encontro ninguna aignacion con ese id',
+text: 'No se encontro ninguna asignacion con ese id',
 showConfirmButton: true,
 
 })
