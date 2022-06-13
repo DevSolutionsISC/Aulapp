@@ -13,7 +13,7 @@ return [
     |
      */
     
-    'failed' => 'Usuario y/o contraseña no válido.',
+    'failed' => 'Usuario desactivado.',
     'password' => 'La contraseña es incorrecta.',
     'throttle' => 'Demasiados intentos de acceso. Inténtelo de nuevo en :seconds segundos.',
 
