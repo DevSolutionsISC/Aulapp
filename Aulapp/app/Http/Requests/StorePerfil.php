@@ -31,19 +31,23 @@ class StorePerfil extends FormRequest
             
             'old_password' => 'required|exists:usuarios,contrasenia',
             'new_password' => 'required|confirmed|alpha_num|min:10|max:20',
-            'new_password_confirmation' =>'required|min:10|max:20',
+            'new_password_confirmation' =>'required|alpha_num|min:10|max:20',
         ];
     }
     public function messages()
     {
         return[
-            'new_password.min'=>'El campo contraseña actual debe tener al menos 10 caracteres.',
-            'new_password.max'=>'El campo contraseña actual debe ser menor que 20 caracteres.',
+            'new_password.alpha_num'=>'El campo "Nueva contraseña" sólo puede contener letras y números.',
+            'new_password_confirmation.alpha_num'=>'El campo "Repetir contraseña" sólo puede contener letras y números.',
+            'new_password.min'=>'El campo "Contraseña actual" debe tener al menos 10 caracteres.',
+            'new_password.max'=>'El campo "Contraseña actual" debe ser menor que 20 caracteres.',
+            'new_password_confirmation.min'=>'El campo "Repetir contraseña" debe tener al menos 10 caracteres.',
+            'new_password_confirmation.max'=>'El campo "Repetir contraseña" debe ser menor que 20 caracteres.',
             'old_password.exists'=>'La contraseña es incorrecta.',
-            'old_password.required'=>'El campo contraseña actual es obligatorio.',
-            'new_password.required'=>'El campo contraseña nueva es obligatorio.',
-            'new_password.confirmed'=>'El campo de confirmación repetir contraseña no coincide.',
-            'new_password_confirmation.required'=>'El campo repetir contraseña es obligatorio.',
+            'old_password.required'=>'El campo "Contraseña actual" es obligatorio.',
+            'new_password.required'=>'El campo "Contraseña nueva" es obligatorio.',
+            'new_password.confirmed'=>'El campo "Repetir contraseña" no coincide con este campo.',
+            'new_password_confirmation.required'=>'El campo "Repetir contraseña" es obligatorio.',
             
         ];
     }
