@@ -32,13 +32,13 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
               </div>
-              <input name="contrasenia" type="password" class="form-control" id="password" placeholder="Contraseña"  value="{{old('contrasenia')}}" />
-              <div class="input-group-append">
-                <span class="input-group-text" onclick="password_show_hide();">
-                  <i class="fas fa-eye d-none" id="show_eye"></i>
-                  <i class="fas fa-eye-slash " id="hide_eye"></i>
-                </span>
-              </div>
+                <input name="contrasenia" type="password" class="form-control" id="password" placeholder="Contraseña"  value="{{old('contrasenia')}}" />
+                <div class="input-group-append">
+                  <span class="input-group-text" onclick="password_show_hide();">
+                    <i class="fas fa-eye d-none" id="show_eye"></i>
+                    <i class="fas fa-eye-slash " id="hide_eye"></i>
+                  </span>
+                </div>
             </div>
             @if ($errors->has('contrasenia'))
                 <span class="error text-danger" for="password">{{ $errors->first('contrasenia') }}</span>

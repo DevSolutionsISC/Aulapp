@@ -37,18 +37,18 @@ class StorePerfil extends FormRequest
     public function messages()
     {
         return[
-            'new_password.alpha_num'=>'El campo "Nueva contraseña" sólo puede contener letras y números.',
-            'new_password_confirmation.alpha_num'=>'El campo "Repetir contraseña" sólo puede contener letras y números.',
-            'new_password.min'=>'El campo "Contraseña actual" debe tener al menos 10 caracteres.',
-            'new_password.max'=>'El campo "Contraseña actual" debe ser menor que 20 caracteres.',
+            'new_password.alpha_num'=>'El campo "Nueva contraseña" sólo acepta caracteres alfanuméricos.',
+            'new_password_confirmation.alpha_num'=>'El campo "Repetir contraseña" sólo acepta caracteres alfanuméricos.',
+            'new_password.min'=>'El campo "Nueva contraseña" debe tener al menos 10 caracteres.',
+            'new_password.max'=>'El campo "Nueva contraseña" debe ser menor que 20 caracteres.',
             'new_password_confirmation.min'=>'El campo "Repetir contraseña" debe tener al menos 10 caracteres.',
             'new_password_confirmation.max'=>'El campo "Repetir contraseña" debe ser menor que 20 caracteres.',
-            'old_password.exists'=>'La contraseña es incorrecta.',
             'old_password.required'=>'El campo "Contraseña actual" es obligatorio.',
+            'old_password.exists'=>'La contraseña incorrecta.',
             'new_password.required'=>'El campo "Contraseña nueva" es obligatorio.',
             'new_password.confirmed'=>'El campo "Repetir contraseña" no coincide con este campo.',
             'new_password_confirmation.required'=>'El campo "Repetir contraseña" es obligatorio.',
-            
+
         ];
     }
 }

@@ -35,13 +35,7 @@ class MenuController extends Controller
     {
         $usuario = Auth::user();
     
-     return view('perfil', ['usuario' => $usuario]);
-    }
-    public function cambiarContraseña($id)
-    {
-        $usuario = Auth::user();
-    
-     return view('editarContraseña', ['usuario' => $usuario]);
+     return view('Perfil_usuario.perfil', ['usuario' => $usuario]);
     }
 
     private function obtenerPrivilegios($rol)
