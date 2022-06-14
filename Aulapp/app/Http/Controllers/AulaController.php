@@ -149,12 +149,25 @@ class AulaController extends Controller
     foreach ($reservas as $reserva) {
 
      if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen == $fecha->toDateString() && $reserva->estado == 'aceptado' && ($fecha->toTimeString() < $reserva->hora_inicio || $reserva->hora_fin > $fecha->toTimeString())) {
+      foreach ($aulas_asignadas as $aula_asignada) {
+       if ($aula_asignada->reserva_id == $reserva->id) {
+        $aula_asignada->delete();
+       }
+      }
+
       $reserva->estado = "reasignar";
       $reserva->save();
       Notification::route('mail', $reserva->user_rol->usuario->Email)->notify(new NotificacionReserva($reserva));
      } else if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen > $fecha->toDateString() && $reserva->estado == 'aceptado') {
+      foreach ($aulas_asignadas as $aula_asignada) {
+       if ($aula_asignada->reserva_id == $reserva->id) {
+        $aula_asignada->delete();
+       }
+      }
+
       $reserva->estado = "reasignar";
       $reserva->save();
+
       Notification::route('mail', $reserva->user_rol->usuario->Email)->notify(new NotificacionReserva($reserva));
      }
     }
