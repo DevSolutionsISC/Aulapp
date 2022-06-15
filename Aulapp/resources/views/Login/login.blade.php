@@ -64,11 +64,11 @@
 
      var campana=document.getElementById("campana");
      campana.style.display="none"
-     var not=document.getElementById("cant_not");
-     not.style.display="none";
+    /* var not=document.getElementById("cant_not");
+     not.style.display="none";*/
 </script>
 <script>
-.login_oueter {
+/*.login_oueter {
     width: 360px;
     max-width: 100%;
 }
@@ -78,7 +78,7 @@
 .logo_outer img{
     width:120px;
     margin-bottom: 40px;
-}
+}*/
 </script>
 <script>
 function password_show_hide() {

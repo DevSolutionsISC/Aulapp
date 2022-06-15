@@ -100,7 +100,7 @@ label {
     float: left;
     margin-top: 1%;
 }
-#presentacion{
+#presentacion, #presentacion1{
     float: right;
     margin-top: 7%;
     margin-right: 8%;
@@ -179,7 +179,7 @@ label {
     width: 80%;
     margin-left: 15%;
 }
-#presentacion{
+#presentacion, #presentacion1{
     width: 80%;
     height: 250px;
     border: none;
@@ -212,7 +212,7 @@ label {
     #campana{
         width: 20px;
     }
-    #inicio, #salir{
+    #inicio, #salir, #perfil{
         font-size: 10px;
     }
     }

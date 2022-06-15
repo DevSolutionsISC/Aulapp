@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="details">
-                            <div class="card mb-3" style="max-width: 540px;" id="presentacion">
+                            <div class="card mb-3" style="max-width: 540px;" id="presentacion1">
                                 <div class="row g-0">
                                     @if ($usuario->id == 1)
                                         <div class="col-md-6">
@@ -40,6 +40,10 @@
         </div>
     </div>    
     </div>    
-</form>                                
+</form>  
+<script>
+var cam=document.getElementById("campana");
+cam.style.display="none" 
+</script>                              
 @endsection
 

@@ -9,7 +9,7 @@
 <h3 text-center id="Titulo">Administración de aulas</h3>
 @endsection
 @section('Contenido formulario')
-
+{{--Formulario de edicion de aula--}}
 <div class="row">
 <div >
   <div class="d-flex" id="formularioEditar">
@@ -56,6 +56,7 @@
   </div>
 
 </div>
+{{--En caso de cometer errores al editar esta seccion recupera los datos del formulario--}}
 @if ($errors->has('capacidad') || $errors->has('Nombre') )
 <script>
     var buscar=document.getElementById("buscar");
@@ -81,6 +82,7 @@
       nombre.disabled=true
 </script>
 @endif
+{{-- mensaje de actualizacion correcta--}}
 @if (session('actualizar')=='ok')
   <script>localStorage.setItem('ruta',"")
   
@@ -105,25 +107,34 @@
   var estado=document.getElementById("estado")
   var estadoE=document.getElementById("estadoE")
   estadoE.value=1
+
+  //funcionalidad de buscar aula
   buscar.onclick=function(){
 
   var formulario=document.getElementById("formulario");
   @foreach ($aulas as $aula)
     if(texto.value =='{{$aula->nombre}}'){
+      //Aula encontrada, deshabilita el boton buscar
         buscar.disabled=true;
+      //Se llena el nombre y no es editable
       nombre.value='{{$aula->nombre}}'
       nombre.disabled=true
+      //Se llena la capacidad y es editable
       codigo.value='{{$aula->capacidad}}'
+      //Se coloca la ruta del formulario
       formulario.action="{{route('aula-update', ['id'=>$aula->id])}}"
       localStorage.setItem('ruta',formulario.action)
       localStorage.setItem('id',texto.value)
+      //Se muestra la informacion del aula
       var ed=document.getElementsByClassName("ed");
       for(var i=0;i<ed.length;i++){
         ed[i].style.display="block"
       }
+      // se deshablita el campo buscador
       texto.disabled=true;
       encontrado=1;
       var asignaciones= document.getElementById("asignar");
+      //Listado de todas las secciones y se marca la seccion del aula
       @foreach ($secciones as $seccion )
         if ({{$seccion->id}} == {{$aula->section_id}}){
             asignaciones.innerHTML+="<option selected='selected'value={{$seccion->id}}>{{$seccion->nombre}}</option>"
@@ -134,6 +145,7 @@
             }
         }
       @endforeach
+      //Si el aula esta en baja
       if({{$aula->estado}}==0){
             Swal.fire({
             icon: 'warning',
@@ -152,6 +164,7 @@
           }
     }
   @endforeach
+  //Si el aula no fue encontrada
   if(encontrado==0){
       Swal.fire({
     icon: 'error',
@@ -161,38 +174,7 @@
 
     }
   }
-
-</script>
-<script>
-    var letras=document.getElementsByClassName("A_let")
-    var asignaciones= document.getElementById("Asignaciones");
-    document.onclick=function(a){
-        var f=a.target;
-        for(var i=0;i<letras.length;i++){
-     if(f==letras[i]){
-         if(letras.length>1){
-            asignaciones.removeChild(letras[i].parentNode)
-            var actual=document.getElementById("actual");
-            if(esta(f.id,actual.value)){
-                var eliminar=document.getElementById("eliminar")
-                eliminar.value+="+"+f.id
-                console.log(eliminar.value+"-eliminar-"+actual.value)
-            }
-         }else{
-            Swal.fire({ icon: 'error',title: 'No puedes dejar una materia sin carreras'})
-        }
-    }
-        }}
-         function esta(id, cadena){
-            var alerta =false;
-            var separado=cadena.split("+");
-            for(var i=1;i<separado.length;i++){
-                if(separado[i]==id){
-                    alerta=true;
-                }
-            }
-            return alerta;
-        }
+  //Cuando se da de alta un aula
         var asignaciones= document.getElementById("asignar");
         estado.onclick=function(){
     console.log(estado.value)
@@ -203,6 +185,7 @@
             estado.disabled=true
   }
   var registrar=document.getElementById("botonRegistrar");
+  //Se habilita todos los campos antes de enviar el formulario
   registrar.onclick=function(){
 
     nombre.disabled=false
