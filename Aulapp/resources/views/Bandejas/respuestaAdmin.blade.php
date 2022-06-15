@@ -83,7 +83,7 @@
           <label class="col">{{$mensaje->fecha_examen}}</label>
       </div>
         <br>
-        @if ($mensaje->estado!="enviado" && $mensaje->estado!="rechazado" && $tipo=="recibido")
+        @if ($mensaje->estado!="enviado" && $mensaje->estado!="rechazado" && $tipo=="recibido" && $mensaje->estado!="reasignar")
      
         <div class="row">
             <label class="col-5" style="font-weight: bold">Hora Inicio-Fin:</label>
