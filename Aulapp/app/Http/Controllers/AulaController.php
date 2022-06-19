@@ -6,7 +6,7 @@ use App\Http\Requests\StoreAula;
 use App\Models\Aula;
 use App\Models\AulaAsignada;
 use App\Models\reserva;
-use App\Models\Section;
+use App\Models\Seccion;
 use App\Notifications\NotificacionReserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -23,7 +23,7 @@ class AulaController extends Controller
 
  public function vistaRegistro()
  {
-  $seccions = Section::where('estado', true)->get();
+  $seccions = Seccion::where('estado', true)->get();
   return view('Aula.registrar_aula', ['seccions' => $seccions]);
  }
  public function reporte()
@@ -37,7 +37,7 @@ class AulaController extends Controller
  public function vistaEditar()
  {
   $aulas     = Aula::all();
-  $secciones = Section::all();
+  $secciones = Seccion::all();
   return view('Aula.editar_aula', ['secciones' => $secciones, 'aulas' => $aulas]);
 
  }

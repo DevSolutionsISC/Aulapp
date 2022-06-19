@@ -2,20 +2,17 @@
 
 use App\Http\Controllers\AsignacionDocenteController;
 use App\Http\Controllers\AulaController;
-use App\Http\Controllers\CarrerasController;
-use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarrerasController;
+use App\Http\Controllers\gestionController;
+use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\MateriaCarreraController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\SectionsController;
-use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\reservaController;
-use App\Http\Controllers\gestionController;
-use App\Http\Controllers\infoRechazados;
-use App\Http\Controllers\respuestaAdmin;
 use App\Http\Controllers\respuestasController;
-use App\Models\reserva;
+use App\Http\Controllers\SeccionController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,31 +26,27 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-
-    
-
-       /*Route::get('/pass-generate', function () {
-                return bcrypt('papaya');
-          });
-            Route::get('/menu_adm', function () {
-                return view('menu_administrador');
-                });
-
-          Route::get('/menu_docente', function () {
-           return view('menu_docente');
-          });
-                   /* Route::get('/bandeja_administrador', function () {
-           return view('bandeja_administrador');
-          });*/
-          
-Route::middleware(['guest'])->group(function () {
-    Route::get('/', function () {
-        return view('Login.login');
-    })->name('login');
-
-    Route::post('login', [AuthController::class, 'authenticate']);
+/*Route::get('/pass-generate', function () {
+return bcrypt('papaya');
+});
+Route::get('/menu_adm', function () {
+return view('menu_administrador');
 });
 
+Route::get('/menu_docente', function () {
+return view('menu_docente');
+});
+/* Route::get('/bandeja_administrador', function () {
+return view('bandeja_administrador');
+});*/
+
+Route::middleware(['guest'])->group(function () {
+ Route::get('/', function () {
+  return view('Login.login');
+ })->name('login');
+
+ Route::post('login', [AuthController::class, 'authenticate']);
+});
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/menu', [MenuController::class, 'loadMenu']);
@@ -61,7 +54,7 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
 
 
        //--------------------------------Rutas de eliminacion --------------------------------------------------------
-       Route::get('/eliminar-seccion', [SectionsController::class, 'busqueda'])->name('eliminar-seccion');
+       Route::get('/eliminar-seccion', [SeccionController::class, 'busqueda'])->name('eliminar-seccion');
        Route::get('/eliminar-aula', [AulaController::class, 'busqueda'])->name('eliminar-aula');
        Route::get('/eliminar-carrera', [CarrerasController::class, 'busqueda'])->name('eliminar-carrera');
        Route::get('/eliminar-materia', [MateriaController::class, 'busqueda'])->name('eliminar-materia');
@@ -73,7 +66,7 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        Route::delete('/grupo/{id}', [GrupoController::class, 'estado'])->name('grupos-destroy');
        Route::delete('/asignacionDocente/{asignacionDocente}', [AsignacionDocenteController::class, 'estado'])->name('asignacionDocente-destroy');
        Route::delete('/carrera/{carrera}', [CarrerasController::class, 'estado'])->name('carreras-destroy');
-       Route::delete('/seccion/{section}', [SectionsController::class, 'estado'])->name('secciones-destroy');
+       Route::delete('/seccion/{section}', [SeccionController::class, 'estado'])->name('secciones-destroy');
        Route::delete('/aula/{id}', [AulaController::class, 'estado'])->name('aulas-destroy');
        Route::delete('/materia-carreras/{materiaCarrera}', [MateriaCarreraController::class, 'estado'])->name('materiasCarreras-destroy');
        Route::delete('/materia/{materia}', [MateriaController::class, 'estado'])->name('materias-destroy');
@@ -83,8 +76,8 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        //--------------------Rutas de registro------------------------------------------
        Route::get('/carreras', [CarrerasController::class, 'vistaRegistro'])->name('carreras'); 
        Route::post('/carreras', [CarrerasController::class, 'registro'])->name('carreras');
-       Route::get('/seccion', [SectionsController::class, 'vistaRegistro'])->name('secciones');
-       Route::post('/seccion', [SectionsController::class, 'registro'])->name('secciones');
+       Route::get('/seccion', [SeccionController::class, 'vistaRegistro'])->name('secciones');
+       Route::post('/seccion', [SeccionController::class, 'registro'])->name('secciones');
        Route::get('/aula', [AulaController::class, 'vistaRegistro'])->name('aulas');
        Route::post('/aula', [AulaController::class, 'registro'])->name('aulas');
        Route::get('/materias', [MateriaController::class, 'vistaRegistro'])->name('materias');
@@ -104,7 +97,7 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        //--------------------Rutas de reportes---------------------------------------------------
        
        Route::get('/reporte_carrera', 'App\Http\Controllers\CarrerasController@reporte');
-       Route::get('/reporte_section', 'App\Http\Controllers\SectionsController@reporte');
+       Route::get('/reporte_section', 'App\Http\Controllers\SeccionController@reporte');
        Route::get('/reporte_materia', 'App\Http\Controllers\MateriaController@reporte');
        Route::get('/reporte_aula', 'App\Http\Controllers\AulaController@reporte');
        Route::get('/reporte_grupo', 'App\Http\Controllers\GrupoController@reporte');
@@ -118,8 +111,8 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        Route::get('/carrera/{id}', [CarrerasController::class, 'editar'])->name('carreras-update');
        Route::get('/materiaEdit', [MateriaController::class, 'vistaEditar'])->name('materia_edit');
        Route::get('/materia/{id}', [MateriaController::class, 'editar'])->name('materias-update');
-       Route::get('/seccionEdit', [SectionsController::class, 'vistaEditar'])->name('seccion_edit');
-       Route::get('/seccion/{id}', [SectionsController::class, 'editar'])->name('seccion-update');
+       Route::get('/seccionEdit', [SeccionController::class, 'vistaEditar'])->name('seccion_edit');
+       Route::get('/seccion/{id}', [SeccionController::class, 'editar'])->name('seccion-update');
        Route::get('/aulaEdit', [AulaController::class, 'vistaEditar'])->name('aulas_edit');
        Route::get('/aula/{id}', [AulaController::class, 'editar'])->name('aula-update');
        Route::get('/docenteEdit', [UsuarioController::class, 'vistaEditar'])->name('docentes_edit');
