@@ -11,7 +11,7 @@ class Aula extends Model
  use HasFactory;
  protected $table      = 'aulas';
  protected $primaryKey = 'id';
- public function seccion()
+ public function section()
  {
   return $this->belongsTo(Seccion::class, 'section_id');
  }
