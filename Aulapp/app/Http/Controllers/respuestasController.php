@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class respuestasController extends Controller
 {
- public function show()
+ public function verBandeja()
  {
   $usuario = Auth::user();
 

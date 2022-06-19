@@ -13,37 +13,39 @@ use Illuminate\Http\Request;
 class AsignacionDocenteController extends Controller
 {
 
- public function registro()
+ //Funcion para llamar a la vista de registro y envio de los datos necesarios para la vista
+ public function vistaRegistro()
  {
+  //Seleccion de materias y los grupos asociados a cada materia de todas las carreras
   $materias       = Materia::where('estado', true)->get();
   $grupos         = Grupo::join("materia_carreras", "materia_carreras.id", "=", "grupos.materia_carrera_id")->join("materias", "materias.id", "=", "materia_carreras.materia_id")->where('grupos.estado', true)->select("grupos.*", "materias.id as materia_id")->get();
-  
+  //Filtro de un solo grupo de una materia para todas las carreras asociadas
   $grupos=$grupos->unique(function ($item) {
     return $item['nombre'].$item['materia_id'];
-});
-  
+  });
+  //Seleccion de todos los docentes, la gestion actual y todas las asignaciones de la gestion actual
   $docentes       = UserRol::all();
   $gestion        = gestion::firstWhere('estado', true);
   $docente_grupos = asignacionDocentes::where('gestion_id', $gestion->id)->get();
- 
+ //Filtro de grupos que aun no tienen una asignacion de docente
   $filtered       = $grupos->reject(function ($value, $key) {
    $gestion        = gestion::firstWhere('estado', true);
- 
    $docente_grupos = asignacionDocentes::where('gestion_id', $gestion->id)->where('estado', true)->get();
-  
    return $docente_grupos->contains('grupo_id', $value->id);
   });
-  
-return view('Asignacion-Docente.registro_asignacion_docente', ['materias' => $materias, 'docentes' => $docentes, 'docente_materias' => $docente_grupos, 'grupos' => $filtered]);
+  //Devuelve la vista de registro de asignaciones
+  return view('Asignacion-Docente.registro_asignacion_docente', ['materias' => $materias, 'docentes' => $docentes,'grupos' => $filtered]);
  }
 
- public function store(StoreAsignacion $request)
+ //Guardado de datos del registro de asignacion
+ public function registro(StoreAsignacion $request)
  {
-
+  //Seleccion de los grupos de la materia en las distintas carreras
   $grupos = Grupo::join("materia_carreras", "materia_carreras.id", "=", "grupos.materia_carrera_id")->join("materias", "materias.id", "=", "materia_carreras.materia_id")->where('grupos.estado', true)->where('grupos.nombre', $request->grupo)->where('materias.id', $request->materia)->select("grupos.id")->get();
   
-  
+  //Seleccion de la gestion actual
   $gestion = gestion::firstWhere('estado', true);
+  //Insertar un registro o habilitar un registro deshabilitado
   foreach ($grupos as $grupo) {
     $deshabilitado=asignacionDocentes::where('grupo_id',$grupo->id)->where('user_rol_id', $request->docente)->where('gestion_id',$gestion->id)->where('estado',false)->get();
     
@@ -59,9 +61,9 @@ return view('Asignacion-Docente.registro_asignacion_docente', ['materias' => $ma
     }
   
   }
-
+ 
+  //regireccion a la pagina con el modal de registro exitoso
   return redirect()->route('materia_docente')->with('registrar', 'ok');
-
  }
 
  public function busqueda(Request $request)

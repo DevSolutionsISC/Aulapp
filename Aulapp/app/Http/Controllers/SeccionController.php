@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class SeccionController extends Controller
 {
- public function index()
+ public function vistaRegistro()
  {
   return view('Seccion.registrar_seccion_de_aula');
  }
 
- public function showEdit()
+ public function vistaEditar()
  {
   $secciones = Seccion::all();
   return view('Seccion.editar_seccion', ['secciones' => $secciones]);
@@ -26,7 +26,7 @@ class SeccionController extends Controller
   return view('Seccion.reporte_seccion', compact('sections'));
  }
 
- public function store(StoreSeccion $request)
+ public function registro(StoreSeccion $request)
  {
 
   $seccion              = new Seccion();
@@ -42,7 +42,7 @@ class SeccionController extends Controller
 
  }
 
- public function update(Request $request, $id)
+ public function editar(Request $request, $id)
  {
   $section = Seccion::find($id);
   $request->validate([

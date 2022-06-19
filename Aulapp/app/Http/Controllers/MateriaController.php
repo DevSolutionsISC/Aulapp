@@ -19,7 +19,7 @@ class MateriaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function vistaRegistro()
     {
         $carreras = Carrera::all();
         return view('Materia.registrar_materia', ['carreras' => $carreras]);
@@ -31,7 +31,7 @@ class MateriaController extends Controller
         return view('Materia.reporte_materia', compact('materias'));
 
     }
-    public function showEdit()
+    public function vistaEditar()
     {
         $materias = Materia::all();
         $carreras = Carrera::all();
@@ -56,7 +56,7 @@ class MateriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMateria $request)
+    public function registro(StoreMateria $request)
     {
         $materia = new Materia();
         $materia->nombre_materia = $request->nombre;
@@ -96,7 +96,7 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editar(Request $request, $id)
     {
         $materia = Materia::find($id);
         $request->validate([
