@@ -100,7 +100,7 @@ class CarrerasController extends Controller
     {
         $carreras = Carrera::all();
         $mcs = Materia_Carrera::all();
-        return view('Carrera.editarcarrera', ['carreras' => $carreras, 'mcs' => $mcs]);
+        return view('Carrera.editar_carrera', ['carreras' => $carreras, 'mcs' => $mcs]);
 
     }
     public function update(Request $request, $id)

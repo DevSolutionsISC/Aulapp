@@ -9,7 +9,7 @@ use App\Models\nuevasnotificacion;
 use Illuminate\Support\Facades\Auth;
 
 
-class respuestaAdmin extends Controller
+class respuestasController extends Controller
 {
  public function show()
  {
@@ -25,13 +25,13 @@ class respuestaAdmin extends Controller
   return view('Bandejas.bandeja_docente', ['respuestas' => $respuestas]);
  }
 
- public function respuestasAdmin($tipo,$id)
+ public function respuestas($tipo,$id)
  {
   $mensaje = reserva::firstWhere('id', $id);
   $aulas   = AulaAsignada::join("aulas", "aulas.id", "aula_asignadas.aula_id")->where('reserva_id', $mensaje->id)->select("aulas.nombre")->get();
 
   $aulas = $aulas->implode('nombre', ',');
 
-  return view('Bandejas.respuestaAdmin', ['mensaje' => $mensaje, 'aulas' => $aulas,'tipo'=>$tipo]);
+  return view('Bandejas.respuesta_solicitud', ['mensaje' => $mensaje, 'aulas' => $aulas,'tipo'=>$tipo]);
  }
 }

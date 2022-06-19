@@ -36,7 +36,7 @@ class MateriaController extends Controller
         $materias = Materia::all();
         $carreras = Carrera::all();
         $mcs = Materia_Carrera::all();
-        return view('Materia.editarmateria', ['materias' => $materias, 'carreras' => $carreras, 'mcs' => $mcs]);
+        return view('Materia.editar_materia', ['materias' => $materias, 'carreras' => $carreras, 'mcs' => $mcs]);
 
     }
 

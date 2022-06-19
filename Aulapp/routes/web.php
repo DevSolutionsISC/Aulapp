@@ -14,6 +14,7 @@ use App\Http\Controllers\reservaController;
 use App\Http\Controllers\gestionController;
 use App\Http\Controllers\infoRechazados;
 use App\Http\Controllers\respuestaAdmin;
+use App\Http\Controllers\respuestasController;
 use App\Models\reserva;
 use Illuminate\Support\Facades\Route;
 
@@ -131,10 +132,10 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        
        //-----------------------------------Bandeja del docente--------------------------------------------
       
+          Route::get('/bandeja_docente', [respuestasController::class, 'show'])->name('bandeja_docente');
 
-
-          Route::get('/bandeja_docente', [respuestaAdmin::class, 'show'])->name('bandeja_docente');
-          Route::get('/respuestas/{tipo}/{id}', [respuestaAdmin::class, 'respuestasAdmin'])->name('respuestas');
+        //---------------------------------Detalle de mensaje-----------------------------------------
+          Route::get('/respuestas/{tipo}/{id}', [respuestasController::class, 'respuestas'])->name('respuestas');
 
          //------------------------------------Bandeja de administrador----------------------------------------------
 
@@ -145,9 +146,7 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
           
           Route::get('/gestion', [gestionController::class, 'index'])->name('estadogestion');
           Route::get('/gestion/{id}/{id2}/{tipo}', [gestionController::class, 'update'])->name('gestion-update');
-        //----------------------------------Reporte de solicitudes rechazadas----------------------------------------
-          Route::get('/infoRech',[infoRechazados::class, 'reporte']);
-         
+        
          //------------------------------Perfil y cambio de contraseña--------------------------------------------------------------------------
          Route::get('/perfil/{id}', [MenuController::class, 'loadPerfil']);
          Route::get('/CambiarContraseña',[AuthController::class, 'showEditPassword'])->name('CambiarContraseña');
