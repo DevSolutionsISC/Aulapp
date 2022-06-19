@@ -38,13 +38,18 @@ class reservaController extends Controller
        if($not!="[]"){
             $cantidad=$not[0]->cantidad_not;
         }
-  $materias= asignacionDocentes::join("user_rols","user_rols.id","=","asignacion_docentes.user_rol_id")->where("user_rols.usuario_id",$usuario->id)->where("asignacion_docentes.gestion_id",$gestion[0]->id)->join("grupos","grupos.id",'=','asignacion_docentes.grupo_id')->join("materia_carreras","materia_carreras.id","=","grupos.materia_carrera_id")->join("materias","materias.id","=","materia_carreras.materia_id")->select("materias.nombre_materia")->get()->unique("nombre_materia");
+  $materias= asignacionDocentes::join("user_rols","user_rols.id","=","asignacion_docentes.user_rol_id")
+  ->where("user_rols.usuario_id",$usuario->id)
+  ->where("asignacion_docentes.gestion_id",$gestion[0]->id)
+  ->join("grupos","grupos.id",'=','asignacion_docentes.grupo_id')
+  ->join("materia_carreras","materia_carreras.id","=","grupos.materia_carrera_id")
+  ->join("materias","materias.id","=","materia_carreras.materia_id")
+  ->select("materias.nombre_materia")->get()
+  ->unique("nombre_materia");
 
   $ads = asignacionDocentes::where("gestion_id",$gestion[0]->id)->get();
   $diasNoHabiles=diasExamen::where("estado",false)->get();
 
-
- 
 
   return view('Reserva.registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad ,"id"=>$ur[0]->id]);
 
@@ -81,7 +86,7 @@ class reservaController extends Controller
   $reserva->materia        = $request->materia;
   $reserva->user_rol_id    = $request->id;
   $reserva->motivo_rechazo = "";
- $reserva->save();
+  $reserva->save();
   $buscar_usuario=UserRol::where("rol_id",1)->get();
   $buscar_not=nuevasnotificacion::where("user_rol_id",$buscar_usuario[0]->id)->get();
   echo($buscar_not);

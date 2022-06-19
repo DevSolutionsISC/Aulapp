@@ -21,14 +21,16 @@ class respuestaAdmin extends Controller
     $not[0]->cantidad_not=0;
     $not[0]->save();
   }
-  $respuestas = reserva::where('docentes', 'LIKE', '%' . $usuario->Nombre." ".$usuario->Apellido . '%')->get()->sortDesc();
+  $respuestas = reserva::where('docentes', 'LIKE', '%' . $usuario->Nombre." ".$usuario->Apellido . '%')
+  ->get()->sortDesc();
   return view('Bandejas.bandeja_docente', ['respuestas' => $respuestas]);
  }
 
  public function respuestasAdmin($tipo,$id)
  {
   $mensaje = reserva::firstWhere('id', $id);
-  $aulas   = AulaAsignada::join("aulas", "aulas.id", "aula_asignadas.aula_id")->where('reserva_id', $mensaje->id)->select("aulas.nombre")->get();
+  $aulas   = AulaAsignada::join("aulas", "aulas.id", "aula_asignadas.aula_id")->where('reserva_id', $mensaje->id)
+  ->select("aulas.nombre")->get();
 
   $aulas = $aulas->implode('nombre', ',');
 

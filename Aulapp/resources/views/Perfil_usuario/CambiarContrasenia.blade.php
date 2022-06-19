@@ -40,7 +40,8 @@
                     <input class="form-control" name="new_password" type="password" 
                     id="newPasswordInput"value="{{old('new_password')}}">
                     <div class="input-group-append">
-                      <button id="show_password2" class="btn btn-secondary" type="button" onclick="mostrarPassword2()"> <span class="fa fa-eye-slash icon"></span> </button>
+                      <button id="show_password2" class="btn btn-secondary" type="button" onclick="mostrarPassword2()">
+                       <span class="fa fa-eye-slash icon"></span> </button>
                     </div> 
                     @error('new_password')
                         <span class="text-danger">{{ $message }}</span>
@@ -52,7 +53,8 @@
                    <input class="form-control" name="new_password_confirmation" type="password"
                     id="confirmNewPasswordInput"value="{{old('new_password_confirmation')}}"> 
                     <div class="input-group-append">
-                      <button id="show_password" class="btn btn-secondary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                      <button id="show_password" class="btn btn-secondary" type="button" onclick="mostrarPassword()"> 
+                      <span class="fa fa-eye-slash icon"></span> </button>
                     </div> 
                     @error('new_password_confirmation')
                         <span class="text-danger">{{ $message }}</span>
