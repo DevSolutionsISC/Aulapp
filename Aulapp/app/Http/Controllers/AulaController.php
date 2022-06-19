@@ -38,7 +38,7 @@ class AulaController extends Controller
  {
   $aulas     = Aula::all();
   $secciones = Section::all();
-  return view('Aula.editaraula', ['secciones' => $secciones, 'aulas' => $aulas]);
+  return view('Aula.editar_aula', ['secciones' => $secciones, 'aulas' => $aulas]);
 
  }
  /**

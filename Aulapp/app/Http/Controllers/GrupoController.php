@@ -34,7 +34,7 @@ class GrupoController extends Controller
         $Urs = UserRol::all();
         $ads = asignacionDocentes::all();
         $mcs = Materia_Carrera::all();
-        return view('Grupo.editargrupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
+        return view('Grupo.editar_grupo', ['grupos' => $grupos, 'docentes' => $docentes, 'carreras' => $carreras, 'materias' => $materias, 'urs' => $Urs, "ads" => $ads, "mcs" => $mcs]);
 
     }
 

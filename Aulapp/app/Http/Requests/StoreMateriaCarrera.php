@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\SeleccionCarrera;
+use App\Rules\RuleSeleccionCarrera;
+use App\Rules\RuleSeleccionMateri;
 use App\Rules\SeleccionMateri;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,8 +27,8 @@ class StoreMateriaCarrera extends FormRequest
     public function rules()
     {
         return [
-            'carrera'=>[new SeleccionCarrera],
-            'materia'=>[new SeleccionMateri]
+            'carrera'=>[new RuleSeleccionCarrera],
+            'materia'=>[new RuleSeleccionMateri]
         ];
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Materia_Carrera;
+use App\Rules\RuleSeleccionMateri;
+use App\Rules\RuleUniqueGrupo;
+use App\Rules\RuleValidacionGrupo;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\SeleccionMateri;
-use App\Rules\UniqueGrupo;
-use App\Rules\ValidacionGrupo;
 
 class StoreGrupo extends FormRequest
 {
@@ -32,8 +31,8 @@ class StoreGrupo extends FormRequest
         
         return [
             'nombre'=>'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9 ]+$/|max:3:',
-            'carrera'=>[new ValidacionGrupo],
-            'materia'=>[new SeleccionMateri,new UniqueGrupo],
+            'carrera'=>[new RuleValidacionGrupo],
+            'materia'=>[new RuleSeleccionMateri,new RuleUniqueGrupo],
             
            
         ];

@@ -17,7 +17,7 @@ class SectionsController extends Controller
  public function showEdit()
  {
   $secciones = Section::all();
-  return view('Seccion.editarseccion', ['secciones' => $secciones]);
+  return view('Seccion.editar_seccion', ['secciones' => $secciones]);
 
  }
  public function reporte()

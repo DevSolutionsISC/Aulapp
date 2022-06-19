@@ -4,13 +4,16 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class SeleccionGrupo implements Rule
+
+
+class RuleSeleccionMateri implements Rule
 {
     /**
      * Create a new rule instance.
      *
      * @return void
      */
+   
     public function __construct()
     {
         //
@@ -23,11 +26,14 @@ class SeleccionGrupo implements Rule
      * @param  mixed  $value
      * @return bool
      */
+
+
     public function passes($attribute, $value)
     {
-        return $value!="Seleccione un grupo";
+        return $value!="Seleccione una materia";
     }
 
+    
     /**
      * Get the validation error message.
      *
@@ -35,6 +41,6 @@ class SeleccionGrupo implements Rule
      */
     public function message()
     {
-        return 'Debe seleccionar un grupo';
+        return 'Debe seleccionar una materia';
     }
 }
