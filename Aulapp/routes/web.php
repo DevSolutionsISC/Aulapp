@@ -81,24 +81,24 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        //--------------------------------------------------------------------------------------------
        
        //--------------------Rutas de registro------------------------------------------
-       Route::get('/carreras', [CarrerasController::class, 'index'])->name('carreras'); 
-       Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras');
-       Route::get('/seccion', [SectionsController::class, 'index'])->name('secciones');
-       Route::post('/seccion', [SectionsController::class, 'store'])->name('secciones');
-       Route::get('/aula', [AulaController::class, 'index'])->name('aulas');
-       Route::post('/aula', [AulaController::class, 'store'])->name('aulas');
-       Route::get('/materias', [MateriaController::class, 'index'])->name('materias');
-       Route::post('/materias', [MateriaController::class, 'store'])->name('materias');
-       Route::get('/grupos', [GrupoController::class, 'registro'])->name('grupos');
-       Route::post('/grupos', [GrupoController::class, 'store'])->name('grupos');
-       Route::get('/docente', [UsuarioController::class, 'registro'])->name('docentes');
-       Route::post('/docente', [UsuarioController::class, 'store'])->name('docentes');
-       Route::get('/materia_carrera', [MateriaCarreraController::class, 'registro'])->name('materia_carrera');
-       Route::post('/materia_carrera', [MateriaCarreraController::class, 'store'])->name('materia_carrera');
-       Route::get('/materia_docente', [AsignacionDocenteController::class, 'registro'])->name('materia_docente');
-       Route::post('/materia_docente', [AsignacionDocenteController::class, 'store'])->name('materia_docente');
-       Route::get('/reserva', [reservaController::class, 'registro'])->name('registro_reserva');
-       Route::post('/reserva', [reservaController::class, 'store'])->name('reserva');
+       Route::get('/carreras', [CarrerasController::class, 'vistaRegistro'])->name('carreras'); 
+       Route::post('/carreras', [CarrerasController::class, 'registro'])->name('carreras');
+       Route::get('/seccion', [SectionsController::class, 'vistaRegistro'])->name('secciones');
+       Route::post('/seccion', [SectionsController::class, 'registro'])->name('secciones');
+       Route::get('/aula', [AulaController::class, 'vistaRegistro'])->name('aulas');
+       Route::post('/aula', [AulaController::class, 'registro'])->name('aulas');
+       Route::get('/materias', [MateriaController::class, 'vistaRegistro'])->name('materias');
+       Route::post('/materias', [MateriaController::class, 'registro'])->name('materias');
+       Route::get('/grupos', [GrupoController::class, 'vistaRegistro'])->name('grupos');
+       Route::post('/grupos', [GrupoController::class, 'registro'])->name('grupos');
+       Route::get('/docente', [UsuarioController::class, 'vistaRegistro'])->name('docentes');
+       Route::post('/docente', [UsuarioController::class, 'registro'])->name('docentes');
+       Route::get('/materia_carrera', [MateriaCarreraController::class, 'vistaRegistro'])->name('materia_carrera');
+       Route::post('/materia_carrera', [MateriaCarreraController::class, 'registro'])->name('materia_carrera');
+       Route::get('/materia_docente', [AsignacionDocenteController::class, 'vistaRegistro'])->name('materia_docente');
+       Route::post('/materia_docente', [AsignacionDocenteController::class, 'registro'])->name('materia_docente');
+       Route::get('/reserva', [reservaController::class, 'vistaRegistro'])->name('registro_reserva');
+       Route::post('/reserva', [reservaController::class, 'registro'])->name('reserva');
        //-----------------------------------------------------------------------------------
        
        //--------------------Rutas de reportes---------------------------------------------------
@@ -114,29 +114,28 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
        //--------------------------------------------------------------------------------------------------------
 
        //----------------------Rutas de edicion--------------------------------------------------
-       Route::get('/carreraEdit', [CarrerasController::class, 'showEdit'])->name('carrera_edit');
-       Route::get('/carrera/{id}', [CarrerasController::class, 'update'])->name('carreras-update');
-       Route::get('/materiaEdit', [MateriaController::class, 'showEdit'])->name('materia_edit');
-       Route::get('/materia/{id}', [MateriaController::class, 'update'])->name('materias-update');
-       Route::get('/seccionEdit', [SectionsController::class, 'showEdit'])->name('seccion_edit');
-       Route::get('/seccion/{id}', [SectionsController::class, 'update'])->name('seccion-update');
-       Route::get('/aulaEdit', [AulaController::class, 'showEdit'])->name('aulas_edit');
-       Route::get('/aula/{id}', [AulaController::class, 'update'])->name('aula-update');
-       Route::get('/docenteEdit', [UsuarioController::class, 'showEdit'])->name('docentes_edit');
-       Route::get('/docente/{id}', [UsuarioController::class, 'update'])->name('docente-update');
-       Route::get('/grupoEdit', [GrupoController::class, 'showEdit'])->name('grupo_edit');
-       Route::get('/grupo/{id}', [GrupoController::class, 'update'])->name('grupo-update');
+       Route::get('/carreraEdit', [CarrerasController::class, 'vistaEditar'])->name('carrera_edit');
+       Route::get('/carrera/{id}', [CarrerasController::class, 'editar'])->name('carreras-update');
+       Route::get('/materiaEdit', [MateriaController::class, 'vistaEditar'])->name('materia_edit');
+       Route::get('/materia/{id}', [MateriaController::class, 'editar'])->name('materias-update');
+       Route::get('/seccionEdit', [SectionsController::class, 'vistaEditar'])->name('seccion_edit');
+       Route::get('/seccion/{id}', [SectionsController::class, 'editar'])->name('seccion-update');
+       Route::get('/aulaEdit', [AulaController::class, 'vistaEditar'])->name('aulas_edit');
+       Route::get('/aula/{id}', [AulaController::class, 'editar'])->name('aula-update');
+       Route::get('/docenteEdit', [UsuarioController::class, 'vistaEditar'])->name('docentes_edit');
+       Route::get('/docente/{id}', [UsuarioController::class, 'editar'])->name('docente-update');
+       Route::get('/grupoEdit', [GrupoController::class, 'vistaEditar'])->name('grupo_edit');
+       Route::get('/grupo/{id}', [GrupoController::class, 'editar'])->name('grupo-update');
        Route::post('/bandeja_administrador/{id}/{estado}', [reservaController::class, 'respuesta'])->name('responder');
        //------------------------------------------------------------------------------
        
        
        //-----------------------------------Bandeja del docente--------------------------------------------
       
-          Route::get('/bandeja_docente', [respuestasController::class, 'show'])->name('bandeja_docente');
+          Route::get('/bandeja_docente', [respuestasController::class, 'verBandeja'])->name('bandeja_docente');
 
         //---------------------------------Detalle de mensaje-----------------------------------------
           Route::get('/respuestas/{tipo}/{id}', [respuestasController::class, 'respuestas'])->name('respuestas');
-
          //------------------------------------Bandeja de administrador----------------------------------------------
 
           Route::get('/respuestaAdmin', [reservaController::class, 'reportePeticiones'])->name('respuestaAdmin');
@@ -144,8 +143,8 @@ Route::get('/menu', [MenuController::class, 'loadMenu']);
           
         //------------------------------Gestion-------------------------------------------------------------
           
-          Route::get('/gestion', [gestionController::class, 'index'])->name('estadogestion');
-          Route::get('/gestion/{id}/{id2}/{tipo}', [gestionController::class, 'update'])->name('gestion-update');
+          Route::get('/gestion', [gestionController::class, 'verEstado'])->name('estadogestion');
+          Route::get('/gestion/{id}/{id2}/{tipo}', [gestionController::class, 'editar'])->name('gestion-update');
         
          //------------------------------Perfil y cambio de contraseña--------------------------------------------------------------------------
          Route::get('/perfil/{id}', [MenuController::class, 'loadPerfil']);

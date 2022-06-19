@@ -14,7 +14,7 @@ class gestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function verEstado()
     {
         $usuario = Auth::user();
         $gestion=gestion::where("estado",1)->get();
@@ -97,7 +97,7 @@ class gestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( $id , $id2 ,$tipo)
+    public function editar( $id , $id2 ,$tipo)
     {
        //actualizar
        if($tipo==0 && $id != $id2){
