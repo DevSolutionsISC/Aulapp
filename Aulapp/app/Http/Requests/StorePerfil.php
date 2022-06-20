@@ -30,8 +30,8 @@ class StorePerfil extends FormRequest
         return [
             
             'old_password' => 'required|exists:usuarios,contrasenia',
-            'new_password' => 'required|confirmed|alpha_num|min:10|max:20',
-            'new_password_confirmation' =>'required|alpha_num|min:10|max:20',
+            'new_password' => 'required|confirmed|alpha_num|min:8|max:20',
+            'new_password_confirmation' =>'required|alpha_num|min:8|max:20',
         ];
     }
     public function messages()

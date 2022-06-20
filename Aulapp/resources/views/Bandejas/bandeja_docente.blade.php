@@ -51,7 +51,7 @@
                  @foreach ($respuestas as $respuesta)
                     
                         
-                   @if ($respuesta->estado != "enviado")
+                   @if ($respuesta->estado != "enviado" )
                    <tr class="efecto {{$respuesta->estado}}" data-url="{{route('respuestas',['tipo'=>'recibido','id'=>$respuesta->id])}}">     
                     <td>{{$respuesta->created_at}}</td>     
                      <td>{{$respuesta->estado}} - {{$respuesta->motivo}}</td>

@@ -151,7 +151,7 @@ class UsuarioController extends Controller
  {
   $docentes = Usuario::all();
   $urs      = UserRol::all();
-  return view('Usuario-Docente.editardocente', ['docentes' => $docentes, 'urs' => $urs]);
+  return view('Usuario-Docente.editar_docente', ['docentes' => $docentes, 'urs' => $urs]);
 
  }
 

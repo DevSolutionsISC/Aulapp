@@ -58,7 +58,7 @@
                 </thead>
                 <tbody>
                  @foreach($reservas as $reservaBandeja)
-                 @if ($reservaBandeja->estado == 'enviado')
+                 @if ($reservaBandeja->estado == 'enviado' ||$reservaBandeja->estado == 'reasignar' )
                     <tr class="efecto {{$reservaBandeja->estado}}" data-url="{{route('respuesta',['id'=>$reservaBandeja->id])}}">
     
                         <td>{{$reservaBandeja->docentes}}</td>

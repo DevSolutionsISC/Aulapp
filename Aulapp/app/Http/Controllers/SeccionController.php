@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSeccion;
 use App\Models\Aula;
-use App\Models\Section;
+use App\Models\Seccion;
 use Illuminate\Http\Request;
 
-class SectionsController extends Controller
+class SeccionController extends Controller
 {
  public function index()
  {
@@ -16,20 +16,20 @@ class SectionsController extends Controller
 
  public function showEdit()
  {
-  $secciones = Section::all();
-  return view('Seccion.editarseccion', ['secciones' => $secciones]);
+  $secciones = Seccion::all();
+  return view('Seccion.editar_seccion', ['secciones' => $secciones]);
 
  }
  public function reporte()
  {
-  $sections = Section::all();
+  $sections = Seccion::all();
   return view('Seccion.reporte_seccion', compact('sections'));
  }
 
  public function store(StoreSeccion $request)
  {
 
-  $seccion              = new Section();
+  $seccion              = new Seccion();
   $seccion->nombre      = $request->nombre;
   $seccion->descripcion = $request->descripcion;
   $seccion->save();
@@ -44,7 +44,7 @@ class SectionsController extends Controller
 
  public function update(Request $request, $id)
  {
-  $section = Section::find($id);
+  $section = Seccion::find($id);
   $request->validate([
    'nombre'      => 'required|min:10|max:50|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/u|unique:sections,nombre,' . $section->id,
    'descripcion' => 'required|min:10|max:50',
@@ -62,7 +62,7 @@ class SectionsController extends Controller
   $nombre = $request->search;
   try {
 
-   $section = Section::query();
+   $section = Seccion::query();
 
    if ($request->has('search')) {
     $section->where('nombre', 'like', $request->search);
@@ -79,7 +79,7 @@ class SectionsController extends Controller
 
  public function estado(Request $request, $section)
  {
-  $section     = Section::find($section);
+  $section     = Seccion::find($section);
   $aulas       = Aula::all();
   $sizeSection = 0;
 

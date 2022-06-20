@@ -6,7 +6,7 @@ use App\Http\Requests\StoreAula;
 use App\Models\Aula;
 use App\Models\AulaAsignada;
 use App\Models\reserva;
-use App\Models\Section;
+use App\Models\Seccion;
 use App\Notifications\NotificacionReserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -23,7 +23,7 @@ class AulaController extends Controller
 
  public function index()
  {
-  $seccions = Section::where('estado', true)->get();
+  $seccions = Seccion::where('estado', true)->get();
   return view('Aula.registrar_aula', ['seccions' => $seccions]);
  }
  public function reporte()
@@ -37,8 +37,8 @@ class AulaController extends Controller
  public function showEdit()
  {
   $aulas     = Aula::all();
-  $secciones = Section::all();
-  return view('Aula.editaraula', ['secciones' => $secciones, 'aulas' => $aulas]);
+  $secciones = Seccion::all();
+  return view('Aula.editar_aula', ['secciones' => $secciones, 'aulas' => $aulas]);
 
  }
  /**
@@ -149,12 +149,25 @@ class AulaController extends Controller
     foreach ($reservas as $reserva) {
 
      if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen == $fecha->toDateString() && $reserva->estado == 'aceptado' && ($fecha->toTimeString() < $reserva->hora_inicio || $reserva->hora_fin > $fecha->toTimeString())) {
+      foreach ($aulas_asignadas as $aula_asignada) {
+       if ($aula_asignada->reserva_id == $reserva->id) {
+        $aula_asignada->delete();
+       }
+      }
+
       $reserva->estado = "reasignar";
       $reserva->save();
       Notification::route('mail', $reserva->user_rol->usuario->Email)->notify(new NotificacionReserva($reserva));
      } else if ($reserva->id == $aula_asignada->reserva_id && $reserva->fecha_examen > $fecha->toDateString() && $reserva->estado == 'aceptado') {
+      foreach ($aulas_asignadas as $aula_asignada) {
+       if ($aula_asignada->reserva_id == $reserva->id) {
+        $aula_asignada->delete();
+       }
+      }
+
       $reserva->estado = "reasignar";
       $reserva->save();
+
       Notification::route('mail', $reserva->user_rol->usuario->Email)->notify(new NotificacionReserva($reserva));
      }
     }

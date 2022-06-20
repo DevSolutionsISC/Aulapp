@@ -10,6 +10,7 @@
           src="{{asset('Imagenes/logo.jpeg')}}" width="50" id="logo"></a>
 
       <form class="d-flex m-0">
+        <a href="#" class="material-symbols-outlined" id="menu">menu</a>
         <a class="nav-link active" aria-current="page" href="{{url('menu')}}">Inicio</a>
       </form>
     </div>
@@ -40,8 +41,7 @@
                     <input class="form-control" name="new_password" type="password" 
                     id="newPasswordInput"value="{{old('new_password')}}">
                     <div class="input-group-append">
-                      <button id="show_password2" class="btn btn-secondary" type="button" onclick="mostrarPassword2()">
-                       <span class="fa fa-eye-slash icon"></span> </button>
+                      <button id="show_password2" class="btn btn-secondary" type="button" onclick="mostrarPassword2()"> <span class="fa fa-eye-slash icon" id="icon1"></span> </button>
                     </div> 
                     @error('new_password')
                         <span class="text-danger">{{ $message }}</span>
@@ -53,8 +53,7 @@
                    <input class="form-control" name="new_password_confirmation" type="password"
                     id="confirmNewPasswordInput"value="{{old('new_password_confirmation')}}"> 
                     <div class="input-group-append">
-                      <button id="show_password" class="btn btn-secondary" type="button" onclick="mostrarPassword()"> 
-                      <span class="fa fa-eye-slash icon"></span> </button>
+                      <button id="show_password" class="btn btn-secondary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon" id="icon2"></span> </button>
                     </div> 
                     @error('new_password_confirmation')
                         <span class="text-danger">{{ $message }}</span>
@@ -95,10 +94,10 @@ function mostrarPassword(){
 		var cambio = document.getElementById("confirmNewPasswordInput");
 		if(cambio.type == "password"){
 			cambio.type = "text";
-			$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+			$('#icon2').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
 		}else{
 			cambio.type = "password";
-			$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+			$('#icon2').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
 		}
 	} 
 
@@ -109,10 +108,10 @@ function mostrarPassword(){
 		var cambio2 = document.getElementById("newPasswordInput");
 		if(cambio2.type == "password"){
 			cambio2.type = "text";
-			$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+			$('#icon1').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
 		}else{
 			cambio2.type = "password";
-			$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+			$('#icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
 		}
 	} 
 

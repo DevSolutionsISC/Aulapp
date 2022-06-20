@@ -25,7 +25,7 @@ class gestionController extends Controller
                   $cantidad=$not[0]->cantidad_not;
               }
         $gestiones=gestion::all();
-        return view('Gestion.estadogestion', ['gestiones' => $gestiones, 'not'=>$cantidad]);
+        return view('Gestion.estado_gestion', ['gestiones' => $gestiones, 'not'=>$cantidad]);
     }
 
     /**
