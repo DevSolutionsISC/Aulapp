@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUsuario;
-use App\Models\asignacionDocentes;
-use App\Models\Carrera;
-use App\Models\Materia;
-use App\Models\Materia_Carrera;
 use App\Models\UserRol;
 use App\Models\Usuario;
 use App\Notifications\Usuario as NotificationsUsuario;
@@ -32,15 +28,10 @@ class UsuarioController extends Controller
 
  }
 
-
+ //Funcion para llamar a la vista de registro
  public function vistaRegistro()
  {
-  $materias        = Materia::all();
-  $carreras        = Carrera::all();
-  $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras", "carreras.id", "=", "materia_carreras.carrera_id")
-   ->select("materia_carreras.id as id", "materias.id as id_materia", "carreras.id as id_carrera", "materias.nombre_materia as nom_materia", "carreras.Nombre as nom_carrera")->get();
-
-  return view('Usuario-Docente.registrar_docente', ['materias' => $materias, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
+  return view('Usuario-Docente.registrar_docente');
  }
 
  /**
@@ -59,40 +50,49 @@ class UsuarioController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
+
+  //Guardado de datos del registro de docente
  public function registro(StoreUsuario $request)
  {
+//Almacena un nuevo registro de docente
   $usuario           = new Usuario();
   $usuario->Nombre   = $request->nombre;
   $usuario->Apellido = $request->apellido;
   $usuario->CI       = $request->ci;
   $usuario->Email    = $request->email;
-
+//Separamos por espacion
   $user       = explode(" ", $request->nombre);
   $iniciales  = "";
   $caracteres = "";
+  //Recorremos todo el nombre
   for ($i = 0; $i < sizeof($user); $i++) {
+    //Si no es vacio
    if ($user[$i] != "") {
+    //Obtenemos la primera letra y la concatenamos a una variable para guardar la inicial
     $iniciales = $iniciales . substr($user[$i], 0, 1);
+    //Concatenamos el nombre a una variable para guardar
     $caracteres .= $user[$i];
    }
   }
-
+  //Concatenamos el CI para obtener un conjunto de caractere
   $caracteres .= $request->ci;
+  //Obtenemos una cadena de 10 caracteres de la mezcla de caracteres
   $Usercontrasenia = substr(str_shuffle($caracteres), 0, 10);
+  //Concatenamos si CI mas sus iniciales para el nombre de usuario
   $User            = $request->ci . $iniciales;
 
   $usuario->usuario     = $User;
   $usuario->contrasenia = $Usercontrasenia;
   $usuario->save();
-
+  //Enviamos un email al docente
   Notification::route('mail', $request->email)->notify(new NotificationsUsuario($usuario));
-
+  //Asignamos en user rol el rol de docente
   $userRol             = new UserRol();
   $id_usuario          = Usuario::firstWhere('CI', $request->ci);
   $userRol->usuario_id = $id_usuario->id;
   $userRol->rol_id     = 2;
   $userRol->save();
-
+ //Redirecciona al registro de docente con el modal de registro exitoso
   return redirect()->route('docentes')->with('registrar', "ok");
  }
 
