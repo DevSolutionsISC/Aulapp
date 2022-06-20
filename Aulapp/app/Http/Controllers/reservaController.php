@@ -28,7 +28,7 @@ class reservaController extends Controller
  {
  }
 
- public function registro()
+ public function vistaRegistro()
  {
   //Recuperamos el usuario autentificado
   $usuario = Auth::user();
@@ -47,8 +47,10 @@ class reservaController extends Controller
   $ads = asignacionDocentes::where("gestion_id",$gestion[0]->id)->get();
         // Recuperar los dias no habiles
   $diasNoHabiles=diasExamen::where("estado",false)->get();
-  //Redireccionar a la vista de registro de reserva
-  return view('Reserva.registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad ,"id"=>$ur[0]->id]);
+
+//Redireccionar a la vista de registro de reserva
+  return view('Reserva.registrar_reserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad ,"id"=>$ur[0]->id]);
+
 
  }
 
@@ -68,7 +70,7 @@ class reservaController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
- public function store(Request $request)
+ public function registro(Request $request)
  {
   //Registrar la reserva en la base de daros juto a todos sus atributos
   $reserva                 = new reserva();

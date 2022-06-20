@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class Seleccion implements Rule
+class RuleSeleccionGrupo implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,7 @@ class Seleccion implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $value!="Seleccione un docente";
+        return $value!="Seleccione un grupo";
     }
 
     /**
@@ -35,6 +35,6 @@ class Seleccion implements Rule
      */
     public function message()
     {
-        return 'Debe seleccionar un docente';
+        return 'Debe seleccionar un grupo';
     }
 }

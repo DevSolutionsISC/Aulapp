@@ -4,34 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSeccion;
 use App\Models\Aula;
-use App\Models\Section;
+use App\Models\Seccion;
 use Illuminate\Http\Request;
 
-class SectionsController extends Controller
+class SeccionController extends Controller
 {
- public function index()
+ public function vistaRegistro()
  {
   return view('Seccion.registrar_seccion_de_aula');
  }
 
- public function showEdit()
+ public function vistaEditar()
  {
-    //Recuperar todas las secciones
-  $secciones = Section::all();
+
+//Recuperar todas las secciones
+  $secciones = Seccion::all();
   //Redireccionar a la vista de editar seccion
-  return view('Seccion.editarseccion', ['secciones' => $secciones]);
+  return view('Seccion.editar_seccion', ['secciones' => $secciones]);
+
 
  }
  public function reporte()
  {
-  $sections = Section::all();
+  $sections = Seccion::all();
   return view('Seccion.reporte_seccion', compact('sections'));
  }
 
- public function store(StoreSeccion $request)
+ public function registro(StoreSeccion $request)
  {
 
-  $seccion              = new Section();
+  $seccion              = new Seccion();
   $seccion->nombre      = $request->nombre;
   $seccion->descripcion = $request->descripcion;
   $seccion->save();
@@ -44,11 +46,13 @@ class SectionsController extends Controller
 
  }
 
- public function update(Request $request, $id)
+ public function editar(Request $request, $id)
  {
-    //Buscar la seccion a ser editada
-  $section = Section::find($id);
-  //Validar os campos del formulario
+
+//Buscar la seccion a ser editada
+  $section = Seccion::find($id);
+
+//Validar os campos del formulario
   $request->validate([
    'nombre'      => 'required|min:10|max:50|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/u|unique:sections,nombre,' . $section->id,
    'descripcion' => 'required|min:10|max:50',
@@ -68,7 +72,7 @@ class SectionsController extends Controller
   $nombre = $request->search;
   try {
 
-   $section = Section::query();
+   $section = Seccion::query();
 
    if ($request->has('search')) {
     $section->where('nombre', 'like', $request->search);
@@ -85,7 +89,7 @@ class SectionsController extends Controller
 
  public function estado(Request $request, $section)
  {
-  $section     = Section::find($section);
+  $section     = Seccion::find($section);
   $aulas       = Aula::all();
   $sizeSection = 0;
 

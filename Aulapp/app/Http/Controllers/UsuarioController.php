@@ -33,7 +33,7 @@ class UsuarioController extends Controller
  }
 
 
- public function registro()
+ public function vistaRegistro()
  {
   $materias        = Materia::all();
   $carreras        = Carrera::all();
@@ -59,7 +59,7 @@ class UsuarioController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
- public function store(StoreUsuario $request)
+ public function registro(StoreUsuario $request)
  {
   $usuario           = new Usuario();
   $usuario->Nombre   = $request->nombre;
@@ -125,7 +125,7 @@ class UsuarioController extends Controller
   * @param  \App\Models\Usuario  $usuario
   * @return \Illuminate\Http\Response
   */
- public function update(Request $request, $id)
+ public function editar(Request $request, $id)
  {
     //Buscar el docente para editar
   $docente = Usuario::find($id);
@@ -154,13 +154,15 @@ class UsuarioController extends Controller
   return redirect()->route('docentes_edit')->with('actualizar', 'ok');
  }
 
- public function showEdit()
+ public function vistaEditar()
  {
     //Recuperar todos los usuarios y todas las asignaciones usuario rol
   $docentes = Usuario::all();
   $urs      = UserRol::all();
-  //Redireccionar a la vista editar docente
-  return view('Usuario-Docente.editardocente', ['docentes' => $docentes, 'urs' => $urs]);
+
+//Redireccionar a la vista editar docente
+  return view('Usuario-Docente.editar_docente', ['docentes' => $docentes, 'urs' => $urs]);
+
 
  }
 

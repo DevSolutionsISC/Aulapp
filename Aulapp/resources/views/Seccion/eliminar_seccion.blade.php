@@ -142,8 +142,8 @@ showConfirmButton: true,
 </script>
 @endif
 @php
-use App\Models\Section;
-$ss=Section::all();
+use App\Models\Seccion;
+$ss=Seccion::all();
 @endphp
 <script>
   var buscar=document.getElementById("buscar");

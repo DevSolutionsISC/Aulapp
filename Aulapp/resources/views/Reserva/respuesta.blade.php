@@ -59,8 +59,8 @@
       <h5 id="ocultar">Seleccione las aulas necesarias para la reserva de: <b>{{$reserva->cantE}}</b> estudiantes</h5>
       <h5 id="ocultar1">Capacidad asignada</h5>
       @php
-      use App\Models\Section;
-      $sections=Section::all();
+      use App\Models\Seccion;
+      $sections=Seccion::all();
       use App\Models\Aula;
       $aulas=Aula::all();
       use App\Models\AulaAsignada;

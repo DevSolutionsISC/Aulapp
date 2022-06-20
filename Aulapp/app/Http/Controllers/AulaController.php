@@ -6,7 +6,7 @@ use App\Http\Requests\StoreAula;
 use App\Models\Aula;
 use App\Models\AulaAsignada;
 use App\Models\reserva;
-use App\Models\Section;
+use App\Models\Seccion;
 use App\Notifications\NotificacionReserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -21,9 +21,9 @@ class AulaController extends Controller
   * @return \Illuminate\Http\Response
   */
 
- public function index()
+ public function vistaRegistro()
  {
-  $seccions = Section::where('estado', true)->get();
+  $seccions = Seccion::where('estado', true)->get();
   return view('Aula.registrar_aula', ['seccions' => $seccions]);
  }
  public function reporte()
@@ -34,12 +34,12 @@ class AulaController extends Controller
 
  }
 
- public function showEdit()
+ public function vistaEditar()
  {
     //envia la informacion de todas las aulas y secciones , accede a la vista de editar aulas
   $aulas     = Aula::all();
-  $secciones = Section::all();
-  return view('Aula.editaraula', ['secciones' => $secciones, 'aulas' => $aulas]);
+  $secciones = Seccion::all();
+  return view('Aula.editar_aula', ['secciones' => $secciones, 'aulas' => $aulas]);
 
  }
  /**
@@ -58,7 +58,7 @@ class AulaController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
- public function store(StoreAula $request)
+ public function registro(StoreAula $request)
  {
 
   $aula             = new Aula();
@@ -100,7 +100,7 @@ class AulaController extends Controller
   * @param  \App\Models\Aula  $aula
   * @return \Illuminate\Http\Response
   */
- public function update(Request $request, $id)
+ public function editar(Request $request, $id)
  {
     //recupera el aula a ser editada 
   $aula = Aula::find($id);

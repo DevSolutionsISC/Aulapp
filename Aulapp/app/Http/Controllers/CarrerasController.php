@@ -17,7 +17,7 @@ class CarrerasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function vistaRegistro()
     {
 
         return view('Carrera.registrar_carrera');
@@ -46,7 +46,7 @@ class CarrerasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCarrera $request)
+    public function registro(StoreCarrera $request)
     {
 
         $carrera = new Carrera();
@@ -96,15 +96,15 @@ class CarrerasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showEdit()
+    public function vistaEditar()
     {
         //recuperar todas las carreras y asignaciones materia carrera, acceder a la vista editar carrera
         $carreras = Carrera::all();
         $mcs = Materia_Carrera::all();
-        return view('Carrera.editarcarrera', ['carreras' => $carreras, 'mcs' => $mcs]);
+        return view('Carrera.editar_carrera', ['carreras' => $carreras, 'mcs' => $mcs]);
 
     }
-    public function update(Request $request, $id)
+    public function editar(Request $request, $id)
     {
         //Recuperar la carrera a ser editada
         $carrera = Carrera::find($id);

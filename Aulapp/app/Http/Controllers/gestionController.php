@@ -14,8 +14,9 @@ class gestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   
+    public function verEstado()
+    {
+
         //Recuperamos el usuario autentificado para las notificaciones nuevas que tiene
         $usuario = Auth::user();
         $ur = UserRol::where("usuario_id",$usuario->id)->get();
@@ -25,8 +26,10 @@ class gestionController extends Controller
                   $cantidad=$not[0]->cantidad_not;
               }
         $gestiones=gestion::all();
-        //Acceder a la vista de estado de gestion 
-        return view('Gestion.estadogestion', ['gestiones' => $gestiones, 'not'=>$cantidad]);
+
+//Acceder a la vista de estado de gestion 
+        return view('Gestion.estado_gestion', ['gestiones' => $gestiones, 'not'=>$cantidad]);
+
     }
 
     /**
@@ -75,7 +78,7 @@ class gestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( $id , $id2 ,$tipo)
+    public function editar( $id , $id2 ,$tipo)
     {
        //actualizar , cambio de una a otra gestion
        if($tipo==0 && $id != $id2){

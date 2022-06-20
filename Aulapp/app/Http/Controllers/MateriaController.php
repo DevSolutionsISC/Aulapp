@@ -19,7 +19,7 @@ class MateriaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function vistaRegistro()
     {
         $carreras = Carrera::all();
         return view('Materia.registrar_materia', ['carreras' => $carreras]);
@@ -31,14 +31,16 @@ class MateriaController extends Controller
         return view('Materia.reporte_materia', compact('materias'));
 
     }
-    public function showEdit()
+    public function vistaEditar()
     {
         //Recuperar todas las materias, carreras y materias carreras
         $materias = Materia::all();
         $carreras = Carrera::all();
         $mcs = Materia_Carrera::all();
-        //Redireccionar a la vista de editar materia
-        return view('Materia.editarmateria', ['materias' => $materias, 'carreras' => $carreras, 'mcs' => $mcs]);
+
+//Redireccionar a la vista de editar materia
+        return view('Materia.editar_materia', ['materias' => $materias, 'carreras' => $carreras, 'mcs' => $mcs]);
+
 
     }
 
@@ -58,7 +60,7 @@ class MateriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMateria $request)
+    public function registro(StoreMateria $request)
     {
         $materia = new Materia();
         $materia->nombre_materia = $request->nombre;
@@ -98,7 +100,7 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editar(Request $request, $id)
     {
         //Recuperar la materia que sera editada
         $materia = Materia::find($id);
