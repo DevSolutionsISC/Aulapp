@@ -12,6 +12,7 @@
 <div class="row">
 <div >
   <div class="d-flex" id="formularioEditar">
+    {{--Formulario para la edicion de la materia--}}
     <form method="GET" action="" id="formulario">
       
       @csrf
@@ -53,6 +54,7 @@
   </div>
 
 </div>
+{{--En caso de tener errores al momento  de editar la materia esta seccion recupera los campos de texto llenados--}}
 @if ($errors->has('Codigo') || $errors->has('Nombre') )
 <script>
     var buscar=document.getElementById("buscar");
@@ -69,6 +71,7 @@
   codigo.disabled=true;
 </script>
 @endif
+{{--Mensaje de cambios guardados--}}
 @if (session('actualizar')=='ok')
   <script>localStorage.setItem('ruta',"")
   Swal.fire({
@@ -88,6 +91,7 @@
   var nombre= document.getElementById("inputNombre");
   var codigo=document.getElementById("inputCodigo");
   estadoE.value=1
+  //Funcionalidad de buscar la materia
   buscar.onclick=function(){
   var texto=document.getElementById("inputtexto");
   var encontrado=0;
@@ -100,15 +104,18 @@
       nombre.value='{{$materia->nombre_materia}}'
       codigo.value='{{$materia->Cod_materia}}'
       codigo.disabled=true
+      //Se introduce la ruta para editar la materia en especifico
       formulario.action="{{route('materias-update', ['id'=>$materia->id])}}"
       localStorage.setItem('ruta',formulario.action)
       localStorage.setItem('id',texto.value)
       var ed=document.getElementsByClassName("ed");
+      //Mostrar los campos de texto en el formulario
       for(var i=0;i<ed.length;i++){
         ed[i].style.display="block"
       }
       texto.disabled=true;
       encontrado=1;
+      //En caso de que este dado de baja entonces se mostrara el mensaje
       if({{$materia->estado}}==0){
             Swal.fire({
             icon: 'warning',
@@ -116,7 +123,7 @@
             text: 'La materia se encuentra de baja, dar de alta para poder editarlo',
             })
             var oculto=document.getElementsByClassName("oculto");
-           
+           // se muestra el boton de estado
             for(var i=0;i<oculto.length;i++){
             oculto[i].style.display="block"
             nombre.disabled=true
@@ -124,6 +131,7 @@
           }
           estadoE.value=0
           }
+          // En caso de que este relacionado con carreras no es posible editar los campos de texto
       @foreach ($mcs as $mc)
         if({{$materia->id}}== {{$mc->materia_id}}){
           asignado=1
@@ -133,6 +141,7 @@
       @endforeach
     }
   @endforeach
+          //En caso de que no fue encontrada la materia se muestra el mensaje
   if(encontrado==0){
       Swal.fire({
     icon: 'error',
@@ -141,6 +150,7 @@
     })
 
     }
+    //Cuando se da de alta la materia se habilita el campo nombre de la materia
     estado.onclick=function(){
     console.log(estado.value)
     estadoE.value=1
@@ -151,7 +161,7 @@
     }
   }
   }
-  
+  //Se habilitan todos los campos de texto antes de mandar
   var registrar=document.getElementById("botonRegistrar");
   registrar.onclick=function(){
     nombre.disabled=false

@@ -98,6 +98,7 @@ class CarrerasController extends Controller
      */
     public function showEdit()
     {
+        //recuperar todas las carreras y asignaciones materia carrera, acceder a la vista editar carrera
         $carreras = Carrera::all();
         $mcs = Materia_Carrera::all();
         return view('Carrera.editarcarrera', ['carreras' => $carreras, 'mcs' => $mcs]);
@@ -105,17 +106,20 @@ class CarrerasController extends Controller
     }
     public function update(Request $request, $id)
     {
-
+        //Recuperar la carrera a ser editada
         $carrera = Carrera::find($id);
+        //Validar los campos nuevos de la carrera
         $request->validate([
             'Nombre' => 'bail|required|min:20|max:60|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|unique:carreras,Nombre,' . $carrera->id,
             'Codigo' => 'bail|required|numeric|digits_between:5,8|unique:carreras,Codigo,' . $carrera->id,
         ]);
-
+        //Asignar los nuevos valores a la carrera
         $carrera->Nombre = $request->Nombre;
         $carrera->Codigo = $request->Codigo;
         $carrera->estado = $request->estadoE;
+        //Guardar los cambios de la carrera
         $carrera->save();
+        //Redireccionar a la vista editar carrera
         return redirect()->route('carrera_edit')->with('actualizar', 'ok');
     }
 

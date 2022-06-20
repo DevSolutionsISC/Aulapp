@@ -36,6 +36,7 @@ class AulaController extends Controller
 
  public function showEdit()
  {
+    //envia la informacion de todas las aulas y secciones , accede a la vista de editar aulas
   $aulas     = Aula::all();
   $secciones = Section::all();
   return view('Aula.editaraula', ['secciones' => $secciones, 'aulas' => $aulas]);
@@ -101,17 +102,21 @@ class AulaController extends Controller
   */
  public function update(Request $request, $id)
  {
+    //recupera el aula a ser editada 
   $aula = Aula::find($id);
+  //validar la informacion de los campos
   $request->validate([
    'Nombre'    => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/|min:3|max:10|unique:aulas,nombre,' . $aula->id,
    'capacidad' => 'bail|required|numeric|between:1,300',
   ]);
+  //llenar los atributos del aula con los nuevos
   $aula->nombre     = $request->Nombre;
   $aula->capacidad  = $request->capacidad;
   $aula->section_id = $request->section;
   $aula->estado     = $request->estadoE;
+  //guardar los datos del aula
   $aula->save();
-
+  //redirigir a la pagina de edicion de aula
   return redirect()->route('aulas_edit')->with('actualizar', 'ok');
  }
 

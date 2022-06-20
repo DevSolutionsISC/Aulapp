@@ -45,6 +45,8 @@
   <div id="Container" class="container-fluid">
     <div class="row">
         <div >
+          {{--Contenido del formulario que tiene las gestiones del año
+            las gestiones son añadidas desde el js para que se actualice a medida que los años se van cambiando--}}
           <div class="d-flex" id="formularioEditar">
             <form method="GET" action="" id="formulario">
               
@@ -61,6 +63,7 @@
         
         </div>
   </div>
+  {{-- Mensaje de actualizado correctamente--}}
   @if (session('actualizar')=='ok')
   <script>localStorage.setItem('ruta',"")
   Swal.fire({
@@ -110,7 +113,7 @@
         }else{botones[i].className="btn btn-outline-dark"}
       }
     }
-    //--------------------------------cambiar gestion-------------------
+    //--------------------------------boton cambiar gestion-------------------
     var cambiar=document.getElementById("cambiar")
     var formulario=document.getElementById("formulario")
     cambiar.onclick=function(e){
@@ -119,6 +122,7 @@
       window.location.href="/gestion/{{$id}}/"+id2+"/0";
 
     }
+    //---------------------------------boton cambiar de año---------------
     var nuevo=document.getElementById("nuevo")
     nuevo.onclick=function(e){
       e.preventDefault();
@@ -127,6 +131,7 @@
     }
   </script>
   <script>
+    //-Se necesita un temporizador para recuperar la cantidad de notinicaciones para la bandeja
     setTimeout(() => {
     if("{{$not}}"!=0){
       var not= document.getElementById("cant_not")

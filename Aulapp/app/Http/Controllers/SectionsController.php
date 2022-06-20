@@ -16,7 +16,9 @@ class SectionsController extends Controller
 
  public function showEdit()
  {
+    //Recuperar todas las secciones
   $secciones = Section::all();
+  //Redireccionar a la vista de editar seccion
   return view('Seccion.editarseccion', ['secciones' => $secciones]);
 
  }
@@ -44,16 +46,20 @@ class SectionsController extends Controller
 
  public function update(Request $request, $id)
  {
+    //Buscar la seccion a ser editada
   $section = Section::find($id);
+  //Validar os campos del formulario
   $request->validate([
    'nombre'      => 'required|min:10|max:50|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/u|unique:sections,nombre,' . $section->id,
    'descripcion' => 'required|min:10|max:50',
   ]);
-
+//Reemplazar los nuevos valores de la seccion
   $section->nombre      = $request->nombre;
   $section->descripcion = $request->descripcion;
   $section->estado      = $request->estadoE;
+  //Guardar los cambios
   $section->save();
+  //Redireccionar a la vista editar seccion
   return redirect()->route('seccion_edit')->with('actualizar', 'ok');
 
  }

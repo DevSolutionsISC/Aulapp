@@ -33,9 +33,11 @@ class MateriaController extends Controller
     }
     public function showEdit()
     {
+        //Recuperar todas las materias, carreras y materias carreras
         $materias = Materia::all();
         $carreras = Carrera::all();
         $mcs = Materia_Carrera::all();
+        //Redireccionar a la vista de editar materia
         return view('Materia.editarmateria', ['materias' => $materias, 'carreras' => $carreras, 'mcs' => $mcs]);
 
     }
@@ -98,15 +100,20 @@ class MateriaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Recuperar la materia que sera editada
         $materia = Materia::find($id);
+        //Validar los campos del formulario
         $request->validate([
             'Nombre' => 'required|regex:/^[\pL\s\-]+$/u|min:5|max:60',
             'Codigo' => 'required|numeric|digits_between:6,10|unique:materias,Cod_materia,' . $materia->id,
         ]);
+        //Asignar los nuevos valores a la materia
         $materia->nombre_materia = $request->Nombre;
         $materia->Cod_materia = $request->Codigo;
         $materia->estado = $request->estadoE;
+        //Guardar los cambios 
         $materia->save();
+        //Redireccionar a la visra editar materia
         return redirect()->route('materia_edit')->with('actualizar', 'ok');
 
     }

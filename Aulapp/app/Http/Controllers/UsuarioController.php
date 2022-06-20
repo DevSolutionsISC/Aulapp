@@ -127,30 +127,39 @@ class UsuarioController extends Controller
   */
  public function update(Request $request, $id)
  {
+    //Buscar el docente para editar
   $docente = Usuario::find($id);
+  //Validar los campos 
   $request->validate([
    'Nombre'   => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:3|max:25',
    'Apellido' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:2|max:30',
    'CI'       => 'bail|required|numeric|digits_between:6,10|unique:usuarios,CI,' . $docente->id,
    'Correo'   => 'bail|required|email|regex:/^[a-zA-Z\s 0-9 @ . _]+$/|unique:usuarios,Email,' . $docente->id,
   ]);
+  //Asignar los nuevos valores al docente
   $docente->estado   = $request->estadoE;
   $docente->Nombre   = $request->Nombre;
   $docente->Apellido = $request->Apellido;
   $docente->CI       = $request->CI;
   $docente->Email    = $request->Correo;
+  //Guardar los cambios
   $docente->save();
+  //Cambiar el estado del docente en caso de que sea dado de alta
   $sql=DB::table("user_rols")->where(['usuario_id'=>$id])->value('id');
   $asignacion=UserRol::find($sql);
   $asignacion->estado=$request->estadoE;
+  //Guardar los cambios
   $asignacion->save();
+  //Redireccionar a vista  de editar docente
   return redirect()->route('docentes_edit')->with('actualizar', 'ok');
  }
 
  public function showEdit()
  {
+    //Recuperar todos los usuarios y todas las asignaciones usuario rol
   $docentes = Usuario::all();
   $urs      = UserRol::all();
+  //Redireccionar a la vista editar docente
   return view('Usuario-Docente.editardocente', ['docentes' => $docentes, 'urs' => $urs]);
 
  }
