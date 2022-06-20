@@ -7,7 +7,6 @@ use App\Models\Aula;
 use App\Models\AulaAsignada;
 use App\Models\diasExamen;
 use App\Models\gestion;
-use App\Models\Materia;
 use App\Models\nuevasnotificacion;
 use App\Models\reserva;
 use App\Models\UserRol;

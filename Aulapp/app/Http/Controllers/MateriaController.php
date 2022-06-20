@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMateria;
-use App\Models\asignacionDocentes;
 use App\Models\Carrera;
 
 //use Illuminate\Support\Facades\Session;
@@ -18,10 +17,12 @@ class MateriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    //Funcion para llamar a la vista de registro
     public function vistaRegistro()
     {
+        //Selecciona todas las carreras
         $carreras = Carrera::all();
+        //Retorna la vista de registro de materia y envia los datos que se mostraran 
         return view('Materia.registrar_materia', ['carreras' => $carreras]);
 
     }
@@ -60,13 +61,16 @@ class MateriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Guardado de datos del registro de materia
     public function registro(StoreMateria $request)
     {
+        //Almacena un nuevo registro de materia
         $materia = new Materia();
         $materia->nombre_materia = $request->nombre;
         $materia->Cod_materia = $request->codigo;
         $materia->save();
-
+        //Redirecciona a la vista de registro de materia con el modal de registro exitoso
         return redirect()->route('materias')->with('registrar', 'ok');
 
     }

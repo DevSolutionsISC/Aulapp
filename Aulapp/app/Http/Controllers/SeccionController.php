@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class SeccionController extends Controller
 {
+ //Funcion para llamar a la vista de registro
  public function vistaRegistro()
  {
   return view('Seccion.registrar_seccion_de_aula');
@@ -29,15 +30,15 @@ class SeccionController extends Controller
   $sections = Seccion::all();
   return view('Seccion.reporte_seccion', compact('sections'));
  }
-
+//Guardado de datos del registro de seccion
  public function registro(StoreSeccion $request)
  {
-
+ //Almacena un nuevo registro de seccion
   $seccion              = new Seccion();
   $seccion->nombre      = $request->nombre;
   $seccion->descripcion = $request->descripcion;
   $seccion->save();
-
+ //Redirecciona a la vista de registro de seccion con el modal de registro exitoso
   return redirect()->route('secciones')->with('registrar', 'ok');
  }
 

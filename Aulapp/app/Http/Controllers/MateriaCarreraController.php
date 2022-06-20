@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMateriaCarrera;
-use App\Models\asignacionDocentes;
 use App\Models\Carrera;
 use App\Models\Materia;
 use App\Models\Materia_Carrera;
@@ -26,11 +25,14 @@ class MateriaCarreraController extends Controller
   return view('Planilla-de-carrera-materia.reporte_materia_carrera', compact('materia_carreras'));
  }
 
+ //Funcion para llamar a la vista de registro
  public function vistaRegistro()
  {
+  //Seleccion de materias, carreras y la asociacion de estas
   $materias         = Materia::where('estado', true)->get();
   $carrera_materias = Materia_Carrera::where('estado',true)->get();
   $carreras         = Carrera::where('estado', true)->get();
+  //Retorna vista de registro de materia-carrera y envia los datos necesarios
   return view('Planilla-de-carrera-materia.registro_planilla_carrera_materia', ['carreras' => $carreras, 'materias' => $materias, 'carrera_materias' => $carrera_materias]);
  }
  /**s
@@ -51,18 +53,22 @@ class MateriaCarreraController extends Controller
   */
  public function registro(StoreMateriaCarrera $request)
  {
+  //Busca si la materia que se desea asociar a la carrera ya existe
   $existe=Materia_Carrera::where('carrera_id',$request->carrera)->where('materia_id',$request->materia)->get();
+  //Si existe (no esta vacio)
   if($existe->isNotEmpty()){
+    //Habilita el registro
     $existe[0]->estado=true;
     $existe[0]->save();
   }else{
+    //Almacena un nuevo registro
     $materia_carrera             = new Materia_Carrera();
     $materia_carrera->carrera_id = $request->carrera;
     $materia_carrera->materia_id = $request->materia;
     $materia_carrera->save();
   
   }
-  
+  //Redirecciona a la vista de registro de materia con el modal de registro exitoso
   return redirect()->route('materia_carrera')->with('registrar', 'ok');
  }
 

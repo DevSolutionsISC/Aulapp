@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\DataAwareRule;
 use App\Models\Grupo;
 use App\Models\Materia_Carrera;
 
-class ValidacionGrupo implements Rule,DataAwareRule
+class RuleValidacionGrupo implements Rule,DataAwareRule
 {
     /**
      * Create a new rule instance.

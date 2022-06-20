@@ -11,7 +11,6 @@ use App\Notifications\NotificacionReserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Redirect;
 
 class AulaController extends Controller
 {
@@ -20,10 +19,12 @@ class AulaController extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-
+//Funcion para llamar a la vista de registro y envio de los datos necesarios para la vista
  public function vistaRegistro()
  {
+ //Seleccion de secciones
   $seccions = Seccion::where('estado', true)->get();
+  //Retorna la vista de registro de aulas con los datos de las secciones
   return view('Aula.registrar_aula', ['seccions' => $seccions]);
  }
  public function reporte()
@@ -58,16 +59,17 @@ class AulaController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
+//Guardado de datos del registro de aula
  public function registro(StoreAula $request)
  {
-
+ //Almacenado de aula
   $aula             = new Aula();
   $aula->nombre     = $request->nombre;
   $aula->capacidad  = $request->capacidad;
-  $aula->section_id = $_POST['seccion'];
+  $aula->section_id = $request->seccion;
 
   $aula->save();
-
+    //Redireccion a la vista de registro de aulas con el modal de registro exitoso
   return redirect()->route('aulas')->with('registrar', 'ok');
  }
 
