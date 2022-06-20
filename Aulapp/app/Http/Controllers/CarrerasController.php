@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-session_start();
-
 use App\Http\Requests\StoreCarrera;
 use App\Models\Carrera;
 use App\Models\Materia_Carrera;
@@ -17,11 +14,10 @@ class CarrerasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Funcion para llamar a la vista de registro
     public function vistaRegistro()
     {
-
         return view('Carrera.registrar_carrera');
-
     }
     public function reporte()
     {
@@ -46,15 +42,16 @@ class CarrerasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //Guardado de datos del registro de carrera
     public function registro(StoreCarrera $request)
     {
-
+        //almacenado de carrera
         $carrera = new Carrera();
         $carrera->Nombre = $request->nombre;
         $carrera->Codigo = $request->codigo;
 
         $carrera->save();
-
+        //Redirección a la vista de registro de carreras con el modal de registro exitoso
         return redirect()->route('carreras')->with('registrar', 'ok');
     }
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\asignacionDocentes;
 use App\Models\gestion;
-use Illuminate\Http\Request;
 use App\Models\UserRol;
 use App\Models\nuevasnotificacion;
 class gestionController extends Controller
