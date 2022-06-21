@@ -12,7 +12,6 @@ use App\Models\Materia_Carrera;
 use App\Models\UserRol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class GrupoController extends Controller
 {
@@ -25,7 +24,7 @@ class GrupoController extends Controller
     {
 
     }
-    public function showEdit()
+    public function vistaEditar()
     {
         $grupos = Grupo::all();
         $docentes = Usuario::all();
@@ -38,7 +37,7 @@ class GrupoController extends Controller
 
     }
 
-    public function registro()
+    public function vistaRegistro()
     {
 
         $carreras = Carrera::where('estado', true)->get();
@@ -87,7 +86,7 @@ class GrupoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreGrupo $request)
+    public function registro(StoreGrupo $request)
     {
         $lista_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('estado',true)->get();
         $id_grupo=Grupo::where('materia_carrera_id',$lista_materia_carrera[0]->id)->get();
@@ -190,7 +189,7 @@ class GrupoController extends Controller
      * @param  \App\Models\Grupo  $grupo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editar(Request $request, $id)
     {
         $grupo = Grupo::find($id);
         if ($request->docente != 0) {

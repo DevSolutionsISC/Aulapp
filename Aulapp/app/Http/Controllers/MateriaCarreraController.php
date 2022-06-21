@@ -26,7 +26,7 @@ class MateriaCarreraController extends Controller
   return view('Planilla-de-carrera-materia.reporte_materia_carrera', compact('materia_carreras'));
  }
 
- public function registro()
+ public function vistaRegistro()
  {
   $materias         = Materia::where('estado', true)->get();
   $carrera_materias = Materia_Carrera::where('estado',true)->get();
@@ -49,7 +49,7 @@ class MateriaCarreraController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
- public function store(StoreMateriaCarrera $request)
+ public function registro(StoreMateriaCarrera $request)
  {
   $existe=Materia_Carrera::where('carrera_id',$request->carrera)->where('materia_id',$request->materia)->get();
   if($existe->isNotEmpty()){

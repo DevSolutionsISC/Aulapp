@@ -21,7 +21,7 @@ class AulaController extends Controller
   * @return \Illuminate\Http\Response
   */
 
- public function index()
+ public function vistaRegistro()
  {
   $seccions = Seccion::where('estado', true)->get();
   return view('Aula.registrar_aula', ['seccions' => $seccions]);
@@ -34,7 +34,7 @@ class AulaController extends Controller
 
  }
 
- public function showEdit()
+ public function vistaEditar()
  {
   $aulas     = Aula::all();
   $secciones = Seccion::all();
@@ -57,7 +57,7 @@ class AulaController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
- public function store(StoreAula $request)
+ public function registro(StoreAula $request)
  {
 
   $aula             = new Aula();
@@ -99,7 +99,7 @@ class AulaController extends Controller
   * @param  \App\Models\Aula  $aula
   * @return \Illuminate\Http\Response
   */
- public function update(Request $request, $id)
+ public function editar(Request $request, $id)
  {
   $aula = Aula::find($id);
   $request->validate([

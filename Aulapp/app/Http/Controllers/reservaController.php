@@ -28,7 +28,7 @@ class reservaController extends Controller
  {
  }
 
- public function registro()
+ public function vistaRegistro()
  {
   $usuario = Auth::user();
   $gestion=gestion::where("estado",1)->get();
@@ -51,7 +51,9 @@ class reservaController extends Controller
   $diasNoHabiles=diasExamen::where("estado",false)->get();
 
 
-  return view('Reserva.registrarreserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad ,"id"=>$ur[0]->id]);
+ 
+
+  return view('Reserva.registrar_reserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad ,"id"=>$ur[0]->id]);
 
  }
 
@@ -71,7 +73,7 @@ class reservaController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
- public function store(Request $request)
+ public function registro(Request $request)
  {
   //
   $reserva                 = new reserva();

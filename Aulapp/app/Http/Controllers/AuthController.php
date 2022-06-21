@@ -59,7 +59,7 @@ class AuthController extends Controller
     public function showEditPassword()
     {
         $usuario = Usuario::all();
-        return view('Perfil_usuario.Cambiar_Contrasenia', ['usuarios' => $usuario]);
+        return view('Perfil-Usuario.Cambiar_Contrasenia', ['usuarios' => $usuario]);
 
      }
 
