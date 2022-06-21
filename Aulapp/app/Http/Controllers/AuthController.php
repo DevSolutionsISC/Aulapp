@@ -55,36 +55,26 @@ class AuthController extends Controller
     public function showEditPassword()
     {
         $usuario = Usuario::all();
-        return view('Perfil_usuario.Cambiar_Contrasenia', ['usuarios' => $usuario]);
+        return view('Perfil-Usuario.Cambiar_Contrasenia', ['usuarios' => $usuario]);
 
      }
 
     public function updatePassword(StorePerfil $request)
     {
-       // dd($request->all());
         # Validacion
         $request->validate([
             'old_password' => 'required',
-            'new_password' => 'required|confirmed',
+            'new_password' => 'required',
             'new_password_confirmation' =>'required',
         ]);
-
-
         #Coincidir con la contraseña anterior
-       
         if(Hash::check($request->old_password, auth()->user()->contrasenia)){
          return back()->with("error", "La contraseña es incorrecta!");
-         // return redirect()->route('CambiarContraseña')->with('modificar', 'ok');
         }
-
-
         #actualizar la nueva contraseña
         Usuario::whereId(auth()->user()->id)->update([
             'contrasenia' => $request->new_password
         ]);
-        
-
-        //return back()->with("status", "Contraseña cambiada con éxito!");
        return redirect()->route('CambiarContraseña')->with('actualizar', 'ok');
     }
 }

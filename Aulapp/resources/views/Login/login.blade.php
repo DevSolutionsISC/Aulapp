@@ -19,7 +19,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
               </div>
-              <input name="usuario" type="text" class="form-control" id="username" placeholder="Usuario"  autofocus value="{{old('usuario')}}"/>
+              <input name="usuario" type="text" class="form-control" id="username" placeholder="Usuario"  
+              autofocus value="{{old('usuario')}}"/>
             </div>
             @if ($errors->has('usuario'))
                <span class="error text-danger" for="input-usuario">{{ $errors->first('usuario') }}</span>
@@ -32,7 +33,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
               </div>
-                <input name="contrasenia" type="password" class="form-control" id="password" placeholder="Contraseña"  value="{{old('contrasenia')}}" />
+                <input name="contrasenia" type="password" class="form-control" id="password" placeholder="Contraseña"  
+                value="{{old('contrasenia')}}" />
                 <div class="input-group-append">
                   <span class="input-group-text" onclick="password_show_hide();">
                     <i class="fas fa-eye d-none" id="show_eye"></i>

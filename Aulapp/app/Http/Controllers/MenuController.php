@@ -30,11 +30,11 @@ class MenuController extends Controller
     }
 
 
-    public function loadPerfil($id)
+    public function loadPerfil()
     {
         $usuario = Auth::user();
     
-     return view('Perfil_usuario.perfil', ['usuario' => $usuario]);
+     return view('Perfil-Usuario.perfil', ['usuario' => $usuario]);
     }
 
     private function obtenerPrivilegios($rol)
