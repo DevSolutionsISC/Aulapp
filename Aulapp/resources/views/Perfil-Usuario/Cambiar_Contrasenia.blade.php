@@ -65,7 +65,7 @@
 
                     <div class="d-flex justify-content-center">
                     <button class="btn btn-dark" type="submit" >Guardar</button>
-                        <a href="perfil/{id}" class="btn btn-dark"
+                        <a href="/perfil" class="btn btn-dark"
                         type="button"style="margin-left: 10px">Cancelar</a>
                     </div>
 
