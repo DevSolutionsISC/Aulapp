@@ -59,8 +59,7 @@
             {{$asignacionDocente->user_rol->usuario->Apellido}}</span>
 
           <br>
-          <span><b>Carrera:</b> {{$asignacionDocente->grupos->materia_carrera->carrera->Nombre}}</span>
-          <br>
+
           <span><b>Materia:</b> {{$asignacionDocente->grupos->materia_carrera->materia->nombre_materia}}</span>
         </div>
         @endif
