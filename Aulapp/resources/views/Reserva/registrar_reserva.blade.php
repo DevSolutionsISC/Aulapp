@@ -48,6 +48,7 @@
   </header>
   <div id="Container" class="container-fluid">
     <div class="row">
+      {{--Formulario de reserva--}}
         <div >
           <div class="d-flex" id="formularioEditar">
             <form method="POST"  id="formulario" {{route('reserva')}}>
@@ -99,6 +100,7 @@
                         <option value="15:45">15:45</option>
                         <option value="17:15">17:15</option>
                         <option value="18:45">18:45</option>
+                        <option value="20:15">20:15</option>
                     </select></div>
                 </div><br>
                 <div class="row">
@@ -149,7 +151,7 @@
   var listaD=document.getElementById("lista_docentes");
   var listaG=document.getElementById("lista_grupos");
   var nombre="";
-  
+  // Se añaden las materiasque se le fueron asignadas al docente
   @foreach ($materias as $materia) 
         materia.innerHTML+="<option >{{$materia->nombre_materia}}</option>"
   @endforeach
@@ -166,9 +168,10 @@
   docentes.className="form-select"
  @foreach ($ads as $ad)
     if(materia.options[materia.selectedIndex].text == "{{$ad->grupos->materia_carrera->materia->nombre_materia}}" && !encontrardocente('{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}')){
-      
+      //Se añade un temporizador para que cargue correctamente la lista de docentes
       setTimeout(() => {
         if(!encontrarD("{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}")){
+          //Coloctar los docentes que coinciden en la materia en el selector de docentes
           docentes.innerHTML+='<option class="docs">{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}</option>'
         }
        
@@ -179,6 +182,7 @@
       
     }
   @endforeach
+  //Mostrar ventana emergente con los docentes que dictan la misma materia que el docente que realiza la reserva
     Swal.fire({
   title: 'Elija un docente',
   showCancelButton: true,
@@ -194,7 +198,7 @@
   }
 })
   }
-  //-----------------------------funcion de encontrardocente-----------------------
+  //-----------------------------funcion de encontrar docente-----------------------
   function encontrardocente(d){
     var listado=listaD.value.split(",")
     var encontrado=false;
@@ -219,6 +223,7 @@
   //--------------------------------funcion quitar docente---------------------------------
   var letras=document.getElementsByClassName("A_let")
   var iconos=document.getElementsByClassName("A_icon")
+  //Para quitar el docente del formulario
   asignacionD.onclick=function(a){
     var f=a.target;
     for(var i=0; i<letras.length;i++){
@@ -228,6 +233,7 @@
     }
   }
   }
+  //Para quitar al docente de la lista de docentes que se enviara al registrar la solicitud
   function quitarDocente(d){
     var listado=listaD.value.split(",")
     listaD.value=""
@@ -241,6 +247,7 @@
   }
   //----------------------------funcion quitar grupo--------------------------
   asignacionG.onclick=function(a){
+    // Quitar el grupo del formulario
     var f=a.target;
     for(var i=0; i<letras.length;i++){
       if(f==letras[i] || f==iconos[i]){
@@ -249,6 +256,7 @@
     }
   }
   }
+  //Quitar el grupo de la lista de grupos que se envia en la solicitud
   function quitarGrupo(d){
     var listado=listaG.value.split(",")
     listaG.value=""
@@ -259,13 +267,13 @@
         }else{listaG.value+= ','+listado[i]}
       }
     }
+    //Habilitar l etiqueta de docente para eliminar en caso de que no se tenga ningun grupo de ese docente
     var d=$(".d")
     var g=$(".g")
     for(var i=0; i<d.length;i++){
       var alerta=false;
       for(var j=0; j<g.length;j++){
         if(d[i].innerHTML==g[j].id){
-        //d[i].parentNode.disabled=true;
         alerta=true
         }
         if(alerta==false){
@@ -284,8 +292,10 @@
     @foreach ($ads as $ad)
      for(var i=0; i<listado.length;i++){
        if("{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}"==listado[i] && materia.options[materia.selectedIndex].text == "{{$ad->grupos->materia_carrera->materia->nombre_materia}}" && !encontrargrupo('{{$ad->grupos->nombre}}')){
+       //Se coloca un temporizador para el carcado correcto de los datos
         setTimeout(() => {
           if(!encontrarG("{{$ad->grupos->nombre}}"))  {
+            //Asignar todos los grupos de la materia que pertenezcan a la lista de docentes 
           grupos.innerHTML+="<option class='groups' id='{{$ad->user_rol->usuario->Nombre}} {{$ad->user_rol->usuario->Apellido}}'>{{$ad->grupos->nombre}}</option>"
         }
     
@@ -294,6 +304,7 @@
         }
      }
     @endforeach
+    //Ventana emergente donde se mostrara la lista de los grupos permitidos
     Swal.fire({
   title: 'Elija un grupo',
   showCancelButton: true,
@@ -310,6 +321,7 @@
     asignacionG.innerHTML+="<div class='A_cont'><span class='material-symbols-outlined A_icon'>close</span><spam class='A_let g' id='"+grupos.options[grupos.selectedIndex].id+"'>"+grupos.options[grupos.selectedIndex].text+"</spam></div>"
     var d=$(".d")
     var g=$(".g")
+    //Cuando se selecciona un grupo de un docente entones este es deshabilitado para que no pueda quitar
     for(var i=0; i<d.length;i++){
       for(var j=0; j<g.length;j++){
         if(d[i].innerHTML==g[j].id){
@@ -333,7 +345,7 @@ var valf=document.getElementById("fecha");
 var fechaf=document.getElementById("fechaf")
 var duracion=document.getElementById("duracion")
 var horario=document.getElementById("horario")
-//--------------------Cambiar hora-------------------------------
+//--------------------Cambiar hora de finalizacion de reserva-------------------------------
 function cambiarHora(){
   var modificador=fechaf.value.split(":")
   var entrada=horario.options[horario.selectedIndex].text.split(":")
@@ -346,14 +358,20 @@ function cambiarHora(){
   }
   fechaf.value=hora+":"+minutos
 }
+//Se cambia la hora de fin de reserva en caso de que la duracion cambie
 duracion.addEventListener('change', (event) => {
   cambiarHora();
 })
+//Se cambia la hora de fin de reserva en caso de que la hoea de inicio cambie
 horario.addEventListener('change', (event) => {
+  if(horario.options[horario.selectedIndex].text == "20:15"){
+    duracion.innerHTML="<option value='1:30'>1:30</option>"
+  }else{duracion.innerHTML="<option value='1:30'>1:30</option><option value='3:00'>3:00</option>"}
   cambiarHora();
 })
 //------------------------
 function vacio(texto){
+  //Funcion que verifica si algun campo esta vacio
 var alerta=true;
 lineas=texto.split("\n")
 for(var i=0; i<lineas.length;i++){
@@ -365,6 +383,7 @@ return alerta
 }
 //----------------------------------------------------------------
 registrar.onclick=function(event){
+  //Se detiene el evento de enviar reserva para acer sus validaciones
   var formulario=document.getElementById("formulario")
   
   var alerta=0;
@@ -372,44 +391,51 @@ registrar.onclick=function(event){
   errorm.innerHTML=""
   errorc.innerHTML=""
   errorf.innerHTML=""
+  //Verifica si se añadieron grupos
   if(valg.value==""){
     errorg.innerHTML="Debe añadir un grupo"
     alerta=1;
   }
+  //Verifica si el motivo de reserva esta vacio
   if(vacio(valm.value)){
     errorm.innerHTML="Campo obligatorio"
     alerta=1
   }
+  //Verifica si la cantidad de estudiantes solo tiene caracteres numericos
   if(valc.value.match('^[0-9]+$')==null){
     errorc.innerHTML="Solo se aceptan números"
     alerta=1;
   }
+  //Verifica que la cantidad de estudiantes sea mayor a 0
   if(valc.value== "0"){
     errorc.innerHTML="La cantidad debe ser mayor a 0"
     alerta=1;
   }
+  //Verifica que la cantidad de estudiantes no este vacia
   if(valc.value==""){
     errorc.innerHTML="Campo obligatorio"
     alerta=1
   }
   var fecha=new Date(valf.value);
   var hoy= new Date();
-  
+  // Verifica si la fecha de examen es mayor a la de hoy
   if(fecha.getTime()+86399999<hoy.getTime()){
     errorf.innerHTML="La fecha es  menor a la de hoy"
     alerta=1;
   }
   @foreach ($diasNoHabiles as $dia)
+  //Verifica si el dia de reserva elegido sea uno valido para reservas
   if(fecha.getDay()=={{$dia->dias}}){
     errorf.innerHTML="El día elegido no es valido"
     alerta=1;
   }
   @endforeach
-  
+  //Verifica si es la fecha de reserva no esta vacia
   if(valf.value==""){
     errorf.innerHTML="Fecha no valida"
     alerta=1
   }
+  //Verifica que todods los docentes añadidos tengan como minimo un grupo añadido
   var val_doc=listaD.value.split(",");
   var g=$(".g");
     for(var i=0; i<val_doc.length;i++){
@@ -446,6 +472,7 @@ registrar.onclick=function(event){
    }
    return alerta
  }
+ // -------------------------buscar grupo
  function encontrarG(texto){
    
    var groups=document.getElementsByClassName("groups");
@@ -462,6 +489,7 @@ registrar.onclick=function(event){
  }
 </script>
 <script>
+  //Para la cantidad de notificaciones nuevas se hace un retraso para que cargue correctamente
   setTimeout(() => {
   if("{{$not}}"!=0){
     var not= document.getElementById("cant_not")
@@ -469,6 +497,7 @@ registrar.onclick=function(event){
   }
 },50);
 </script>
+{{--Mensaje de actualizacion correctz--}}
 @if (session('actualizar')=='ok')
   <script>localStorage.setItem('ruta',"")
   Swal.fire({

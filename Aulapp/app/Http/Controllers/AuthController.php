@@ -1,17 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-Use Session;
-Use Redirect;
 use App\Models\Usuario;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreLogin;
 use App\Http\Requests\StorePerfil;
-use Illuminate\Auth\SessionGuard;
 class AuthController extends Controller
 {
     /**

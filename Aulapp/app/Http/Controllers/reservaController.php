@@ -7,7 +7,6 @@ use App\Models\Aula;
 use App\Models\AulaAsignada;
 use App\Models\diasExamen;
 use App\Models\gestion;
-use App\Models\Materia;
 use App\Models\nuevasnotificacion;
 use App\Models\reserva;
 use App\Models\UserRol;
@@ -30,30 +29,27 @@ class reservaController extends Controller
 
  public function vistaRegistro()
  {
+  //Recuperamos el usuario autentificado
   $usuario = Auth::user();
+  //Filtrar las gestiones y recuperar la habilitada
   $gestion=gestion::where("estado",1)->get();
+  //Para la campanade notificaciones recuperar el numero de notificaciones nuevas
   $ur = UserRol::where("usuario_id",$usuario->id)->get();
   $not= nuevasnotificacion::where("user_rol_id",$ur[0]->id)->get();
   $cantidad=0;
        if($not!="[]"){
             $cantidad=$not[0]->cantidad_not;
         }
-  $materias= asignacionDocentes::join("user_rols","user_rols.id","=","asignacion_docentes.user_rol_id")
-  ->where("user_rols.usuario_id",$usuario->id)
-  ->where("asignacion_docentes.gestion_id",$gestion[0]->id)
-  ->join("grupos","grupos.id",'=','asignacion_docentes.grupo_id')
-  ->join("materia_carreras","materia_carreras.id","=","grupos.materia_carrera_id")
-  ->join("materias","materias.id","=","materia_carreras.materia_id")
-  ->select("materias.nombre_materia")->get()
-  ->unique("nombre_materia");
-
+        //Recuperar solo las materias que son dictadas por el docente
+  $materias= asignacionDocentes::join("user_rols","user_rols.id","=","asignacion_docentes.user_rol_id")->where("user_rols.usuario_id",$usuario->id)->where("asignacion_docentes.gestion_id",$gestion[0]->id)->join("grupos","grupos.id",'=','asignacion_docentes.grupo_id')->join("materia_carreras","materia_carreras.id","=","grupos.materia_carrera_id")->join("materias","materias.id","=","materia_carreras.materia_id")->select("materias.nombre_materia")->get()->unique("nombre_materia");
+        //Recuperar las asignaciones vigentes en la gestion
   $ads = asignacionDocentes::where("gestion_id",$gestion[0]->id)->get();
+        // Recuperar los dias no habiles
   $diasNoHabiles=diasExamen::where("estado",false)->get();
 
-
- 
-
+//Redireccionar a la vista de registro de reserva
   return view('Reserva.registrar_reserva', ['ads' => $ads, 'materias'=>$materias, 'usuario'=>$usuario,'diasNoHabiles'=>$diasNoHabiles,"not" =>$cantidad ,"id"=>$ur[0]->id]);
+
 
  }
 
@@ -75,7 +71,7 @@ class reservaController extends Controller
   */
  public function registro(Request $request)
  {
-  //
+  //Registrar la reserva en la base de daros juto a todos sus atributos
   $reserva                 = new reserva();
   $reserva->motivo         = $request->motivo;
   $reserva->estado         = "enviado";
@@ -88,21 +84,29 @@ class reservaController extends Controller
   $reserva->materia        = $request->materia;
   $reserva->user_rol_id    = $request->id;
   $reserva->motivo_rechazo = "";
+<<<<<<< HEAD
   $reserva->save();
+=======
+  //Guardar el registro
+ $reserva->save();
+ //buscar si el administraor recibio solicitudes con anterioridad
+>>>>>>> 87bb797b8d28bc8a3b69fe5a275e222bfdebe6ab
   $buscar_usuario=UserRol::where("rol_id",1)->get();
   $buscar_not=nuevasnotificacion::where("user_rol_id",$buscar_usuario[0]->id)->get();
-  echo($buscar_not);
+    //En caso de no encontrar se crea una nueva asignacion para que tenga su contador de nuevas reservas
   if($buscar_not=="[]"){
     $notificacion=new nuevasnotificacion();
     $notificacion->user_rol_id=$buscar_usuario[0]->id;
     $notificacion->cantidad_not=1;
     $notificacion->save();
-    echo("nuevo");
+
   }else{
+    //En caso de encotrar su contador de notificaciones aumentara en uno
     $buscar_not[0]->cantidad_not=$buscar_not[0]->cantidad_not+1;
     $buscar_not[0]->save();
-    echo("encontrado");
+
   }
+    //Redirecciona a la vista de registro de reserva 
   return redirect()->route('registro_reserva')->with('actualizar', 'ok');
  }
 
@@ -116,20 +120,28 @@ class reservaController extends Controller
  public function respuesta(Request $request, $id, $estado)
  {
   $aulas_asignadas = [];
+  //El estado 0  es en caso de que la reserva fue rechazada
   if ($estado == 0) {
+    //Se valida el motivo
    $request->validate([
     'motivo_rechazo' => 'required',
    ]);
+   //modificar los valores de la reserva con los nuevos valores
    $rechazado                 = reserva::find($id);
    $rechazado->estado         = "rechazado";
    $rechazado->motivo_rechazo = $request->motivo_rechazo;
+   //Guardar cambios en la reserva
    $rechazado->save();
+   //Enviar email al docente
    Notification::route('mail', $rechazado->user_rol->usuario->Email)->notify(new NotificacionReserva($rechazado)); /* para usar cuando se guarde la reserva */
 
   } else {
+    //en caso de que la reserva sea aceptada
    $aceptado         = reserva::find($id);
    $aceptado->estado = "aceptado";
+   //guardar los cambios en la reserva
    $aceptado->save();
+   //Reservar las aulas correspondientes
    $aulas = explode(",", $request->aulas_nombres);
    for ($i = 0; $i < sizeof($aulas); $i++) {
     $aula_asignada             = new AulaAsignada();
@@ -139,24 +151,26 @@ class reservaController extends Controller
     $aula_asignada->save();
     $aulas_asignadas[] = $aula_asignada;
    }
+   //Enviar email al docente
    Notification::route('mail', $aceptado->user_rol->usuario->Email)->notify(new NotificacionReserva($aceptado, $aulas_asignadas)); /* para usar cuando se guarde la reserva */
    
 }
 $buscar_reserva=reserva::find($id);
-
+//Buscar si el docente que hizo la reserva tuvo alguna ves una respuesta a sus solicitudes
 $buscar_not=nuevasnotificacion::where("user_rol_id",$buscar_reserva->user_rol_id)->get();
-  echo($buscar_not);
+//En caso de que no se crea una nueva asignacion de nuevas reservas
   if($buscar_not=="[]"){
     $notificacion=new nuevasnotificacion();
     $notificacion->user_rol_id=$buscar_reserva->user_rol_id;
     $notificacion->cantidad_not=1;
     $notificacion->save();
-    echo("nuevo");
+// En caso de que si haya tenido su contador de reservas aumenta en 1
   }else{
     $buscar_not[0]->cantidad_not=$buscar_not[0]->cantidad_not+1;
     $buscar_not[0]->save();
-    echo("encontrado");
+
   }
+  //Redireccionar a la bandeja del administrador
 return redirect()->route('respuestaAdmin')->with('actualizar', 'ok');
 }
 

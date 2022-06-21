@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\nuevasnotificacion;
 use App\Models\UserRol;
-use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +30,7 @@ class MenuController extends Controller
     }
 
 
-    public function loadPerfil($id)
+    public function loadPerfil()
     {
         $usuario = Auth::user();
     

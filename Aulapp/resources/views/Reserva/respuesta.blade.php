@@ -183,10 +183,12 @@
       var aceptado=document.getElementById("aceptado")
       var rechazado=document.getElementById("rechazado")
       rechazado.style.display="none"
+      //Mostrar las secciones que contienen las aulas para hacer reserva
       btn_aceptar.onclick=function(){
       rechazado.style.display="none"
       aceptado.style.display="block"
       }
+      //Mostrar el campo de texto para el motivo de rechazo
       btn_rechazar.onclick=function(){
 
       rechazado.style.display="block"
@@ -208,17 +210,21 @@
         var aulas=inputs[1].value.split(",");
         var alerta=false;
         inputs[1].value=""
+        //Colocar las aulas que fueron elegidas
         for(var i=0; i<aulas.length; i++){
           if(nombre_aula == aulas[i]){
             alerta=true;
             inputs[0].value=parseInt(inputs[0].value)-capacidad_aula;
+            //En caso que el aula seleccionada ya fue elegida entonces 
             $(this).val("0")
           }else{
+            //llenado de lista de aulas
             if(inputs[1].value == ""){
               inputs[1].value = aulas[i];
             }else{inputs[1].value +=","+aulas[i];}
           }
         }
+        //En caso de que el aula 
         if(alerta==false){
           $(this).val("1")
           inputs[0].value=parseInt(inputs[0].value)+capacidad_aula
@@ -227,29 +233,34 @@
             }else{inputs[1].value +=","+nombre_aula}
         }
         var btn_enviar=$(this).parent().parent().find("button");
+        //cuando la reserva es satisfecha se habilita el boton enviar
         if(parseInt(inputs[0].value)>= {{$reserva->cantE}}){
           btn_enviar[0].disabled=false;
+          //deshabilita los checks ya cumple con la cantidad
           var checks=$(this).parent().parent().find(".check").find("input")
           for(var i=0 ;i<checks.length;i++){
             checks[i].disabled=true;
           }
         }else{
+          //Si no cumple entonces el boton enviar se deshabilita
           btn_enviar[0].disabled=true
+          //los check son habilitados
           var checks=$(this).parent().parent().find(".check").find("input")
           for(var i=0 ;i<checks.length;i++){
             checks[i].disabled=false;
           }
         }
+        //El ultimo check que es usado para completar la cantidad siempre estara habilitado
         $(this).parent().find("input")[0].disabled=false;
       })
       
     </script>
     <script>
+      //Se detiene el evento de enviar respuesta y se verifica si hay aulas innecesarias seleccionadas
       $('.aceptados').submit(function(e){
             e.preventDefault();
             var alerta=0;
             var total=parseInt($(this).parent().find(".aulas")[0].value)
-           // console.log({{$reserva->cantE}});
             aulas_s=$(this).parent().find(".check");
                 for(var i=0; i<aulas_s.length;i++){
                   if($(aulas_s[i]).find("input").attr("value")==1){

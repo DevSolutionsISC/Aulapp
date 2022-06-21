@@ -1,4 +1,5 @@
 @extends('plantilla')
+{{--Se extiende del archivo plantilla--}}
 @section('title', 'Carrera')
 @section('Titulo')
 @section("editar","carreraEdit")
@@ -7,6 +8,7 @@
 @section("eliminar","eliminar-carrera")
 <h3 text-center id="Titulo">Administración de carreras</h3>
 @endsection
+{{-- Contenido del formula de editar carrera--}}
 @section('Contenido formulario')
 
 <div class="row">
@@ -54,6 +56,8 @@
 
 </div>
 @if ($errors->has('Codigo') || $errors->has('Nombre') )
+{{--En caso de que se tenga errores en el llenado de del formulario se entrara a esta seccion para recuperar
+  los datos de los campos de texto--}}
 <script>
    var ed=document.getElementsByClassName("ed");
       for(var i=0;i<ed.length;i++){
@@ -67,6 +71,7 @@
   codigo.disabled=true;
 </script>
 @endif
+{{-- Para mostrar el modal de cambios guardados--}}
 @if (session('actualizar')=='ok')
   <script>localStorage.setItem('ruta',"")
   Swal.fire({
@@ -88,15 +93,18 @@
   var estadoE=document.getElementById("estadoE")
   estadoE.value=1
   var asignado=0
+  //Funcionalidad de buscar la carrera
   buscar.onclick=function(){
   var encontrado=0;
   var formulario=document.getElementById("formulario");
+  //Busca entre todas las carreras existentes
   @foreach ($carreras as $carrera)
     if(texto.value =='{{$carrera->Codigo}}'){
       nombre.value='{{$carrera->Nombre}}'
       codigo.value='{{$carrera->Codigo}}'
       codigo.disabled=true
       buscar.disabled=true;
+      //Cuando encientra entonces se le es asignado una ruta para editar esa carrera en especifico
       formulario.action="{{route('carreras-update', ['id'=>$carrera->id])}}"
       localStorage.setItem('ruta',formulario.action)
       localStorage.setItem('id',texto.value)
@@ -106,12 +114,14 @@
         ed[i].style.display="block"
       }
       texto.disabled=true;
+      //En caso de que el aula se encuentre en baja se muestra un mensaje que lo indica
       if({{$carrera->estado}}==0){
             Swal.fire({
             icon: 'warning',
             title: 'Oops...',
             text: 'La carrera se encuentra de baja, dar de alta para poder editarlo',
             })
+            //CCuando se llenan todos los campos de texto y se los quiere mostrar dentro el formulario
             var oculto=document.getElementsByClassName("oculto");
            
             for(var i=0;i<oculto.length;i++){
@@ -121,6 +131,7 @@
           }
           estadoE.value=0
           }
+          //En caso de que la carrera tenga alguna asignacion con materias no se puede habilitar su edicion en sus campos de texto
           @foreach ($mcs as $mc)
             if({{$carrera->id}} == {{$mc->carrera_id}}){
              asignado=1
@@ -130,6 +141,7 @@
            @endforeach
     }
   @endforeach
+  //En caso de que la carrera no sea encontrada entonces se muestra el mensaje
   if(encontrado == 0){
     Swal.fire({
     icon: 'error',
@@ -137,6 +149,7 @@
     text: 'No se encontro ninguna carrera con ese codigo',
     })
   }
+  //Cuando la carrera esta de baja y se quiere habilitar esta es la funcionalidad
   estado.onclick=function(){
     
     estadoE.value=1
@@ -146,6 +159,7 @@
             codigo.disabled=true
     }
   }
+  //Antes de mandar el formulario se habilitan todos los campos de texto 
   var registrar=document.getElementById("botonRegistrar");
   registrar.onclick=function(){
     nombre.disabled=false

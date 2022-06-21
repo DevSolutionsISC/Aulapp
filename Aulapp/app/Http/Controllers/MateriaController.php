@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMateria;
-use App\Models\asignacionDocentes;
 use App\Models\Carrera;
 
 //use Illuminate\Support\Facades\Session;
@@ -18,10 +17,12 @@ class MateriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    //Funcion para llamar a la vista de registro
     public function vistaRegistro()
     {
+        //Selecciona todas las carreras
         $carreras = Carrera::all();
+        //Retorna la vista de registro de materia y envia los datos que se mostraran 
         return view('Materia.registrar_materia', ['carreras' => $carreras]);
 
     }
@@ -33,10 +34,14 @@ class MateriaController extends Controller
     }
     public function vistaEditar()
     {
+        //Recuperar todas las materias, carreras y materias carreras
         $materias = Materia::all();
         $carreras = Carrera::all();
         $mcs = Materia_Carrera::all();
+
+//Redireccionar a la vista de editar materia
         return view('Materia.editar_materia', ['materias' => $materias, 'carreras' => $carreras, 'mcs' => $mcs]);
+
 
     }
 
@@ -56,13 +61,16 @@ class MateriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Guardado de datos del registro de materia
     public function registro(StoreMateria $request)
     {
+        //Almacena un nuevo registro de materia
         $materia = new Materia();
         $materia->nombre_materia = $request->nombre;
         $materia->Cod_materia = $request->codigo;
         $materia->save();
-
+        //Redirecciona a la vista de registro de materia con el modal de registro exitoso
         return redirect()->route('materias')->with('registrar', 'ok');
 
     }
@@ -98,15 +106,20 @@ class MateriaController extends Controller
      */
     public function editar(Request $request, $id)
     {
+        //Recuperar la materia que sera editada
         $materia = Materia::find($id);
+        //Validar los campos del formulario
         $request->validate([
             'Nombre' => 'required|regex:/^[\pL\s\-]+$/u|min:5|max:60',
             'Codigo' => 'required|numeric|digits_between:6,10|unique:materias,Cod_materia,' . $materia->id,
         ]);
+        //Asignar los nuevos valores a la materia
         $materia->nombre_materia = $request->Nombre;
         $materia->Cod_materia = $request->Codigo;
         $materia->estado = $request->estadoE;
+        //Guardar los cambios 
         $materia->save();
+        //Redireccionar a la visra editar materia
         return redirect()->route('materia_edit')->with('actualizar', 'ok');
 
     }

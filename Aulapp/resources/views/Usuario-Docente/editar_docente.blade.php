@@ -10,7 +10,7 @@
 <h3 text-center id="Titulo">Administración de docentes</h3>
 @endsection
 @section('Contenido formulario')
-
+{{--Formulario de editar docente--}}
 <div class="row">
 <div >
   <div class="d-flex" id="formularioEditar">
@@ -66,6 +66,7 @@
   </div>
 
 </div>
+{{--En caso de tener algun error al moento de editar los campos, esta seccion de codigo sirve para recuperar los valores--}}
 @if ($errors->has('Correo') || $errors->has('Nombre') ||$errors->has('CI')  ||$errors->has('Apellido') )
 <script>
    var ed=document.getElementsByClassName("ed");
@@ -96,6 +97,7 @@
   var estado=document.getElementById("estado")
   var estadoE=document.getElementById("estadoE")
   estadoE.value=1
+  //Funcion de buscar el docente para editar fu informacion
   buscar.onclick=function(){
   var texto=document.getElementById("inputtexto");
   var encontrado=0;
@@ -103,22 +105,27 @@
   @foreach ($docentes as $docente)
     @foreach ($urs as $ur )
       if(texto.value=='{{$docente->CI}}' && '{{$ur->rol_id}}'=='2' && '{{$docente->id}}'== '{{$ur->usuario_id}}'){
+        //En caso de ser encontrado llenar los campos de texto con su informacion
           nombre.value='{{$docente->Nombre}}'
           apellido.value= '{{$docente->Apellido}}'
           ci.value='{{$docente->CI}}'
           correo.value= '{{$docente->Email}}'
           correo.disabled=false
+          //El ci no es editable
           ci.disabled=true
+          //Se asigna la ruta correspondiente al docente
           formulario.action="{{route('docente-update', ['id'=>$docente->id])}}"
           localStorage.setItem('ruta',formulario.action)
           localStorage.setItem('id',texto.value)
           var ed=document.getElementsByClassName("ed");
           encontrado=1;
           buscar.disabled=true;
+          //Se hacen visibles todos los campos de texto
           for(var i=0;i<ed.length;i++){
           ed[i].style.display="block"
           }
           texto.disabled=true;
+          //En caso de que el docente se encuentre de baja se muestra el mensaje
           if({{$docente->estado}}==0){
             Swal.fire({
             icon: 'warning',
@@ -126,7 +133,7 @@
             text: 'El docente se encuentra de baja, dar de alta para poder editarlo',
             })
             var oculto=document.getElementsByClassName("oculto");
-           
+           //Se muestra el boton de estado para dar de alta al docente
             for(var i=0;i<oculto.length;i++){
             oculto[i].style.display="block"
             nombre.disabled=true
@@ -141,6 +148,7 @@
     @endforeach
 
   @endforeach
+  //Si el docente no fue encontrado se muestra el mensaje
   if(encontrado == 0){
     Swal.fire({
     icon: 'error',
@@ -149,7 +157,7 @@
     })
   }
   }
-  
+  //Cuando es dado de alta al docente se habilitan todos sus campos a excepcion de el ci
   estado.onclick=function(){
     console.log(estado.value)
     if(estadoE.value==0){
@@ -161,6 +169,7 @@
             estado.disabled=true
     }
   }
+  //Cuando se envia el formulario se habilitan todos los campos
   var registrar=document.getElementById("botonRegistrar");
   registrar.onclick=function(){
     nombre.disabled=false
@@ -171,6 +180,7 @@
             estado.disabled=false
   }
 </script>
+{{--Si la actualizacion es cprrecta se muestra el mensajes--}}
 @if (session('actualizar')=='ok')
 
 <script>

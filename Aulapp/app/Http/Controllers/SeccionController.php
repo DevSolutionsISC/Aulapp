@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class SeccionController extends Controller
 {
+ //Funcion para llamar a la vista de registro
  public function vistaRegistro()
  {
   return view('Seccion.registrar_seccion_de_aula');
@@ -16,8 +17,12 @@ class SeccionController extends Controller
 
  public function vistaEditar()
  {
+
+//Recuperar todas las secciones
   $secciones = Seccion::all();
+  //Redireccionar a la vista de editar seccion
   return view('Seccion.editar_seccion', ['secciones' => $secciones]);
+
 
  }
  public function reporte()
@@ -25,15 +30,15 @@ class SeccionController extends Controller
   $sections = Seccion::all();
   return view('Seccion.reporte_seccion', compact('sections'));
  }
-
+//Guardado de datos del registro de seccion
  public function registro(StoreSeccion $request)
  {
-
+ //Almacena un nuevo registro de seccion
   $seccion              = new Seccion();
   $seccion->nombre      = $request->nombre;
   $seccion->descripcion = $request->descripcion;
   $seccion->save();
-
+ //Redirecciona a la vista de registro de seccion con el modal de registro exitoso
   return redirect()->route('secciones')->with('registrar', 'ok');
  }
 
@@ -44,16 +49,22 @@ class SeccionController extends Controller
 
  public function editar(Request $request, $id)
  {
+
+//Buscar la seccion a ser editada
   $section = Seccion::find($id);
+
+//Validar os campos del formulario
   $request->validate([
    'nombre'      => 'required|min:10|max:50|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/u|unique:sections,nombre,' . $section->id,
    'descripcion' => 'required|min:10|max:50',
   ]);
-
+//Reemplazar los nuevos valores de la seccion
   $section->nombre      = $request->nombre;
   $section->descripcion = $request->descripcion;
   $section->estado      = $request->estadoE;
+  //Guardar los cambios
   $section->save();
+  //Redireccionar a la vista editar seccion
   return redirect()->route('seccion_edit')->with('actualizar', 'ok');
 
  }

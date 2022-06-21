@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-session_start();
-
 use App\Http\Requests\StoreCarrera;
 use App\Models\Carrera;
 use App\Models\Materia_Carrera;
@@ -17,11 +14,10 @@ class CarrerasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Funcion para llamar a la vista de registro
     public function vistaRegistro()
     {
-
         return view('Carrera.registrar_carrera');
-
     }
     public function reporte()
     {
@@ -46,15 +42,16 @@ class CarrerasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //Guardado de datos del registro de carrera
     public function registro(StoreCarrera $request)
     {
-
+        //almacenado de carrera
         $carrera = new Carrera();
         $carrera->Nombre = $request->nombre;
         $carrera->Codigo = $request->codigo;
 
         $carrera->save();
-
+        //Redirección a la vista de registro de carreras con el modal de registro exitoso
         return redirect()->route('carreras')->with('registrar', 'ok');
     }
 
@@ -98,6 +95,7 @@ class CarrerasController extends Controller
      */
     public function vistaEditar()
     {
+        //recuperar todas las carreras y asignaciones materia carrera, acceder a la vista editar carrera
         $carreras = Carrera::all();
         $mcs = Materia_Carrera::all();
         return view('Carrera.editar_carrera', ['carreras' => $carreras, 'mcs' => $mcs]);
@@ -105,17 +103,20 @@ class CarrerasController extends Controller
     }
     public function editar(Request $request, $id)
     {
-
+        //Recuperar la carrera a ser editada
         $carrera = Carrera::find($id);
+        //Validar los campos nuevos de la carrera
         $request->validate([
             'Nombre' => 'bail|required|min:20|max:60|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|unique:carreras,Nombre,' . $carrera->id,
             'Codigo' => 'bail|required|numeric|digits_between:5,8|unique:carreras,Codigo,' . $carrera->id,
         ]);
-
+        //Asignar los nuevos valores a la carrera
         $carrera->Nombre = $request->Nombre;
         $carrera->Codigo = $request->Codigo;
         $carrera->estado = $request->estadoE;
+        //Guardar los cambios de la carrera
         $carrera->save();
+        //Redireccionar a la vista editar carrera
         return redirect()->route('carrera_edit')->with('actualizar', 'ok');
     }
 

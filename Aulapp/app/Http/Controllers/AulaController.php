@@ -11,7 +11,6 @@ use App\Notifications\NotificacionReserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Redirect;
 
 class AulaController extends Controller
 {
@@ -20,10 +19,12 @@ class AulaController extends Controller
   *
   * @return \Illuminate\Http\Response
   */
-
+//Funcion para llamar a la vista de registro y envio de los datos necesarios para la vista
  public function vistaRegistro()
  {
+ //Seleccion de secciones
   $seccions = Seccion::where('estado', true)->get();
+  //Retorna la vista de registro de aulas con los datos de las secciones
   return view('Aula.registrar_aula', ['seccions' => $seccions]);
  }
  public function reporte()
@@ -36,6 +37,7 @@ class AulaController extends Controller
 
  public function vistaEditar()
  {
+    //envia la informacion de todas las aulas y secciones , accede a la vista de editar aulas
   $aulas     = Aula::all();
   $secciones = Seccion::all();
   return view('Aula.editar_aula', ['secciones' => $secciones, 'aulas' => $aulas]);
@@ -57,16 +59,17 @@ class AulaController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
+//Guardado de datos del registro de aula
  public function registro(StoreAula $request)
  {
-
+ //Almacenado de aula
   $aula             = new Aula();
   $aula->nombre     = $request->nombre;
   $aula->capacidad  = $request->capacidad;
-  $aula->section_id = $_POST['seccion'];
+  $aula->section_id = $request->seccion;
 
   $aula->save();
-
+    //Redireccion a la vista de registro de aulas con el modal de registro exitoso
   return redirect()->route('aulas')->with('registrar', 'ok');
  }
 
@@ -101,17 +104,21 @@ class AulaController extends Controller
   */
  public function editar(Request $request, $id)
  {
+    //recupera el aula a ser editada 
   $aula = Aula::find($id);
+  //validar la informacion de los campos
   $request->validate([
    'Nombre'    => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ 0-9]+$/|min:3|max:10|unique:aulas,nombre,' . $aula->id,
    'capacidad' => 'bail|required|numeric|between:1,300',
   ]);
+  //llenar los atributos del aula con los nuevos
   $aula->nombre     = $request->Nombre;
   $aula->capacidad  = $request->capacidad;
   $aula->section_id = $request->section;
   $aula->estado     = $request->estadoE;
+  //guardar los datos del aula
   $aula->save();
-
+  //redirigir a la pagina de edicion de aula
   return redirect()->route('aulas_edit')->with('actualizar', 'ok');
  }
 

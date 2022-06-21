@@ -8,7 +8,7 @@
 <h3 text-center id="Titulo">Administracion de secciones</h3>
 @endsection
 @section('Contenido formulario')
-
+{{--Formulario de edicion de seccion--}}
 <div class="row">
 <div >
   <div class="d-flex" id="formularioEditar">
@@ -53,6 +53,7 @@
   </div>
 
 </div>
+{{--En caso de que se cometa errores al momento de llenar el formulario, para recuperrar los datos llenados anterioirmente--}}
 @if ($errors->has('descripcion') || $errors->has('nombre') )
 <script>
    var ed=document.getElementsByClassName("ed");
@@ -67,6 +68,7 @@
   nombre.disabled=true
 </script>
 @endif
+{{--Mensaje de actualizacion exitosa--}}
 @if (session('actualizar')=='ok')
   <script>localStorage.setItem('ruta',"")
   Swal.fire({
@@ -89,13 +91,16 @@
   var estadoE=document.getElementById("estadoE")
   estadoE.value=1
   var formulario=document.getElementById("formulario");
+  //Funcionalidad de buscar una seccion
   buscar.onclick=function(){
 
   @foreach ($secciones as $seccion)
     if(texto.value =='{{$seccion->nombre}}'){
+      //Cuando se encuentra una seccion se llena los campos y se deshabilita el nombre y el boton de buscar
       nombre.value='{{$seccion->nombre}}'
       nombre.disabled=true;
       codigo.value='{{$seccion->descripcion}}'
+      //Se llena la ruta de la seccion que sera editada 
       formulario.action="{{route('seccion-update', ['id'=>$seccion->id])}}"
       localStorage.setItem('ruta',formulario.action)
       localStorage.setItem('id',texto.value)
@@ -105,6 +110,7 @@
       }
       texto.disabled=true;
       encontrado=1;
+      //Cuando la seccion esta deshabilitada se muestra un mensaje
       if({{$seccion->estado}}==0){
             Swal.fire({
             icon: 'warning',
@@ -112,7 +118,7 @@
             text: 'La sección se encuentra de baja, dar de alta para poder editarlo',
             })
             var oculto=document.getElementsByClassName("oculto");
-           
+           //Se muestra el boton de estado
             for(var i=0;i<oculto.length;i++){
             oculto[i].style.display="block"
             nombre.disabled=true
@@ -121,7 +127,7 @@
           estadoE.value=0
           }
     }
-
+    //En caso de que no sea encontrada la seccion se muestra un mensaje
   @endforeach
   if(encontrado==0){
     Swal.fire({
@@ -132,6 +138,7 @@
   }
   
   }
+  //Si la seccion es dada de alta se habilita la descripcion pero no el nombre
   estado.onclick=function(){
     console.log(estado.value)
     if(estadoE.value==0){
@@ -141,6 +148,7 @@
             estado.disabled=true
     }
   }
+  //Al momento de enviar el formulario se habilitan todos los campos
   var registrar=document.getElementById("botonRegistrar");
   registrar.onclick=function(){
     nombre.disabled=false

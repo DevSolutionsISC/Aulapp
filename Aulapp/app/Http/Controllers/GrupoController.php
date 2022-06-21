@@ -37,18 +37,16 @@ class GrupoController extends Controller
 
     }
 
+    //Funcion para llamar a la vista de registro y enviar los datos necesarios para mostrar
     public function vistaRegistro()
     {
-
+        //Seleccion de carreras, materias y sus asociaciones habilitadas
         $carreras = Carrera::where('estado', true)->get();
         $materia_carrera = Materia_Carrera::where('estado', true)->get();
         $materias = Materia::where('estado', true)->get();
-        $docentes = Usuario::where('estado', true)->get();
-        $user_rol = UserRol::where('estado', true)->get();
-      
 
-        return view('Grupo.registrar_grupo', ['urs' => $user_rol, 'docentes' => $docentes, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera,  'materias' => $materias]);
-
+        //Redireccion a la vista de registro con los respectivos datos que se mostraran
+        return view('Grupo.registrar_grupo', ['carreras' => $carreras, 'materia_carrera' => $materia_carrera,  'materias' => $materias]);
     }
 
     /*public function reporte()
@@ -86,27 +84,39 @@ class GrupoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Guardado de datos del registro de grupo
     public function registro(StoreGrupo $request)
     {
+        //Seleccionar todos los registros de materia y carrera relacionado con la materia elegida
         $lista_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('estado',true)->get();
+        //Seleccionar un grupo que tenga la materia
         $id_grupo=Grupo::where('materia_carrera_id',$lista_materia_carrera[0]->id)->get();
        
         $id_docente="";
+        //Si hay almenos un grupo en esa materia
         if($id_grupo!="[]"){
+            //Ver si tiene asignación de docente
             $id_docente=asignacionDocentes::where('grupo_id',$id_grupo[0]->id)->get();
         }
-    
+        //Seleccionar la gestion actual
         $id_gestion=gestion::firstWhere('estado', true);
+        //Si no se selecciono ninguna carrera
         if($request->carrera=="Seleccione una carrera"){
     
-    
+        //Recorrer la lista de la materia y carrera
         for($i=0;$i<sizeof($lista_materia_carrera);$i=$i+1){
+            //Si no existe el grupo
             if(!Grupo::where('materia_carrera_id',$lista_materia_carrera[$i]->id)->where('nombre',"G:".$request->nombre)->exists()){
+            //Almacenar los datos del grupo
             $grupo                         = new Grupo();
             $grupo->nombre                 = "G:".$request->nombre;
             $grupo->materia_carrera_id     = $lista_materia_carrera[$i]->id;
             $grupo->save();
+
+            //Si no esta vacio (Significa que ese grupo ya tiene asignacion en el mismo grupo de otra carrera)
             if($id_docente!="[]" && $id_docente!=""){
+                //Almaceno datos de la asignacion en el grupo recien creado
                 $asignacion= new asignacionDocentes();
                 $asignacion->user_rol_id=$id_docente[0]->user_rol_id;
                 $asignacion->grupo_id=$grupo->id;
@@ -114,11 +124,11 @@ class GrupoController extends Controller
                 $asignacion->save();
             }
             }else{
-
+                //Si existe el grupo y esta deshabilitado
                 $grupo=Grupo::where('materia_carrera_id',$lista_materia_carrera[$i]->id)->where('nombre',"G:".$request->nombre)->where('estado',false)->get();
-                
-                 if($grupo!="[]"){
-                   
+                //Si encuentra la materia y carrera en la que existe y esta deshabilitado
+                if($grupo!="[]"){
+                   //Se cambia su estado a habilitado
                     $grupo[0]->estado=true;
                     $grupo[0]->save();
                 }
@@ -127,22 +137,27 @@ class GrupoController extends Controller
         }
         
      }else{
-         
+         //Si se selecciono una carrera especifica
+         //Seleccionar el id de la materia en la carrera especifica
         $id_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('carrera_id',$request->carrera)->get();
+        //Selecciona el grupo si es que existe
         $grupo=Grupo::where('materia_carrera_id',$id_materia_carrera[0]->id)->where('nombre',"G:".$request->nombre)->get();
        
-        
+            //Si existe
             if($grupo!="[]"){
+                //Cambia el estado
                 $grupo[0]->estado=true;
                 $grupo[0]->save();
             }else{
+            //Si no existe crea un nuevo registro
              $grupo                         = new Grupo();
              $grupo->nombre                 = "G:".$request->nombre;
              $grupo->materia_carrera_id     = $id_materia_carrera[0]->id;
              $grupo->save();
             }
-    
+            //Si no esta vacio (Significa que ese grupo ya tiene asignacion en el mismo grupo de otra carrera)
             if($id_docente!="[]" && $id_docente!=""){
+                //Almaceno datos de la asignacion en el grupo recien creado
                 $asignacion= new asignacionDocentes();
                 $asignacion->user_rol_id=$id_docente[0]->user_rol_id;
                 $asignacion->grupo_id=$grupo->id;

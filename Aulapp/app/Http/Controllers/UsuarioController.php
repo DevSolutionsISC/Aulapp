@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUsuario;
-use App\Models\asignacionDocentes;
-use App\Models\Carrera;
-use App\Models\Materia;
-use App\Models\Materia_Carrera;
 use App\Models\UserRol;
 use App\Models\Usuario;
 use App\Notifications\Usuario as NotificationsUsuario;
@@ -32,15 +28,10 @@ class UsuarioController extends Controller
 
  }
 
-
+ //Funcion para llamar a la vista de registro
  public function vistaRegistro()
  {
-  $materias        = Materia::all();
-  $carreras        = Carrera::all();
-  $materia_carrera = Materia_Carrera::join("materias", "materias.id", "=", "materia_carreras.materia_id")->join("carreras", "carreras.id", "=", "materia_carreras.carrera_id")
-   ->select("materia_carreras.id as id", "materias.id as id_materia", "carreras.id as id_carrera", "materias.nombre_materia as nom_materia", "carreras.Nombre as nom_carrera")->get();
-
-  return view('Usuario-Docente.registrar_docente', ['materias' => $materias, 'carreras' => $carreras, 'materia_carrera' => $materia_carrera]);
+  return view('Usuario-Docente.registrar_docente');
  }
 
  /**
@@ -59,40 +50,49 @@ class UsuarioController extends Controller
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
+
+  //Guardado de datos del registro de docente
  public function registro(StoreUsuario $request)
  {
+//Almacena un nuevo registro de docente
   $usuario           = new Usuario();
   $usuario->Nombre   = $request->nombre;
   $usuario->Apellido = $request->apellido;
   $usuario->CI       = $request->ci;
   $usuario->Email    = $request->email;
-
+//Separamos por espacion
   $user       = explode(" ", $request->nombre);
   $iniciales  = "";
   $caracteres = "";
+  //Recorremos todo el nombre
   for ($i = 0; $i < sizeof($user); $i++) {
+    //Si no es vacio
    if ($user[$i] != "") {
+    //Obtenemos la primera letra y la concatenamos a una variable para guardar la inicial
     $iniciales = $iniciales . substr($user[$i], 0, 1);
+    //Concatenamos el nombre a una variable para guardar
     $caracteres .= $user[$i];
    }
   }
-
+  //Concatenamos el CI para obtener un conjunto de caractere
   $caracteres .= $request->ci;
+  //Obtenemos una cadena de 10 caracteres de la mezcla de caracteres
   $Usercontrasenia = substr(str_shuffle($caracteres), 0, 10);
+  //Concatenamos si CI mas sus iniciales para el nombre de usuario
   $User            = $request->ci . $iniciales;
 
   $usuario->usuario     = $User;
   $usuario->contrasenia = $Usercontrasenia;
   $usuario->save();
-
+  //Enviamos un email al docente
   Notification::route('mail', $request->email)->notify(new NotificationsUsuario($usuario));
-
+  //Asignamos en user rol el rol de docente
   $userRol             = new UserRol();
   $id_usuario          = Usuario::firstWhere('CI', $request->ci);
   $userRol->usuario_id = $id_usuario->id;
   $userRol->rol_id     = 2;
   $userRol->save();
-
+ //Redirecciona al registro de docente con el modal de registro exitoso
   return redirect()->route('docentes')->with('registrar', "ok");
  }
 
@@ -127,31 +127,42 @@ class UsuarioController extends Controller
   */
  public function editar(Request $request, $id)
  {
+    //Buscar el docente para editar
   $docente = Usuario::find($id);
+  //Validar los campos 
   $request->validate([
    'Nombre'   => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:3|max:25',
    'Apellido' => 'bail|required|regex:/^[a-zA-Z\s áéíóúÁÉÍÓÚñÑ]+$/u|min:2|max:30',
    'CI'       => 'bail|required|numeric|digits_between:6,10|unique:usuarios,CI,' . $docente->id,
    'Correo'   => 'bail|required|email|regex:/^[a-zA-Z\s 0-9 @ . _]+$/|unique:usuarios,Email,' . $docente->id,
   ]);
+  //Asignar los nuevos valores al docente
   $docente->estado   = $request->estadoE;
   $docente->Nombre   = $request->Nombre;
   $docente->Apellido = $request->Apellido;
   $docente->CI       = $request->CI;
   $docente->Email    = $request->Correo;
+  //Guardar los cambios
   $docente->save();
+  //Cambiar el estado del docente en caso de que sea dado de alta
   $sql=DB::table("user_rols")->where(['usuario_id'=>$id])->value('id');
   $asignacion=UserRol::find($sql);
   $asignacion->estado=$request->estadoE;
+  //Guardar los cambios
   $asignacion->save();
+  //Redireccionar a vista  de editar docente
   return redirect()->route('docentes_edit')->with('actualizar', 'ok');
  }
 
  public function vistaEditar()
  {
+    //Recuperar todos los usuarios y todas las asignaciones usuario rol
   $docentes = Usuario::all();
   $urs      = UserRol::all();
+
+//Redireccionar a la vista editar docente
   return view('Usuario-Docente.editar_docente', ['docentes' => $docentes, 'urs' => $urs]);
+
 
  }
 
