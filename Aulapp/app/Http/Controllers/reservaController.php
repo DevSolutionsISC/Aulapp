@@ -84,13 +84,10 @@ class reservaController extends Controller
   $reserva->materia        = $request->materia;
   $reserva->user_rol_id    = $request->id;
   $reserva->motivo_rechazo = "";
-<<<<<<< HEAD
-  $reserva->save();
-=======
+
   //Guardar el registro
  $reserva->save();
  //buscar si el administraor recibio solicitudes con anterioridad
->>>>>>> 87bb797b8d28bc8a3b69fe5a275e222bfdebe6ab
   $buscar_usuario=UserRol::where("rol_id",1)->get();
   $buscar_not=nuevasnotificacion::where("user_rol_id",$buscar_usuario[0]->id)->get();
     //En caso de no encontrar se crea una nueva asignacion para que tenga su contador de nuevas reservas
