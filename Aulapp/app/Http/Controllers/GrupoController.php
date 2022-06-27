@@ -91,6 +91,7 @@ class GrupoController extends Controller
         //Seleccionar todos los registros de materia y carrera relacionado con la materia elegida
         $lista_materia_carrera=Materia_Carrera::where('materia_id',$request->materia)->where('estado',true)->get();
         //Seleccionar un grupo que tenga la materia
+        
         $id_grupo=Grupo::where('materia_carrera_id',$lista_materia_carrera[0]->id)->get();
        
         $id_docente="";

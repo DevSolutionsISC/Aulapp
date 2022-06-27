@@ -21,7 +21,10 @@
       <select name="materia" id="materia" class="form-select">
         <option selected>Seleccione una materia</option>
         @foreach ($materias as $materia)
-        <option value="{{$materia->id}}">{{$materia->Cod_materia}} - {{$materia->nombre_materia}}</option>
+          @if($materia_carrera->contains('materia_id',$materia->id)){
+            <option value="{{$materia->id}}">{{$materia->Cod_materia}} - {{$materia->nombre_materia}}</option>
+          }
+          @endif
         @endforeach
       </select>
       @if ($errors->has("materia"))
@@ -80,8 +83,7 @@
                      nombre_materia=nombre_materia.split(' - ');
                      nombre_materia=nombre_materia[1];
                    for(var contC=0;contC<todosCM.length;contC++){
-                     console.log(todosMC[contC][0]);
-                     console.log(nombre_materia);
+                  
                       if( nombre_materia==todosMC[contC][0]){
                         
                           carreras.innerHTML+="<option value="+todosMC[contC][2]+">"+todosMC[contC][1]+"</option>"

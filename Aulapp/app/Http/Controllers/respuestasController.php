@@ -14,14 +14,13 @@ class respuestasController extends Controller
  public function verBandeja()
  {
   $usuario = Auth::user();
-
   $ur = UserRol::where("usuario_id",$usuario->id)->get();
   $not= nuevasnotificacion::where("user_rol_id",$ur[0]->id)->get();
   if($not!="[]"){
     $not[0]->cantidad_not=0;
     $not[0]->save();
   }
-  $respuestas = reserva::where('docentes', 'LIKE', '%' . $usuario->Nombre." ".$usuario->Apellido . '%')
+  $respuestas = reserva::where('user_rol_id',$usuario->id)
   ->get()->sortDesc();
   return view('Bandejas.bandeja_docente', ['respuestas' => $respuestas]);
  }

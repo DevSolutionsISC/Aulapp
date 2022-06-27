@@ -24,9 +24,8 @@ class AsignacionDocenteController extends Controller
     return $item['nombre'].$item['materia_id'];
   });
   //Seleccion de todos los docentes, la gestion actual y todas las asignaciones de la gestion actual
-  $docentes       = UserRol::all();
+  $docentes       = UserRol::where('estado', true)->get();
   $gestion        = gestion::firstWhere('estado', true);
-  $docente_grupos = asignacionDocentes::where('gestion_id', $gestion->id)->get();
  //Filtro de grupos que aun no tienen una asignacion de docente
   $filtered       = $grupos->reject(function ($value, $key) {
    $gestion        = gestion::firstWhere('estado', true);
